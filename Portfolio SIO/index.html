@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>index.html – Portfolio Brieuc Métairie – BTS SIO SISR</title>
+  <meta name="description" content="Portfolio statique HTML/CSS de Brieuc Métairie – BTS SIO SISR (Accueil, Entreprise, Activités, Veille)." />
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="preload" as="image" href="images/banner.jpg" />
+  <!-- Favicon unique -->
+  <link rel="icon" href="favicon.ico" />
+  <style>
+    :root{--bg1:#f8fafc;--bg2:#e2e8f0;--text:#1e293b;--muted:#475569;--card:#ffffffcc;--stroke:#cbd5e1;--brand:#0ea5e9}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(var(--bg1),var(--bg2));color:var(--text)}
+    header,footer{background:var(--card);backdrop-filter:blur(6px);border-bottom:1px solid var(--stroke)}
+    .header-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:1rem}
+    .banner-wrap{width:100%;overflow:hidden}
+    .banner{width:100%;height:220px;object-fit:cover;display:block}
+    @media (min-width:900px){.banner{height:260px}}
+    main{max-width:1000px;margin:auto;padding:2rem 1rem}
+    section{background:var(--card);border-radius:1rem;padding:1.5rem;margin-bottom:2rem}
+    h1,h2,h3{margin-top:0}
+    nav[role="tablist"]{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;flex:1}
+    .tab-btn{background:#f1f5f9;border:none;padding:.6rem 1rem;border-radius:.75rem;cursor:pointer;transition:background-color .2s ease, box-shadow .25s ease, transform .12s ease}
+    .tab-btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(14,165,233,.25)}
+    .tab-btn:active{transform:translateY(0)}
+    .tab-btn[aria-selected="true"]{background:var(--brand);color:#fff;box-shadow:0 10px 24px rgba(14,165,233,.35)}
+    .chip{display:inline-block;padding:.25rem .75rem;border-radius:999px;background:#e2e8f0;margin:.25rem;font-size:.85rem}
+    .logo{max-width:150px;display:block;margin:0 0 1rem 0}
+    footer{padding:1rem;text-align:center;font-size:.9rem;border-top:1px solid var(--stroke)}
+    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{position:static;width:auto;height:auto;padding:.5rem;background:#000;color:#fff;border-radius:.375rem}
+    :focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+    .btn{display:inline-block;background:var(--brand);color:#fff;text-decoration:none;border:none;border-radius:.5rem;padding:.6rem 1rem;font-weight:600;cursor:pointer;transition:filter .15s ease, transform .12s ease}
+    .btn:hover{filter:brightness(.95);transform:translateY(-1px)}
+    .btn:active{transform:translateY(0)}
+    .orgchart{width:100%;height:auto;display:block;border-radius:.5rem;border:1px solid var(--stroke);background:#fff}
+    .activity-img{max-width:300px;display:block;margin:1rem auto;border-radius:.5rem}
+  </style>
+</head>
+<body>
+  <a href="#accueil" class="skip-link">Aller au contenu principal</a>
+
+  <header>
+    <div class="banner-wrap">
+      <img
+        class="banner"
+        src="images/banner.jpg"
+        srcset="images/banner.jpg 1200w, images/banner@2x.jpg 2400w"
+        sizes="(max-width: 900px) 100vw, 1000px"
+        alt="Bannière du portfolio de Brieuc Métairie"
+        loading="eager"
+        decoding="async"
+      />
+    </div>
+    <div class="header-inner">
+      <div><strong>Brieuc Métairie</strong> – Étudiant BTS SIO option SISR</div>
+      <nav role="tablist" aria-label="Navigation du portfolio">
+        <button class="tab-btn" data-tab="accueil" aria-selected="true">Accueil</button>
+        <button class="tab-btn" data-tab="entreprise">Entreprise</button>
+        <button class="tab-btn" data-tab="activites">Activités</button>
+        <button class="tab-btn" data-tab="veille">Veille</button>
+      </nav>
+      <div><a class="btn" href="mailto:metairiebrieuc@gmail.com">✉️ Contact</a></div>
+    </div>
+  </header>
+
+  <main>
+    <section id="accueil">
+      <h1>Bienvenue, je suis Brieuc Métairie</h1>
+      <p>Étudiant en <strong>BTS SIO option SISR</strong>, je m’intéresse à l’informatique orientée systèmes et réseaux : installation, configuration, administration et sécurisation d’équipements et de services.</p>
+      <h2>Le BTS SIO – option SISR</h2>
+      <p>Le BTS SIO comporte deux options, mais je me spécialise en <strong>SISR</strong> (Solutions d’Infrastructure, Systèmes et Réseaux).</p>
+      <ul>
+        <li>Installation et configuration de postes clients</li>
+        <li>Gestion et maintenance des serveurs et réseaux</li>
+        <li>Sécurisation des systèmes et des accès</li>
+        <li>Support technique aux utilisateurs</li>
+      </ul>
+      <div>
+        <span class="chip">Administration systèmes</span>
+        <span class="chip">Gestion réseau</span>
+        <span class="chip">Virtualisation</span>
+        <span class="chip">Maintenance PC</span>
+        <span class="chip">Cybersécurité</span>
+      </div>
+
+      <h2 style="margin-top:1.25rem">Mon école — Faculté des Métiers de l’Essonne</h2>
+      <p>Je prépare mon diplôme à la <strong>Faculté des Métiers de l’Essonne</strong> (FDME), un centre de formation reconnu qui propose des cursus en alternance et des parcours professionnalisants. Le rythme d’alternance me permet d’acquérir des compétences concrètes en entreprise tout en consolidant les bases techniques en cours.</p>
+      <p>
+        <a class="btn" href="https://www.facmetiers91.fr/" target="_blank" rel="noopener noreferrer">Découvrir la FDME</a>
+      </p>
+
+      <h2 style="margin-top:1.25rem">Mon CV</h2>
+      <p>Télécharge mon CV au format PDF :</p>
+      <p>
+        <a class="btn" href="cv_brieuc.pdf" download>📄 Télécharger mon CV (PDF)</a>
+      </p>
+    </section>
+
+    <section id="entreprise" hidden>
+      <h2>Présentation de l’entreprise</h2>
+      <img class="logo" src="images/logoalthec.png" alt="Logo Althec Sécurité Systèmes" />
+      <p><strong>Nom :</strong> Althec Sécurité Systèmes</p>
+      <p><strong>Secteur :</strong> Sécurité électronique (alarmes intrusion, vidéosurveillance, contrôle d’accès, interphonie)</p>
+      <p><strong>Taille :</strong> PME</p>
+      <p><strong>Localisation :</strong> Villeneuve-le-Roi</p>
+
+      <h3>Activité principale</h3>
+      <p>Althec Sécurité Systèmes conçoit, installe et maintient des solutions de protection pour les particuliers et les professionnels. L’objectif est de sécuriser les lieux (maisons, commerces, bureaux, sites industriels) grâce à des systèmes fiables et faciles à utiliser.</p>
+
+      <h3>Offre de services</h3>
+      <ul>
+        <li>Étude du besoin et conseil (audit des risques, choix du matériel)</li>
+        <li>Installation et mise en service (alarmes, caméras, enregistreurs, contrôle d’accès)</li>
+        <li>Configuration réseau de base (accès distant sécurisé, application mobile)</li>
+        <li>Maintenance préventive et corrective, assistance aux utilisateurs</li>
+      </ul>
+
+      <h3>Valeurs et engagements</h3>
+      <p>Proximité, réactivité et clarté : accompagnement du client de l’étude à la maintenance, avec une attention portée à la pédagogie et à la simplicité d’usage.</p>
+
+      <h3>Organigramme</h3>
+      <img class="orgchart" src="images/Organigramme.png" alt="Organigramme de l'entreprise Althec Sécurité Systèmes" />
+    </section>
+
+    <section id="activites" hidden>
+      <h2>Activités</h2>
+      <article>
+        <h3>Déployer un MediaWiki</h3>
+        <img class="activity-img" src="images/mediawiki.png" alt="Illustration MediaWiki" />
+        <p><strong>Actions :</strong></p>
+        <ul>
+          <li>Installation de MediaWiki sur un serveur Linux</li>
+          <li>Configuration d’Apache, PHP et MySQL/MariaDB</li>
+          <li>Personnalisation du wiki et gestion des droits utilisateurs</li>
+          <li>Mise en place d’une sauvegarde de la base de données</li>
+          <li>Ajout d’extensions pour enrichir les fonctionnalités (ex : gestion des droits, éditeur visuel)</li>
+        </ul>
+        <p><strong>Bénéfices :</strong> Fournir une plateforme collaborative simple et efficace où les utilisateurs peuvent créer, consulter et partager de la documentation interne.</p>
+        <p>Ce déploiement de MediaWiki faisait partie d’un <strong>devoir de fin de première année de BTS SIO</strong>. L’objectif était de mettre en pratique les compétences acquises en administration système et réseau à travers un projet concret. Ce travail m’a permis de comprendre comment mettre en place un service collaboratif complet, depuis l’installation jusqu’à la configuration avancée, et de mesurer l’importance de la documentation centralisée pour une organisation.</p>
+      </article>
+    </section>
+
+    <section id="veille" hidden>
+      <h2>Veille informationnelle</h2>
+      <p>Je m’informe régulièrement sur l’évolution des systèmes, des réseaux et de la cybersécurité. Pour cela, je consulte différents sites spécialisés, articles techniques et contenus multimédias afin de rester au courant des nouveautés et des bonnes pratiques.</p>
+      <h3>Sources</h3>
+      <ul>
+        <li><a href="https://www.cert.ssi.gouv.fr/" target="_blank">CERT-FR</a></li>
+        <li><a href="https://www.cnil.fr/" target="_blank">CNIL</a></li>
+        <li><a href="https://www.commentcamarche.net/" target="_blank">Comment Ça Marche</a></li>
+        <li><a href="https://www.it-connect.fr/" target="_blank">IT-Connect</a></li>
+        <li><a href="https://www.zdnet.fr/" target="_blank">ZDNet</a></li>
+        <li><a href="https://www.youtube.com/@Underscore_" target="_blank">Underscore_ (YouTube)</a></li>
+        <li><a href="https://www.youtube.com/@PowerCertAnimatedVideos" target="_blank">PowerCert Animated Videos (YouTube)</a></li>
+      </ul>
+      <h3>Articles récents consultés</h3>
+      <ul>
+        <li><a href="https://www.it-connect.fr/windows-server-2025-les-nouveautes/" target="_blank">Windows Server 2025 : les nouveautés</a></li>
+        <li><a href="https://www.it-connect.fr/activer-bitlocker-via-gpo/" target="_blank">Activer BitLocker via une stratégie de groupe</a></li>
+        <li><a href="https://www.it-connect.fr/initiation-a-la-securite-des-reseaux/" target="_blank">Initiation à la sécurité des réseaux</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Brieuc Métairie – Portfolio BTS SIO option SISR
+  </footer>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const sections = document.querySelectorAll('main section');
+
+    function showSection(id) {
+      sections.forEach(sec => {
+        sec.hidden = sec.id !== id;
+      });
+    }
+
+    tabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.tab;
+        showSection(target);
+        tabs.forEach(t => t.setAttribute('aria-selected', t === btn ? 'true' : 'false'));
+      });
+    });
+  </script>
+</body>
+</html>
