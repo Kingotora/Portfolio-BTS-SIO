@@ -16,8 +16,20 @@
     header,footer{background:var(--card);backdrop-filter:blur(6px);border-bottom:1px solid var(--stroke)}
     .header-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:1rem}
     .banner-wrap{width:100%;overflow:hidden}
-    .banner{width:100%;height:220px;object-fit:cover;display:block}
-    @media (min-width:900px){.banner{height:260px}}
+    /* bannière recadrée / moins zoomée */
+    .banner{
+      width:100%;
+      height:200px;
+      object-fit:cover;
+      object-position:center 30%;
+      display:block
+    }
+    @media (min-width:900px){
+      .banner{
+        height:240px;
+        object-position:center 35%
+      }
+    }
     main{max-width:1000px;margin:auto;padding:2rem 1rem}
     section{background:var(--card);border-radius:1rem;padding:1.5rem;margin-bottom:2rem}
     h1,h2,h3{margin-top:0}
@@ -37,6 +49,8 @@
     .btn:active{transform:translateY(0)}
     .orgchart{width:100%;height:auto;display:block;border-radius:.5rem;border:1px solid var(--stroke);background:#fff}
     .activity-img{max-width:300px;display:block;margin:1rem auto;border-radius:.5rem}
+    .download-block{background:#f1f5f9;border:1px solid var(--stroke);border-radius:.75rem;padding:1rem;margin-top:1rem;box-shadow:0 8px 24px rgba(0,0,0,.05);text-align:center}
+    .download-block p{margin-top:0;margin-bottom:1rem;color:var(--muted);font-size:.95rem;line-height:1.4}
   </style>
 </head>
 <body>
@@ -97,15 +111,21 @@
       <p>
         <a class="btn" href="cv_brieuc.pdf" download>📄 Télécharger mon CV (PDF)</a>
       </p>
-    </section>
+
+      </section>
 
     <section id="entreprise" hidden>
       <h2>Présentation de l’entreprise</h2>
       <img class="logo" src="images/logoalthec.png" alt="Logo Althec Sécurité Systèmes" />
-      <p><strong>Nom :</strong> Althec Sécurité Systèmes</p>
-      <p><strong>Secteur :</strong> Sécurité électronique (alarmes intrusion, vidéosurveillance, contrôle d’accès, interphonie)</p>
-      <p><strong>Taille :</strong> PME</p>
-      <p><strong>Localisation :</strong> Villeneuve-le-Roi</p>
+      <p><strong>Raison sociale :</strong> ALTHEC SECURITE SYSTEMES</p>
+      <p><strong>Forme juridique :</strong> SARL à associé unique (capital social 80&nbsp;000&nbsp;€)</p>
+      <p><strong>Date de création :</strong> 4 janvier 2006</p>
+      <p><strong>Siège social :</strong> 4 rue Voltaire, 94290 Villeneuve-le-Roi (Val-de-Marne)</p>
+      <p><strong>Secteur :</strong> Sécurité électronique et sûreté : alarmes intrusion, vidéosurveillance IP, contrôle d’accès, interphonie.</p>
+      <p><strong>Taille :</strong> PME spécialisée, effectif réduit (techniciens terrain, maintenance, support administratif), décisions rapides et forte proximité client.</p>
+      <p><strong>Zone d’intervention :</strong> principalement Île-de-France, avec interventions ponctuelles en province pour certains sites critiques.</p>
+      <p><strong>Clientèle :</strong> commerces, PME industrielles / artisanales, collectivités locales, copropriétés et sites nécessitant un contrôle d’accès / de la vidéo-surveillance.</p>
+      <p><strong>Chiffre d’affaires :</strong> le détail n’est pas communiqué publiquement ; l’entreprise est active de manière continue depuis 2006 sur le marché professionnel de la sécurité électronique, ce qui traduit une activité stable.</p>
 
       <h3>Activité principale</h3>
       <p>Althec sécurise des sites de tailles variées, du commerce au petit site industriel. L’entreprise installe des solutions fiables et adaptées, puis accompagne ses clients sur la durée : conseils clairs, interventions rapides, maintenance planifiée et suivi à distance lorsque c’est possible.</p>
@@ -138,6 +158,13 @@
           <li>Extensions utiles (éditeur visuel, gestion avancée des droits, thème léger)</li>
         </ul>
         <p><strong>Résultat :</strong> un wiki propre et organisé pour centraliser procédures et tutos. J’ai particulièrement appris à structurer la documentation et à penser “exploitation” : sauvegardes, droits, et simplicité d’usage.</p>
+
+        <div class="download-block">
+          <p>Documentation complète du projet MediaWiki (installation, configuration, sauvegarde, exploitation).</p>
+          <a class="btn" href="docs/mediawiki_documentation.pdf" download>
+            📄 Télécharger la documentation MediaWiki (PDF)
+          </a>
+        </div>
       </article>
     </section>
 
