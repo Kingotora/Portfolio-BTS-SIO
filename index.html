@@ -142,32 +142,109 @@
       <img class="orgchart" src="images/Organigramme.png" alt="Organigramme de l'entreprise Althec Sécurité Systèmes" />
     </section>
 
-    <section id="activites" hidden>
+   <section id="activites" hidden>
   <h2>Activités</h2>
-  <article>
-    <h3>Déployer un MediaWiki sous Windows</h3>
-    <img class="activity-img" src="images/mediawiki.png" alt="Illustration MediaWiki" />
-    <p><strong>Contexte :</strong> projet de fin de première année de <strong>BTS SIO (SISR)</strong>. Objectif : mettre en place un service collaboratif documenté et prêt à l’emploi <em>sur Windows</em>.</p>
 
-    <p><strong>Ce que j’ai fait (Windows) :</strong></p>
-    <ul>
-      <li>Installation du stack <strong>XAMPP</strong> (Apache, PHP, MariaDB) et démarrage des services via le <em>XAMPP Control Panel</em>.</li>
-      <li>Création de la base <code>mediawiki</code> dans <strong>phpMyAdmin</strong> (encodage <code>utf8mb4_general_ci</code>).</li>
-      <li>Téléchargement de <strong>MediaWiki</strong> puis extraction dans <code>C:\xampp\htdocs\mediawiki</code>.</li>
-      <li>Lancement de l’assistant sur <code>http://localhost/mediawiki</code> : paramètres de la base, compte administrateur, génération et placement du fichier <code>LocalSettings.php</code>.</li>
-      <li>Ajout d’extensions utiles (ex. VisualEditor), structuration du contenu (catégories, modèles) et mise en place des sauvegardes (dump SQL + dossier <code>images/</code>).</li>
-    </ul>
+  <style>
+    /* Cartes projets (option C) — scoped uniquement à cette section */
+    #activites .projects-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap:1rem;
+      margin-top:1rem;
+    }
+    #activites .project-card{
+      background: #ffffff;
+      border:1px solid var(--stroke);
+      border-radius: .75rem;
+      padding:1rem;
+      box-shadow:0 6px 16px rgba(0,0,0,.06);
+      display:flex;
+      flex-direction:column;
+      gap:.6rem;
+    }
+    #activites .project-card h3{
+      font-size:1.05rem;
+      margin:.25rem 0 0 0;
+    }
+    #activites .project-card p{
+      margin:0;
+      line-height:1.45;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+    #activites .project-card ul{
+      margin:.25rem 0 0 1.1rem;
+      padding:0;
+      font-size:.95rem;
+    }
+    #activites .project-card img{
+      width:100%;
+      height:140px;
+      object-fit:contain;
+      background:#f8fafc;
+      border-radius:.5rem;
+      border:1px solid var(--stroke);
+      padding:.5rem;
+    }
+    #activites .project-card .actions{
+      margin-top:auto;
+      text-align:center;
+      padding-top:.5rem;
+    }
+  </style>
 
-    <p><strong>Résultat :</strong> un wiki fonctionnel sous Windows, documenté de l’installation à l’exploitation (droits, sauvegardes, navigation).</p>
+  <div class="projects-grid">
 
-    <div class="download-block">
-      <p>Télécharger la documentation d’installation <strong>Windows</strong> (pas à pas avec captures).</p>
-      <a class="btn" href="Manuel_Installation_Windows.pdf" download>
-        📄 Télécharger « Manuel d’installation MediaWiki – Windows » (PDF)
-      </a>
-    </div>
-  </article>
+    <!-- MediaWiki -->
+    <article class="project-card">
+      <img src="images/mediawiki.png" alt="MediaWiki" />
+      <h3>MediaWiki sous Windows</h3>
+      <p><strong>Contexte :</strong> projet BTS SIO SISR. Déploiement d’un wiki collaboratif documenté sur Windows.</p>
+      <ul>
+        <li>Installation XAMPP (Apache, PHP, MariaDB)</li>
+        <li>BDD <code>mediawiki</code> via phpMyAdmin</li>
+        <li>Déploiement dans <code>C:\xampp\htdocs\mediawiki</code></li>
+        <li>Assistant web + extensions + sauvegardes</li>
+      </ul>
+      <div class="download-block actions">
+        <p>Documentation complète (Windows).</p>
+        <a class="btn" href="docs/Manuel_Installation_Windows.pdf" download>
+          📄 Télécharger la doc MediaWiki (PDF)
+        </a>
+      </div>
+    </article>
+
+    <!-- GLPI -->
+    <article class="project-card">
+      <img src="images/glpi.png" alt="GLPI" />
+      <h3>GLPI sous Windows</h3>
+      <p><strong>Contexte :</strong> mise en place d’un helpdesk / gestion de parc pour centraliser tickets et inventaire.</p>
+      <ul>
+        <li>Installation XAMPP / WAMP</li>
+        <li>BDD <code>glpi</code> via phpMyAdmin</li>
+        <li>Déploiement dans <code>C:\xampp\htdocs\glpi</code></li>
+        <li>Paramétrage profils, entités, SLA</li>
+        <li>Plugin FusionInventory</li>
+      </ul>
+    </article>
+
+    <!-- Plex -->
+    <article class="project-card">
+      <img src="images/plex.png" alt="Plex" />
+      <h3>Serveur Plex (projet personnel)</h3>
+      <p><strong>Contexte :</strong> création d’un serveur multimédia sur NAS Synology DS920+ pour la lecture locale.</p>
+      <ul>
+        <li>Plex Media Server via Docker</li>
+        <li>Volumes médias + configuration</li>
+        <li>Accès réseau local et optimisation bibliothèques</li>
+        <li>Transcodage matériel</li>
+      </ul>
+    </article>
+
+  </div>
 </section>
+
 
     <section id="veille" hidden>
       <h2>Veille informationnelle</h2>
