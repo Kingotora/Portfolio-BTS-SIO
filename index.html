@@ -25,22 +25,43 @@
   *{box-sizing:border-box}
 
   body{
-    margin:0;
-    font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-    color:var(--text);
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--text);
+  background:#050814;          /* fond central sobre */
+  min-height:100vh;
+}
 
-    /* ✅ Arrière-plan AVEC image */
-    background:
-      radial-gradient(1200px 600px at 10% -10%, #172554 0%, transparent 45%),
-      radial-gradient(1000px 500px at 90% -20%, #312e81 0%, transparent 40%),
-      linear-gradient(180deg,rgba(11,16,32,.92) 0%, rgba(5,8,20,.98) 100%),
-      url("images/bg.jpg");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+/* ✅ Image sur les côtés : deux bandes latérales fixes */
+body::before, body::after{
+  content:"";
+  position:fixed;
+  top:0; bottom:0;
+  width:18vw;                 /* largeur des bandes */
+  min-width:140px;
+  max-width:260px;
+  background-image:url("images/bg.jpg");
+  background-size:cover;
+  background-position:center;
+  opacity:.22;                /* transparence -> lisible */
+  pointer-events:none;
+  z-index:-1;
+  filter:blur(1px) saturate(1.05);
+}
 
-    min-height:100vh;
-  }
+/* gauche */
+body::before{
+  left:0;
+  mask-image:linear-gradient(90deg, black 0%, black 60%, transparent 100%);
+}
+
+/* droite (miroir) */
+body::after{
+  right:0;
+  transform:scaleX(-1);
+  mask-image:linear-gradient(90deg, black 0%, black 60%, transparent 100%);
+}
+
 
   header,footer{
     background:rgba(10,14,30,.75);
@@ -196,15 +217,51 @@
     </div>
 
     <div class="header-inner">
-      <div><strong>Brieuc Métairie</strong> – Étudiant BTS SIO option SISR</div>
+      <div class="name-badge">
+  <span>Brieuc Métairie</span>
+  <small>Étudiant BTS SIO option SISR</small>
+</div>
+
       <nav role="tablist" aria-label="Navigation du portfolio">
         <button class="tab-btn" data-tab="accueil" aria-selected="true">Accueil</button>
         <button class="tab-btn" data-tab="entreprise">Entreprise</button>
         <button class="tab-btn" data-tab="activites">Activités</button>
         <button class="tab-btn" data-tab="veille">Veille</button>
       </nav>
-      <div><a class="btn" href="mailto:metairiebrieuc@gmail.com">✉️ Contact</a></div>
+      <div class="header-contact">
+  <a class="btn" href="mailto:metairiebrieuc@gmail.com">✉️ Me contacter</a>
+</div>
+
     </div>
+    
+    /* ✅ Nom plus visible */
+.name-badge{
+  font-size:1.25rem;
+  font-weight:900;
+  letter-spacing:.4px;
+  display:flex;
+  flex-direction:column;
+  line-height:1.1;
+}
+.name-badge small{
+  font-size:.9rem;
+  font-weight:600;
+  color:var(--muted);
+  margin-top:.15rem;
+}
+
+/* ✅ Contact plus marquant */
+.header-contact .btn{
+  font-size:1.05rem;
+  padding:.85rem 1.2rem;
+  font-weight:900;
+  box-shadow:0 12px 28px rgba(56,189,248,.45);
+}
+.header-contact .btn::after{
+  content:" →";
+  font-weight:900;
+}
+
   </header>
 
   <main>
