@@ -33,35 +33,33 @@
 }
 
 /* ✅ Image sur les côtés : deux bandes latérales fixes */
-body::before, body::after{
+body::before,
+body::after{
   content:"";
   position:fixed;
   top:0; bottom:0;
-  width:18vw;                 /* largeur des bandes */
-  min-width:140px;
-  max-width:260px;
+  width:22vw;
+  min-width:220px;
+  max-width:360px;
+  z-index:-1;
   background-image:url("images/bg.jpg");
   background-size:cover;
   background-position:center;
-  opacity:.22;                /* transparence -> lisible */
-  pointer-events:none;
-  z-index:-1;
-  filter:blur(1px) saturate(1.05);
+  opacity:.30;            /* <- plus visible */
+  filter:blur(2.2px) brightness(0.75);
 }
 
-/* gauche */
+/* Dégradés latéraux plus doux */
 body::before{
   left:0;
-  mask-image:linear-gradient(90deg, black 0%, black 60%, transparent 100%);
+  mask-image: linear-gradient(to right, black 0%, transparent 90%);
 }
 
-/* droite (miroir) */
 body::after{
   right:0;
   transform:scaleX(-1);
-  mask-image:linear-gradient(90deg, black 0%, black 60%, transparent 100%);
+  mask-image: linear-gradient(to left, black 0%, transparent 90%);
 }
-
 
   header,footer{
     background:rgba(10,14,30,.75);
@@ -180,6 +178,7 @@ body::after{
   a:hover{text-decoration:underline}
   ul{line-height:1.55}
 
+   
   /* ✅ hover moderne cartes */
   .project-card, .article-card{
     transition:transform .2s ease, box-shadow .25s ease, border-color .2s ease;
@@ -195,6 +194,96 @@ body::after{
   .project-card:hover img, .article-card:hover img{
     transform:scale(1.035);
   }
+    /* ✅ Nom plus visible */
+.name-badge{
+  font-size:1.25rem;
+  font-weight:900;
+  letter-spacing:.4px;
+  display:flex;
+  flex-direction:column;
+  line-height:1.1;
+}
+.name-badge small{
+  font-size:.9rem;
+  font-weight:600;
+  color:var(--muted);
+  margin-top:.15rem;
+}
+
+/* ✅ Contact plus marquant */
+.header-contact .btn{
+  font-size:1.05rem;
+  padding:.85rem 1.2rem;
+  font-weight:900;
+  box-shadow:0 12px 28px rgba(56,189,248,.45);
+}
+.header-contact .btn::after{
+  content:" →";
+  font-weight:900;
+}
+   /* Icône + effet lumineux sur le nom */
+.brand-name {
+  font-size:1.55rem;
+  font-weight:900;
+  letter-spacing:.6px;
+  background:linear-gradient(90deg,var(--brand),var(--brand-2));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  display:flex;
+  align-items:center;
+  gap:.45rem;
+  text-shadow:0 7px 26px rgba(56,189,248,.35);
+  position:relative;
+}
+
+/* Petite icône */
+.brand-name::before {
+  content:"⭐";
+  font-size:1.25rem;
+  animation:glow 3s ease infinite;
+}
+
+/* Animation lumière */
+@keyframes glow {
+  0%, 100% { filter:drop-shadow(0 0 5px rgba(167,139,250,.7)); }
+  50% { filter:drop-shadow(0 0 15px rgba(56,189,248,.9)); }
+}
+   .brand-name:hover {
+  cursor:pointer;
+}
+
+.brand-name:hover::after {
+  transform:scaleX(1);
+}
+
+.brand-name::after {
+  content:"";
+  position:absolute;
+  bottom:-3px;
+  left:0;
+  width:100%;
+  height:2px;
+  background:linear-gradient(90deg,var(--brand),var(--brand-2));
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .35s ease;
+  border-radius:4px;
+}
+   .header-inner .btn {
+  font-size:1.15rem;
+  padding:.95rem 1.4rem;
+  border-radius:16px;
+  font-weight:900;
+  letter-spacing:.3px;
+  box-shadow:0 18px 40px rgba(56,189,248,.55);
+  transition:all .25s ease;
+}
+
+.header-inner .btn:hover {
+  transform:translateY(-3px) scale(1.03);
+  box-shadow:0 22px 50px rgba(167,139,250,.55);
+}
 </style>
 
 
@@ -234,33 +323,7 @@ body::after{
 
     </div>
     
-    /* ✅ Nom plus visible */
-.name-badge{
-  font-size:1.25rem;
-  font-weight:900;
-  letter-spacing:.4px;
-  display:flex;
-  flex-direction:column;
-  line-height:1.1;
-}
-.name-badge small{
-  font-size:.9rem;
-  font-weight:600;
-  color:var(--muted);
-  margin-top:.15rem;
-}
-
-/* ✅ Contact plus marquant */
-.header-contact .btn{
-  font-size:1.05rem;
-  padding:.85rem 1.2rem;
-  font-weight:900;
-  box-shadow:0 12px 28px rgba(56,189,248,.45);
-}
-.header-contact .btn::after{
-  content:" →";
-  font-weight:900;
-}
+   
 
   </header>
 
