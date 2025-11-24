@@ -32,33 +32,80 @@
   min-height:100vh;
 }
 
-/* ✅ Image sur les côtés : deux bandes latérales fixes */
+/* ==== IMAGE LATÉRALE + FUSION + FLOU ==== */
+
 body::before,
-body::after{
-  content:"";
-  position:fixed;
-  top:0; bottom:0;
-  width:22vw;
-  min-width:220px;
-  max-width:360px;
-  z-index:-1;
-  background-image:url("images/bg.jpg");
-  background-size:cover;
-  background-position:center;
-  opacity:.30;            /* <- plus visible */
-  filter:blur(2.2px) brightness(0.75);
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 22vw;
+  min-width: 220px;
+  max-width: 360px;
+  background-image: url("images/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+
+  /* Image légèrement atténuée */
+  opacity: 0.35;
+  filter: brightness(0.85) saturate(0.9);
 }
 
-/* Dégradés latéraux plus doux */
-body::before{
-  left:0;
-  mask-image: linear-gradient(to right, black 0%, transparent 90%);
+/* Côté gauche */
+body::before {
+  left: 0;
+  transform: none;
 }
 
-body::after{
-  right:0;
-  transform:scaleX(-1);
-  mask-image: linear-gradient(to left, black 0%, transparent 90%);
+/* Côté droit (miroir) */
+body::after {
+  right: 0;
+  transform: scaleX(-1);
+}
+
+/* ==== GRADIENT DE FUSION + FLOU ==== */
+
+body::before::after,
+body::after::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 40%;                        /* largeur de la zone de flou */
+  pointer-events: none;
+  z-index: -1;
+
+  background: linear-gradient(
+    to right,
+    rgba(11,16,32,0.55) 0%,           /* centre sombre */
+    rgba(11,16,32,0.20) 60%,
+    rgba(255,255,255,0) 100%          /* côté image */
+  );
+
+  backdrop-filter: blur(12px);        /* flou intense */
+
+}
+
+/* côté gauche : flou vers l'image */
+body::before::after {
+  right: 0;
+}
+
+/* côté droit : flou vers l'image */
+body::after::after {
+  left: 0;
+}
+
+/* Désactiver sur petits écrans */
+@media(max-width: 800px){
+  body::before,
+  body::after,
+  body::before::after,
+  body::after::after{
+    display:none;
+  }
 }
 
   header,footer{
