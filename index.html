@@ -350,6 +350,53 @@ main section:not(.is-active){
   transform:scale(1.045);
 }
 
+   /* ===== HOVER CARTES (Activités + Veille) : fluide et moderne ===== */
+.project-card, .article-card{
+  position:relative;
+  transition:
+    transform .28s cubic-bezier(.2,.8,.2,1),
+    box-shadow .32s cubic-bezier(.2,.8,.2,1),
+    border-color .25s ease,
+    background .25s ease;
+  will-change:transform;
+}
+
+.project-card::after, .article-card::after{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  border-radius:inherit;
+  background:linear-gradient(135deg, rgba(56,189,248,0), rgba(167,139,250,0));
+  opacity:0;
+  transition:opacity .25s ease;
+  pointer-events:none;
+  z-index:-1;
+}
+
+.project-card:hover, .article-card:hover{
+  transform:translateY(-8px) scale(1.025);
+  box-shadow:
+    0 22px 50px rgba(0,0,0,.60),
+    0 0 0 1px rgba(56,189,248,.35);
+  border-color:rgba(167,139,250,.8);
+  background:rgba(255,255,255,.055);
+}
+
+.project-card:hover::after, .article-card:hover::after{
+  opacity:1;
+  background:linear-gradient(135deg, rgba(56,189,248,.18), rgba(167,139,250,.14));
+  filter:blur(14px);
+}
+
+.project-card img, .article-card img{
+  transition:transform .38s cubic-bezier(.2,.8,.2,1), filter .3s ease;
+  transform-origin:center;
+}
+
+.project-card:hover img, .article-card:hover img{
+  transform:scale(1.06);
+  filter:saturate(1.08) contrast(1.05);
+}
 </style>
 
 </head>
@@ -691,7 +738,8 @@ main section:not(.is-active){
       </ul>
       <p><strong>Résultat :</strong> accès distant fiable et chiffré.</p>
     </article>
-
+  
+  
   </div>
 
   <div class="no-results" id="noResults">Aucun projet ne correspond à ta recherche.</div>
