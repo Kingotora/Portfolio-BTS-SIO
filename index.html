@@ -397,6 +397,29 @@ main section:not(.is-active){
   transform:scale(1.06);
   filter:saturate(1.08) contrast(1.05);
 }
+
+   /* ===== NOM NAVBAR SOBRE ===== */
+.name-badge{
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+  padding:0 !important;
+}
+
+.name-badge span{
+  font-size:1.05rem !important;
+  font-weight:700 !important;
+  color:var(--text) !important;
+  background:none !important;
+  text-shadow:none !important;
+}
+
+.name-badge small{
+  font-size:.85rem !important;
+  font-weight:600 !important;
+  color:var(--muted) !important;
+}
+
 </style>
 
 </head>
@@ -560,6 +583,7 @@ main section:not(.is-active){
       <button class="tag-filter" data-tag="raspberry" type="button">Raspberry Pi</button>
       <button class="tag-filter" data-tag="reseau" type="button">Réseau</button>
       <button class="tag-filter" data-tag="securite" type="button">Sécurité</button>
+      <button class="tag-filter" data-tag="web" type="button" title="Web">Web</button>
     </div>
 
     <span id="searchCount" style="color:var(--muted); font-size:.95rem;"></span>
@@ -738,7 +762,33 @@ main section:not(.is-active){
       </ul>
       <p><strong>Résultat :</strong> accès distant fiable et chiffré.</p>
     </article>
-  
+
+    <article class="project-card"
+  data-title="site vitrine restaurant création web html css js projet personnel"
+  data-tags="web,personnel">
+  <img src="images/restaurant.png" alt="Site vitrine restaurant" />
+  <h3>Site vitrine pour mon restaurant</h3>
+
+  <p><strong>Objectif :</strong> réaliser un site vitrine simple et élégant pour présenter le restaurant, l’ambiance,
+    les menus et les informations pratiques.</p>
+
+  <p><strong>Contenu :</strong> pages essentielles (Accueil, Carte/Menu, Infos pratiques, Contact) avec un design cohérent
+    et une navigation fluide.</p>
+
+  <ul>
+    <li>Maquettage puis intégration HTML/CSS/JS</li>
+    <li>Responsive complet (mobile → desktop)</li>
+    <li>Optimisation des images et du chargement</li>
+    <li>Formulaire de contact et liens réseaux sociaux</li>
+  </ul>
+
+  <div class="download-block actions">
+    <p>Voir le site en ligne.</p>
+    <a class="btn" href="https://mom-s-restaurant-1ddpi.kinsta.page/" target="_blank" rel="noopener">
+      🌐 Accéder au site
+    </a>
+  </div>
+</article>
   
   </div>
 
