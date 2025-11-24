@@ -461,10 +461,10 @@ nav[role="tablist"]{
     </section>
 
     <!-- ACTIVITÉS -->
-   <section id="activites" hidden>
+  <section id="activites" hidden>
   <h2>Activités</h2>
 
-  <!-- Recherche + filtres tags -->
+  <!-- Recherche + filtres tags MULTI -->
   <div style="margin-top:.5rem; display:flex; gap:.75rem; flex-wrap:wrap; align-items:center;">
     <input id="projectSearch" type="search"
       placeholder="Rechercher un projet (ex. MediaWiki, GLPI, Plex, Pi-hole)…"
@@ -492,9 +492,15 @@ nav[role="tablist"]{
     #tagFilters .tag-filter{
       padding:.45rem .8rem;border-radius:999px;border:1px solid var(--stroke);
       background:rgba(255,255,255,.04);color:var(--text);cursor:pointer;font-weight:600;
+      transition:background .2s ease, transform .12s ease, border-color .2s ease;
+    }
+    #tagFilters .tag-filter:hover{
+      transform:translateY(-1px);
+      border-color:rgba(56,189,248,.5);
     }
     #tagFilters .tag-filter.is-on{
-      background:rgba(255,255,255,.12);
+      background:rgba(255,255,255,.14);
+      border-color:rgba(167,139,250,.55);
     }
 
     #activites .projects-grid{
@@ -519,14 +525,32 @@ nav[role="tablist"]{
     #activites .no-results{
       display:none; margin-top:1rem; color:var(--muted); font-style:italic;
     }
+
+    #activites .subsection-title{
+      margin-top:1.2rem;
+      font-size:1.15rem;
+      font-weight:800;
+      letter-spacing:.2px;
+      display:flex;
+      align-items:center;
+      gap:.5rem;
+    }
+    #activites .subsection-title::after{
+      content:"";
+      height:1px; flex:1;
+      background:var(--stroke);
+      margin-left:.7rem;
+    }
   </style>
 
   <p style="color:var(--muted); margin-top:.75rem">
-    Voici quelques projets marquants menés en cours et en autonomie. Ils illustrent ma façon de travailler :
-    partir d’un besoin concret, monter un service proprement, puis documenter pour qu’il reste exploitable.
+    Je présente ici deux types de projets : ceux réalisés dans le cadre de ma formation,
+    et ceux montés chez moi en autonomie pour aller plus loin ou répondre à un besoin concret.
   </p>
 
-  <div class="projects-grid" id="projectsGrid">
+  <!-- ========= PROJETS SCOLAIRES ========= -->
+  <div class="subsection-title">📘 Projets scolaires</div>
+  <div class="projects-grid" id="projectsSchool">
 
     <!-- MediaWiki -->
     <article class="project-card"
@@ -574,12 +598,18 @@ nav[role="tablist"]{
       </div>
     </article>
 
+  </div>
+
+  <!-- ========= PROJETS PERSONNELS ========= -->
+  <div class="subsection-title">🛠️ Projets personnels</div>
+  <div class="projects-grid" id="projectsPersonal">
+
     <!-- Plex -->
     <article class="project-card"
       data-title="plex synology ds920 docker multimedia streaming nas"
       data-tags="docker,nas">
       <img src="images/plex.png" alt="Plex" />
-      <h3>Serveur Plex (projet personnel)</h3>
+      <h3>Serveur Plex sur NAS</h3>
       <p><strong>Objectif :</strong> centraliser une médiathèque personnelle et la diffuser à la maison.</p>
       <p><strong>Matériel :</strong> NAS Synology DS920+ + Docker.</p>
       <ul>
@@ -597,43 +627,44 @@ nav[role="tablist"]{
       data-title="pihole raspberry pi dns adblock reseau securite"
       data-tags="raspberry,reseau,securite">
       <img src="images/pihole.png" alt="Pi-hole" />
-      <h3>Pi-hole sur Raspberry Pi (projet personnel)</h3>
-      <p><strong>Objectif :</strong> mettre en place un bloqueur de publicités et de trackers au niveau DNS pour tout le réseau domestique.</p>
-      <p><strong>Environnement :</strong> Raspberry Pi + Debian/Raspberry Pi OS.</p>
+      <h3>Pi-hole sur Raspberry Pi</h3>
+      <p><strong>Objectif :</strong> bloquer publicités/trackers au niveau DNS pour tout le réseau domestique.</p>
+      <p><strong>Environnement :</strong> Raspberry Pi + Raspberry Pi OS.</p>
       <ul>
-        <li>Installation du système et mise à jour sécurisée</li>
-        <li>Déploiement de Pi-hole et configuration DNS local</li>
-        <li>Redirection du DNS du routeur vers Pi-hole</li>
-        <li>Création de listes de blocage adaptées (ads / tracking / malware)</li>
-        <li>Supervision via l’interface Web + logs DNS</li>
-        <li>Mise en place d’une IP fixe et d’une sauvegarde de config</li>
+        <li>Installation système + mises à jour</li>
+        <li>Déploiement Pi-hole et DNS local</li>
+        <li>DNS routeur redirigé vers Pi-hole</li>
+        <li>Listes de blocage (ads/tracking/malware)</li>
+        <li>Supervision via interface Web</li>
+        <li>Sauvegarde configuration + IP fixe</li>
       </ul>
-      <p><strong>Résultat :</strong> navigation plus propre, réseau mieux protégé et demandes DNS centralisées.</p>
+      <p><strong>Résultat :</strong> réseau plus propre et plus sécurisé.</p>
     </article>
 
     <!-- VPN -->
     <article class="project-card"
-      data-title="vpn raspberry pi wireguard openvpn acces distant securite"
+      data-title="vpn raspberry pi wireguard openvpn acces distant securite reseau"
       data-tags="raspberry,reseau,securite">
       <img src="images/vpn.png" alt="VPN Raspberry Pi" />
-      <h3>Serveur VPN sur Raspberry Pi (projet personnel)</h3>
-      <p><strong>Objectif :</strong> accéder de façon sécurisée à mon réseau domestique depuis l’extérieur (fichiers, Plex, administration NAS).</p>
-      <p><strong>Environnement :</strong> Raspberry Pi + WireGuard (ou OpenVPN).</p>
+      <h3>Serveur VPN sur Raspberry Pi</h3>
+      <p><strong>Objectif :</strong> accéder à mon réseau domestique depuis l’extérieur en sécurité.</p>
+      <p><strong>Environnement :</strong> Raspberry Pi + WireGuard/OpenVPN.</p>
       <ul>
-        <li>Installation et durcissement du Raspberry Pi</li>
-        <li>Déploiement d’un serveur VPN (WireGuard/OpenVPN)</li>
-        <li>Création des profils clients (PC / mobile)</li>
-        <li>Ouverture/forward des ports sur la box + DDNS</li>
-        <li>Règles de pare-feu pour limiter l’accès interne</li>
-        <li>Tests de connexion externe et documentation utilisateur</li>
+        <li>Durcissement du Raspberry Pi</li>
+        <li>Déploiement serveur VPN</li>
+        <li>Profils clients (PC/mobile)</li>
+        <li>Port-forward + DDNS sur la box</li>
+        <li>Règles firewall pour limiter l’accès interne</li>
+        <li>Tests externes + documentation utilisateur</li>
       </ul>
-      <p><strong>Résultat :</strong> accès distant fiable et chiffré, sans exposer directement les services.</p>
+      <p><strong>Résultat :</strong> accès distant fiable et chiffré.</p>
     </article>
 
   </div>
 
   <div class="no-results" id="noResults">Aucun projet ne correspond à ta recherche.</div>
 </section>
+
 
     <!-- VEILLE -->
     <section id="veille" hidden>
@@ -759,53 +790,81 @@ nav[role="tablist"]{
     });
   });
 
-  // Recherche + filtres par tags
+  // === Recherche + filtres MULTI tags ===
   const searchInput = document.getElementById('projectSearch');
-  const projectsGrid = document.getElementById('projectsGrid');
   const noResults = document.getElementById('noResults');
   const searchCount = document.getElementById('searchCount');
   const tagButtons = document.querySelectorAll('#tagFilters .tag-filter');
 
-  let activeTag = 'all';
+  // deux grilles (scolaire + perso)
+  const grids = [
+    document.getElementById('projectsSchool'),
+    document.getElementById('projectsPersonal')
+  ].filter(Boolean);
 
-  if (projectsGrid) {
-    const cards = Array.from(projectsGrid.querySelectorAll('.project-card'));
+  // tags actifs : Set
+  const activeTags = new Set(['all']);
 
-    function applyFilters() {
-      const q = (searchInput?.value || '').trim().toLowerCase();
-      let visible = 0;
+  function getAllCards(){
+    return grids.flatMap(g => Array.from(g.querySelectorAll('.project-card')));
+  }
 
-      cards.forEach(card => {
-        const hay = (card.dataset.title || card.textContent).toLowerCase();
-        const tags = (card.dataset.tags || '').split(',').map(t => t.trim());
+  function applyFilters() {
+    const q = (searchInput?.value || '').trim().toLowerCase();
+    const cards = getAllCards();
+    let visible = 0;
 
-        const matchText = !q || hay.includes(q);
-        const matchTag = activeTag === 'all' || tags.includes(activeTag);
+    cards.forEach(card => {
+      const hay = (card.dataset.title || card.textContent).toLowerCase();
+      const tags = (card.dataset.tags || '').split(',').map(t => t.trim());
 
-        const match = matchText && matchTag;
-        card.style.display = match ? '' : 'none';
-        if (match) visible++;
-      });
+      const matchText = !q || hay.includes(q);
+      const matchTag =
+        activeTags.has('all') ||
+        tags.some(t => activeTags.has(t));
 
-      if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
-      if (searchCount) {
-        searchCount.textContent = q ? `${visible} projet(s) trouvé(s)` : `${visible} projet(s)`;
-      }
-    }
-
-    searchInput?.addEventListener('input', applyFilters);
-
-    tagButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        activeTag = btn.dataset.tag || 'all';
-        tagButtons.forEach(b => b.classList.toggle('is-on', b.dataset.tag === activeTag));
-        applyFilters();
-      });
+      const match = matchText && matchTag;
+      card.style.display = match ? '' : 'none';
+      if (match) visible++;
     });
 
-    applyFilters();
+    if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
+    if (searchCount) {
+      const textPart = q ? `${visible} projet(s) trouvé(s)` : `${visible} projet(s)`;
+      searchCount.textContent = textPart;
+    }
   }
+
+  tagButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tag = btn.dataset.tag || 'all';
+
+      if (tag === 'all') {
+        activeTags.clear();
+        activeTags.add('all');
+        tagButtons.forEach(b => b.classList.toggle('is-on', b.dataset.tag === 'all'));
+      } else {
+        activeTags.delete('all');
+        if (activeTags.has(tag)) activeTags.delete(tag);
+        else activeTags.add(tag);
+
+        // si plus aucun tag, retour à "all"
+        if (activeTags.size === 0) activeTags.add('all');
+
+        tagButtons.forEach(b => {
+          const t = b.dataset.tag;
+          b.classList.toggle('is-on', activeTags.has(t));
+        });
+      }
+
+      applyFilters();
+    });
+  });
+
+  searchInput?.addEventListener('input', applyFilters);
+  applyFilters();
 </script>
+
 
 
 </body>
