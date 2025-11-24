@@ -245,6 +245,67 @@ nav[role="tablist"]{
   margin-top:.15rem;
 }
 
+   /* ===== AJOUTS / OVERRIDES ===== */
+
+/* ✅ Supprimer le rectangle autour des onglets */
+nav[role="tablist"]{
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+  padding:0 !important;
+}
+
+/* ✅ Tags compacts + barre de recherche prioritaire */
+#tagFilters{
+  display:flex;
+  flex-wrap:nowrap;              /* garde tout sur une ligne */
+  gap:.3rem;
+  overflow-x:auto;               /* scroll horizontal si besoin */
+  max-width:100%;
+  padding-bottom:.15rem;
+  scrollbar-width:thin;
+}
+#tagFilters::-webkit-scrollbar{height:6px}
+#tagFilters::-webkit-scrollbar-thumb{
+  background:rgba(255,255,255,.15);
+  border-radius:999px;
+}
+
+#tagFilters .tag-filter{
+  padding:.28rem .55rem !important;
+  font-size:.78rem !important;
+  border-radius:999px !important;
+  border:1px solid var(--stroke) !important;
+  background:rgba(255,255,255,.04) !important;
+  color:var(--text) !important;
+  cursor:pointer !important;
+  font-weight:600 !important;
+  white-space:nowrap;
+}
+#tagFilters .tag-filter.is-on{
+  background:rgba(255,255,255,.12) !important;
+  border-color:rgba(167,139,250,.55) !important;
+}
+
+/* ✅ Compteurs par sous-section */
+#activites .subsection-meta{
+  color:var(--muted);
+  font-size:.9rem;
+  margin-top:.2rem;
+  margin-bottom:.35rem;
+}
+
+/* ✅ Animation stagger (cartes une par une) */
+.project-card{
+  opacity:0;
+  transform:translateY(10px) scale(.985);
+  animation:cardIn .55s cubic-bezier(.2,.8,.2,1) forwards;
+  animation-delay: var(--stagger, 0ms);
+}
+@keyframes cardIn{
+  to{ opacity:1; transform:translateY(0) scale(1); }
+}
+
 /* ✅ Contact plus marquant */
 .header-contact .btn{
   font-size:1.05rem;
@@ -550,8 +611,9 @@ nav[role="tablist"]{
 
   <!-- ========= PROJETS SCOLAIRES ========= -->
   <div class="subsection-title">📘 Projets scolaires</div>
-  <div class="projects-grid" id="projectsSchool">
-
+<div class="subsection-meta" id="countSchool"></div>
+<div class="projects-grid" id="projectsSchool">
+  
     <!-- MediaWiki -->
     <article class="project-card"
       data-title="mediawiki windows wiki documentation xampp"
@@ -602,7 +664,8 @@ nav[role="tablist"]{
 
   <!-- ========= PROJETS PERSONNELS ========= -->
   <div class="subsection-title">🛠️ Projets personnels</div>
-  <div class="projects-grid" id="projectsPersonal">
+<div class="subsection-meta" id="countPersonal"></div>
+<div class="projects-grid" id="projectsPersonal">
 
     <!-- Plex -->
     <article class="project-card"
@@ -779,6 +842,12 @@ nav[role="tablist"]{
       sec.hidden = !isTarget;
       sec.classList.toggle('is-active', isTarget);
     });
+
+    // reset stagger quand on arrive sur Activités
+    if (id === 'activites') {
+      staggerCards();
+      applyFilters();
+    }
   }
   showSection('accueil');
 
@@ -796,17 +865,29 @@ nav[role="tablist"]{
   const searchCount = document.getElementById('searchCount');
   const tagButtons = document.querySelectorAll('#tagFilters .tag-filter');
 
-  // deux grilles (scolaire + perso)
-  const grids = [
-    document.getElementById('projectsSchool'),
-    document.getElementById('projectsPersonal')
-  ].filter(Boolean);
+  const gridSchool = document.getElementById('projectsSchool');
+  const gridPersonal = document.getElementById('projectsPersonal');
+  const countSchool = document.getElementById('countSchool');
+  const countPersonal = document.getElementById('countPersonal');
 
-  // tags actifs : Set
+  const grids = [gridSchool, gridPersonal].filter(Boolean);
   const activeTags = new Set(['all']);
 
   function getAllCards(){
     return grids.flatMap(g => Array.from(g.querySelectorAll('.project-card')));
+  }
+
+  function updateSectionCounts() {
+    if (!gridSchool || !gridPersonal) return;
+
+    const visibleSchool = Array.from(gridSchool.querySelectorAll('.project-card'))
+      .filter(c => c.style.display !== 'none').length;
+
+    const visiblePersonal = Array.from(gridPersonal.querySelectorAll('.project-card'))
+      .filter(c => c.style.display !== 'none').length;
+
+    if (countSchool) countSchool.textContent = `${visibleSchool} projet(s) scolaire(s) affiché(s)`;
+    if (countPersonal) countPersonal.textContent = `${visiblePersonal} projet(s) personnel(s) affiché(s)`;
   }
 
   function applyFilters() {
@@ -830,9 +911,10 @@ nav[role="tablist"]{
 
     if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
     if (searchCount) {
-      const textPart = q ? `${visible} projet(s) trouvé(s)` : `${visible} projet(s)`;
-      searchCount.textContent = textPart;
+      searchCount.textContent = q ? `${visible} projet(s) trouvé(s)` : `${visible} projet(s)`;
     }
+
+    updateSectionCounts();
   }
 
   tagButtons.forEach(btn => {
@@ -845,10 +927,10 @@ nav[role="tablist"]{
         tagButtons.forEach(b => b.classList.toggle('is-on', b.dataset.tag === 'all'));
       } else {
         activeTags.delete('all');
+
         if (activeTags.has(tag)) activeTags.delete(tag);
         else activeTags.add(tag);
 
-        // si plus aucun tag, retour à "all"
         if (activeTags.size === 0) activeTags.add('all');
 
         tagButtons.forEach(b => {
@@ -862,8 +944,19 @@ nav[role="tablist"]{
   });
 
   searchInput?.addEventListener('input', applyFilters);
+
+  // === Stagger animation (cartes une par une) ===
+  function staggerCards(){
+    const cards = getAllCards();
+    cards.forEach((card, i) => {
+      card.style.setProperty('--stagger', `${i*70}ms`);
+    });
+  }
+
+  staggerCards();
   applyFilters();
 </script>
+
 
 
 
