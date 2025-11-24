@@ -117,6 +117,41 @@ body::after{
     display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;flex:1;
   }
 
+  /* Effet néon discret sur la navbar */
+nav[role="tablist"]{
+  padding:.35rem;
+  border-radius:16px;
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--stroke);
+  box-shadow:
+    0 0 0 1px rgba(56,189,248,.06),
+    0 10px 28px rgba(0,0,0,.35);
+}
+
+/* Glow doux quand un onglet est sélectionné */
+.tab-btn[aria-selected="true"]{
+  position:relative;
+}
+.tab-btn[aria-selected="true"]::after{
+  content:"";
+  position:absolute; inset:-2px;
+  border-radius:16px;
+  background:linear-gradient(90deg,var(--brand),var(--brand-2));
+  filter:blur(12px);
+  opacity:.35;
+  z-index:-1;
+}
+
+   /* Animation d'apparition des cartes */
+.project-card, .article-card{
+  opacity:0;
+  transform:translateY(8px) scale(.98);
+  animation:cardIn .55s cubic-bezier(.2,.8,.2,1) forwards;
+}
+@keyframes cardIn{
+  to{ opacity:1; transform:translateY(0) scale(1); }
+}
+
   /* ✅ Boutons onglets plus larges */
   .tab-btn{
     background:linear-gradient(180deg,#111827,#0b1020);
@@ -432,7 +467,7 @@ body::after{
   <!-- Recherche + filtres tags -->
   <div style="margin-top:.5rem; display:flex; gap:.75rem; flex-wrap:wrap; align-items:center;">
     <input id="projectSearch" type="search"
-      placeholder="Rechercher un projet (ex. MediaWiki, GLPI, Plex)…"
+      placeholder="Rechercher un projet (ex. MediaWiki, GLPI, Plex, Pi-hole)…"
       aria-label="Rechercher un projet"
       style="flex:1; min-width:240px; padding:.75rem 1rem; border-radius:12px;
       border:1px solid var(--stroke); background:rgba(255,255,255,.05);
@@ -445,6 +480,9 @@ body::after{
       <button class="tag-filter" data-tag="helpdesk" type="button">Helpdesk</button>
       <button class="tag-filter" data-tag="nas" type="button">NAS</button>
       <button class="tag-filter" data-tag="wiki" type="button">Wiki</button>
+      <button class="tag-filter" data-tag="raspberry" type="button">Raspberry Pi</button>
+      <button class="tag-filter" data-tag="reseau" type="button">Réseau</button>
+      <button class="tag-filter" data-tag="securite" type="button">Sécurité</button>
     </div>
 
     <span id="searchCount" style="color:var(--muted); font-size:.95rem;"></span>
@@ -490,6 +528,7 @@ body::after{
 
   <div class="projects-grid" id="projectsGrid">
 
+    <!-- MediaWiki -->
     <article class="project-card"
       data-title="mediawiki windows wiki documentation xampp"
       data-tags="windows,wiki">
@@ -512,6 +551,7 @@ body::after{
       </div>
     </article>
 
+    <!-- GLPI -->
     <article class="project-card"
       data-title="glpi windows helpdesk parc inventaire fusioninventory ocs"
       data-tags="windows,helpdesk">
@@ -534,6 +574,7 @@ body::after{
       </div>
     </article>
 
+    <!-- Plex -->
     <article class="project-card"
       data-title="plex synology ds920 docker multimedia streaming nas"
       data-tags="docker,nas">
@@ -551,12 +592,48 @@ body::after{
       <p><strong>Résultat :</strong> serveur stable et simple à utiliser.</p>
     </article>
 
+    <!-- Pi-hole -->
+    <article class="project-card"
+      data-title="pihole raspberry pi dns adblock reseau securite"
+      data-tags="raspberry,reseau,securite">
+      <img src="images/pihole.png" alt="Pi-hole" />
+      <h3>Pi-hole sur Raspberry Pi (projet personnel)</h3>
+      <p><strong>Objectif :</strong> mettre en place un bloqueur de publicités et de trackers au niveau DNS pour tout le réseau domestique.</p>
+      <p><strong>Environnement :</strong> Raspberry Pi + Debian/Raspberry Pi OS.</p>
+      <ul>
+        <li>Installation du système et mise à jour sécurisée</li>
+        <li>Déploiement de Pi-hole et configuration DNS local</li>
+        <li>Redirection du DNS du routeur vers Pi-hole</li>
+        <li>Création de listes de blocage adaptées (ads / tracking / malware)</li>
+        <li>Supervision via l’interface Web + logs DNS</li>
+        <li>Mise en place d’une IP fixe et d’une sauvegarde de config</li>
+      </ul>
+      <p><strong>Résultat :</strong> navigation plus propre, réseau mieux protégé et demandes DNS centralisées.</p>
+    </article>
+
+    <!-- VPN -->
+    <article class="project-card"
+      data-title="vpn raspberry pi wireguard openvpn acces distant securite"
+      data-tags="raspberry,reseau,securite">
+      <img src="images/vpn.png" alt="VPN Raspberry Pi" />
+      <h3>Serveur VPN sur Raspberry Pi (projet personnel)</h3>
+      <p><strong>Objectif :</strong> accéder de façon sécurisée à mon réseau domestique depuis l’extérieur (fichiers, Plex, administration NAS).</p>
+      <p><strong>Environnement :</strong> Raspberry Pi + WireGuard (ou OpenVPN).</p>
+      <ul>
+        <li>Installation et durcissement du Raspberry Pi</li>
+        <li>Déploiement d’un serveur VPN (WireGuard/OpenVPN)</li>
+        <li>Création des profils clients (PC / mobile)</li>
+        <li>Ouverture/forward des ports sur la box + DDNS</li>
+        <li>Règles de pare-feu pour limiter l’accès interne</li>
+        <li>Tests de connexion externe et documentation utilisateur</li>
+      </ul>
+      <p><strong>Résultat :</strong> accès distant fiable et chiffré, sans exposer directement les services.</p>
+    </article>
+
   </div>
 
   <div class="no-results" id="noResults">Aucun projet ne correspond à ta recherche.</div>
 </section>
-
-
 
     <!-- VEILLE -->
     <section id="veille" hidden>
