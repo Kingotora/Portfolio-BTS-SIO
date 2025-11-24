@@ -67,6 +67,12 @@
   @media (max-width: 700px){
     body::before, body::after{ display:none; }
   }
+/* le parallax est piloté par JS via --parallaxY */
+body::before,
+body::after{
+  transform: translateY(var(--parallaxY, 0px));
+  will-change: transform;
+}
 
   header,footer{
     background:rgba(10,14,30,.78);
@@ -259,6 +265,37 @@
     padding:1rem;text-align:center;font-size:.9rem;border-top:1px solid var(--stroke);
     color:var(--muted)
   }
+
+   /* ===== Halo lumineux au scroll ===== */
+section{ position:relative; }
+
+section.is-active::before{
+  content:"";
+  position:absolute;
+  inset:-18px;
+  border-radius:calc(var(--radius) + 10px);
+  background:
+    radial-gradient(600px 220px at 50% 0%, rgba(56,189,248,.20), transparent 60%),
+    radial-gradient(520px 260px at 50% 100%, rgba(167,139,250,.18), transparent 65%);
+  filter:blur(22px);
+  z-index:-1;
+  pointer-events:none;
+  opacity:var(--halo, 0);
+  transition:opacity .35s ease;
+}
+
+   /* ===== Transition douce entre rubriques ===== */
+main section{
+  transition:
+    opacity .45s cubic-bezier(.2,.8,.2,1),
+    transform .55s cubic-bezier(.2,.8,.2,1),
+    filter .45s ease;
+}
+main section:not(.is-active){
+  filter:blur(4px);
+}
+
+   
 </style>
 
 </head>
@@ -827,6 +864,47 @@
 
   staggerCards();
   applyFilters();
+  // ===== Halo lumineux : active le glow quand une section est visible =====
+const haloSections = Array.from(document.querySelectorAll('main section'));
+const haloObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.setProperty('--halo', '1');
+    } else {
+      e.target.style.setProperty('--halo', '0');
+    }
+  });
+}, { threshold: 0.35 });
+
+haloSections.forEach(sec => haloObserver.observe(sec));
+
+// ===== Parallax sur les images latérales =====
+window.addEventListener('scroll', () => {
+  const y = window.scrollY || document.documentElement.scrollTop;
+  const offset = Math.min(60, y * 0.06); // limite le décalage
+  document.body.style.setProperty('--parallaxY', offset + 'px');
+}, { passive: true });
+
+// ===== Transition douce au changement de rubrique =====
+// Si ton script possède déjà showSection(), on le remplace par une version smooth.
+function smoothShowSection(id){
+  haloSections.forEach(sec => {
+    const isTarget = sec.id === id;
+
+    if (isTarget){
+      sec.hidden = false;
+      requestAnimationFrame(()=>sec.classList.add('is-active'));
+    } else {
+      sec.classList.remove('is-active');
+      setTimeout(()=>sec.hidden = true, 420);
+    }
+  });
+}
+
+if (typeof showSection === 'function'){
+  showSection = smoothShowSection;
+}
+
 </script>
 
 
