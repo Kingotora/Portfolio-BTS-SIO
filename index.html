@@ -420,6 +420,37 @@ main section:not(.is-active){
   color:var(--muted) !important;
 }
 
+   /* ===== NOM NAVBAR — sobre mais très visible ===== */
+.name-badge{
+  padding:0 .4rem;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  line-height:1.2;
+}
+
+.name-badge span{
+  font-size:1.65rem !important;      /* PLUS GRAND */
+  font-weight:900 !important;        /* PLUS FORT */
+  color:#ffffff !important;          /* TEXTE BLANC PUR */
+  letter-spacing:.8px;               /* LÉGÈRE ESPACEMENT = lisibilité */
+  text-shadow:0 0 6px rgba(0,0,0,.45),
+               0 2px 12px rgba(0,0,0,.35); /* ÉCLAIRAGE DISCRET */
+}
+
+.name-badge small{
+  font-size:.92rem !important;
+  font-weight:600;
+  color:rgba(255,255,255,.75);       /* Gris clair = sobre */
+}
+
+   .name-badge span:hover{
+  text-decoration:underline;
+  text-decoration-thickness:2px;
+  text-underline-offset:4px;
+  opacity:.9;
+}
+
 </style>
 
 </head>
