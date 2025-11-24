@@ -10,146 +10,172 @@
   <link rel="icon" href="favicon.ico" />
 
   <style>
-    :root{
-      --bg:#0b1020;
-      --bg-soft:#0f172a;
-      --card:rgba(255,255,255,.06);
-      --card-solid:#0b1226;
-      --stroke:rgba(255,255,255,.10);
-      --text:#e5e7eb;
-      --muted:#a1a1aa;
-      --brand:#38bdf8;
-      --brand-2:#a78bfa;
-      --radius:18px;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 10% -10%, #172554 0%, transparent 45%),
-        radial-gradient(1000px 500px at 90% -20%, #312e81 0%, transparent 40%),
-        linear-gradient(180deg,var(--bg) 0%, #050814 100%);
-      min-height:100vh;
-    }
+  :root{
+    --bg:#0b1020;
+    --bg-soft:#0f172a;
+    --card:rgba(255,255,255,.06);
+    --card-solid:#0b1226;
+    --stroke:rgba(255,255,255,.10);
+    --text:#e5e7eb;
+    --muted:#a1a1aa;
+    --brand:#38bdf8;
+    --brand-2:#a78bfa;
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    color:var(--text);
+    background:
+      radial-gradient(1200px 600px at 10% -10%, #172554 0%, transparent 45%),
+      radial-gradient(1000px 500px at 90% -20%, #312e81 0%, transparent 40%),
+      linear-gradient(180deg,var(--bg) 0%, #050814 100%);
+    min-height:100vh;
+  }
 
-    header,footer{
-      background:rgba(10,14,30,.75);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--stroke);
-    }
+  header,footer{
+    background:rgba(10,14,30,.75);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--stroke);
+  }
 
-    .banner-wrap{width:100%;overflow:hidden;border-bottom:1px solid var(--stroke)}
-    .banner{
-      width:100%;
-      height:220px;
-      object-fit:cover;
-      object-position:center 35%;
-      display:block;
-      filter:saturate(1.05) contrast(1.03);
-    }
-    @media (min-width:900px){.banner{height:280px;object-position:center 40%}}
+  .banner-wrap{width:100%;overflow:hidden;border-bottom:1px solid var(--stroke)}
+  .banner{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    object-position:center 35%;
+    display:block;
+    filter:saturate(1.05) contrast(1.03);
+  }
+  @media (min-width:900px){.banner{height:280px;object-position:center 40%}}
 
-    .header-inner{
-      display:flex;justify-content:space-between;align-items:center;gap:1rem;
-      flex-wrap:wrap;padding:1rem 1.25rem;
-      max-width:1100px;margin:0 auto;
-    }
+  .header-inner{
+    display:flex;justify-content:space-between;align-items:center;gap:1rem;
+    flex-wrap:wrap;padding:1rem 1.25rem;
+    max-width:1100px;margin:0 auto;
+  }
 
-    main{max-width:1100px;margin:auto;padding:2.25rem 1.1rem}
-    section{
-      background:var(--card);
-      border:1px solid var(--stroke);
-      border-radius:var(--radius);
-      padding:1.6rem;
-      margin-bottom:1.6rem;
-      box-shadow:0 10px 30px rgba(0,0,0,.35);
-    }
+  main{max-width:1100px;margin:auto;padding:2.25rem 1.1rem}
 
-    h1,h2,h3{margin-top:0;letter-spacing:.2px}
-    h1{font-size:clamp(1.6rem,2.2vw,2rem)}
-    h2{font-size:clamp(1.25rem,1.8vw,1.5rem)}
-    h3{font-size:1.1rem}
+  /* animation d'apparition */
+  section{
+    background:var(--card);
+    border:1px solid var(--stroke);
+    border-radius:var(--radius);
+    padding:1.6rem;
+    margin-bottom:1.6rem;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+    opacity:0;
+    transform:translateY(6px);
+    transition:opacity .25s ease, transform .25s ease;
+  }
+  section.is-active{
+    opacity:1;
+    transform:translateY(0);
+  }
 
-    nav[role="tablist"]{
-      display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;flex:1;
-    }
+  h1,h2,h3{margin-top:0;letter-spacing:.2px}
+  h1{font-size:clamp(1.6rem,2.2vw,2rem)}
+  h2{font-size:clamp(1.25rem,1.8vw,1.5rem)}
+  h3{font-size:1.1rem}
 
-    /* Boutons de navigation plus larges + modernes */
-    .tab-btn{
-      background:linear-gradient(180deg,#111827,#0b1020);
-      border:1px solid var(--stroke);
-      padding:.85rem 1.4rem;
-      min-width:150px;
-      border-radius:14px;
-      cursor:pointer;
-      font-size:1.02rem;
-      font-weight:700;
-      color:var(--text);
-      box-shadow:0 6px 16px rgba(0,0,0,.35);
-      transition:transform .12s ease, box-shadow .2s ease, border-color .2s ease, background .25s ease;
-    }
-    .tab-btn:hover{
-      transform:translateY(-2px);
-      box-shadow:0 12px 28px rgba(56,189,248,.25);
-      border-color:rgba(56,189,248,.6);
-      background:linear-gradient(180deg,#0b132b,#0b1020);
-    }
-    .tab-btn[aria-selected="true"]{
-      background:linear-gradient(90deg,var(--brand),var(--brand-2));
-      color:#041018;
-      border-color:transparent;
-      box-shadow:0 14px 34px rgba(56,189,248,.40);
-    }
+  nav[role="tablist"]{
+    display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;flex:1;
+  }
 
-    .chip{
-      display:inline-block;padding:.3rem .8rem;border-radius:999px;
-      background:rgba(255,255,255,.08);
-      border:1px solid var(--stroke);
-      margin:.25rem;font-size:.85rem;color:var(--text)
-    }
+  /* boutons plus larges */
+  .tab-btn{
+    background:linear-gradient(180deg,#111827,#0b1020);
+    border:1px solid var(--stroke);
+    padding:.9rem 1.6rem;      /* + large */
+    min-width:160px;           /* + large */
+    border-radius:14px;
+    cursor:pointer;
+    font-size:1.05rem;
+    font-weight:700;
+    color:var(--text);
+    box-shadow:0 6px 16px rgba(0,0,0,.35);
+    transition:transform .12s ease, box-shadow .2s ease, border-color .2s ease, background .25s ease;
+  }
+  .tab-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 28px rgba(56,189,248,.25);
+    border-color:rgba(56,189,248,.6);
+    background:linear-gradient(180deg,#0b132b,#0b1020);
+  }
+  .tab-btn[aria-selected="true"]{
+    background:linear-gradient(90deg,var(--brand),var(--brand-2));
+    color:#041018;
+    border-color:transparent;
+    box-shadow:0 14px 34px rgba(56,189,248,.40);
+  }
 
-    .logo{max-width:160px;display:block;margin:0 0 1rem 0}
+  .chip{
+    display:inline-block;padding:.3rem .8rem;border-radius:999px;
+    background:rgba(255,255,255,.08);
+    border:1px solid var(--stroke);
+    margin:.25rem;font-size:.85rem;color:var(--text)
+  }
 
-    footer{
-      padding:1rem;text-align:center;font-size:.9rem;border-top:1px solid var(--stroke);
-      color:var(--muted)
-    }
+  .logo{max-width:160px;display:block;margin:0 0 1rem 0}
 
-    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
-    .skip-link:focus{
-      position:static;width:auto;height:auto;padding:.5rem .8rem;background:#000;color:#fff;border-radius:.5rem
-    }
-    :focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+  footer{
+    padding:1rem;text-align:center;font-size:.9rem;border-top:1px solid var(--stroke);
+    color:var(--muted)
+  }
 
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:.45rem;
-      background:linear-gradient(90deg,var(--brand),var(--brand-2));
-      color:#041018;font-weight:800;text-decoration:none;border:none;
-      border-radius:12px;padding:.7rem 1.05rem;cursor:pointer;
-      box-shadow:0 10px 26px rgba(56,189,248,.35);
-      transition:transform .12s ease, filter .15s ease, box-shadow .2s ease;
-    }
-    .btn:hover{filter:brightness(1.05);transform:translateY(-1px);box-shadow:0 16px 36px rgba(56,189,248,.45)}
-    .btn:active{transform:translateY(0)}
+  .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+  .skip-link:focus{
+    position:static;width:auto;height:auto;padding:.5rem .8rem;background:#000;color:#fff;border-radius:.5rem
+  }
+  :focus-visible{outline:2px solid var(--brand);outline-offset:2px}
 
-    .orgchart{
-      width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);
-      background:var(--card-solid)
-    }
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.45rem;
+    background:linear-gradient(90deg,var(--brand),var(--brand-2));
+    color:#041018;font-weight:800;text-decoration:none;border:none;
+    border-radius:12px;padding:.7rem 1.05rem;cursor:pointer;
+    box-shadow:0 10px 26px rgba(56,189,248,.35);
+    transition:transform .12s ease, filter .15s ease, box-shadow .2s ease;
+  }
+  .btn:hover{filter:brightness(1.05);transform:translateY(-1px);box-shadow:0 16px 36px rgba(56,189,248,.45)}
+  .btn:active{transform:translateY(0)}
 
-    .download-block{
-      background:rgba(255,255,255,.05);
-      border:1px dashed var(--stroke);
-      border-radius:12px;padding:1rem;margin-top:1rem;text-align:center
-    }
-    .download-block p{margin:0 0 .6rem 0;color:var(--muted);font-size:.95rem;line-height:1.4}
+  .orgchart{
+    width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);
+    background:var(--card-solid)
+  }
 
-    a{color:var(--brand);text-decoration:none}
-    a:hover{text-decoration:underline}
-    ul{line-height:1.55}
-  </style>
+  .download-block{
+    background:rgba(255,255,255,.05);
+    border:1px dashed var(--stroke);
+    border-radius:12px;padding:1rem;margin-top:1rem;text-align:center
+  }
+  .download-block p{margin:0 0 .6rem 0;color:var(--muted);font-size:.95rem;line-height:1.4}
+
+  a{color:var(--brand);text-decoration:none}
+  a:hover{text-decoration:underline}
+  ul{line-height:1.55}
+
+  /* hover moderne cartes (activités + veille) */
+  .project-card, .article-card{
+    transition:transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .project-card:hover, .article-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 16px 36px rgba(0,0,0,.45);
+    border-color:rgba(167,139,250,.6);
+  }
+  .project-card img, .article-card img{
+    transition:transform .25s ease;
+  }
+  .project-card:hover img, .article-card:hover img{
+    transform:scale(1.03);
+  }
+</style>
+
 </head>
 
 <body>
@@ -280,96 +306,133 @@
 
     <!-- ACTIVITÉS -->
     <section id="activites" hidden>
-      <h2>Activités</h2>
+  <h2>Activités</h2>
 
-      <style>
-        #activites .projects-grid{
-          display:grid;
-          grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-          gap:1rem;margin-top:1rem;
-        }
-        #activites .project-card{
-          background:rgba(255,255,255,.04);
-          border:1px solid var(--stroke);
-          border-radius:14px;padding:1rem;
-          display:flex;flex-direction:column;gap:.6rem;
-        }
-        #activites .project-card img{
-          width:100%;height:150px;object-fit:contain;
-          background:rgba(255,255,255,.04);
-          border-radius:10px;border:1px solid var(--stroke);padding:.6rem;
-        }
-        #activites .project-card p{margin:0;color:var(--muted);line-height:1.55;font-size:.95rem}
-        #activites .project-card ul{margin:.25rem 0 0 1.1rem;font-size:.95rem}
-        #activites .actions{margin-top:auto;text-align:center;padding-top:.5rem}
-      </style>
+  <!-- barre de recherche -->
+  <div style="margin-top:.5rem; display:flex; gap:.75rem; flex-wrap:wrap; align-items:center;">
+    <input id="projectSearch" type="search"
+      placeholder="Rechercher un projet (ex. MediaWiki, GLPI, Plex)…"
+      aria-label="Rechercher un projet"
+      style="flex:1; min-width:240px; padding:.75rem 1rem; border-radius:12px;
+      border:1px solid var(--stroke); background:rgba(255,255,255,.05);
+      color:var(--text); font-size:1rem; outline:none;" />
+    <span id="searchCount" style="color:var(--muted); font-size:.95rem;"></span>
+  </div>
 
-      <div class="projects-grid">
+  <style>
+    #activites .projects-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:1rem;margin-top:1rem;
+    }
+    #activites .project-card{
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--stroke);
+      border-radius:14px;padding:1rem;
+      display:flex;flex-direction:column;gap:.6rem;
+    }
+    #activites .project-card img{
+      width:100%;height:150px;object-fit:contain;
+      background:rgba(255,255,255,.04);
+      border-radius:10px;border:1px solid var(--stroke);padding:.6rem;
+    }
+    #activites .project-card p{margin:0;color:var(--muted);line-height:1.55;font-size:.95rem}
+    #activites .project-card ul{margin:.25rem 0 0 1.1rem;font-size:.95rem}
+    #activites .actions{margin-top:auto;text-align:center;padding-top:.5rem}
 
-        <article class="project-card">
-          <img src="images/mediawiki.png" alt="MediaWiki" />
-          <h3>MediaWiki sous Windows</h3>
-          <p><strong>Objectif :</strong> mettre en place un wiki interne pour centraliser les procédures de support et d’exploitation.</p>
-          <p><strong>Environnement :</strong> Windows + XAMPP.</p>
+    #activites .project-tags{display:flex; flex-wrap:wrap; gap:.35rem; margin-top:.25rem;}
+    #activites .project-tag{
+      font-size:.78rem; padding:.15rem .55rem; border-radius:999px;
+      background:rgba(255,255,255,.06); border:1px solid var(--stroke); color:var(--text);
+    }
+    #activites .no-results{
+      display:none; margin-top:1rem; color:var(--muted); font-style:italic;
+    }
+  </style>
 
-          <ul>
-            <li>Installation / configuration XAMPP</li>
-            <li>BDD <code>mediawiki</code> via phpMyAdmin</li>
-            <li>Déploiement dans <code>C:\xampp\htdocs\mediawiki</code></li>
-            <li>Assistant d’installation + extensions (VisualEditor)</li>
-            <li>Sauvegardes SQL + répertoire images</li>
-          </ul>
+  <p style="color:var(--muted); margin-top:.75rem">
+    Voici quelques projets marquants menés en cours et en autonomie. Ils montrent ma façon de travailler :
+    partir d’un besoin concret, monter un service proprement, puis documenter pour qu’il reste exploitable.
+  </p>
 
-          <div class="download-block actions">
-            <p>Documentation complète.</p>
-            <a class="btn" href="docs/Manuel_Installation_Windows.pdf" download>
-              📄 Télécharger la doc MediaWiki (PDF)
-            </a>
-          </div>
-        </article>
+  <div class="projects-grid" id="projectsGrid">
 
-        <article class="project-card">
-          <img src="images/glpi.png" alt="GLPI" />
-          <h3>GLPI sous Windows</h3>
-          <p><strong>Objectif :</strong> déployer une plateforme de helpdesk et de gestion de parc pour structurer le support.</p>
-          <p><strong>Environnement :</strong> Windows + WAMP/XAMPP.</p>
-
-          <ul>
-            <li>Stack Web (Apache / PHP / MariaDB)</li>
-            <li>BDD <code>glpi</code> via phpMyAdmin</li>
-            <li>Déploiement dans <code>C:\xampp\htdocs\glpi</code></li>
-            <li>Configuration profils, entités, SLA</li>
-            <li>Inventaire auto (FusionInventory / GLPI Inventory)</li>
-          </ul>
-
-          <div class="download-block actions">
-            <p>Documentation GLPI/OCS.</p>
-            <a class="btn" href="docs/GLPI_Cours.pdf" download>
-              📄 Télécharger la doc GLPI (PDF)
-            </a>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <img src="images/plex.png" alt="Plex" />
-          <h3>Serveur Plex (projet personnel)</h3>
-          <p><strong>Objectif :</strong> centraliser une médiathèque personnelle et la diffuser sur le réseau domestique.</p>
-          <p><strong>Matériel :</strong> NAS Synology DS920+ (3×8 To) + Docker.</p>
-
-          <ul>
-            <li>Déploiement Plex Media Server via Docker</li>
-            <li>Volumes persistants config + bibliothèques</li>
-            <li>Organisation Films / Séries / Musiques</li>
-            <li>Accès local multi-appareils (TV, PC, mobile)</li>
-            <li>Transcodage matériel activé</li>
-            <li>Métadonnées et scans automatisés</li>
-          </ul>
-
-          <p><strong>Résultat :</strong> serveur stable et simple à utiliser au quotidien.</p>
-        </article>
-
+    <article class="project-card" data-title="mediawiki windows wiki documentation xampp">
+      <img src="images/mediawiki.png" alt="MediaWiki" />
+      <h3>MediaWiki sous Windows</h3>
+      <div class="project-tags">
+        <span class="project-tag">Windows</span>
+        <span class="project-tag">XAMPP</span>
+        <span class="project-tag">Wiki</span>
       </div>
-    </section>
+      <p><strong>Objectif :</strong> mettre en place un wiki interne pour centraliser les procédures de support et d’exploitation.</p>
+      <p><strong>Environnement :</strong> Windows + XAMPP.</p>
+      <ul>
+        <li>Installation / configuration XAMPP</li>
+        <li>BDD <code>mediawiki</code> via phpMyAdmin</li>
+        <li>Déploiement dans <code>C:\xampp\htdocs\mediawiki</code></li>
+        <li>Assistant d’installation + extensions (VisualEditor)</li>
+        <li>Sauvegardes SQL + répertoire images</li>
+      </ul>
+      <div class="download-block actions">
+        <p>Documentation complète.</p>
+        <a class="btn" href="docs/Manuel_Installation_Windows.pdf" download>
+          📄 Télécharger la doc MediaWiki (PDF)
+        </a>
+      </div>
+    </article>
+
+    <article class="project-card" data-title="glpi windows helpdesk parc inventaire fusioninventory ocs">
+      <img src="images/glpi.png" alt="GLPI" />
+      <h3>GLPI sous Windows</h3>
+      <div class="project-tags">
+        <span class="project-tag">Helpdesk</span>
+        <span class="project-tag">Inventaire</span>
+        <span class="project-tag">Windows</span>
+      </div>
+      <p><strong>Objectif :</strong> déployer une plateforme de helpdesk et de gestion de parc pour structurer le support.</p>
+      <p><strong>Environnement :</strong> Windows + WAMP/XAMPP.</p>
+      <ul>
+        <li>Stack Web (Apache / PHP / MariaDB)</li>
+        <li>BDD <code>glpi</code> via phpMyAdmin</li>
+        <li>Déploiement dans <code>C:\xampp\htdocs\glpi</code></li>
+        <li>Configuration profils, entités, SLA</li>
+        <li>Inventaire auto (FusionInventory / GLPI Inventory)</li>
+      </ul>
+      <div class="download-block actions">
+        <p>Documentation GLPI/OCS.</p>
+        <a class="btn" href="docs/GLPI_Cours.pdf" download>
+          📄 Télécharger la doc GLPI (PDF)
+        </a>
+      </div>
+    </article>
+
+    <article class="project-card" data-title="plex synology ds920 docker multimedia streaming nas">
+      <img src="images/plex.png" alt="Plex" />
+      <h3>Serveur Plex (projet personnel)</h3>
+      <div class="project-tags">
+        <span class="project-tag">NAS</span>
+        <span class="project-tag">Docker</span>
+        <span class="project-tag">Streaming</span>
+      </div>
+      <p><strong>Objectif :</strong> centraliser une médiathèque personnelle et la diffuser sur le réseau domestique.</p>
+      <p><strong>Matériel :</strong> NAS Synology DS920+ (3×8 To) + Docker.</p>
+      <ul>
+        <li>Déploiement Plex Media Server via Docker</li>
+        <li>Volumes persistants config + bibliothèques</li>
+        <li>Organisation Films / Séries / Musiques</li>
+        <li>Accès local multi-appareils (TV, PC, mobile)</li>
+        <li>Transcodage matériel activé</li>
+        <li>Métadonnées et scans automatisés</li>
+      </ul>
+      <p><strong>Résultat :</strong> serveur stable et simple à utiliser au quotidien.</p>
+    </article>
+
+  </div>
+
+  <div class="no-results" id="noResults">Aucun projet ne correspond à ta recherche.</div>
+</section>
+
 
     <!-- VEILLE -->
     <section id="veille" hidden>
@@ -474,19 +537,56 @@
     © 2025 Brieuc Métairie – Portfolio BTS SIO option SISR
   </footer>
 
-  <script>
-    const tabs = document.querySelectorAll('.tab-btn');
-    const sections = document.querySelectorAll('main section');
-    function showSection(id){
-      sections.forEach(sec => sec.hidden = sec.id !== id);
-    }
-    tabs.forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        const target = btn.dataset.tab;
-        showSection(target);
-        tabs.forEach(t => t.setAttribute('aria-selected', t===btn ? 'true':'false'));
-      });
+ <script>
+  const tabs = document.querySelectorAll('.tab-btn');
+  const sections = document.querySelectorAll('main section');
+
+  function showSection(id) {
+    sections.forEach(sec => {
+      const isTarget = sec.id === id;
+      sec.hidden = !isTarget;
+      sec.classList.toggle('is-active', isTarget);
     });
-  </script>
+  }
+
+  // état initial + animation
+  showSection('accueil');
+
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      showSection(target);
+      tabs.forEach(t => t.setAttribute('aria-selected', t === btn ? 'true' : 'false'));
+    });
+  });
+
+  // Recherche projets
+  const searchInput = document.getElementById('projectSearch');
+  const projectsGrid = document.getElementById('projectsGrid');
+  const noResults = document.getElementById('noResults');
+  const searchCount = document.getElementById('searchCount');
+
+  if (searchInput && projectsGrid) {
+    const cards = Array.from(projectsGrid.querySelectorAll('.project-card'));
+
+    function applySearch() {
+      const q = searchInput.value.trim().toLowerCase();
+      let visible = 0;
+
+      cards.forEach(card => {
+        const hay = (card.dataset.title || card.textContent).toLowerCase();
+        const match = hay.includes(q);
+        card.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+
+      noResults.style.display = visible === 0 ? 'block' : 'none';
+      searchCount.textContent = q ? `${visible} projet(s) trouvé(s)` : '';
+    }
+
+    searchInput.addEventListener('input', applySearch);
+  }
+</script>
+
 </body>
 </html>
