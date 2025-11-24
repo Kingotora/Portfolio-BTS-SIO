@@ -143,30 +143,31 @@
     </section>
 
     <section id="activites" hidden>
-      <h2>Activités</h2>
-      <article>
-        <h3>Déployer un MediaWiki</h3>
-        <img class="activity-img" src="images/mediawiki.png" alt="Illustration MediaWiki" />
-        <p><strong>Contexte :</strong> devoir de fin de <strong>première année de BTS SIO</strong> (option SISR). Objectif : mettre en place un service collaboratif documenté et prêt à l’emploi.</p>
-        <p><strong>Ce que j’ai fait :</strong></p>
-        <ul>
-          <li>Installation sur un serveur Linux (paquets requis, dossiers, droits)</li>
-          <li>Configuration d’Apache, PHP et MySQL/MariaDB (vhost, base, utilisateur, conf PHP)</li>
-          <li>Assistant d’installation MediaWiki et réglages post‑installation</li>
-          <li>Gestion des comptes et des droits, catégories et modèles</li>
-          <li>Mise en place d’une stratégie de sauvegarde de la base et du répertoire <code>images/</code></li>
-          <li>Extensions utiles (éditeur visuel, gestion avancée des droits, thème léger)</li>
-        </ul>
-        <p><strong>Résultat :</strong> un wiki propre et organisé pour centraliser procédures et tutos. J’ai particulièrement appris à structurer la documentation et à penser “exploitation” : sauvegardes, droits, et simplicité d’usage.</p>
+  <h2>Activités</h2>
+  <article>
+    <h3>Déployer un MediaWiki sous Windows</h3>
+    <img class="activity-img" src="images/mediawiki.png" alt="Illustration MediaWiki" />
+    <p><strong>Contexte :</strong> projet de fin de première année de <strong>BTS SIO (SISR)</strong>. Objectif : mettre en place un service collaboratif documenté et prêt à l’emploi <em>sur Windows</em>.</p>
 
-        <div class="download-block">
-          <p>Documentation complète du projet MediaWiki (installation, configuration, sauvegarde, exploitation).</p>
-          <a class="btn" href="docs/mediawiki_documentation.pdf" download>
-            📄 Télécharger la documentation MediaWiki (PDF)
-          </a>
-        </div>
-      </article>
-    </section>
+    <p><strong>Ce que j’ai fait (Windows) :</strong></p>
+    <ul>
+      <li>Installation du stack <strong>XAMPP</strong> (Apache, PHP, MariaDB) et démarrage des services via le <em>XAMPP Control Panel</em>.</li>
+      <li>Création de la base <code>mediawiki</code> dans <strong>phpMyAdmin</strong> (encodage <code>utf8mb4_general_ci</code>).</li>
+      <li>Téléchargement de <strong>MediaWiki</strong> puis extraction dans <code>C:\xampp\htdocs\mediawiki</code>.</li>
+      <li>Lancement de l’assistant sur <code>http://localhost/mediawiki</code> : paramètres de la base, compte administrateur, génération et placement du fichier <code>LocalSettings.php</code>.</li>
+      <li>Ajout d’extensions utiles (ex. VisualEditor), structuration du contenu (catégories, modèles) et mise en place des sauvegardes (dump SQL + dossier <code>images/</code>).</li>
+    </ul>
+
+    <p><strong>Résultat :</strong> un wiki fonctionnel sous Windows, documenté de l’installation à l’exploitation (droits, sauvegardes, navigation).</p>
+
+    <div class="download-block">
+      <p>Télécharger la documentation d’installation <strong>Windows</strong> (pas à pas avec captures).</p>
+      <a class="btn" href="docs/Manuel_Installation_Windows.pdf" download>
+        📄 Télécharger « Manuel d’installation MediaWiki – Windows » (PDF)
+      </a>
+    </div>
+  </article>
+</section>
 
     <section id="veille" hidden>
       <h2>Veille informationnelle</h2>
