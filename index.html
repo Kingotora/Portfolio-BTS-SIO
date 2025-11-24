@@ -9,7 +9,7 @@
   <link rel="preload" as="image" href="images/banner.jpg" />
   <link rel="icon" href="favicon.ico" />
 
-  <style>
+ <style>
   :root{
     --bg:#0b1020;
     --bg-soft:#0f172a;
@@ -23,14 +23,22 @@
     --radius:18px;
   }
   *{box-sizing:border-box}
+
   body{
     margin:0;
     font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
     color:var(--text);
+
+    /* ✅ Arrière-plan AVEC image */
     background:
       radial-gradient(1200px 600px at 10% -10%, #172554 0%, transparent 45%),
       radial-gradient(1000px 500px at 90% -20%, #312e81 0%, transparent 40%),
-      linear-gradient(180deg,var(--bg) 0%, #050814 100%);
+      linear-gradient(180deg,rgba(11,16,32,.92) 0%, rgba(5,8,20,.98) 100%),
+      url("images/bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
     min-height:100vh;
   }
 
@@ -59,7 +67,7 @@
 
   main{max-width:1100px;margin:auto;padding:2.25rem 1.1rem}
 
-  /* animation d'apparition */
+  /* ✅ Animation plus fluide */
   section{
     background:var(--card);
     border:1px solid var(--stroke);
@@ -67,13 +75,18 @@
     padding:1.6rem;
     margin-bottom:1.6rem;
     box-shadow:0 10px 30px rgba(0,0,0,.35);
+
     opacity:0;
-    transform:translateY(6px);
-    transition:opacity .25s ease, transform .25s ease;
+    transform:translateY(12px) scale(.985);
+    transition:
+      opacity .45s cubic-bezier(.2,.8,.2,1),
+      transform .55s cubic-bezier(.2,.8,.2,1);
+    pointer-events:none;
   }
   section.is-active{
     opacity:1;
-    transform:translateY(0);
+    transform:translateY(0) scale(1);
+    pointer-events:auto;
   }
 
   h1,h2,h3{margin-top:0;letter-spacing:.2px}
@@ -85,12 +98,12 @@
     display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;flex:1;
   }
 
-  /* boutons plus larges */
+  /* ✅ Boutons onglets plus larges */
   .tab-btn{
     background:linear-gradient(180deg,#111827,#0b1020);
     border:1px solid var(--stroke);
-    padding:.9rem 1.6rem;      /* + large */
-    min-width:160px;           /* + large */
+    padding:.9rem 1.6rem;
+    min-width:160px;
     border-radius:14px;
     cursor:pointer;
     font-size:1.05rem;
@@ -126,12 +139,6 @@
     color:var(--muted)
   }
 
-  .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
-  .skip-link:focus{
-    position:static;width:auto;height:auto;padding:.5rem .8rem;background:#000;color:#fff;border-radius:.5rem
-  }
-  :focus-visible{outline:2px solid var(--brand);outline-offset:2px}
-
   .btn{
     display:inline-flex;align-items:center;justify-content:center;gap:.45rem;
     background:linear-gradient(90deg,var(--brand),var(--brand-2));
@@ -141,40 +148,34 @@
     transition:transform .12s ease, filter .15s ease, box-shadow .2s ease;
   }
   .btn:hover{filter:brightness(1.05);transform:translateY(-1px);box-shadow:0 16px 36px rgba(56,189,248,.45)}
-  .btn:active{transform:translateY(0)}
-
-  .orgchart{
-    width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--stroke);
-    background:var(--card-solid)
-  }
 
   .download-block{
     background:rgba(255,255,255,.05);
     border:1px dashed var(--stroke);
     border-radius:12px;padding:1rem;margin-top:1rem;text-align:center
   }
-  .download-block p{margin:0 0 .6rem 0;color:var(--muted);font-size:.95rem;line-height:1.4}
 
   a{color:var(--brand);text-decoration:none}
   a:hover{text-decoration:underline}
   ul{line-height:1.55}
 
-  /* hover moderne cartes (activités + veille) */
+  /* ✅ hover moderne cartes */
   .project-card, .article-card{
-    transition:transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+    transition:transform .2s ease, box-shadow .25s ease, border-color .2s ease;
   }
   .project-card:hover, .article-card:hover{
-    transform:translateY(-4px);
-    box-shadow:0 16px 36px rgba(0,0,0,.45);
-    border-color:rgba(167,139,250,.6);
+    transform:translateY(-5px);
+    box-shadow:0 18px 40px rgba(0,0,0,.5);
+    border-color:rgba(167,139,250,.7);
   }
   .project-card img, .article-card img{
-    transition:transform .25s ease;
+    transition:transform .3s ease;
   }
   .project-card:hover img, .article-card:hover img{
-    transform:scale(1.03);
+    transform:scale(1.035);
   }
 </style>
+
 
 </head>
 
@@ -305,10 +306,10 @@
     </section>
 
     <!-- ACTIVITÉS -->
-    <section id="activites" hidden>
+   <section id="activites" hidden>
   <h2>Activités</h2>
 
-  <!-- barre de recherche -->
+  <!-- Recherche + filtres tags -->
   <div style="margin-top:.5rem; display:flex; gap:.75rem; flex-wrap:wrap; align-items:center;">
     <input id="projectSearch" type="search"
       placeholder="Rechercher un projet (ex. MediaWiki, GLPI, Plex)…"
@@ -316,10 +317,28 @@
       style="flex:1; min-width:240px; padding:.75rem 1rem; border-radius:12px;
       border:1px solid var(--stroke); background:rgba(255,255,255,.05);
       color:var(--text); font-size:1rem; outline:none;" />
+
+    <div id="tagFilters" style="display:flex; flex-wrap:wrap; gap:.4rem;">
+      <button class="tag-filter is-on" data-tag="all" type="button">Tous</button>
+      <button class="tag-filter" data-tag="windows" type="button">Windows</button>
+      <button class="tag-filter" data-tag="docker" type="button">Docker</button>
+      <button class="tag-filter" data-tag="helpdesk" type="button">Helpdesk</button>
+      <button class="tag-filter" data-tag="nas" type="button">NAS</button>
+      <button class="tag-filter" data-tag="wiki" type="button">Wiki</button>
+    </div>
+
     <span id="searchCount" style="color:var(--muted); font-size:.95rem;"></span>
   </div>
 
   <style>
+    #tagFilters .tag-filter{
+      padding:.45rem .8rem;border-radius:999px;border:1px solid var(--stroke);
+      background:rgba(255,255,255,.04);color:var(--text);cursor:pointer;font-weight:600;
+    }
+    #tagFilters .tag-filter.is-on{
+      background:rgba(255,255,255,.12);
+    }
+
     #activites .projects-grid{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -339,39 +358,30 @@
     #activites .project-card p{margin:0;color:var(--muted);line-height:1.55;font-size:.95rem}
     #activites .project-card ul{margin:.25rem 0 0 1.1rem;font-size:.95rem}
     #activites .actions{margin-top:auto;text-align:center;padding-top:.5rem}
-
-    #activites .project-tags{display:flex; flex-wrap:wrap; gap:.35rem; margin-top:.25rem;}
-    #activites .project-tag{
-      font-size:.78rem; padding:.15rem .55rem; border-radius:999px;
-      background:rgba(255,255,255,.06); border:1px solid var(--stroke); color:var(--text);
-    }
     #activites .no-results{
       display:none; margin-top:1rem; color:var(--muted); font-style:italic;
     }
   </style>
 
   <p style="color:var(--muted); margin-top:.75rem">
-    Voici quelques projets marquants menés en cours et en autonomie. Ils montrent ma façon de travailler :
+    Voici quelques projets marquants menés en cours et en autonomie. Ils illustrent ma façon de travailler :
     partir d’un besoin concret, monter un service proprement, puis documenter pour qu’il reste exploitable.
   </p>
 
   <div class="projects-grid" id="projectsGrid">
 
-    <article class="project-card" data-title="mediawiki windows wiki documentation xampp">
+    <article class="project-card"
+      data-title="mediawiki windows wiki documentation xampp"
+      data-tags="windows,wiki">
       <img src="images/mediawiki.png" alt="MediaWiki" />
       <h3>MediaWiki sous Windows</h3>
-      <div class="project-tags">
-        <span class="project-tag">Windows</span>
-        <span class="project-tag">XAMPP</span>
-        <span class="project-tag">Wiki</span>
-      </div>
       <p><strong>Objectif :</strong> mettre en place un wiki interne pour centraliser les procédures de support et d’exploitation.</p>
       <p><strong>Environnement :</strong> Windows + XAMPP.</p>
       <ul>
         <li>Installation / configuration XAMPP</li>
         <li>BDD <code>mediawiki</code> via phpMyAdmin</li>
         <li>Déploiement dans <code>C:\xampp\htdocs\mediawiki</code></li>
-        <li>Assistant d’installation + extensions (VisualEditor)</li>
+        <li>Assistant + extensions (VisualEditor)</li>
         <li>Sauvegardes SQL + répertoire images</li>
       </ul>
       <div class="download-block actions">
@@ -382,22 +392,19 @@
       </div>
     </article>
 
-    <article class="project-card" data-title="glpi windows helpdesk parc inventaire fusioninventory ocs">
+    <article class="project-card"
+      data-title="glpi windows helpdesk parc inventaire fusioninventory ocs"
+      data-tags="windows,helpdesk">
       <img src="images/glpi.png" alt="GLPI" />
       <h3>GLPI sous Windows</h3>
-      <div class="project-tags">
-        <span class="project-tag">Helpdesk</span>
-        <span class="project-tag">Inventaire</span>
-        <span class="project-tag">Windows</span>
-      </div>
-      <p><strong>Objectif :</strong> déployer une plateforme de helpdesk et de gestion de parc pour structurer le support.</p>
+      <p><strong>Objectif :</strong> déployer une plateforme helpdesk et gestion de parc.</p>
       <p><strong>Environnement :</strong> Windows + WAMP/XAMPP.</p>
       <ul>
         <li>Stack Web (Apache / PHP / MariaDB)</li>
         <li>BDD <code>glpi</code> via phpMyAdmin</li>
         <li>Déploiement dans <code>C:\xampp\htdocs\glpi</code></li>
         <li>Configuration profils, entités, SLA</li>
-        <li>Inventaire auto (FusionInventory / GLPI Inventory)</li>
+        <li>Inventaire auto (FusionInventory)</li>
       </ul>
       <div class="download-block actions">
         <p>Documentation GLPI/OCS.</p>
@@ -407,31 +414,28 @@
       </div>
     </article>
 
-    <article class="project-card" data-title="plex synology ds920 docker multimedia streaming nas">
+    <article class="project-card"
+      data-title="plex synology ds920 docker multimedia streaming nas"
+      data-tags="docker,nas">
       <img src="images/plex.png" alt="Plex" />
       <h3>Serveur Plex (projet personnel)</h3>
-      <div class="project-tags">
-        <span class="project-tag">NAS</span>
-        <span class="project-tag">Docker</span>
-        <span class="project-tag">Streaming</span>
-      </div>
-      <p><strong>Objectif :</strong> centraliser une médiathèque personnelle et la diffuser sur le réseau domestique.</p>
-      <p><strong>Matériel :</strong> NAS Synology DS920+ (3×8 To) + Docker.</p>
+      <p><strong>Objectif :</strong> centraliser une médiathèque personnelle et la diffuser à la maison.</p>
+      <p><strong>Matériel :</strong> NAS Synology DS920+ + Docker.</p>
       <ul>
-        <li>Déploiement Plex Media Server via Docker</li>
+        <li>Plex Media Server via Docker</li>
         <li>Volumes persistants config + bibliothèques</li>
         <li>Organisation Films / Séries / Musiques</li>
-        <li>Accès local multi-appareils (TV, PC, mobile)</li>
+        <li>Accès multi-appareils</li>
         <li>Transcodage matériel activé</li>
-        <li>Métadonnées et scans automatisés</li>
       </ul>
-      <p><strong>Résultat :</strong> serveur stable et simple à utiliser au quotidien.</p>
+      <p><strong>Résultat :</strong> serveur stable et simple à utiliser.</p>
     </article>
 
   </div>
 
   <div class="no-results" id="noResults">Aucun projet ne correspond à ta recherche.</div>
 </section>
+
 
 
     <!-- VEILLE -->
@@ -537,7 +541,7 @@
     © 2025 Brieuc Métairie – Portfolio BTS SIO option SISR
   </footer>
 
- <script>
+<script>
   const tabs = document.querySelectorAll('.tab-btn');
   const sections = document.querySelectorAll('main section');
 
@@ -548,8 +552,6 @@
       sec.classList.toggle('is-active', isTarget);
     });
   }
-
-  // état initial + animation
   showSection('accueil');
 
   tabs.forEach(btn => {
@@ -560,33 +562,54 @@
     });
   });
 
-  // Recherche projets
+  // Recherche + filtres par tags
   const searchInput = document.getElementById('projectSearch');
   const projectsGrid = document.getElementById('projectsGrid');
   const noResults = document.getElementById('noResults');
   const searchCount = document.getElementById('searchCount');
+  const tagButtons = document.querySelectorAll('#tagFilters .tag-filter');
 
-  if (searchInput && projectsGrid) {
+  let activeTag = 'all';
+
+  if (projectsGrid) {
     const cards = Array.from(projectsGrid.querySelectorAll('.project-card'));
 
-    function applySearch() {
-      const q = searchInput.value.trim().toLowerCase();
+    function applyFilters() {
+      const q = (searchInput?.value || '').trim().toLowerCase();
       let visible = 0;
 
       cards.forEach(card => {
         const hay = (card.dataset.title || card.textContent).toLowerCase();
-        const match = hay.includes(q);
+        const tags = (card.dataset.tags || '').split(',').map(t => t.trim());
+
+        const matchText = !q || hay.includes(q);
+        const matchTag = activeTag === 'all' || tags.includes(activeTag);
+
+        const match = matchText && matchTag;
         card.style.display = match ? '' : 'none';
         if (match) visible++;
       });
 
-      noResults.style.display = visible === 0 ? 'block' : 'none';
-      searchCount.textContent = q ? `${visible} projet(s) trouvé(s)` : '';
+      if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
+      if (searchCount) {
+        searchCount.textContent = q ? `${visible} projet(s) trouvé(s)` : `${visible} projet(s)`;
+      }
     }
 
-    searchInput.addEventListener('input', applySearch);
+    searchInput?.addEventListener('input', applyFilters);
+
+    tagButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeTag = btn.dataset.tag || 'all';
+        tagButtons.forEach(b => b.classList.toggle('is-on', b.dataset.tag === activeTag));
+        applyFilters();
+      });
+    });
+
+    applyFilters();
   }
 </script>
+
 
 </body>
 </html>
