@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }, function (error) {
         console.log('FAILED...', error);
         sendBtn.textContent = 'Erreur';
-        formStatus.textContent = 'Une erreur est survenue. Réessayez plus tard.';
+        formStatus.textContent = 'Une erreur est survenue. Vérifiez votre connexion.';
         formStatus.style.color = '#ef4444'; // Red
         sendBtn.disabled = false;
       });
