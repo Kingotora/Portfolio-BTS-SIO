@@ -1,3 +1,120 @@
+// =========================================
+//  LANG TOGGLE (FR/EN) - GLOBAL
+// =========================================
+const langBtn = document.getElementById('langToggle');
+
+// TRANSLATION DICTIONARY
+const translations = {
+  fr: {
+    // NAV
+    "nav.accueil": "Accueil",
+    "nav.activites": "Activités",
+    "nav.entreprise": "Entreprise",
+    "nav.veille": "Veille",
+    "nav.contact": "Me contacter",
+    // HERO
+    "hero.subtitle": "Étudiant BTS SIO – option SISR",
+    "hero.title": "Futur Administrateur Système & Réseau",
+    "hero.desc": "Passionné par la <strong>cybersécurité</strong> et l'infrastructure. J'apprends à concevoir des architectures robustes.",
+    "hero.cta": "Voir mes projets",
+    // SECTIONS
+    "section.skills": "Compétences",
+    "section.projects": "Derniers Projets",
+    "section.about": "À propos",
+    "section.contact": "Restons en contact",
+    // FOOTER
+    "footer.rights": "© 2025 Brieuc Métairie – Portfolio",
+    // 404
+    "404.title": "404",
+    "404.msg": "Oups ! La ressource que vous cherchez a peut-être été déplacée, supprimée ou n'a jamais existé.",
+    "404.back": "Retour à l'accueil"
+  },
+  en: {
+    // NAV
+    "nav.accueil": "Home",
+    "nav.activites": "Projects",
+    "nav.entreprise": "Career",
+    "nav.veille": "Blog & Watch",
+    "nav.contact": "Contact Me",
+    // HERO
+    "hero.subtitle": "IT Student – System & Network Option",
+    "hero.title": "Future System & Network Administrator",
+    "hero.desc": "Passionate about <strong>cybersecurity</strong> and infrastructure. Learning to build robust and secure architectures.",
+    "hero.cta": "View My Projects",
+    // SECTIONS
+    "section.skills": "Skills",
+    "section.projects": "Latest Projects",
+    "section.about": "About Me",
+    "section.contact": "Get In Touch",
+    // FOOTER
+    "footer.rights": "© 2025 Brieuc Métairie – Portfolio",
+    // 404
+    "404.title": "404",
+    "404.msg": "Oops! The resource you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
+    "404.back": "Back to Home"
+  }
+};
+
+let currentLang = localStorage.getItem('lang') || 'fr';
+
+function updateLang() {
+  // 1. Update Language Button
+  const icon = langBtn?.querySelector('.lang-icon');
+  if (icon) {
+    // Show the flag of the *active* language.
+    // User requested "French flag for French language".
+    icon.textContent = currentLang === 'fr' ? '🇫🇷' : '🇬🇧';
+    icon.style.filter = 'none'; // Ensure no grayscale
+  }
+
+  // 2. Parse all elements with data-i18n
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const text = translations[currentLang][key];
+
+    if (text) {
+      // Check if it's an input placeholder
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = text;
+      } else {
+        // Standard Text (Allow HTML for strong tags)
+        el.innerHTML = text;
+      }
+    }
+  });
+
+  // 3. Update HTML lang attribute
+  document.documentElement.lang = currentLang;
+
+  // 4. Update Typewriter Immediately
+  const subtitle = document.querySelector('.subtitle');
+  if (subtitle && subtitle.classList.contains('typing-cursor')) {
+    // Force clear to prevent duplication
+    subtitle.textContent = "";
+    // Restart typing logic
+    let text = translations[currentLang]['hero.subtitle'] || "";
+    let i = 0;
+    function typeWriter() {
+      if (i < text.length) {
+        subtitle.textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 50);
+      }
+    }
+    setTimeout(typeWriter, 100);
+  }
+}
+
+if (langBtn) {
+  langBtn.addEventListener('click', () => {
+    currentLang = currentLang === 'fr' ? 'en' : 'fr';
+    localStorage.setItem('lang', currentLang);
+    updateLang();
+  });
+  // Init on load
+  document.addEventListener('DOMContentLoaded', updateLang);
+}
+
 
 // =========================================
 //  THEME TOGGLE (Global)
@@ -417,21 +534,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 3. Typing Effect (Hero)
-  const subtitle = document.querySelector('.subtitle');
-  if (subtitle && subtitle.classList.contains('typing-cursor')) { // Only if prepared
-    const text = "Étudiant BTS SIO – option SISR";
-    let i = 0;
-    function typeWriter() {
-      if (i < text.length) {
-        subtitle.textContent += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 50); // Speed
-      }
-    }
-    // Start after a delay
-    setTimeout(typeWriter, 1000);
-  }
+  // 3. Typing Effect (Hero) - REMOVED (Handled in updateLang)
 
   // 4. Spotlight & Tilt (Cards)
   // Apply class 'premium-card' to all cards first
@@ -479,8 +582,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // Move theme toggle to top right inside header (in the padding area)
       if (themeBtn) {
         themeBtn.style.bottom = 'auto';
-        themeBtn.style.top = '1.25rem'; // Vertically centered in header (approx)
-        themeBtn.style.right = '1rem';  // To the right of the contact button (which has 2rem margin)
+        themeBtn.style.top = '0.9rem'; // Vertically aligned
+        themeBtn.style.right = '1rem';  // Pushed to the far right edge
         themeBtn.style.transition = 'all 0.4s ease';
         themeBtn.style.zIndex = '100';
       }

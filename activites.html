@@ -29,19 +29,25 @@
 
     <header>
         <div class="header-inner">
+            <!-- LANG TOGGLE -->
+            <button id="langToggle" class="lang-btn" aria-label="Switch Language">
+                <span class="lang-icon">🇫🇷</span>
+            </button>
+
             <div class="name-badge brand-strong">
                 <span class="big-name">Brieuc Métairie</span>
-                <small>Étudiant BTS SIO – option SISR</small>
+                <small class="subtitle typing-cursor" data-i18n="hero.subtitle">Étudiant BTS SIO – option SISR</small>
             </div>
 
-            <nav role="tablist" aria-label="Navigation du portfolio">
-                <a class="tab-btn" href="index.html">Accueil</a>
-                <a class="tab-btn" href="entreprise.html">Entreprise</a>
-                <a class="tab-btn" href="activites.html" aria-selected="true" style="text-decoration:none">Activités</a>
-                <a class="tab-btn" href="veille.html">Veille</a>
+            <nav class="nav-links">
+                <a class="tab-btn" href="index.html" data-i18n="nav.accueil">Accueil</a>
+                <a class="tab-btn" href="entreprise.html" data-i18n="nav.entreprise">Entreprise</a>
+                <a class="tab-btn active" href="activites.html" aria-selected="true" style="text-decoration:none"
+                    data-i18n="nav.activites">Activités</a>
+                <a class="tab-btn" href="veille.html" data-i18n="nav.veille">Veille</a>
             </nav>
             <div class="header-contact">
-                <a class="btn" href="mailto:metairiebrieuc@gmail.com">✉️ Me contacter</a>
+                <a class="btn" href="mailto:metairiebrieuc@gmail.com" data-i18n="nav.contact">✉️ Me contacter</a>
             </div>
 
         </div>

@@ -104,6 +104,34 @@ body {
   }
 }
 
+/* =========================================
+   ACCESSIBILITY (A11Y)
+   ========================================= */
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Skip to Content Link (Hidden until focused) */
+.skip-link {
+  position: absolute;
+  top: -9999px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-brand);
+  color: white;
+  padding: 1rem;
+  z-index: 9999;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
 /* --- AMBIENT BACKGROUND (MESH GRADIENT) --- */
 body::before {
   content: "";
@@ -623,6 +651,35 @@ body.light-mode #projectSearch {
   box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2), 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* LANG TOGGLE */
+.lang-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.25rem;
+  margin-right: 0.5rem;
+  transition: all 0.2s;
+  border-radius: 8px;
+  /* Match tab-btn radius */
+}
+
+.lang-btn:hover {
+  background: var(--bg-surface-hover);
+  transform: translateY(-2px);
+}
+
+.lang-btn:hover {
+  background: var(--bg-surface-hover);
+  border-color: var(--color-brand);
+  transform: scale(1.1) rotate(5deg);
+  /* Playful effect */
+}
+
 .tag-filter {
   background: transparent;
   border: 1px solid var(--border-subtle);
@@ -737,32 +794,47 @@ body.light-mode #projectSearch {
   .header-inner {
     flex-direction: column;
     padding: 1rem;
-    gap: 1.5rem;
+    gap: 1rem;
+    position: relative;
   }
 
-  nav[role="tablist"] {
+  /* Lang toggle absolute top-left for clean mobile layout */
+  .lang-btn {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    margin: 0;
+  }
+
+  .name-badge {
+    align-items: center;
+    text-align: center;
     width: 100%;
-    overflow-x: auto;
-    justify-content: flex-start;
-    padding: 0.5rem;
-    -webkit-overflow-scrolling: touch;
+    margin-top: 2rem;
+    /* Space for lang toggle */
+  }
+
+  nav[role="tablist"],
+  .nav-links {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 
   .tab-btn {
-    flex: 0 0 auto;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
   }
 
-  /* Don't shrink buttons */
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  main {
-    padding-top: 220px;
-    /* More space for stacked header */
+  /* Hide 'Contact Me' button on mobile to save space */
+  .header-contact {
+    display: none;
   }
 }
+
+/* Cleaned up orphaned code */
+
 
 /* =========================================
    SCROLL ANIMATIONS

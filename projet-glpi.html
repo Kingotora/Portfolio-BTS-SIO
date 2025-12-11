@@ -17,6 +17,21 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="style.css?v=2">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      "name": "Projet GLPI ",
+      "description": "Déploiement et configuration d'un serveur GLPI sous Windows pour la gestion de parc informatique.",
+      "author": {
+          "@type": "Person",
+          "name": "Brieuc Métairie"
+      },
+      "url": "https://brieuc-metairie.fr/projet-glpi.html",
+      "keywords": "GLPI, IT Asset Management, Windows Server, Apache"
+    }
+  </script>
 </head>
 
 <body>
@@ -61,27 +76,56 @@
 
         <section class="project-content-grid">
             <div class="content-left">
-                <h2>Contexte du projet</h2>
-                <p>
-                    L'entreprise avait besoin d'un outil centralisé pour gérer les demandes d'assistance des
-                    utilisateurs (tickets)
-                    et suivre l'inventaire du matériel informatique (PC, Écrans, Imprimantes). Jusqu'à présent, tout
-                    était fait par email et Excel.
-                </p>
+                <!-- STORYTELLING INTRO -->
+                <div class="story-block">
+                    <h2>🎯 <span class="highlight">Le Problème</span></h2>
+                    <p>
+                        L'entreprise gérait encore ses incidents par <strong>téléphone et post-it</strong>. Résultat ?
+                        Des demandes perdues, aucun suivi de l'historique, et un service informatique débordé incapable
+                        de prioriser les urgences.
+                        Il fallait centraliser tout ça.
+                    </p>
+                </div>
 
-                <h2>Objectifs & Réalisations</h2>
-                <ul>
-                    <li>Installation d'un serveur LAMP (Linux Apache MySQL PHP).</li>
-                    <li>Déploiement de GLPI (Gestionnaire Libre de Parc Informatique).</li>
-                    <li>Configuration des catégories de tickets et des profils utilisateurs.</li>
-                    <li>Synchronisation LDAP avec l'Active Directory (optionnel).</li>
-                </ul>
+                <div class="story-block">
+                    <h2>💡 <span class="highlight">La Solution : GLPI</span></h2>
+                    <p>
+                        J'ai choisi de déployer <strong>GLPI</strong> (Gestionnaire Libre de Parc Informatique), la
+                        référence open-source.
+                        Pourquoi ? Gratuit, flexible, et une communauté énorme.
+                    </p>
+                    <p>
+                        Mon rôle a été d'installer le serveur complète (Stack LAMP), de sécuriser l'accès, et surtout
+                        de configurer l'outil pour qu'il soit <em>simple</em> à utiliser pour les secrétaires.
+                    </p>
+                </div>
 
-                <h2>Bilan</h2>
-                <p>
-                    L'outil est désormais utilisé par l'équipe technique pour traiter les incidents 30% plus rapidement.
-                    L'inventaire est mis à jour automatiquement grâce à l'agent FusionInventory.
-                </p>
+                <div class="story-block">
+                    <h2>🔥 <span class="highlight">Le Challenge</span></h2>
+                    <p>
+                        Le plus dur n'était pas la technique, mais l'humain.
+                        Il a fallu <strong>former les utilisateurs</strong> à abandonner leurs vieilles habitudes
+                        (mails/téléphone)
+                        pour passer par le portail web. J'ai donc créé des guides PDF ultra-simplifiés.
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <h2>🚀 <span class="highlight">L'Impact</span></h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-num">-30%</span>
+                            <span class="stat-desc">de temps de résolution</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-num">100%</span>
+                            <span class="stat-desc">de tickets tracés</span>
+                        </div>
+                    </div>
+                    <p class="summary-text">
+                        Aujourd'hui, l'équipe DSI a une vue en temps réel sur l'état du parc et les demandes en cours.
+                    </p>
+                </div>
             </div>
 
             <aside class="content-right">
@@ -89,19 +133,18 @@
                     <h3>Infos Techniques</h3>
                     <ul>
                         <li><strong>Client :</strong> Althec Sécurité</li>
-                        <li><strong>Date :</strong> Mars 2024</li>
-                        <li><strong>Rôle :</strong> Administrateur Stagiaire</li>
+                        <li><strong>Rôle :</strong> Admin Sys (Stage)</li>
+                        <li><strong>Durée :</strong> 4 semaines</li>
                     </ul>
                     <hr>
-                    <h3>Stack</h3>
+                    <h3>Stack Technique</h3>
                     <div class="stack-list">
                         <span class="stack-tag">Debian 12</span>
                         <span class="stack-tag">Apache 2</span>
-                        <span class="stack-tag">MariaDB</span>
-                        <span class="stack-tag">PHP 8.2</span>
+                        <span class="stack-tag">MariaDB (SQL)</span>
+                        <span class="stack-tag">GLPI 10</span>
+                        <span class="stack-tag">FusionInventory</span>
                     </div>
-                    <a href="#" class="btn btn-primary" style="margin-top:1rem; display:block; text-align:center;">Voir
-                        la documentation</a>
                 </div>
             </aside>
         </section>
@@ -130,6 +173,54 @@
             padding: 8rem 2rem 2rem;
             max-width: 1100px;
             margin: 0 auto;
+        }
+
+        /* STORYTELLING STYLES */
+        .story-block {
+            margin-bottom: 3rem;
+        }
+
+        .story-block h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .story-block h2 .highlight {
+            background: linear-gradient(120deg, rgba(56, 189, 248, 0.2) 0%, rgba(56, 189, 248, 0) 100%);
+            padding: 0 0.5rem;
+            border-radius: 4px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-item {
+            background: var(--bg-surface);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-highlight);
+            text-align: center;
+        }
+
+        .stat-num {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--color-brand);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
         }
 
         .project-hero {
