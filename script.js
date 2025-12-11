@@ -245,9 +245,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const formStatus = document.getElementById('formStatus');
 
   // Initialize EmailJS
-  // PUBLIC KEY: B33KUw_SRxXz54Mn
+  // PUBLIC KEY: B33KUw_SRxXz54Mng
   if (typeof emailjs !== 'undefined') {
-    emailjs.init("B33KUw_SRxXz54Mn");
+    emailjs.init("B33KUw_SRxXz54Mng");
   } else {
     console.error("EmailJS SDK not loaded.");
   }
@@ -278,7 +278,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Service: service_irwg4qn
     // Template: template_h2a018w
-    emailjs.sendForm('service_irwg4qn', 'template_h2a018w', this)
+    // Public Key: B33KUw_SRxXz54Mng
+    emailjs.sendForm('service_irwg4qn', 'template_h2a018w', this, 'B33KUw_SRxXz54Mng')
       .then(function () {
         console.log('SUCCESS!');
         sendBtn.textContent = 'Envoyé !';
@@ -294,8 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }, function (error) {
         console.log('FAILED...', error);
         sendBtn.textContent = 'Erreur';
-        // Detailed error for debugging
-        formStatus.textContent = 'Erreur : ' + (error.text || JSON.stringify(error));
+        formStatus.textContent = 'Une erreur est survenue. Vérifiez votre connexion.';
         formStatus.style.color = '#ef4444'; // Red
         sendBtn.disabled = false;
       });
