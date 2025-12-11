@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet GLPI — Brieuc Métairie</title>
+    <meta name="description" content="Détail du projet GLPI : Mise en place d'un outil de ticketing en entreprise." />
+    <meta name="theme-color" content="#38bdf8" />
+    <link rel="icon" href="images/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css?v=2">
+</head>
+
+<body>
+    <div id="scrollProgress"></div>
+
+    <header>
+        <div class="header-inner">
+            <div class="name-badge brand-strong">
+                <span class="big-name">Brieuc Métairie</span>
+                <small>Étudiant BTS SIO – option SISR</small>
+            </div>
+            <nav role="tablist">
+                <a class="tab-btn" href="index.html">Accueil</a>
+                <a class="tab-btn" href="entreprise.html">Entreprise</a>
+                <a class="tab-btn" href="activites.html">Activités</a>
+                <a class="tab-btn" href="veille.html">Veille</a>
+            </nav>
+            <div class="header-contact">
+                <a class="btn" href="mailto:metairiebrieuc@gmail.com">✉️ Me contacter</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="project-detail-main">
+        <section class="project-hero">
+            <div class="hero-content">
+                <a href="activites.html" class="back-link">← Retour aux projets</a>
+                <h1>Mise en place de GLPI</h1>
+                <p class="subtitle">Gestion de Parc Informatique et Helpdesk</p>
+                <div class="tags">
+                    <span class="tag">Stage</span>
+                    <span class="tag">Linux</span>
+                    <span class="tag">Ticketing</span>
+                </div>
+            </div>
+            <div class="hero-image">
+                <!-- Placeholder banner for project -->
+                <img src="images/banner.jpg" alt="GLPI Interface"
+                    style="width:100%; height:300px; object-fit:cover; border-radius:12px;">
+            </div>
+        </section>
+
+        <section class="project-content-grid">
+            <div class="content-left">
+                <h2>Contexte du projet</h2>
+                <p>
+                    L'entreprise avait besoin d'un outil centralisé pour gérer les demandes d'assistance des
+                    utilisateurs (tickets)
+                    et suivre l'inventaire du matériel informatique (PC, Écrans, Imprimantes). Jusqu'à présent, tout
+                    était fait par email et Excel.
+                </p>
+
+                <h2>Objectifs & Réalisations</h2>
+                <ul>
+                    <li>Installation d'un serveur LAMP (Linux Apache MySQL PHP).</li>
+                    <li>Déploiement de GLPI (Gestionnaire Libre de Parc Informatique).</li>
+                    <li>Configuration des catégories de tickets et des profils utilisateurs.</li>
+                    <li>Synchronisation LDAP avec l'Active Directory (optionnel).</li>
+                </ul>
+
+                <h2>Bilan</h2>
+                <p>
+                    L'outil est désormais utilisé par l'équipe technique pour traiter les incidents 30% plus rapidement.
+                    L'inventaire est mis à jour automatiquement grâce à l'agent FusionInventory.
+                </p>
+            </div>
+
+            <aside class="content-right">
+                <div class="info-card">
+                    <h3>Infos Techniques</h3>
+                    <ul>
+                        <li><strong>Client :</strong> Althec Sécurité</li>
+                        <li><strong>Date :</strong> Mars 2024</li>
+                        <li><strong>Rôle :</strong> Administrateur Stagiaire</li>
+                    </ul>
+                    <hr>
+                    <h3>Stack</h3>
+                    <div class="stack-list">
+                        <span class="stack-tag">Debian 12</span>
+                        <span class="stack-tag">Apache 2</span>
+                        <span class="stack-tag">MariaDB</span>
+                        <span class="stack-tag">PHP 8.2</span>
+                    </div>
+                    <a href="#" class="btn btn-primary" style="margin-top:1rem; display:block; text-align:center;">Voir
+                        la documentation</a>
+                </div>
+            </aside>
+        </section>
+
+        <section class="project-gallery">
+            <h2>Galerie</h2>
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:1rem;">
+                <img src="https://via.placeholder.com/600x400" alt="Capture GLPI 1"
+                    style="width:100%; border-radius:8px;">
+                <img src="https://via.placeholder.com/600x400" alt="Capture GLPI 2"
+                    style="width:100%; border-radius:8px;">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2025 Brieuc Métairie – Portfolio
+    </footer>
+
+    <button id="themeToggle" class="theme-btn">🌙</button>
+    <script src="script.js"></script>
+
+    <style>
+        /* Specific Styles for Project detail - could be moved to style.css */
+        .project-detail-main {
+            padding: 8rem 2rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .project-hero {
+            margin-bottom: 3rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-brand);
+        }
+
+        .project-content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+
+        @media(max-width: 768px) {
+            .project-content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .info-card {
+            background: var(--bg-surface);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-highlight);
+        }
+
+        .stack-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .stack-tag {
+            background: var(--bg-card);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            border: 1px solid var(--border-subtle);
+        }
+    </style>
+</body>
+
+</html>

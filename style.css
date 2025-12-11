@@ -91,7 +91,7 @@ body {
   position: relative;
   overflow-x: hidden;
   transition: background 0.3s ease, color 0.3s ease;
-  animation: pageFadeIn 0.5s ease-out;
+  animation: pageFadeIn 0.3s ease-out;
 }
 
 @keyframes pageFadeIn {
@@ -315,8 +315,10 @@ body.light-mode .tab-btn[aria-selected="true"] {
   align-items: center;
   gap: 0.5rem;
   background: var(--color-brand);
-  color: #fff;
+  color: #fff !important;
   /* Always white text on primary button */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow for legibility */
   padding: 0.75rem 1.5rem;
   border-radius: 99px;
   font-weight: 600;
@@ -326,10 +328,11 @@ body.light-mode .tab-btn[aria-selected="true"] {
 }
 
 .btn:hover {
-  background: var(--color-accent);
+  background: #0ea5e9;
+  /* Slightly darker/richer blue than brand #38bdf8 */
   transform: translateY(-2px);
   text-decoration: none;
-  box-shadow: 0 8px 20px rgba(167, 139, 250, 0.4);
+  box-shadow: 0 8px 20px rgba(56, 189, 248, 0.4);
 }
 
 .btn:active {
@@ -434,11 +437,14 @@ section {
   border-bottom: 1px solid var(--border-subtle);
 }
 
-.project-card h3 {
+.project-card h3,
+.project-card:active h3,
+.project-card:visited h3,
+.project-card:focus h3 {
   padding: 1.25rem 1.25rem 0.5rem;
   margin: 0;
   font-size: 1.25rem;
-  color: var(--text-primary);
+  color: var(--color-brand) !important;
 }
 
 .project-card p {
@@ -784,86 +790,217 @@ body.light-mode #projectSearch {
 
 .skills-grid .skill-card:nth-child(4) {
   transition-delay: 300ms;
-}/* =========================================
+}
+
+/* =========================================
    CONTACT MODAL
    ========================================= */
 dialog#contactModal {
-    border: none;
-    background: transparent;
-    padding: 0;
-    max-width: 500px;
-    width: 90%;
-    margin: auto;
-    overflow: visible;
+  border: none;
+  background: transparent;
+  padding: 0;
+  max-width: 500px;
+  width: 90%;
+  margin: auto;
+  overflow: visible;
 }
 
 dialog#contactModal::backdrop {
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
 }
 
 dialog#contactModal .modal-content {
-    background: var(--bg-card);
-    padding: 2rem;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--border-subtle);
-    box-shadow: var(--shadow-lg);
-    color: var(--text-primary);
-    position: relative;
+  background: var(--bg-card);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-lg);
+  color: var(--text-primary);
+  position: relative;
 }
 
 dialog#contactModal .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
 }
 
 dialog#contactModal h3 {
-    margin: 0;
-    font-family: var(--font-heading);
+  margin: 0;
+  font-family: var(--font-heading);
+  color: var(--color-brand) !important;
+}
+
+/* Also ensure Project Modal Title is blue if it has an ID */
+#modalTitle {
+  color: var(--color-brand) !important;
 }
 
 .form-group {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    font-size: 0.9rem;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 0.9rem;
 }
 
 .form-group input,
 .form-group textarea {
-    width: 100%;
-    padding: 0.8rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-subtle);
-    background: var(--bg-surface);
-    color: var(--text-primary);
-    font-family: var(--font-body);
-    transition: all 0.2s;
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  transition: all 0.2s;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-    outline: none;
-    border-color: var(--color-brand);
-    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+  outline: none;
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
 }
 
 .btn-close {
-    background: transparent;
-    border: none;
-    font-size: 1.5rem;
-    color: var(--text-secondary);
-    cursor: pointer;
-    padding: 0.2rem;
-    line-height: 1;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.2rem;
+  line-height: 1;
 }
 
 .btn-close:hover {
-    color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+/* =========================================
+   PREMIUM EFFECTS (Wow Factor)
+   ========================================= */
+
+/* --- 1. Scroll Progress Bar --- */
+#scrollProgress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-brand), #a855f7);
+  /* Sky to Purple */
+  width: 0%;
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+/* --- 2. Custom Cursor - REMOVED --- */
+
+/* --- 3. Typing Effect Cursor --- */
+.typing-cursor::after {
+  content: '|';
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+/* --- 4. Spotlight & Tilt (Cards) --- */
+.premium-card {
+  position: relative;
+  overflow: hidden;
+  /* For spotlight shine */
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+  will-change: transform;
+}
+
+.premium-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
+      rgba(255, 255, 255, 0.06),
+      transparent 40%);
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+
+/* Show spotlight on hover */
+.premium-card:hover::before {
+  opacity: 1;
+}
+
+/* --- 5. Gallery Modal Controls --- */
+.gallery-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.gallery-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-highlight);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.gallery-btn:hover {
+  background: var(--bg-highlight);
+}
+
+/* --- Back to Top Button --- */
+#backToTop {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--color-brand);
+  color: white;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+#backToTop.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#backToTop:hover {
+  transform: translateY(-5px);
+  background: var(--color-brand-hover, #0ea5e9);
 }

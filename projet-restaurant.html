@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Restaurant — Brieuc Métairie</title>
+    <meta name="description" content="Détail du projet Web Restaurant : Site vitrine HTML/CSS." />
+    <meta name="theme-color" content="#38bdf8" />
+    <link rel="icon" href="images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=2">
+</head>
+
+<body>
+    <div id="scrollProgress"></div>
+    <header>
+        <div class="header-inner">
+            <div class="name-badge brand-strong">
+                <span class="big-name">Brieuc Métairie</span>
+                <small>Étudiant BTS SIO – option SISR</small>
+            </div>
+            <nav role="tablist">
+                <a class="tab-btn" href="index.html">Accueil</a>
+                <a class="tab-btn" href="entreprise.html">Entreprise</a>
+                <a class="tab-btn" href="activites.html">Activités</a>
+                <a class="tab-btn" href="veille.html">Veille</a>
+            </nav>
+            <div class="header-contact">
+                <a class="btn" href="mailto:metairiebrieuc@gmail.com">✉️ Me contacter</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="project-detail-main">
+        <section class="project-hero">
+            <div class="hero-content">
+                <a href="activites.html" class="back-link">← Retour aux projets</a>
+                <h1>Site Vitrine Restaurant</h1>
+                <p class="subtitle">Conception & Développement Web</p>
+                <div class="tags">
+                    <span class="tag">HTML/CSS</span>
+                    <span class="tag">Responsive</span>
+                    <span class="tag">Design</span>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/restaurant.png" alt="Restaurant Website"
+                    style="width:100%; height:300px; object-fit:contain; background:#f0f0f0; border-radius:12px;">
+            </div>
+        </section>
+
+        <section class="project-content-grid">
+            <div class="content-left">
+                <h2>Contexte</h2>
+                <p>Création d'un site web moderne et responsive pour présenter un restaurant, ses menus et faciliter la
+                    prise de contact et la réservation.</p>
+                <h2>Réalisations</h2>
+                <ul>
+                    <li>Maquettage et Design UI/UX.</li>
+                    <li>Intégration HTML5 & CSS3 pur (pas de framework lourd).</li>
+                    <li>Design Responsive (adapté Mobile, Tablette, Desktop).</li>
+                    <li>Optimisation des performances (chargement rapide).</li>
+                </ul>
+            </div>
+            <aside class="content-right">
+                <div class="info-card">
+                    <h3>Infos Techniques</h3>
+                    <ul>
+                        <li><strong>Type :</strong> Projet Perso</li>
+                        <li><strong>Techno :</strong> Web Standard</li>
+                    </ul>
+                    <hr>
+                    <h3>Stack</h3>
+                    <div class="stack-list">
+                        <span class="stack-tag">HTML5</span>
+                        <span class="stack-tag">CSS3</span>
+                        <span class="stack-tag">JavaScript</span>
+                        <span class="stack-tag">Git</span>
+                    </div>
+                    <a href="https://mom-s-restaurant-1ddpi.kinsta.page/" target="_blank" class="btn btn-primary"
+                        style="margin-top:1rem; display:block; text-align:center;">Voir le site en ligne</a>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <footer>© 2025 Brieuc Métairie – Portfolio</footer>
+    <button id="themeToggle" class="theme-btn">🌙</button>
+    <script src="script.js"></script>
+    <style>
+        .project-detail-main {
+            padding: 8rem 2rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .project-hero {
+            margin-bottom: 3rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-brand);
+        }
+
+        .project-content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+
+        @media(max-width: 768px) {
+            .project-content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .info-card {
+            background: var(--bg-surface);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-highlight);
+        }
+
+        .stack-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .stack-tag {
+            background: var(--bg-card);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            border: 1px solid var(--border-subtle);
+        }
+    </style>
+</body>
+
+</html>
