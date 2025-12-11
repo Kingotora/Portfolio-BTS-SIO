@@ -1,484 +1,64 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfolio — Brieuc Métairie</title>
-  <meta name="description" content="Portfolio de Brieuc Métairie, BTS SIO SISR : parcours, entreprise, projets Windows (MediaWiki/GLPI) et projet Plex. Veille systèmes et cybersécurité." />
+  <meta name="description"
+    content="Portfolio de Brieuc Métairie, BTS SIO SISR : parcours, entreprise, projets Windows (MediaWiki/GLPI) et projet Plex. Veille systèmes et cybersécurité." />
   <meta name="theme-color" content="#38bdf8" />
   <link rel="preload" as="image" href="images/banner.jpg" />
   <link rel="icon" href="images/favicon.ico" />
 
- <style>
-  :root{
-    --bg:#0b1020;
-    --bg-soft:#0f172a;
-    --card:rgba(255,255,255,.06);
-    --card-solid:#0b1226;
-    --stroke:rgba(255,255,255,.10);
-    --text:#e5e7eb;
-    --muted:#a1a1aa;
-    --brand:#38bdf8;
-    --brand-2:#a78bfa;
-    --radius:18px;
-  }
-  *{box-sizing:border-box}
+  <!-- Fonts: Outfit (modern, geometric) + Inter (clean readable) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;900&display=swap"
+    rel="stylesheet">
 
-  /* ===== BACKGROUND avec images seulement sur les côtés + fondu flou ===== */
-  body{
-    margin:0;
-    font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-    color:var(--text);
-    background:
-      radial-gradient(1200px 600px at 10% -10%, #172554 0%, transparent 45%),
-      radial-gradient(1000px 500px at 90% -20%, #312e81 0%, transparent 40%),
-      linear-gradient(180deg,rgba(11,16,32,.96) 0%, rgba(5,8,20,.99) 100%);
-    min-height:100vh;
-    position:relative;
-    overflow-x:hidden;
-  }
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://brieuc-metairie.fr/" />
+  <meta property="og:title" content="Portfolio — Brieuc Métairie | BTS SIO SISR" />
+  <meta property="og:description"
+    content="Portfolio de Brieuc Métairie, futur administrateur systèmes et réseaux. Découvrez mes projets, mon parcours et ma veille technologique." />
+  <meta property="og:image" content="https://brieuc-metairie.fr/images/banner.jpg" />
 
-  /* images latérales + blur fort + dégradé vers le centre */
-  body::before,
-  body::after{
-    content:"";
-    position:fixed;
-    top:-5vh; bottom:-5vh;
-    width:24vw;
-    min-width:220px;
-    max-width:380px;
-    z-index:-2;
-    background-image:url("images/bg.jpg");
-    background-size:cover;
-    background-position:center;
-    opacity:.36;
-    filter:blur(7px) brightness(.72) saturate(1.05);
-    pointer-events:none;
-  }
-  body::before{
-    left:0;
-    mask-image: linear-gradient(to right, black 0%, transparent 85%);
-  }
-  body::after{
-    right:0;
-    transform:scaleX(-1);
-    mask-image: linear-gradient(to left, black 0%, transparent 85%);
-  }
-  @media (max-width: 700px){
-    body::before, body::after{ display:none; }
-  }
-/* le parallax est piloté par JS via --parallaxY */
-body::before,
-body::after{
-  transform: translateY(var(--parallaxY, 0px));
-  will-change: transform;
-}
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://brieuc-metairie.fr/" />
+  <meta property="twitter:title" content="Portfolio — Brieuc Métairie | BTS SIO SISR" />
+  <meta property="twitter:description"
+    content="Portfolio de Brieuc Métairie, futur administrateur systèmes et réseaux. Découvrez mes projets, mon parcours et ma veille technologique." />
+  <meta property="twitter:image" content="https://brieuc-metairie.fr/images/banner.jpg" />
 
-  header,footer{
-    background:rgba(10,14,30,.78);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--stroke);
-  }
-
-  .banner-wrap{width:100%;overflow:hidden;border-bottom:1px solid var(--stroke)}
-  .banner{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-    object-position:center 35%;
-    display:block;
-    filter:saturate(1.05) contrast(1.03);
-  }
-  @media (min-width:900px){
-    .banner{height:280px;object-position:center 40%}
-  }
-
-  .header-inner{
-    display:flex;justify-content:space-between;align-items:center;gap:1rem;
-    flex-wrap:wrap;padding:1rem 1.25rem;
-    max-width:1100px;margin:0 auto;
-  }
-
-  /* ===== Nom plus visible ===== */
-  .brand{display:flex;flex-direction:column;gap:.15rem}
-  .brand-name{
-    font-size:1.45rem;
-    font-weight:900;
-    letter-spacing:.6px;
-    background:linear-gradient(90deg,var(--brand),var(--brand-2));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    display:flex;align-items:center;gap:.45rem;
-    text-shadow:0 7px 26px rgba(56,189,248,.35);
-    position:relative;
-  }
-  .brand-name::before{
-    content:"⭐";
-    font-size:1.2rem;
-    animation:glow 3s ease infinite;
-  }
-  @keyframes glow{
-    0%,100%{filter:drop-shadow(0 0 5px rgba(167,139,250,.7))}
-    50%{filter:drop-shadow(0 0 15px rgba(56,189,248,.9))}
-  }
-  .brand-name::after{
-    content:"";
-    position:absolute;bottom:-3px;left:0;width:100%;height:2px;
-    background:linear-gradient(90deg,var(--brand),var(--brand-2));
-    transform:scaleX(0);transform-origin:left;
-    transition:transform .35s ease;border-radius:4px;
-  }
-  .brand-name:hover::after{transform:scaleX(1)}
-  .brand-sub{font-size:.95rem;color:var(--muted);font-weight:600;letter-spacing:.2px}
-
- /* ---- CENTRE SANS CARRÉ NOIR ---- */
-main{
-  max-width:1100px;
-  margin:auto;
-  padding:2.5rem 1.1rem;
-  position:relative;
-}
-
-/* flou progressif entre centre et images latérales */
-main::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle at center,
-      rgba(20,25,45,.65) 0%,
-      rgba(20,25,45,0) 75%);
-  filter:blur(28px);
-  z-index:-1;
-}
-
-
-  /* ===== Sections en glass (plus de bloc noir) ===== */
-  section{
-    background:rgba(15,20,35,0.38);
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:var(--radius);
-    padding:1.6rem;
-    margin-bottom:1.6rem;
-    backdrop-filter:blur(18px) saturate(180%);
-    -webkit-backdrop-filter:blur(18px) saturate(180%);
-    box-shadow:0 10px 30px rgba(0,0,0,.40);
-
-    opacity:0;
-    transform:translateY(12px) scale(.985);
-    transition:
-      opacity .45s cubic-bezier(.2,.8,.2,1),
-      transform .55s cubic-bezier(.2,.8,.2,1);
-    pointer-events:none;
-  }
-  section.is-active{
-    opacity:1;
-    transform:translateY(0) scale(1);
-    pointer-events:auto;
-  }
-
-  h1,h2,h3{margin-top:0;letter-spacing:.2px}
-  h1{font-size:clamp(1.6rem,2.2vw,2rem)}
-  h2{font-size:clamp(1.25rem,1.8vw,1.5rem)}
-  h3{font-size:1.1rem}
-
-  /* ===== NAVBAR : SANS rectangle, MAIS boutons comme avant ===== */
-  nav[role="tablist"]{
-    padding:0;
-    background:transparent;
-    border:none;
-    box-shadow:none;
-    display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;flex:1;
-  }
-  .tab-btn{
-    background:linear-gradient(180deg,#111827,#0b1020);
-    border:1px solid var(--stroke);
-    padding:.85rem 1.45rem;
-    min-width:150px;
-    border-radius:14px;
-    cursor:pointer;
-    font-size:1.02rem;
-    font-weight:800;
-    color:var(--text);
-    box-shadow:0 6px 16px rgba(0,0,0,.35);
-    transition:transform .12s ease, box-shadow .2s ease, border-color .2s ease, background .25s ease;
-  }
-  .tab-btn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 12px 28px rgba(56,189,248,.25);
-    border-color:rgba(56,189,248,.6);
-    background:linear-gradient(180deg,#0b132b,#0b1020);
-  }
-  .tab-btn[aria-selected="true"]{
-    background:linear-gradient(90deg,var(--brand),var(--brand-2));
-    color:#041018;
-    border-color:transparent;
-    box-shadow:0 14px 34px rgba(56,189,248,.40);
-    position:relative;
-  }
-
-  /* Bouton contact bien visible */
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;gap:.45rem;
-    background:linear-gradient(90deg,var(--brand),var(--brand-2));
-    color:#041018;font-weight:900;text-decoration:none;border:none;
-    border-radius:14px;padding:.95rem 1.4rem;cursor:pointer;
-    font-size:1.12rem;letter-spacing:.2px;
-    box-shadow:0 18px 40px rgba(56,189,248,.55);
-    transition:all .25s ease;
-  }
-  .btn:hover{
-    transform:translateY(-3px) scale(1.03);
-    box-shadow:0 22px 50px rgba(167,139,250,.55);
-  }
-
-  .chip{
-    display:inline-block;padding:.3rem .8rem;border-radius:999px;
-    background:rgba(255,255,255,.08);
-    border:1px solid var(--stroke);
-    margin:.25rem;font-size:.85rem;color:var(--text)
-  }
-
-  .logo{max-width:160px;display:block;margin:0 0 1rem 0}
-
-  a{color:var(--brand);text-decoration:none}
-  a:hover{text-decoration:underline}
-  ul{line-height:1.55}
-
-  /* Animation stagger cartes */
-  .project-card, .article-card{
-    opacity:0;
-    transform:translateY(10px) scale(.98);
-    animation:cardIn .6s cubic-bezier(.2,.8,.2,1) forwards;
-    animation-delay: var(--delay, 0ms);
-    transition:transform .2s ease, box-shadow .25s ease, border-color .2s ease;
-  }
-  @keyframes cardIn{
-    to{ opacity:1; transform:translateY(0) scale(1); }
-  }
-  .project-card:hover, .article-card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 18px 40px rgba(0,0,0,.5);
-    border-color:rgba(167,139,250,.7);
-  }
-
-  footer{
-    padding:1rem;text-align:center;font-size:.9rem;border-top:1px solid var(--stroke);
-    color:var(--muted)
-  }
-
-   /* ===== Halo lumineux au scroll ===== */
-section{ position:relative; }
-
-section.is-active::before{
-  content:"";
-  position:absolute;
-  inset:-18px;
-  border-radius:calc(var(--radius) + 10px);
-  background:
-    radial-gradient(600px 220px at 50% 0%, rgba(56,189,248,.20), transparent 60%),
-    radial-gradient(520px 260px at 50% 100%, rgba(167,139,250,.18), transparent 65%);
-  filter:blur(22px);
-  z-index:-1;
-  pointer-events:none;
-  opacity:var(--halo, 0);
-  transition:opacity .35s ease;
-}
-
-   /* ===== Transition douce entre rubriques ===== */
-main section{
-  transition:
-    opacity .45s cubic-bezier(.2,.8,.2,1),
-    transform .55s cubic-bezier(.2,.8,.2,1),
-    filter .45s ease;
-}
-main section:not(.is-active){
-  filter:blur(4px);
-}
-
-   /* ---- NOM SUPER VISIBILE ---- */
-.brand-strong{
-  padding:.5rem 1rem;
-  border-radius:12px;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:0 10px 28px rgba(0,0,0,.35);
-}
-
-.big-name{
-  font-size:1.55rem;
-  font-weight:900;
-  background:linear-gradient(90deg,var(--brand),var(--brand-2));
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  text-shadow:0 8px 28px rgba(56,189,248,.45);
-}
-
-/* ---- CONTACT PLUS VISIBLE ---- */
-.header-contact .btn{
-  font-size:1.15rem !important;
-  padding:.95rem 1.45rem !important;
-  border-radius:15px;
-  font-weight:900;
-  background:linear-gradient(90deg,var(--brand),var(--brand-2));
-  box-shadow:0 18px 40px rgba(56,189,248,.55);
-  letter-spacing:.3px;
-  transition:.25s ease !important;
-}
-
-.header-contact .btn:hover{
-  transform:translateY(-3px) scale(1.03);
-  box-shadow:0 22px 50px rgba(167,139,250,.55);
-}
-
-/* ---- ANIMATIONS HOVER CARTES (réactivation) ---- */
-.project-card, .article-card{
-  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-}
-
-.project-card:hover, .article-card:hover{
-  transform:translateY(-6px) scale(1.02);
-  box-shadow:0 20px 45px rgba(0,0,0,.55);
-  border-color:rgba(167,139,250,.7);
-}
-
-.project-card img, .article-card img{
-  transition:transform .35s ease;
-}
-
-.project-card:hover img, .article-card:hover img{
-  transform:scale(1.045);
-}
-
-   /* ===== HOVER CARTES (Activités + Veille) : fluide et moderne ===== */
-.project-card, .article-card{
-  position:relative;
-  transition:
-    transform .28s cubic-bezier(.2,.8,.2,1),
-    box-shadow .32s cubic-bezier(.2,.8,.2,1),
-    border-color .25s ease,
-    background .25s ease;
-  will-change:transform;
-}
-
-.project-card::after, .article-card::after{
-  content:"";
-  position:absolute;
-  inset:-1px;
-  border-radius:inherit;
-  background:linear-gradient(135deg, rgba(56,189,248,0), rgba(167,139,250,0));
-  opacity:0;
-  transition:opacity .25s ease;
-  pointer-events:none;
-  z-index:-1;
-}
-
-.project-card:hover, .article-card:hover{
-  transform:translateY(-8px) scale(1.025);
-  box-shadow:
-    0 22px 50px rgba(0,0,0,.60),
-    0 0 0 1px rgba(56,189,248,.35);
-  border-color:rgba(167,139,250,.8);
-  background:rgba(255,255,255,.055);
-}
-
-.project-card:hover::after, .article-card:hover::after{
-  opacity:1;
-  background:linear-gradient(135deg, rgba(56,189,248,.18), rgba(167,139,250,.14));
-  filter:blur(14px);
-}
-
-.project-card img, .article-card img{
-  transition:transform .38s cubic-bezier(.2,.8,.2,1), filter .3s ease;
-  transform-origin:center;
-}
-
-.project-card:hover img, .article-card:hover img{
-  transform:scale(1.06);
-  filter:saturate(1.08) contrast(1.05);
-}
-
-   /* ===== NOM NAVBAR SOBRE ===== */
-.name-badge{
-  background:transparent !important;
-  border:none !important;
-  box-shadow:none !important;
-  padding:0 !important;
-}
-
-.name-badge span{
-  font-size:1.05rem !important;
-  font-weight:700 !important;
-  color:var(--text) !important;
-  background:none !important;
-  text-shadow:none !important;
-}
-
-.name-badge small{
-  font-size:.85rem !important;
-  font-weight:600 !important;
-  color:var(--muted) !important;
-}
-
-   /* ===== NOM NAVBAR — sobre mais très visible ===== */
-.name-badge{
-  padding:0 .4rem;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  line-height:1.2;
-}
-
-.name-badge span{
-  font-size:1.65rem !important;      /* PLUS GRAND */
-  font-weight:900 !important;        /* PLUS FORT */
-  color:#ffffff !important;          /* TEXTE BLANC PUR */
-  letter-spacing:.8px;               /* LÉGÈRE ESPACEMENT = lisibilité */
-  text-shadow:0 0 6px rgba(0,0,0,.45),
-               0 2px 12px rgba(0,0,0,.35); /* ÉCLAIRAGE DISCRET */
-}
-
-.name-badge small{
-  font-size:.92rem !important;
-  font-weight:600;
-  color:rgba(255,255,255,.75);       /* Gris clair = sobre */
-}
-
-   .name-badge span:hover{
-  text-decoration:underline;
-  text-decoration-thickness:2px;
-  text-underline-offset:4px;
-  opacity:.9;
-}
-
-</style>
+  <link rel="stylesheet" href="style.css?v=2">
 
 </head>
 
 <body>
 
   <header>
-      <div class="header-inner">
+    <div class="header-inner">
       <div class="name-badge brand-strong">
-  <span class="big-name">Brieuc Métairie</span>
-  <small>Étudiant BTS SIO – option SISR</small>
-</div>
+        <span class="big-name">Brieuc Métairie</span>
+        <small>Étudiant BTS SIO – option SISR</small>
+      </div>
 
 
       <nav role="tablist" aria-label="Navigation du portfolio">
-        <button class="tab-btn" data-tab="accueil" aria-selected="true">Accueil</button>
-        <button class="tab-btn" data-tab="entreprise">Entreprise</button>
-        <button class="tab-btn" data-tab="activites">Activités</button>
-        <button class="tab-btn" data-tab="veille">Veille</button>
+        <a class="tab-btn" href="index.html" aria-selected="true" style="text-decoration:none">Accueil</a>
+        <a class="tab-btn" href="entreprise.html">Entreprise</a>
+        <a class="tab-btn" href="activites.html">Activités</a>
+        <a class="tab-btn" href="veille.html">Veille</a>
       </nav>
       <div class="header-contact">
-  <a class="btn" href="mailto:metairiebrieuc@gmail.com">✉️ Me contacter</a>
-</div>
+        <a class="btn" href="mailto:metairiebrieuc@gmail.com">✉️ Me contacter</a>
+      </div>
 
     </div>
-    
-   
-
   </header>
 
   <main>
@@ -495,7 +75,8 @@ main section:not(.is-active){
 
       <h2>Le BTS SIO – option SISR</h2>
       <p>
-        Le BTS SIO propose deux spécialisations. J’ai choisi <strong>SISR (Solutions d’Infrastructure, Systèmes et Réseaux)</strong>
+        Le BTS SIO propose deux spécialisations. J’ai choisi <strong>SISR (Solutions d’Infrastructure, Systèmes et
+          Réseaux)</strong>
         car elle correspond à ce que je veux faire plus tard : travailler sur les serveurs, le réseau, la sécurité,
         et l’exploitation au quotidien.
         On y apprend à mettre en place des services (AD, DNS, DHCP, virtualisation…),
@@ -509,15 +90,45 @@ main section:not(.is-active){
         <li>Support utilisateur et rédaction de procédures</li>
       </ul>
 
-      <div>
-        <span class="chip">Administration systèmes</span>
-        <span class="chip">Gestion réseau</span>
-        <span class="chip">Virtualisation</span>
-        <span class="chip">Support</span>
-        <span class="chip">Cybersécurité</span>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="skill-icon">🖥️</div>
+          <div class="skill-info">
+            <h4>Systèmes</h4>
+            <p>Windows Server, Active Directory, GPO, PowerShell</p>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">🌐</div>
+          <div class="skill-info">
+            <h4>Réseau</h4>
+            <p>VLAN, DHCP/DNS, TCP/IP, Wi-Fi, VPN</p>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">🐳</div>
+          <div class="skill-info">
+            <h4>Virtualisation</h4>
+            <p>VMware, Hyper-V, Docker, Proxmox</p>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-icon">🛡️</div>
+          <div class="skill-info">
+            <h4>Cybersécurité</h4>
+            <p>Pare-feu, Durcissement, Sauvegardes, Veille</p>
+          </div>
+        </div>
       </div>
 
-      <h2 style="margin-top:1.25rem">Mon école — Faculté des Métiers de l’Essonne</h2>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.25rem;">
+        <h2 style="margin:0;">Mon école — Faculté des Métiers de l’Essonne</h2>
+        <!-- Explicit placeholder: user can replace src. If broken, alt text shows. -->
+        <div
+          style="width: 80px; height: 80px; background: var(--bg-surface); border: 2px dashed var(--border-highlight); border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+          <img src="images/logo_ecole.png" alt="Logo École" style="max-width: 100%; max-height: 100%; display: block;">
+        </div>
+      </div>
       <p>
         Je prépare mon diplôme à la <strong>FDME</strong> en alternance.
         Le vrai plus, c’est le lien direct entre cours et terrain :
@@ -525,7 +136,8 @@ main section:not(.is-active){
         Ça m’aide à progresser vite et à prendre des réflexes professionnels.
       </p>
       <p>
-        <a class="btn" href="https://www.facmetiers91.fr/" target="_blank" rel="noopener noreferrer">Découvrir la FDME</a>
+        <a class="btn" href="https://www.facmetiers91.fr/" target="_blank" rel="noopener noreferrer">Découvrir la
+          FDME</a>
       </p>
 
       <h2 style="margin-top:1.25rem">Mon CV</h2>
@@ -537,550 +149,45 @@ main section:not(.is-active){
         <a class="btn" href="docs/cv_brieuc.pdf" download>📄 Télécharger mon CV (PDF)</a>
       </p>
     </section>
-
-    <!-- ENTREPRISE -->
-    <section id="entreprise" hidden>
-      <h2>Présentation de l’entreprise</h2>
-      <img class="logo" src="images/logoalthec.png" alt="Logo Althec Sécurité Systèmes" />
-
-      <p>
-        <strong>ALTHEC Sécurité Systèmes</strong> est une PME spécialisée dans la sûreté électronique.
-        Elle accompagne ses clients de manière complète : analyse du besoin, choix de la solution,
-        installation sur site, puis maintenance dans la durée.
-        La relation client est directe, ce qui permet d’adapter rapidement les solutions.
-      </p>
-
-      <p><strong>Raison sociale :</strong> ALTHEC SECURITE SYSTEMES</p>
-      <p><strong>Forme juridique :</strong> SARL à associé unique (capital social 80&nbsp;000&nbsp;€)</p>
-      <p><strong>Date de création :</strong> 4 janvier 2006</p>
-      <p><strong>Siège social :</strong> 4 rue Voltaire, 94290 Villeneuve-le-Roi</p>
-      <p><strong>Secteur :</strong> alarmes intrusion, vidéosurveillance IP, contrôle d’accès, interphonie.</p>
-      <p><strong>Zone :</strong> principalement Île-de-France.</p>
-      <p><strong>Clientèle :</strong> commerces, PME, collectivités, copropriétés.</p>
-      <p><strong>Chiffre d’affaires :</strong> non communiqué publiquement ; activité stable depuis 2006.</p>
-
-      <h3>Activité principale</h3>
-      <p>
-        L’entreprise installe des solutions de protection adaptées à chaque site :
-        caméras IP, centrales d’alarme, badges d’accès, interphonie…
-        Une fois le système en place, elle assure un suivi dans le temps
-        grâce à la maintenance préventive et corrective.
-      </p>
-
-      <h3>Offre de services</h3>
-      <ul>
-        <li><strong>Étude & conseil :</strong> analyse des risques, choix technique, chiffrage</li>
-        <li><strong>Installation :</strong> câblage, pose, configuration, mise en service</li>
-        <li><strong>Intégration réseau :</strong> IP, accès distant sécurisé, supervision simple</li>
-        <li><strong>Maintenance :</strong> préventif/correctif, support utilisateur</li>
-      </ul>
-
-      <h3>Organigramme</h3>
-      <img class="orgchart" src="images/Organigramme.png" alt="Organigramme de l'entreprise Althec Sécurité Systèmes" />
-    </section>
-
-    <!-- ACTIVITÉS -->
-  <section id="activites" hidden>
-  <h2>Activités</h2>
-
-  <!-- Recherche + filtres tags MULTI -->
-  <div style="margin-top:.5rem; display:flex; gap:.75rem; flex-wrap:wrap; align-items:center;">
-    <input id="projectSearch" type="search"
-      placeholder="Rechercher un projet (ex. MediaWiki, GLPI, Plex, Pi-hole)…"
-      aria-label="Rechercher un projet"
-      style="flex:1; min-width:240px; padding:.75rem 1rem; border-radius:12px;
-      border:1px solid var(--stroke); background:rgba(255,255,255,.05);
-      color:var(--text); font-size:1rem; outline:none;" />
-
-    <div id="tagFilters" style="display:flex; flex-wrap:wrap; gap:.4rem;">
-      <button class="tag-filter is-on" data-tag="all" type="button">Tous</button>
-      <button class="tag-filter" data-tag="windows" type="button">Windows</button>
-      <button class="tag-filter" data-tag="docker" type="button">Docker</button>
-      <button class="tag-filter" data-tag="helpdesk" type="button">Helpdesk</button>
-      <button class="tag-filter" data-tag="nas" type="button">NAS</button>
-      <button class="tag-filter" data-tag="wiki" type="button">Wiki</button>
-      <button class="tag-filter" data-tag="raspberry" type="button">Raspberry Pi</button>
-      <button class="tag-filter" data-tag="reseau" type="button">Réseau</button>
-      <button class="tag-filter" data-tag="securite" type="button">Sécurité</button>
-      <button class="tag-filter" data-tag="web" type="button" title="Web">Web</button>
-    </div>
-
-    <span id="searchCount" style="color:var(--muted); font-size:.95rem;"></span>
-  </div>
-
-  <style>
-    #tagFilters .tag-filter{
-      padding:.45rem .8rem;border-radius:999px;border:1px solid var(--stroke);
-      background:rgba(255,255,255,.04);color:var(--text);cursor:pointer;font-weight:600;
-      transition:background .2s ease, transform .12s ease, border-color .2s ease;
-    }
-    #tagFilters .tag-filter:hover{
-      transform:translateY(-1px);
-      border-color:rgba(56,189,248,.5);
-    }
-    #tagFilters .tag-filter.is-on{
-      background:rgba(255,255,255,.14);
-      border-color:rgba(167,139,250,.55);
-    }
-
-    #activites .projects-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:1rem;margin-top:1rem;
-    }
-    #activites .project-card{
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--stroke);
-      border-radius:14px;padding:1rem;
-      display:flex;flex-direction:column;gap:.6rem;
-    }
-    #activites .project-card img{
-      width:100%;height:150px;object-fit:contain;
-      background:rgba(255,255,255,.04);
-      border-radius:10px;border:1px solid var(--stroke);padding:.6rem;
-    }
-    #activites .project-card p{margin:0;color:var(--muted);line-height:1.55;font-size:.95rem}
-    #activites .project-card ul{margin:.25rem 0 0 1.1rem;font-size:.95rem}
-    #activites .actions{margin-top:auto;text-align:center;padding-top:.5rem}
-    #activites .no-results{
-      display:none; margin-top:1rem; color:var(--muted); font-style:italic;
-    }
-
-    #activites .subsection-title{
-      margin-top:1.2rem;
-      font-size:1.15rem;
-      font-weight:800;
-      letter-spacing:.2px;
-      display:flex;
-      align-items:center;
-      gap:.5rem;
-    }
-    #activites .subsection-title::after{
-      content:"";
-      height:1px; flex:1;
-      background:var(--stroke);
-      margin-left:.7rem;
-    }
-  </style>
-
-  <p style="color:var(--muted); margin-top:.75rem">
-    Je présente ici deux types de projets : ceux réalisés dans le cadre de ma formation,
-    et ceux montés chez moi en autonomie pour aller plus loin ou répondre à un besoin concret.
-  </p>
-
-  <!-- ========= PROJETS SCOLAIRES ========= -->
-  <div class="subsection-title">📘 Projets scolaires</div>
-<div class="subsection-meta" id="countSchool"></div>
-<div class="projects-grid" id="projectsSchool">
-  
-    <!-- MediaWiki -->
-    <article class="project-card"
-      data-title="mediawiki windows wiki documentation xampp"
-      data-tags="windows,wiki">
-      <img src="images/mediawiki.png" alt="MediaWiki" />
-      <h3>MediaWiki sous Windows</h3>
-      <p><strong>Objectif :</strong> mettre en place un wiki interne pour centraliser les procédures de support et d’exploitation.</p>
-      <p><strong>Environnement :</strong> Windows + XAMPP.</p>
-      <ul>
-        <li>Installation / configuration XAMPP</li>
-        <li>BDD <code>mediawiki</code> via phpMyAdmin</li>
-        <li>Déploiement dans <code>C:\xampp\htdocs\mediawiki</code></li>
-        <li>Assistant + extensions (VisualEditor)</li>
-        <li>Sauvegardes SQL + répertoire images</li>
-      </ul>
-      <div class="download-block actions">
-        <p>Documentation complète.</p>
-        <a class="btn" href="docs/Manuel_Installation_Windows.pdf" download>
-          📄 Télécharger la doc MediaWiki (PDF)
-        </a>
-      </div>
-    </article>
-
-    <!-- GLPI -->
-    <article class="project-card"
-      data-title="glpi windows helpdesk parc inventaire fusioninventory ocs"
-      data-tags="windows,helpdesk">
-      <img src="images/glpi.png" alt="GLPI" />
-      <h3>GLPI sous Windows</h3>
-      <p><strong>Objectif :</strong> déployer une plateforme helpdesk et gestion de parc.</p>
-      <p><strong>Environnement :</strong> Windows + WAMP/XAMPP.</p>
-      <ul>
-        <li>Stack Web (Apache / PHP / MariaDB)</li>
-        <li>BDD <code>glpi</code> via phpMyAdmin</li>
-        <li>Déploiement dans <code>C:\xampp\htdocs\glpi</code></li>
-        <li>Configuration profils, entités, SLA</li>
-        <li>Inventaire auto (FusionInventory)</li>
-      </ul>
-      <div class="download-block actions">
-        <p>Documentation GLPI/OCS.</p>
-        <a class="btn" href="docs/GLPI_Cours.pdf" download>
-          📄 Télécharger la doc GLPI (PDF)
-        </a>
-      </div>
-    </article>
-
-  </div>
-
-  <!-- ========= PROJETS PERSONNELS ========= -->
-  <div class="subsection-title">🛠️ Projets personnels</div>
-<div class="subsection-meta" id="countPersonal"></div>
-<div class="projects-grid" id="projectsPersonal">
-
-    <!-- Plex -->
-    <article class="project-card"
-      data-title="plex synology ds920 docker multimedia streaming nas"
-      data-tags="docker,nas">
-      <img src="images/plex.png" alt="Plex" />
-      <h3>Serveur Plex sur NAS</h3>
-      <p><strong>Objectif :</strong> centraliser une médiathèque personnelle et la diffuser à la maison.</p>
-      <p><strong>Matériel :</strong> NAS Synology DS920+ + Docker.</p>
-      <ul>
-        <li>Plex Media Server via Docker</li>
-        <li>Volumes persistants config + bibliothèques</li>
-        <li>Organisation Films / Séries / Musiques</li>
-        <li>Accès multi-appareils</li>
-        <li>Transcodage matériel activé</li>
-      </ul>
-      <p><strong>Résultat :</strong> serveur stable et simple à utiliser.</p>
-    </article>
-
-    <!-- Pi-hole -->
-    <article class="project-card"
-      data-title="pihole raspberry pi dns adblock reseau securite"
-      data-tags="raspberry,reseau,securite">
-      <img src="images/pihole.png" alt="Pi-hole" />
-      <h3>Pi-hole sur Raspberry Pi</h3>
-      <p><strong>Objectif :</strong> bloquer publicités/trackers au niveau DNS pour tout le réseau domestique.</p>
-      <p><strong>Environnement :</strong> Raspberry Pi + Raspberry Pi OS.</p>
-      <ul>
-        <li>Installation système + mises à jour</li>
-        <li>Déploiement Pi-hole et DNS local</li>
-        <li>DNS routeur redirigé vers Pi-hole</li>
-        <li>Listes de blocage (ads/tracking/malware)</li>
-        <li>Supervision via interface Web</li>
-        <li>Sauvegarde configuration + IP fixe</li>
-      </ul>
-      <p><strong>Résultat :</strong> réseau plus propre et plus sécurisé.</p>
-    </article>
-
-    <!-- VPN -->
-    <article class="project-card"
-      data-title="vpn raspberry pi wireguard openvpn acces distant securite reseau"
-      data-tags="raspberry,reseau,securite">
-      <img src="images/vpn.png" alt="VPN Raspberry Pi" />
-      <h3>Serveur VPN sur Raspberry Pi</h3>
-      <p><strong>Objectif :</strong> accéder à mon réseau domestique depuis l’extérieur en sécurité.</p>
-      <p><strong>Environnement :</strong> Raspberry Pi + OpenVPN.</p>
-      <ul>
-        <li>Durcissement du Raspberry Pi</li>
-        <li>Déploiement serveur VPN</li>
-        <li>Profils clients (PC/mobile)</li>
-        <li>Port-forward + DDNS sur la box</li>
-        <li>Règles firewall pour limiter l’accès interne</li>
-        <li>Tests externes + documentation utilisateur</li>
-      </ul>
-      <p><strong>Résultat :</strong> accès distant fiable et chiffré.</p>
-    </article>
-
-    <article class="project-card"
-  data-title="site vitrine restaurant création web html css js projet personnel"
-  data-tags="web,personnel">
-  <img src="images/restaurant.png" alt="Site vitrine restaurant" />
-  <h3>Site vitrine pour un restaurant</h3>
-
-  <p><strong>Objectif :</strong> réaliser un site vitrine simple et élégant pour présenter le restaurant, l’ambiance,
-    les menus et les informations pratiques.</p>
-
-  <p><strong>Contenu :</strong> pages essentielles (Accueil, Carte/Menu, Infos pratiques, Contact) avec un design cohérent
-    et une navigation fluide.</p>
-
-  <ul>
-    <li>Maquettage puis intégration HTML/CSS/JS</li>
-    <li>Responsive complet (mobile → desktop)</li>
-    <li>Optimisation des images et du chargement</li>
-    <li>Formulaire de contact et liens réseaux sociaux</li>
-  </ul>
-
-  <div class="download-block actions">
-    <p>Voir le site en ligne.</p>
-    <a class="btn" href="https://mom-s-restaurant-1ddpi.kinsta.page/" target="_blank" rel="noopener">
-      🌐 Accéder au site
-    </a>
-  </div>
-</article>
-  
-  </div>
-
-  <div class="no-results" id="noResults">Aucun projet ne correspond à ta recherche.</div>
-</section>
-
-
-    <!-- VEILLE -->
-    <section id="veille" hidden>
-      <h2>Veille informationnelle</h2>
-
-      <style>
-        #veille .intro{color:var(--muted);line-height:1.6;margin-bottom:1rem}
-        #veille .articles-grid{
-          display:grid;
-          grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-          gap:1rem;margin-top:1rem;
-        }
-        #veille .article-card{
-          background:rgba(255,255,255,.04);
-          border:1px solid var(--stroke);
-          border-radius:14px;overflow:hidden;
-          box-shadow:0 8px 20px rgba(0,0,0,.25);
-          display:flex;flex-direction:column;
-        }
-        #veille .article-card a.thumb{
-          display:block;height:160px;background:rgba(255,255,255,.04);border-bottom:1px solid var(--stroke);
-        }
-        #veille .article-card a.thumb img{width:100%;height:100%;object-fit:cover;display:block}
-        #veille .article-card .content{padding:.95rem 1rem}
-        #veille .article-card h3{margin:.2rem 0;font-size:1.02rem;line-height:1.35}
-        #veille .article-card p{margin:0;color:var(--muted);font-size:.93rem;line-height:1.5}
-        #veille .sources{margin-top:1.25rem}
-      </style>
-
-      <p class="intro">
-        Je réalise une veille régulière sur les systèmes, le réseau et la cybersécurité.
-        L’objectif est de rester à jour sur les nouveautés techniques et sur les vulnérabilités importantes,
-        pour comprendre l’impact réel en entreprise.
-      </p>
-
-      <div class="articles-grid">
-
-        <article class="article-card">
-          <a class="thumb" href="https://www.it-connect.fr/windows-server-2025-les-nouveautes/" target="_blank" rel="noopener noreferrer">
-            <img src="images/veille-ws2025.jpg" alt="Windows Server 2025 nouveautés">
-          </a>
-          <div class="content">
-            <h3>
-              <a href="https://www.it-connect.fr/windows-server-2025-les-nouveautes/" target="_blank" rel="noopener noreferrer">
-                Windows Server 2025 : nouveautés
-              </a>
-            </h3>
-            <p>Analyse des évolutions serveur et de leur impact sur l’exploitation.</p>
-          </div>
-        </article>
-
-        <article class="article-card">
-          <a class="thumb" href="https://www.cnil.fr/fr/evenement-rgpd-quel-impact-economique-compte-rendu-des-debats" target="_blank" rel="noopener noreferrer">
-            <img src="images/cnil.jpg" alt="RGPD quel impact ?">
-          </a>
-          <div class="content">
-            <h3>
-              <a href="https://www.cnil.fr/fr/evenement-rgpd-quel-impact-economique-compte-rendu-des-debats" target="_blank" rel="noopener noreferrer">
-                Événement « RGPD : quel impact économique ? » : compte-rendu des débats
-              </a>
-            </h3>
-            <p>Débats sur l'impact écoonomique de l'application de la RGPD par les entreprises</p>
-          </div>
-        </article>
-
-        <article class="article-card">
-          <a class="thumb" href="https://www.zdnet.fr/actualites/sur-la-souverainete-numerique-macron-appele-a-soutenir-lia-open-source-485079.htm" target="_blank" rel="noopener noreferrer">
-            <img src="images/ia.jpg" alt="Souveraineté numérique">
-          </a>
-          <div class="content">
-            <h3>
-              <a href="https://www.zdnet.fr/actualites/sur-la-souverainete-numerique-macron-appele-a-soutenir-lia-open-source-485079.htm" target="_blank" rel="noopener noreferrer">
-                Parole de Macron sur la souveraineté numérique 
-              </a>
-            </h3>
-            <p>Intéressant lorsque l'on s'intéresse à l'IA</p>
-          </div>
-        </article>
-
-      </div>
-
-      <div class="sources">
-        <h3>Sources suivies</h3>
-        <ul>
-          <li><a href="https://www.cert.ssi.gouv.fr/" target="_blank" rel="noopener noreferrer">CERT-FR</a></li>
-          <li><a href="https://www.cnil.fr/" target="_blank" rel="noopener noreferrer">CNIL</a></li>
-          <li><a href="https://www.it-connect.fr/" target="_blank" rel="noopener noreferrer">IT-Connect</a></li>
-          <li><a href="https://www.zdnet.fr/" target="_blank" rel="noopener noreferrer">ZDNet</a></li>
-          <li><a href="https://www.youtube.com/@Underscore_" target="_blank" rel="noopener noreferrer">Underscore_</a></li>
-          <li><a href="https://www.youtube.com/@PowerCertAnimatedVideos" target="_blank" rel="noopener noreferrer">PowerCert</a></li>
-        </ul>
-      </div>
-    </section>
   </main>
 
   <footer>
-    © 2025 Brieuc Métairie – Portfolio 
+    © 2025 Brieuc Métairie – Portfolio
   </footer>
 
-<script>
-  const tabs = document.querySelectorAll('.tab-btn');
-  const sections = document.querySelectorAll('main section');
+  <button id="themeToggle" class="theme-btn" aria-label="Changer de thème">🌙</button>
 
-  function showSection(id) {
-    sections.forEach(sec => {
-      const isTarget = sec.id === id;
-      sec.hidden = !isTarget;
-      sec.classList.toggle('is-active', isTarget);
-    });
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-    // reset stagger quand on arrive sur Activités
-    if (id === 'activites') {
-      staggerCards();
-      applyFilters();
-    }
-  }
-  showSection('accueil');
+  <!-- CONTACT MODAL -->
+  <dialog id="contactModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Me contacter</h3>
+        <button id="closeContact" class="btn-close" aria-label="Fermer">×</button>
+      </div>
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">Nom</label>
+          <input type="text" id="name" name="name" required placeholder="Votre nom" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="votre@email.com" />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required
+            placeholder="Bonjour, je vous contacte pour..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" id="sendBtn">Envoyer</button>
+        <p id="formStatus" style="margin-top:1rem; font-size:0.9rem;"></p>
+      </form>
+    </div>
+  </dialog>
 
-  tabs.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = btn.dataset.tab;
-      showSection(target);
-      tabs.forEach(t => t.setAttribute('aria-selected', t === btn ? 'true' : 'false'));
-    });
-  });
-
-  // === Recherche + filtres MULTI tags ===
-  const searchInput = document.getElementById('projectSearch');
-  const noResults = document.getElementById('noResults');
-  const searchCount = document.getElementById('searchCount');
-  const tagButtons = document.querySelectorAll('#tagFilters .tag-filter');
-
-  const gridSchool = document.getElementById('projectsSchool');
-  const gridPersonal = document.getElementById('projectsPersonal');
-  const countSchool = document.getElementById('countSchool');
-  const countPersonal = document.getElementById('countPersonal');
-
-  const grids = [gridSchool, gridPersonal].filter(Boolean);
-  const activeTags = new Set(['all']);
-
-  function getAllCards(){
-    return grids.flatMap(g => Array.from(g.querySelectorAll('.project-card')));
-  }
-
-  function updateSectionCounts() {
-    if (!gridSchool || !gridPersonal) return;
-
-    const visibleSchool = Array.from(gridSchool.querySelectorAll('.project-card'))
-      .filter(c => c.style.display !== 'none').length;
-
-    const visiblePersonal = Array.from(gridPersonal.querySelectorAll('.project-card'))
-      .filter(c => c.style.display !== 'none').length;
-
-    if (countSchool) countSchool.textContent = `${visibleSchool} projet(s) scolaire(s) affiché(s)`;
-    if (countPersonal) countPersonal.textContent = `${visiblePersonal} projet(s) personnel(s) affiché(s)`;
-  }
-
-  function applyFilters() {
-    const q = (searchInput?.value || '').trim().toLowerCase();
-    const cards = getAllCards();
-    let visible = 0;
-
-    cards.forEach(card => {
-      const hay = (card.dataset.title || card.textContent).toLowerCase();
-      const tags = (card.dataset.tags || '').split(',').map(t => t.trim());
-
-      const matchText = !q || hay.includes(q);
-      const matchTag =
-        activeTags.has('all') ||
-        tags.some(t => activeTags.has(t));
-
-      const match = matchText && matchTag;
-      card.style.display = match ? '' : 'none';
-      if (match) visible++;
-    });
-
-    if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
-    if (searchCount) {
-      searchCount.textContent = q ? `${visible} projet(s) trouvé(s)` : `${visible} projet(s)`;
-    }
-
-    updateSectionCounts();
-  }
-
-  tagButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const tag = btn.dataset.tag || 'all';
-
-      if (tag === 'all') {
-        activeTags.clear();
-        activeTags.add('all');
-        tagButtons.forEach(b => b.classList.toggle('is-on', b.dataset.tag === 'all'));
-      } else {
-        activeTags.delete('all');
-
-        if (activeTags.has(tag)) activeTags.delete(tag);
-        else activeTags.add(tag);
-
-        if (activeTags.size === 0) activeTags.add('all');
-
-        tagButtons.forEach(b => {
-          const t = b.dataset.tag;
-          b.classList.toggle('is-on', activeTags.has(t));
-        });
-      }
-
-      applyFilters();
-    });
-  });
-
-  searchInput?.addEventListener('input', applyFilters);
-
-  // === Stagger animation (cartes une par une) ===
-  function staggerCards(){
-    const cards = getAllCards();
-    cards.forEach((card, i) => {
-      card.style.setProperty('--stagger', `${i*70}ms`);
-    });
-  }
-
-  staggerCards();
-  applyFilters();
-  // ===== Halo lumineux : active le glow quand une section est visible =====
-const haloSections = Array.from(document.querySelectorAll('main section'));
-const haloObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.style.setProperty('--halo', '1');
-    } else {
-      e.target.style.setProperty('--halo', '0');
-    }
-  });
-}, { threshold: 0.35 });
-
-haloSections.forEach(sec => haloObserver.observe(sec));
-
-// ===== Parallax sur les images latérales =====
-window.addEventListener('scroll', () => {
-  const y = window.scrollY || document.documentElement.scrollTop;
-  const offset = Math.min(60, y * 0.06); // limite le décalage
-  document.body.style.setProperty('--parallaxY', offset + 'px');
-}, { passive: true });
-
-// ===== Transition douce au changement de rubrique =====
-// Si ton script possède déjà showSection(), on le remplace par une version smooth.
-function smoothShowSection(id){
-  haloSections.forEach(sec => {
-    const isTarget = sec.id === id;
-
-    if (isTarget){
-      sec.hidden = false;
-      requestAnimationFrame(()=>sec.classList.add('is-active'));
-    } else {
-      sec.classList.remove('is-active');
-      setTimeout(()=>sec.hidden = true, 420);
-    }
-  });
-}
-
-if (typeof showSection === 'function'){
-  showSection = smoothShowSection;
-}
-
-</script>
-
-
-
-
+  <script src="script.js" defer></script>
 </body>
+
 </html>

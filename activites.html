@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Activités — Portfolio Brieuc Métairie</title>
+    <meta name="description"
+        content="Projets scolaires et personnels de Brieuc Métairie : Windows, Linux, Virtualisation, Réseau." />
+    <meta name="theme-color" content="#38bdf8" />
+    <link rel="icon" href="images/favicon.ico" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Projets & Activités — Portfolio Brieuc Métairie" />
+    <meta property="og:description" content="Découvrez mes projets (GLPI, AD, Plex) et compétences techniques." />
+
+    <!-- Fonts: Outfit (modern, geometric) + Inter (clean readable) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css?v=2">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-inner">
+            <div class="name-badge brand-strong">
+                <span class="big-name">Brieuc Métairie</span>
+                <small>Étudiant BTS SIO – option SISR</small>
+            </div>
+
+            <nav role="tablist" aria-label="Navigation du portfolio">
+                <a class="tab-btn" href="index.html">Accueil</a>
+                <a class="tab-btn" href="entreprise.html">Entreprise</a>
+                <a class="tab-btn" href="activites.html" aria-selected="true" style="text-decoration:none">Activités</a>
+                <a class="tab-btn" href="veille.html">Veille</a>
+            </nav>
+            <div class="header-contact">
+                <a class="btn" href="mailto:metairiebrieuc@gmail.com">✉️ Me contacter</a>
+            </div>
+
+        </div>
+    </header>
+
+    <main>
+        <!-- ACTIVITÉS -->
+        <section id="activites">
+            <h2>Activités</h2>
+
+            <!-- Recherche + filtres tags MULTI -->
+            <div style="margin-top:.5rem; display:flex; gap:.75rem; flex-wrap:wrap; align-items:center;">
+                <input id="projectSearch" type="search"
+                    placeholder="Rechercher un projet (ex. MediaWiki, GLPI, Plex, Pi-hole)…"
+                    aria-label="Rechercher un projet" style="flex:1; min-width:240px; padding:.75rem 1rem; border-radius:12px;
+      border:1px solid var(--stroke); background:rgba(255,255,255,.05);
+      color:var(--text); font-size:1rem; outline:none;" />
+
+                <div id="tagFilters" style="display:flex; flex-wrap:wrap; gap:.4rem;">
+                    <button class="tag-filter is-on" data-tag="all" type="button">Tous</button>
+                    <button class="tag-filter" data-tag="windows" type="button">Windows</button>
+                    <button class="tag-filter" data-tag="docker" type="button">Docker</button>
+                    <button class="tag-filter" data-tag="helpdesk" type="button">Helpdesk</button>
+                    <button class="tag-filter" data-tag="nas" type="button">NAS</button>
+                    <button class="tag-filter" data-tag="wiki" type="button">Wiki</button>
+                    <button class="tag-filter" data-tag="raspberry" type="button">Raspberry Pi</button>
+                    <button class="tag-filter" data-tag="reseau" type="button">Réseau</button>
+                    <button class="tag-filter" data-tag="securite" type="button">Sécurité</button>
+                    <button class="tag-filter" data-tag="web" type="button" title="Web">Web</button>
+                </div>
+
+                <span id="searchCount" style="color:var(--muted); font-size:.95rem;"></span>
+            </div>
+
+
+            <p style="color:var(--muted); margin-top:.75rem">
+                Je présente ici deux types de projets : ceux réalisés dans le cadre de ma formation,
+                et ceux montés chez moi en autonomie pour aller plus loin ou répondre à un besoin concret.
+            </p>
+
+            <!-- ========= PROJETS SCOLAIRES ========= -->
+            <div class="subsection-title">📘 Projets scolaires</div>
+            <div class="subsection-meta" id="countSchool"></div>
+            <div class="projects-grid" id="projectsSchool">
+
+                <!-- MediaWiki -->
+                <article class="project-card" data-title="mediawiki windows wiki documentation xampp"
+                    data-tags="windows,wiki">
+                    <img loading="lazy" src="images/mediawiki.png" alt="MediaWiki" />
+                    <h3>MediaWiki sous Windows</h3>
+                    <p><strong>Objectif :</strong> mettre en place un wiki interne pour centraliser les procédures de
+                        support et
+                        d’exploitation.</p>
+                    <p><strong>Environnement :</strong> Windows + XAMPP.</p>
+                    <ul>
+                        <li>Installation / configuration XAMPP</li>
+                        <li>BDD <code>mediawiki</code> via phpMyAdmin</li>
+                        <li>Déploiement dans <code>C:\xampp\htdocs\mediawiki</code></li>
+                        <li>Assistant + extensions (VisualEditor)</li>
+                        <li>Sauvegardes SQL + répertoire images</li>
+                    </ul>
+                    <div class="download-block actions">
+                        <p>Documentation complète.</p>
+                        <a class="btn" href="docs/Manuel_Installation_Windows.pdf" download>
+                            📄 Télécharger la doc MediaWiki (PDF)
+                        </a>
+                    </div>
+                </article>
+
+                <!-- GLPI -->
+                <article class="project-card" data-title="glpi windows helpdesk parc inventaire fusioninventory ocs"
+                    data-tags="windows,helpdesk">
+                    <img loading="lazy" src="images/glpi.png" alt="GLPI" />
+                    <h3>GLPI sous Windows</h3>
+                    <p><strong>Objectif :</strong> déployer une plateforme helpdesk et gestion de parc.</p>
+                    <p><strong>Environnement :</strong> Windows + WAMP/XAMPP.</p>
+                    <ul>
+                        <li>Stack Web (Apache / PHP / MariaDB)</li>
+                        <li>BDD <code>glpi</code> via phpMyAdmin</li>
+                        <li>Déploiement dans <code>C:\xampp\htdocs\glpi</code></li>
+                        <li>Configuration profils, entités, SLA</li>
+                        <li>Inventaire auto (FusionInventory)</li>
+                    </ul>
+                    <div class="download-block actions">
+                        <p>Documentation GLPI/OCS.</p>
+                        <a class="btn" href="docs/GLPI_Cours.pdf" download>
+                            📄 Télécharger la doc GLPI (PDF)
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- ========= PROJETS PERSONNELS ========= -->
+            <div class="subsection-title">🛠️ Projets personnels</div>
+            <div class="subsection-meta" id="countPersonal"></div>
+            <div class="projects-grid" id="projectsPersonal">
+
+                <!-- Plex -->
+                <article class="project-card" data-title="plex synology ds920 docker multimedia streaming nas"
+                    data-tags="docker,nas">
+                    <img loading="lazy" src="images/plex.png" alt="Plex" />
+                    <h3>Serveur Plex sur NAS</h3>
+                    <p><strong>Objectif :</strong> centraliser une médiathèque personnelle et la diffuser à la maison.
+                    </p>
+                    <p><strong>Matériel :</strong> NAS Synology DS920+ + Docker.</p>
+                    <ul>
+                        <li>Plex Media Server via Docker</li>
+                        <li>Volumes persistants config + bibliothèques</li>
+                        <li>Organisation Films / Séries / Musiques</li>
+                        <li>Accès multi-appareils</li>
+                        <li>Transcodage matériel activé</li>
+                    </ul>
+                    <p><strong>Résultat :</strong> serveur stable et simple à utiliser.</p>
+                </article>
+
+                <!-- Pi-hole -->
+                <article class="project-card" data-title="pihole raspberry pi dns adblock reseau securite"
+                    data-tags="raspberry,reseau,securite">
+                    <img loading="lazy" src="images/pihole.png" alt="Pi-hole" />
+                    <h3>Pi-hole sur Raspberry Pi</h3>
+                    <p><strong>Objectif :</strong> bloquer publicités/trackers au niveau DNS pour tout le réseau
+                        domestique.</p>
+                    <p><strong>Environnement :</strong> Raspberry Pi + Raspberry Pi OS.</p>
+                    <ul>
+                        <li>Installation système + mises à jour</li>
+                        <li>Déploiement Pi-hole et DNS local</li>
+                        <li>DNS routeur redirigé vers Pi-hole</li>
+                        <li>Listes de blocage (ads/tracking/malware)</li>
+                        <li>Supervision via interface Web</li>
+                        <li>Sauvegarde configuration + IP fixe</li>
+                    </ul>
+                    <p><strong>Résultat :</strong> réseau plus propre et plus sécurisé.</p>
+                </article>
+
+                <!-- VPN -->
+                <article class="project-card"
+                    data-title="vpn raspberry pi wireguard openvpn acces distant securite reseau"
+                    data-tags="raspberry,reseau,securite">
+                    <img loading="lazy" src="images/vpn.png" alt="VPN Raspberry Pi" />
+                    <h3>Serveur VPN sur Raspberry Pi</h3>
+                    <p><strong>Objectif :</strong> accéder à mon réseau domestique depuis l’extérieur en sécurité.</p>
+                    <p><strong>Environnement :</strong> Raspberry Pi + OpenVPN.</p>
+                    <ul>
+                        <li>Durcissement du Raspberry Pi</li>
+                        <li>Déploiement serveur VPN</li>
+                        <li>Profils clients (PC/mobile)</li>
+                        <li>Port-forward + DDNS sur la box</li>
+                        <li>Règles firewall pour limiter l’accès interne</li>
+                        <li>Tests externes + documentation utilisateur</li>
+                    </ul>
+                    <p><strong>Résultat :</strong> accès distant fiable et chiffré.</p>
+                </article>
+
+                <article class="project-card"
+                    data-title="site vitrine restaurant création web html css js projet personnel"
+                    data-tags="web,personnel">
+                    <img loading="lazy" src="images/restaurant.png" alt="Site vitrine restaurant" />
+                    <h3>Site vitrine pour un restaurant</h3>
+
+                    <p><strong>Objectif :</strong> réaliser un site vitrine simple et élégant pour présenter le
+                        restaurant,
+                        l’ambiance,
+                        les menus et les informations pratiques.</p>
+
+                    <p><strong>Contenu :</strong> pages essentielles (Accueil, Carte/Menu, Infos pratiques, Contact)
+                        avec un
+                        design cohérent
+                        et une navigation fluide.</p>
+
+                    <ul>
+                        <li>Maquettage puis intégration HTML/CSS/JS</li>
+                        <li>Responsive complet (mobile → desktop)</li>
+                        <li>Optimisation des images et du chargement</li>
+                        <li>Formulaire de contact et liens réseaux sociaux</li>
+                    </ul>
+
+                    <div class="download-block actions">
+                        <p>Voir le site en ligne.</p>
+                        <a class="btn" href="https://mom-s-restaurant-1ddpi.kinsta.page/" target="_blank"
+                            rel="noopener">
+                            🌐 Accéder au site
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+
+            <div class="no-results" id="noResults">Aucun projet ne correspond à ta recherche.</div>
+        </section>
+    </main>
+
+    <footer>
+        © 2025 Brieuc Métairie – Portfolio
+    </footer>
+
+    <!-- Project Details Modal -->
+    <dialog id="projectModal" class="modal">
+        <div class="modal-box">
+            <button class="modal-close" id="closeModal">✕</button>
+            <div class="modal-content">
+                <h2 id="modalTitle"></h2>
+                <div id="modalBody"></div>
+                <div class="modal-actions">
+                    <!-- Links injected via JS -->
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <button id="themeToggle" class="theme-btn" aria-label="Changer de thème">🌙</button>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <!-- CONTACT MODAL -->
+    <dialog id="contactModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Me contacter</h3>
+                <button id="closeContact" class="btn-close" aria-label="Fermer">×</button>
+            </div>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Nom</label>
+                    <input type="text" id="name" name="name" required placeholder="Votre nom" />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="votre@email.com" />
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required
+                        placeholder="Bonjour, je vous contacte pour..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" id="sendBtn">Envoyer</button>
+                <p id="formStatus" style="margin-top:1rem; font-size:0.9rem;"></p>
+            </form>
+        </div>
+    </dialog>
+
+    <script src="script.js" defer></script>
+
+</body>
+
+</html>

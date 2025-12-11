@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Entreprise — Portfolio Brieuc Métairie</title>
+    <meta name="description"
+        content="Portfolio de Brieuc Métairie, étudiant BTS SIO option SISR. Découvrez mon parcours, mes compétences et mes projets en administration système et réseau." />
+    <meta name="theme-color" content="#38bdf8" />
+    <link rel="icon" href="images/favicon.ico" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://brieuc-metairie.fr/" />
+    <meta property="og:title" content="Portfolio Brieuc Métairie — Admin Sys & Réseau" />
+    <meta property="og:description" content="Étudiant BTS SIO SISR. Découvrez mes projets et compétences." />
+    <meta property="og:image" content="https://brieuc-metairie.fr/images/og-image.png" />
+
+    <!-- Fonts: Outfit (modern, geometric) + Inter (clean readable) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css?v=2">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-inner">
+            <div class="name-badge brand-strong">
+                <span class="big-name">Brieuc Métairie</span>
+                <small>Étudiant BTS SIO – option SISR</small>
+            </div>
+
+            <nav role="tablist" aria-label="Navigation du portfolio">
+                <a class="tab-btn" href="index.html">Accueil</a>
+                <a class="tab-btn" href="entreprise.html" aria-selected="true"
+                    style="text-decoration:none">Entreprise</a>
+                <a class="tab-btn" href="activites.html">Activités</a>
+                <a class="tab-btn" href="veille.html">Veille</a>
+            </nav>
+            <div class="header-contact">
+                <a class="btn" href="mailto:metairiebrieuc@gmail.com">✉️ Me contacter</a>
+            </div>
+
+        </div>
+    </header>
+
+    <main>
+        <!-- ENTREPRISE -->
+        <section id="entreprise">
+            <h2>Présentation de l’entreprise</h2>
+            <img loading="lazy" class="logo" src="images/logoalthec.png" alt="Logo Althec Sécurité Systèmes" />
+
+            <p>
+                <strong>ALTHEC Sécurité Systèmes</strong> est une PME spécialisée dans la sûreté électronique.
+                Elle accompagne ses clients de manière complète : analyse du besoin, choix de la solution,
+                installation sur site, puis maintenance dans la durée.
+                La relation client est directe, ce qui permet d’adapter rapidement les solutions.
+            </p>
+
+            <p><strong>Raison sociale :</strong> ALTHEC SECURITE SYSTEMES</p>
+            <p><strong>Forme juridique :</strong> SARL à associé unique (capital social 80&nbsp;000&nbsp;€)</p>
+            <p><strong>Date de création :</strong> 4 janvier 2006</p>
+            <p><strong>Siège social :</strong> 4 rue Voltaire, 94290 Villeneuve-le-Roi</p>
+            <p><strong>Secteur :</strong> alarmes intrusion, vidéosurveillance IP, contrôle d’accès, interphonie.</p>
+            <p><strong>Zone :</strong> principalement Île-de-France.</p>
+            <p><strong>Clientèle :</strong> commerces, PME, collectivités, copropriétés.</p>
+            <p><strong>Chiffre d’affaires :</strong> non communiqué publiquement ; activité stable depuis 2006.</p>
+
+            <h3>Activité principale</h3>
+            <p>
+                L’entreprise installe des solutions de protection adaptées à chaque site :
+                caméras IP, centrales d’alarme, badges d’accès, interphonie…
+                Une fois le système en place, elle assure un suivi dans le temps
+                grâce à la maintenance préventive et corrective.
+            </p>
+
+            <h3>Offre de services</h3>
+            <ul>
+                <li><strong>Étude & conseil :</strong> analyse des risques, choix technique, chiffrage</li>
+                <li><strong>Installation :</strong> câblage, pose, configuration, mise en service</li>
+                <li><strong>Intégration réseau :</strong> IP, accès distant sécurisé, supervision simple</li>
+                <li><strong>Maintenance :</strong> préventif/correctif, support utilisateur</li>
+            </ul>
+
+            <h3>Organigramme</h3>
+            <img loading="lazy" class="orgchart" src="images/Organigramme.png"
+                alt="Organigramme de l'entreprise Althec Sécurité Systèmes" />
+        </section>
+    </main>
+
+    <footer>
+        © 2025 Brieuc Métairie – Portfolio
+    </footer>
+
+    <button id="themeToggle" class="theme-btn" aria-label="Changer de thème">🌙</button>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <!-- CONTACT MODAL -->
+    <dialog id="contactModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Me contacter</h3>
+                <button id="closeContact" class="btn-close" aria-label="Fermer">×</button>
+            </div>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Nom</label>
+                    <input type="text" id="name" name="name" required placeholder="Votre nom" />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="votre@email.com" />
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required
+                        placeholder="Bonjour, je vous contacte pour..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" id="sendBtn">Envoyer</button>
+                <p id="formStatus" style="margin-top:1rem; font-size:0.9rem;"></p>
+            </form>
+        </div>
+    </dialog>
+
+    <script src="script.js" defer></script>
+
+</body>
+
+</html>
