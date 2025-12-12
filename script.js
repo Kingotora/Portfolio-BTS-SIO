@@ -395,6 +395,15 @@ if (contactModal && headerContactBtn) {
     contactModal.showModal();
   });
 }
+
+// Mobile FAB Listener
+const mobileContactBtn = document.getElementById('mobileContactBtn');
+if (contactModal && mobileContactBtn) {
+  mobileContactBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    contactModal.showModal();
+  });
+}
 const closeContactBtn = document.getElementById('closeContact');
 if (closeContactBtn && contactModal) {
   closeContactBtn.addEventListener('click', () => {
@@ -488,19 +497,29 @@ function initTiltEffect() {
       card.style.zIndex = '10';
     });
 
+    let ticking = false;
     card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
 
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
 
-      const rotateX = ((y - centerY) / centerY) * -5;
-      const rotateY = ((x - centerX) / centerX) * 5;
+          const rotateX = ((y - centerY) / centerY) * -5;
+          const rotateY = ((x - centerX) / centerX) * 5;
 
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+
+          ticking = false;
+        });
+        ticking = true;
+      }
     });
+
+
 
     card.addEventListener('mouseleave', () => {
       card.style.transition = 'transform 0.5s ease';
@@ -518,3 +537,25 @@ if (scrollTopBtn) {
     });
   });
 }
+
+
+// =========================================
+//  INSTANT PAGE LOAD (PREFETCH ON HOVER)
+// =========================================
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('a').forEach(link => {
+    if (link.href.includes(window.location.hostname)) { // Internal links only
+      link.addEventListener('mouseenter', () => {
+        try {
+          const url = new URL(link.href).href; // Normalize
+          if (!document.querySelector(`link[rel="prefetch"][href="${url}"]`)) {
+            const prefetchLink = document.createElement('link');
+            prefetchLink.rel = 'prefetch';
+            prefetchLink.href = url;
+            document.head.appendChild(prefetchLink);
+          }
+        } catch (e) { }
+      });
+    }
+  });
+});

@@ -7,7 +7,7 @@ const FEEDS = [
     { id: 'cert-fr', name: 'ANSSI', url: "https://www.cert.ssi.gouv.fr/feed/" },
     { id: 'korben', name: 'Korben', url: "https://korben.info/feed" },
     { id: 'zdnet', name: 'ZDNet', url: "https://www.zdnet.fr/feeds/rss/actualites/" },
-    { id: 'cnil', name: 'CNIL', url: "https://www.cnil.fr/fr/rss.xml", logo: 'images/cnil.jpg' },
+    { id: 'cnil', name: 'CNIL', url: "https://www.cnil.fr/fr/rss.xml", logo: 'images/cnil.webp' },
     { id: 'journalduhacker', name: 'J. du Hacker', url: "https://www.journalduhacker.net/rss" },
     { id: 'numerama', name: 'Numerama', url: "https://www.numerama.com/feed/" },
     { id: 'developpez', name: 'Developpez', url: "https://www.developpez.com/rss/actualites.xml" }
@@ -193,7 +193,7 @@ class RSSManager {
     }
 
     createCard(item) {
-        let image = 'images/banner.jpg';
+        let image = 'images/banner.webp';
         // 1. Thumbnail
         if (item.thumbnail && item.thumbnail.match(/^https?:\/\//)) image = item.thumbnail;
         // 2. Enclosure
@@ -205,7 +205,7 @@ class RSSManager {
         }
 
         // 4. Fallback to Source Logo if still default
-        if (image === 'images/banner.jpg' && item.sourceLogo) {
+        if (image === 'images/banner.webp' && item.sourceLogo) {
             image = item.sourceLogo;
         }
 
@@ -221,7 +221,7 @@ class RSSManager {
         card.innerHTML = `
            <a class="thumb" href="${item.link}" target="_blank" rel="noopener noreferrer">
               <span class="category-badge">${item.sourceName}</span>
-              <img loading="lazy" src="${image}" alt="${item.title}" style="object-fit:cover; width:100%; height:100%;" onerror="this.onerror=null; this.src='images/banner.jpg'">
+              <img loading="lazy" src="${image}" alt="${item.title}" style="object-fit:cover; width:100%; height:100%;" onerror="this.onerror=null; this.src='images/banner.webp'">
            </a>
            <div class="content">
               <div class="meta">

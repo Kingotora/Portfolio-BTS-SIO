@@ -8,7 +8,7 @@
   <meta name="description"
     content="Portfolio de Brieuc Métairie, BTS SIO SISR : parcours, entreprise, projets Windows (MediaWiki/GLPI) et projet Plex. Veille systèmes et cybersécurité." />
   <meta name="theme-color" content="#38bdf8" />
-  <link rel="preload" as="image" href="images/banner.jpg" />
+  <link rel="preload" as="image" href="images/banner.webp" />
   <link rel="icon" href="images/favicon.ico" />
   <link rel="canonical" href="https://brieuc-metairie.fr/" />
 
@@ -25,7 +25,7 @@
   <meta property="og:title" content="Portfolio — Brieuc Métairie | BTS SIO SISR" />
   <meta property="og:description"
     content="Portfolio de Brieuc Métairie, futur administrateur systèmes et réseaux. Découvrez mes projets, mon parcours et ma veille technologique." />
-  <meta property="og:image" content="https://brieuc-metairie.fr/images/banner.jpg" />
+  <meta property="og:image" content="https://brieuc-metairie.fr/images/banner.webp" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
@@ -33,7 +33,7 @@
   <meta property="twitter:title" content="Portfolio — Brieuc Métairie | BTS SIO SISR" />
   <meta property="twitter:description"
     content="Portfolio de Brieuc Métairie, futur administrateur systèmes et réseaux. Découvrez mes projets, mon parcours et ma veille technologique." />
-  <meta property="twitter:image" content="https://brieuc-metairie.fr/images/banner.jpg" />
+  <meta property="twitter:image" content="https://brieuc-metairie.fr/images/banner.webp" />
 
   <link rel="stylesheet" href="style.css?v=2">
 
@@ -44,7 +44,7 @@
       "@type": "Person",
       "name": "Brieuc Métairie",
       "url": "https://brieuc-metairie.fr",
-      "image": "https://brieuc-metairie.fr/images/banner.jpg",
+      "image": "https://brieuc-metairie.fr/images/banner.webp",
       "jobTitle": "Administrateur Système et Réseau",
       "description": "Étudiant expert en sécurité informatique, administration système Windows/Linux et réseaux.",
       "knowsAbout": ["Windows Server", "Linux", "Cybersecurity", "Networking", "GLPI", "Docker"],
@@ -157,14 +157,7 @@
       <!-- PROJETS RECENTS -->
 
 
-      <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.25rem;">
-        <h2 style="margin:0;" data-i18n="index.school.title">Mon école — Faculté des Métiers de l’Essonne</h2>
-        <!-- Explicit placeholder: user can replace src. If broken, alt text shows. -->
-        <div
-          style="width: 80px; height: 80px; background: var(--bg-surface); border: 2px dashed var(--border-highlight); border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-          <img src="images/logo_ecole.png" alt="Logo École" style="max-width: 100%; max-height: 100%; display: block;">
-        </div>
-      </div>
+      <h2 style="margin-top: 1.25rem;" data-i18n="index.school.title">Mon école — Faculté des Métiers de l’Essonne</h2>
       <p data-i18n="index.school.text">
         Je prépare mon diplôme à la <strong>FDME</strong> en alternance.
         Le vrai plus, c’est le lien direct entre cours et terrain :
@@ -226,6 +219,9 @@
 
   <!-- SCROLL TO TOP -->
   <button id="scrollTop" aria-label="Haut de page">↑</button>
+
+  <!-- MOBILE CONTACT FAB -->
+  <button id="mobileContactBtn" class="mobile-fab" aria-label="Me contacter">✉️</button>
 
   <script src="js/lang.js"></script>
   <script src="js/projects.js"></script>
