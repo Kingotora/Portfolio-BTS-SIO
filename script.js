@@ -1171,6 +1171,23 @@ function initConsole() {
       executeCommand(input.value);
       input.value = '';
       historyIndex = -1; // Reset navigation
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      const val = input.value; // Don't trim to allow typing arguments, but for command completion we care about start
+      const args = val.split(' ');
+      const prefix = args[args.length - 1]; // Autocomplete last word? Or just command?
+      // Let's just autocomplete the COMMAND for now (first word)
+      if (args.length > 1) return; // Only autocomplete command
+
+      const potentialCommands = ['ls', 'cd', 'cat', 'pwd', 'clear', 'whoami', 'social', 'cv', 'projects', 'contact', 'ping', 'ipconfig', 'htop', 'weather', 'date', 'invaders', 'snake', 'game', 'theme', 'calc', 'coffee', 'fortune', 'sudo', 'exit', 'shutdown', 'matrix', 'hack', 'vim', 'help'];
+
+      const matches = potentialCommands.filter(c => c.startsWith(val));
+
+      if (matches.length === 1) {
+        input.value = matches[0] + ' ';
+      } else if (matches.length > 1) {
+        print(matches.join('  '), 'info');
+      }
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       if (commandHistory.length > 0) {
