@@ -1,19 +1,19 @@
-
 // =========================================
-//  RSS MANAGER (8 Sources + Load More)
+//  RSS MANAGER (Source-based Filtering)
 // =========================================
-// Link to container handled in DOMContentLoaded
 
-const RSS_SOURCES = [
-    "https://www.it-connect.fr/feed/",              // SysAdmin
-    "https://www.cert.ssi.gouv.fr/feed/",           // Sécurité (ANSSI)
-    "https://korben.info/feed",                     // Tech
-    "https://www.zdnet.fr/feeds/rss/actualites/",   // Pro
-    "https://www.cnil.fr/fr/rss.xml",               // Droit
-    "https://www.lemagit.fr/rss/",                  // Enterprise IT (New)
-    "https://www.journalduhacker.net/rss",          // Hacker News FR (New)
-    "https://www.clubic.com/feed/news.xml"          // Grand Public Tech (New)
+const FEEDS = [
+    { id: 'it-connect', name: 'IT-Connect', url: "https://www.it-connect.fr/feed/" },
+    { id: 'cert-fr', name: 'ANSSI', url: "https://www.cert.ssi.gouv.fr/feed/" },
+    { id: 'korben', name: 'Korben', url: "https://korben.info/feed" },
+    { id: 'zdnet', name: 'ZDNet', url: "https://www.zdnet.fr/feeds/rss/actualites/" },
+    { id: 'cnil', name: 'CNIL', url: "https://www.cnil.fr/fr/rss.xml", logo: 'images/cnil.jpg' },
+    { id: 'journalduhacker', name: 'J. du Hacker', url: "https://www.journalduhacker.net/rss" },
+    { id: 'numerama', name: 'Numerama', url: "https://www.numerama.com/feed/" },
+    { id: 'developpez', name: 'Developpez', url: "https://www.developpez.com/rss/actualites.xml" }
 ];
+// Clubic & LeMagIT removed (API Error 422)
+// Frandroid removed as requested.
 
 const DISPLAY_BATCH = 9;
 
@@ -23,15 +23,62 @@ class RSSManager {
         this.allArticles = [];
         this.visibleCount = 0;
         this.isLoading = false;
+        this.currentFilter = 'all'; // 'all' or source.id
 
-        // Bind loadMore to this instance
-        this.loadMore = this.loadMore.bind(this);
+        // Bind methods
+        this.filterBy = this.filterBy.bind(this);
     }
 
     async init() {
         if (!this.container) return;
+
+        // Create Filter UI wrapper if not exists
+        if (!document.getElementById('rss-filters')) {
+            const filterContainer = document.createElement('div');
+            filterContainer.id = 'rss-filters';
+            filterContainer.className = 'rss-filters';
+            // Insert before the article grid
+            this.container.parentNode.insertBefore(filterContainer, this.container);
+            this.renderFilters(filterContainer);
+        }
+
         this.renderLoader();
         await this.fetchAll();
+        this.render();
+    }
+
+    renderFilters(container) {
+        // "All" button
+        let html = `
+            <button class="rss-filter-btn active" onclick="rssManager.filterBy('all')">
+                Tout
+            </button>
+        `;
+
+        // Source buttons
+        html += FEEDS.map(feed => `
+            <button class="rss-filter-btn" onclick="rssManager.filterBy('${feed.id}')">
+                ${feed.name}
+            </button>
+        `).join('');
+
+        container.innerHTML = html;
+    }
+
+    filterBy(sourceId) {
+        this.currentFilter = sourceId;
+        this.visibleCount = 0; // Reset pagination
+
+        // Update UI active state
+        document.querySelectorAll('.rss-filter-btn').forEach(btn => {
+            // Check if button onclick contains the sourceId
+            if (btn.getAttribute('onclick').includes(`'${sourceId}'`)) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
         this.render();
     }
 
@@ -42,9 +89,10 @@ class RSSManager {
     async fetchAll() {
         this.isLoading = true;
         try {
-            const promises = RSS_SOURCES.map(url =>
-                fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`)
+            const promises = FEEDS.map(feed =>
+                fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed.url)}`)
                     .then(res => res.json())
+                    .then(data => ({ ...data, metaInfo: feed })) // Attach config info
                     .catch(err => null)
             );
 
@@ -54,7 +102,12 @@ class RSSManager {
 
             results.forEach(data => {
                 if (data && data.status === 'ok' && data.items) {
-                    data.items.forEach(item => item.sourceName = data.feed.title);
+                    data.items.forEach(item => {
+                        // Attach source info to the item
+                        item.sourceId = data.metaInfo.id;
+                        item.sourceName = data.metaInfo.name;
+                        item.sourceLogo = data.metaInfo.logo;
+                    });
                     this.allArticles = this.allArticles.concat(data.items);
                 }
             });
@@ -72,36 +125,55 @@ class RSSManager {
     render() {
         this.container.innerHTML = '';
 
-        if (this.allArticles.length === 0) {
+        // Filter articles
+        const filtered = this.currentFilter === 'all'
+            ? this.allArticles
+            : this.allArticles.filter(item => item.sourceId === this.currentFilter);
+
+        if (filtered.length === 0) {
             this.container.innerHTML = `
                 <div style="grid-column: 1/-1; text-align:center; padding: 2rem; color: var(--text-secondary);">
-                     <p>⚠️ Impossible de récupérer les articles (serveurs surchargés).</p>
-                     <button onclick="rssManager.init()" class="btn" style="margin-top:1rem;">Réessayer</button>
+                     <p>Aucun article trouvé pour cette source.</p>
                 </div>`;
             return;
         }
 
-        // Reset if full re-render
-        if (this.visibleCount === 0) this.visibleCount = Math.min(DISPLAY_BATCH, this.allArticles.length);
+        // Initialize visible count
+        if (this.visibleCount === 0) this.visibleCount = Math.min(DISPLAY_BATCH, filtered.length);
 
-        // Render articles
-        this.appendArticles(0, this.visibleCount);
-
-        // Render Load More logic
-        this.updateLoadMoreButton();
-    }
-
-    appendArticles(start, end) {
-        const slice = this.allArticles.slice(start, end);
-
+        // Render subset
+        const slice = filtered.slice(0, this.visibleCount);
         slice.forEach(item => {
             const card = this.createCard(item);
             this.container.appendChild(card);
         });
+
+        // "Load More" Button Logic
+        const existingBtn = document.getElementById('rss-load-more');
+        if (existingBtn) existingBtn.remove();
+
+        if (this.visibleCount < filtered.length) {
+            const btnContainer = document.createElement('div');
+            btnContainer.id = 'rss-load-more';
+            btnContainer.style.gridColumn = "1 / -1";
+            btnContainer.style.textAlign = "center";
+            btnContainer.style.marginTop = "2rem";
+
+            const btn = document.createElement('button');
+            btn.className = "btn";
+            btn.textContent = currentLang === 'fr' ? "Charger plus d'articles" : "Load more articles";
+            btn.onclick = () => {
+                this.visibleCount += DISPLAY_BATCH;
+                this.render(); // Re-render with new limit
+            };
+
+            btnContainer.appendChild(btn);
+            this.container.appendChild(btnContainer);
+        }
     }
 
     createCard(item) {
-        let image = 'images/banner.jpg'; // Default changed to existing banner.jpg
+        let image = 'images/banner.jpg';
         // 1. Thumbnail
         if (item.thumbnail && item.thumbnail.match(/^https?:\/\//)) image = item.thumbnail;
         // 2. Enclosure
@@ -112,31 +184,25 @@ class RSSManager {
             if (imgMatch && imgMatch[1]) image = imgMatch[1];
         }
 
+        // 4. Fallback to Source Logo if still default
+        if (image === 'images/banner.jpg' && item.sourceLogo) {
+            image = item.sourceLogo;
+        }
+
         const dateObj = new Date(item.pubDate);
         const dateStr = dateObj.toLocaleDateString(currentLang === 'fr' ? 'fr-FR' : 'en-GB', { day: 'numeric', month: 'short' });
-
-        let source = item.sourceName || 'Actu';
-        // Normalize names
-        if (source.toLowerCase().includes('it-connect')) source = 'IT-Connect';
-        if (source.toLowerCase().includes('cert-fr')) source = 'ANSSI';
-        if (source.toLowerCase().includes('korben')) source = 'Korben';
-        if (source.toLowerCase().includes('zdnet')) source = 'ZDNet';
-        if (source.toLowerCase().includes('cnil')) source = 'CNIL';
-        if (source.toLowerCase().includes('lemagit')) source = 'LeMagIT';
-        if (source.toLowerCase().includes('hacker')) source = 'J. du Hacker';
-        if (source.toLowerCase().includes('clubic')) source = 'Clubic';
 
         const card = document.createElement('article');
         card.className = 'article-card blog-card';
         card.innerHTML = `
            <a class="thumb" href="${item.link}" target="_blank" rel="noopener noreferrer">
-              <span class="category-badge">${source}</span>
+              <span class="category-badge">${item.sourceName}</span>
               <img loading="lazy" src="${image}" alt="${item.title}" style="object-fit:cover; width:100%; height:100%;" onerror="this.onerror=null; this.src='images/banner.jpg'">
            </a>
            <div class="content">
               <div class="meta">
                  <span class="date">📅 ${dateStr}</span>
-                 <span class="source">${source}</span>
+                 <span class="source">${item.sourceName}</span>
               </div>
               <h3>${item.title}</h3>
               <p>${this.stripHtml(item.description).substring(0, 100)}...</p>
@@ -153,52 +219,15 @@ class RSSManager {
         tmp.innerHTML = html;
         return tmp.textContent || tmp.innerText || "";
     }
-
-    loadMore() {
-        const total = this.allArticles.length;
-        const nextCount = Math.min(total, this.visibleCount + DISPLAY_BATCH);
-
-        if (nextCount > this.visibleCount) {
-            this.appendArticles(this.visibleCount, nextCount);
-            this.visibleCount = nextCount;
-            this.updateLoadMoreButton();
-        }
-    }
-
-    updateLoadMoreButton() {
-        // Remove existing button if any
-        const existingBtn = document.getElementById('loadMoreBtn');
-        if (existingBtn) existingBtn.remove();
-
-        if (this.visibleCount < this.allArticles.length) {
-            const btnContainer = document.createElement('div');
-            btnContainer.id = 'loadMoreBtn';
-            btnContainer.style.gridColumn = '1 / -1';
-            btnContainer.style.textAlign = 'center';
-            btnContainer.style.marginTop = '2rem';
-
-            const btn = document.createElement('button');
-            btn.className = 'btn';
-            btn.innerText = currentLang === 'fr' ? 'Afficher plus d\'articles' : 'Load more articles';
-            btn.onclick = this.loadMore;
-
-            btnContainer.appendChild(btn);
-            this.container.appendChild(btnContainer);
-        }
-    }
 }
 
-// Global Instance
+// Global instance for onclick handlers
+let rssManager;
+
 document.addEventListener('DOMContentLoaded', () => {
     const rssContainer = document.getElementById('rss-feed');
     if (rssContainer) {
-        // RSS Manager initialized
-        const manager = new RSSManager(rssContainer);
-        manager.init();
-    } else {
-        // Only log if we are on the veille page (heuristic: pathname)
-        if (window.location.pathname.includes('veille.html')) {
-            console.error("RSS: Container #rss-feed not found on Veille page.");
-        }
+        rssManager = new RSSManager(rssContainer);
+        rssManager.init();
     }
 });
