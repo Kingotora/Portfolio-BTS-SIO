@@ -425,9 +425,9 @@ if (contactForm) {
 
     // Send params (Standard EmailJS names)
     const templateParams = {
-      from_name: document.getElementById('user_name').value,
-      reply_to: document.getElementById('user_email').value,
-      message: document.getElementById('message').value
+      from_name: contactForm.querySelector('[name="user_name"]').value,
+      reply_to: contactForm.querySelector('[name="user_email"]').value,
+      message: contactForm.querySelector('[name="message"]').value
     };
 
     // ⚠️ IMPORTANT: Remplacez 'YOUR_SERVICE_ID' et 'YOUR_TEMPLATE_ID'
