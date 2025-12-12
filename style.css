@@ -344,20 +344,39 @@ body.light-mode .tab-btn[aria-selected="true"] {
   gap: 0.5rem;
   background: var(--color-brand);
   color: #fff !important;
-  /* Always white text on primary button */
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  /* Subtle shadow for legibility */
   padding: 0.75rem 1.5rem;
   border-radius: 99px;
   font-weight: 600;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid transparent;
   box-shadow: var(--shadow-glow);
+  position: relative;
+  overflow: hidden;
+  /* For shine */
+}
+
+/* Shine Effect */
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent);
+  transition: all 0.6s;
+}
+
+.btn:hover::before {
+  left: 100%;
 }
 
 .btn:hover {
   background: #0ea5e9;
-  /* Slightly darker/richer blue than brand #38bdf8 */
   transform: translateY(-2px);
   text-decoration: none;
   box-shadow: 0 8px 20px rgba(56, 189, 248, 0.4);
@@ -446,7 +465,8 @@ section {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  /* Removed transform to fix lag */
   display: flex;
   flex-direction: column;
   position: relative;
@@ -1341,4 +1361,166 @@ body.page-404 {
   62% {
     transform: translate(0, 0) skew(5deg);
   }
+}
+
+/* =========================================
+   ADDED FIXES
+   ========================================= */
+
+/* Active Filter State for Projects & RSS */
+.tag-filter.is-on,
+.rss-filter-btn.active {
+  background: var(--color-brand);
+  color: #fff;
+  border-color: var(--color-brand);
+}
+
+/* TYPING EFFECT */
+.typing-cursor {
+  overflow: hidden;
+  border-right: 2px solid var(--color-brand);
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+@keyframes typing {
+  from {
+    width: 0
+  }
+
+  to {
+    width: 100%
+  }
+}
+
+@keyframes blink-caret {
+
+  from,
+  to {
+    border-color: transparent
+  }
+
+  50% {
+    border-color: var(--color-brand)
+  }
+}
+
+/* SCROLL TO TOP */
+#scrollTop {
+  display: none;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 45px;
+  height: 45px;
+  background: var(--color-brand);
+  color: var(--p-dark);
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  transition: all 0.3s ease;
+  align-items: center;
+  justify-content: center;
+}
+
+#scrollTop:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(56, 189, 248, 0.5);
+  background: var(--p-white);
+}
+
+#scrollTop.show {
+  display: flex !important;
+  animation: popIn 0.3s ease-out;
+}
+
+/* THEME BUTTON IN HEADER (Moved) */
+.theme-btn.in-menu {
+  position: static;
+  margin-left: 1rem;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  color: var(--text-primary);
+  box-shadow: none;
+  border: 1px solid var(--border-subtle);
+  transform: none !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-btn.in-menu:hover {
+  transform: scale(1.1) !important;
+  border-color: var(--color-brand);
+  color: var(--color-brand);
+}
+
+.theme-btn.in-menu:hover {
+  transform: scale(1.1) !important;
+  border-color: var(--color-brand);
+  color: var(--color-brand);
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+
+
+
+/* =========================================
+   3D TILT EFFECT & GRAPHIC IMPROVEMENTS
+   ========================================= */
+.project-card {
+  /* Ensure 3D context */
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+  will-change: transform;
+  /* Glassmorphism Refinement */
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.3s ease;
+  /* Explicitly NO transform transition here */
+}
+
+.project-card:hover {
+  box-shadow: var(--shadow-lg), 0 0 20px rgba(56, 189, 248, 0.2);
+  border-color: var(--border-highlight);
+}
+
+.project-card img {
+  transform: translateZ(20px);
+  /* Parallax Effect for Image */
+  border-radius: 8px;
+}
+
+.project-card h3,
+.project-card p {
+  transform: translateZ(10px);
+  /* Slight Text Pop */
+}
+
+/* Button Hover Polish */
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
 }

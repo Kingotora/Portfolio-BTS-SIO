@@ -23,7 +23,9 @@ class RSSManager {
         this.allArticles = [];
         this.visibleCount = 0;
         this.isLoading = false;
-        this.currentFilter = 'all'; // 'all' or source.id
+        // activeSources: Set of IDs. Empty means 'all' (or use logic similar to projects)
+        // Let's use array of strings for simplicity
+        this.activeSources = [];
 
         // Bind methods
         this.filterBy = this.filterBy.bind(this);
@@ -50,14 +52,14 @@ class RSSManager {
     renderFilters(container) {
         // "All" button
         let html = `
-            <button class="rss-filter-btn active" onclick="rssManager.filterBy('all')">
+            <button class="rss-filter-btn active" data-source="all" onclick="rssManager.filterBy('all')">
                 Tout
             </button>
         `;
 
         // Source buttons
         html += FEEDS.map(feed => `
-            <button class="rss-filter-btn" onclick="rssManager.filterBy('${feed.id}')">
+            <button class="rss-filter-btn" data-source="${feed.id}" onclick="rssManager.filterBy('${feed.id}')">
                 ${feed.name}
             </button>
         `).join('');
@@ -66,18 +68,35 @@ class RSSManager {
     }
 
     filterBy(sourceId) {
-        this.currentFilter = sourceId;
         this.visibleCount = 0; // Reset pagination
 
-        // Update UI active state
-        document.querySelectorAll('.rss-filter-btn').forEach(btn => {
-            // Check if button onclick contains the sourceId
-            if (btn.getAttribute('onclick').includes(`'${sourceId}'`)) {
-                btn.classList.add('active');
+        if (sourceId === 'all') {
+            // Select All, unique logic
+            this.activeSources = [];
+            // UI Update
+            document.querySelectorAll('.rss-filter-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.rss-filter-btn[data-source="all"]').classList.add('active');
+        } else {
+            // Specific source
+            // 1. Remove 'all' active
+            document.querySelector('.rss-filter-btn[data-source="all"]').classList.remove('active');
+
+            // 2. Toggle in state
+            if (this.activeSources.includes(sourceId)) {
+                this.activeSources = this.activeSources.filter(id => id !== sourceId);
             } else {
-                btn.classList.remove('active');
+                this.activeSources.push(sourceId);
             }
-        });
+
+            // 3. Update UI button
+            const btn = document.querySelector(`.rss-filter-btn[data-source="${sourceId}"]`);
+            if (btn) btn.classList.toggle('active');
+
+            // 4. Fallback to All if empty?
+            if (this.activeSources.length === 0) {
+                document.querySelector('.rss-filter-btn[data-source="all"]').classList.add('active');
+            }
+        }
 
         this.render();
     }
@@ -126,14 +145,15 @@ class RSSManager {
         this.container.innerHTML = '';
 
         // Filter articles
-        const filtered = this.currentFilter === 'all'
+        const isAll = this.activeSources.length === 0;
+        const filtered = isAll
             ? this.allArticles
-            : this.allArticles.filter(item => item.sourceId === this.currentFilter);
+            : this.allArticles.filter(item => this.activeSources.includes(item.sourceId));
 
         if (filtered.length === 0) {
             this.container.innerHTML = `
                 <div style="grid-column: 1/-1; text-align:center; padding: 2rem; color: var(--text-secondary);">
-                     <p>Aucun article trouvé pour cette source.</p>
+                     <p>Aucun article trouvé pour cette sélection.</p>
                 </div>`;
             return;
         }
@@ -161,7 +181,7 @@ class RSSManager {
 
             const btn = document.createElement('button');
             btn.className = "btn";
-            btn.textContent = currentLang === 'fr' ? "Charger plus d'articles" : "Load more articles";
+            btn.textContent = (typeof currentLang !== 'undefined' && currentLang === 'en') ? "Load more articles" : "Charger plus d'articles";
             btn.onclick = () => {
                 this.visibleCount += DISPLAY_BATCH;
                 this.render(); // Re-render with new limit
@@ -190,7 +210,11 @@ class RSSManager {
         }
 
         const dateObj = new Date(item.pubDate);
-        const dateStr = dateObj.toLocaleDateString(currentLang === 'fr' ? 'fr-FR' : 'en-GB', { day: 'numeric', month: 'short' });
+        // Safely check currentLang
+        const langCode = (typeof currentLang !== 'undefined' && currentLang === 'fr') ? 'fr-FR' : 'en-GB';
+        const dateStr = dateObj.toLocaleDateString(langCode, { day: 'numeric', month: 'short' });
+
+        const readMoreText = (typeof currentLang !== 'undefined' && currentLang === 'fr') ? "Lire la suite →" : "Read more →";
 
         const card = document.createElement('article');
         card.className = 'article-card blog-card';
@@ -207,7 +231,7 @@ class RSSManager {
               <h3>${item.title}</h3>
               <p>${this.stripHtml(item.description).substring(0, 100)}...</p>
               <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="read-more">
-                 ${currentLang === 'fr' ? "Lire la suite →" : "Read more →"}
+                 ${readMoreText}
               </a>
            </div>
         `;
