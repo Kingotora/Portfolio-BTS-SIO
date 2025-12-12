@@ -373,7 +373,7 @@ document.querySelectorAll('.tag-filter').forEach(btn => {
 (function () {
   // ⚠️ IMPORTANT: Remplacez ces valeurs par les vôtres depuis https://dashboard.emailjs.com/
   // PUBLIC KEY
-  emailjs.init("YOUR_PUBLIC_KEY");
+  emailjs.init("B33KUw_SRxXz54Mng");
 })();
 
 // =========================================
@@ -423,15 +423,15 @@ if (contactForm) {
     btn.textContent = 'Envoi...';
     btn.disabled = true;
 
-    // Send params
+    // Send params (Standard EmailJS names)
     const templateParams = {
-      user_name: document.getElementById('name').value,
-      user_email: document.getElementById('email').value,
+      from_name: document.getElementById('user_name').value,
+      reply_to: document.getElementById('user_email').value,
       message: document.getElementById('message').value
     };
 
     // ⚠️ IMPORTANT: Remplacez 'YOUR_SERVICE_ID' et 'YOUR_TEMPLATE_ID'
-    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+    emailjs.send('service_irwg4qn', 'template_h2a018w', templateParams)
       .then(() => {
         showToast('Message envoyé avec succès !', 'success');
         contactForm.reset();
