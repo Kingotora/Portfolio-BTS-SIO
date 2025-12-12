@@ -7,7 +7,7 @@ const PROJECTS = [
         goalKey: "projects.mediawiki.goal",
         envKey: "projects.env_label",
         envText: "Windows + XAMPP",
-        img: "images/mediawiki.png",
+        img: "images/mediawiki.webp",
         tags: ["windows", "wiki"],
         listKeys: [
             "projects.mediawiki.list1",
@@ -26,7 +26,7 @@ const PROJECTS = [
         goalKey: "projects.glpi.goal",
         envKey: "projects.env_label",
         envText: "Windows + WAMP/XAMPP",
-        img: "images/glpi.png",
+        img: "images/glpi.webp",
         tags: ["windows", "helpdesk"],
         listKeys: [
             "projects.glpi.list1",
@@ -46,7 +46,7 @@ const PROJECTS = [
         goalKey: "projects.plex.goal",
         matKey: "projects.material_label",
         matText: "NAS Synology DS920+ + Docker",
-        img: "images/plex.png",
+        img: "images/plex.webp",
         tags: ["docker", "nas"],
         listKeys: [
             "projects.plex.list1",
@@ -66,7 +66,7 @@ const PROJECTS = [
         goalKey: "projects.pihole.goal",
         envKey: "projects.env_label",
         envText: "Raspberry Pi + Raspberry Pi OS",
-        img: "images/pihole.png",
+        img: "images/pihole.webp",
         tags: ["raspberry", "reseau", "securite"],
         listKeys: [
             "projects.pihole.list1",
@@ -87,7 +87,7 @@ const PROJECTS = [
         goalKey: "projects.vpn.goal",
         envKey: "projects.env_label",
         envText: "Raspberry Pi + OpenVPN",
-        img: "images/vpn.png",
+        img: "images/vpn.webp",
         tags: ["raspberry", "reseau", "securite"],
         listKeys: [
             "projects.vpn.list1",
@@ -107,7 +107,7 @@ const PROJECTS = [
         title: "Site vitrine pour un restaurant",
         goal: "réaliser un site vitrine simple et élégant pour présenter le restaurant, l’ambiance, les menus et les informations pratiques.",
         content: "pages essentielles (Accueil, Carte/Menu, Infos pratiques, Contact) avec un design cohérent et une navigation fluide.",
-        img: "images/restaurant.png",
+        img: "images/restaurant.webp",
         tags: ["web", "personnel"],
         listRaw: [
             "Maquettage puis intégration HTML/CSS/JS",
