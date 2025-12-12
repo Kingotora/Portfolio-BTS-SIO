@@ -10,6 +10,7 @@
   <meta name="theme-color" content="#38bdf8" />
   <link rel="preload" as="image" href="images/banner.jpg" />
   <link rel="icon" href="images/favicon.ico" />
+  <link rel="canonical" href="https://brieuc-metairie.fr/" />
 
   <!-- Fonts: Outfit (modern, geometric) + Inter (clean readable) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,7 +74,7 @@
 
       <!-- LANG TOGGLE -->
       <button id="langToggle" class="lang-btn" aria-label="Switch Language">
-        <span class="lang-icon">🇫🇷</span>
+        <span class="lang-icon">FR</span>
       </button>
 
       <div class="header-contact">
@@ -91,7 +92,7 @@
         Passionné par la <strong>cybersécurité</strong> et l'infrastructure. J'apprends à concevoir des architectures
         robustes.
       </p>
-      <p>
+      <p data-i18n="index.hero.text2">
         Ce que j’aime dans l’informatique, c’est comprendre comment une infrastructure fonctionne concrètement :
         installer, configurer, sécuriser, puis garder le tout stable dans le temps.
         J’accorde aussi beaucoup d’importance à la documentation : une solution claire et bien expliquée
@@ -103,7 +104,7 @@
     <!-- COMPÉTENCES -->
     <section id="competences">
       <h2 data-i18n="section.skills">Compétences</h2>
-      <p>
+      <p data-i18n="index.skills.intro">
         Le BTS SIO propose deux spécialisations. J’ai choisi <strong>SISR (Solutions d’Infrastructure, Systèmes et
           Réseaux)</strong>
         car elle correspond à ce que je veux faire plus tard : travailler sur les serveurs, le réseau, la sécurité,
@@ -113,10 +114,13 @@
       </p>
 
       <ul>
-        <li>Installation et configuration de postes clients (OS, pilotes, mises à jour, outils)</li>
-        <li>Administration de serveurs et réseaux (sauvegardes, supervision, VLAN, DHCP/DNS)</li>
-        <li>Sécurisation des accès et des systèmes (droits, chiffrement, mises à jour)</li>
-        <li>Support utilisateur et rédaction de procédures</li>
+        <li data-i18n="index.skills.list1">Installation et configuration de postes clients (OS, pilotes, mises à jour,
+          outils)</li>
+        <li data-i18n="index.skills.list2">Administration de serveurs et réseaux (sauvegardes, supervision, VLAN,
+          DHCP/DNS)</li>
+        <li data-i18n="index.skills.list3">Sécurisation des accès et des systèmes (droits, chiffrement, mises à jour)
+        </li>
+        <li data-i18n="index.skills.list4">Support utilisateur et rédaction de procédures</li>
       </ul>
 
       <div class="skills-grid">
@@ -151,31 +155,32 @@
       </div>
 
       <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.25rem;">
-        <h2 style="margin:0;">Mon école — Faculté des Métiers de l’Essonne</h2>
+        <h2 style="margin:0;" data-i18n="index.school.title">Mon école — Faculté des Métiers de l’Essonne</h2>
         <!-- Explicit placeholder: user can replace src. If broken, alt text shows. -->
         <div
           style="width: 80px; height: 80px; background: var(--bg-surface); border: 2px dashed var(--border-highlight); border-radius: 8px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
           <img src="images/logo_ecole.png" alt="Logo École" style="max-width: 100%; max-height: 100%; display: block;">
         </div>
       </div>
-      <p>
+      <p data-i18n="index.school.text">
         Je prépare mon diplôme à la <strong>FDME</strong> en alternance.
         Le vrai plus, c’est le lien direct entre cours et terrain :
         ce que j’apprends à l’école, je le mets rapidement en pratique en entreprise.
         Ça m’aide à progresser vite et à prendre des réflexes professionnels.
       </p>
       <p>
-        <a class="btn" href="https://www.facmetiers91.fr/" target="_blank" rel="noopener noreferrer">Découvrir la
+        <a class="btn" href="https://www.facmetiers91.fr/" target="_blank" rel="noopener noreferrer"
+          data-i18n="index.school.btn">Découvrir la
           FDME</a>
       </p>
 
-      <h2 style="margin-top:1.25rem">Mon CV</h2>
-      <p>
+      <h2 style="margin-top:1.25rem" data-i18n="index.cv.title">Mon CV</h2>
+      <p data-i18n="index.cv.text">
         Mon CV résume mes compétences techniques, mes projets principaux et ce que je sais faire en entreprise.
         Je le tiens à jour au fil de mes missions.
       </p>
       <p>
-        <a class="btn" href="docs/cv_brieuc.pdf" download>📄 Télécharger mon CV (PDF)</a>
+        <a class="btn" href="docs/cv_brieuc.pdf" download data-i18n="index.cv.btn">📄 Télécharger mon CV (PDF)</a>
       </p>
     </section>
   </main>

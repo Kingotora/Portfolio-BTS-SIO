@@ -9,6 +9,7 @@
         content="Veille technologique de Brieuc Métairie : Windows Server, Cybersécurité, RGPD et IA." />
     <meta name="theme-color" content="#38bdf8" />
     <link rel="icon" href="images/favicon.ico" />
+    <link rel="canonical" href="https://brieuc-metairie.fr/veille.html" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Veille Technologique — Portfolio Brieuc Métairie" />
@@ -44,7 +45,7 @@
 
             <!-- LANG TOGGLE -->
             <button id="langToggle" class="lang-btn" aria-label="Switch Language">
-                <span class="lang-icon">🇫🇷</span>
+                <span class="lang-icon">FR</span>
             </button>
 
             <div class="header-contact">
@@ -58,99 +59,47 @@
         <!-- VEILLE -->
         <section id="veille">
             <div class="blog-header">
-                <h2>Blog & Veille Tech</h2>
-                <p class="intro">
+                <h2 data-i18n="blog.title">Blog & Veille Tech</h2>
+                <p class="intro" data-i18n="blog.intro">
                     Mes explorations sur l'administration système, la cybersécurité et les nouveautés tech.
                     Je décrypte l'essentiel pour rester à jour.
                 </p>
             </div>
 
-            <div class="articles-grid blog-layout">
-
-                <article class="article-card blog-card">
-                    <a class="thumb" href="https://www.it-connect.fr/windows-server-2025-les-nouveautes/"
-                        target="_blank" rel="noopener noreferrer">
-                        <span class="category-badge">Windows Server</span>
-                        <img loading="lazy" src="images/veille-ws2025.jpg" alt="Windows Server 2025">
-                    </a>
-                    <div class="content">
-                        <div class="meta">
-                            <span class="date">📅 15 Nov 2024</span>
-                            <span class="source">Source : IT-Connect</span>
-                        </div>
-                        <h3>
-                            Windows Server 2025 : Quoi de neuf pour les admins ?
-                        </h3>
-                        <p>
-                            Microsoft prépare la relève. Active Directory, Hotpatching, performance NVMe...
-                            Voici mon résumé des fonctionnalités clés qui vont changer notre quotidien d'admin.
-                        </p>
-                        <a href="https://www.it-connect.fr/windows-server-2025-les-nouveautes/" target="_blank"
-                            rel="noopener noreferrer" class="read-more">Lire l'article complet →</a>
-                    </div>
-                </article>
-
-                <article class="article-card blog-card">
-                    <a class="thumb"
-                        href="https://www.cnil.fr/fr/evenement-rgpd-quel-impact-economique-compte-rendu-des-debats"
-                        target="_blank" rel="noopener noreferrer">
-                        <span class="category-badge">Législation & Droit</span>
-                        <img loading="lazy" src="images/cnil.jpg" alt="RGPD Impact">
-                    </a>
-                    <div class="content">
-                        <div class="meta">
-                            <span class="date">📅 02 Oct 2024</span>
-                            <span class="source">Source : CNIL</span>
-                        </div>
-                        <h3>
-                            RGPD : Quel impact économique réel ?
-                        </h3>
-                        <p>
-                            Le respect de la vie privée est-il un frein ou un moteur pour les entreprises ?
-                            Retour sur les débats de la CNIL et les enjeux pour les DSI.
-                        </p>
-                        <a href="https://www.cnil.fr/fr/evenement-rgpd-quel-impact-economique-compte-rendu-des-debats"
-                            target="_blank" rel="noopener noreferrer" class="read-more">Lire l'analyse →</a>
-                    </div>
-                </article>
-
-                <article class="article-card blog-card">
-                    <a class="thumb"
-                        href="https://www.zdnet.fr/actualites/sur-la-souverainete-numerique-macron-appele-a-soutenir-lia-open-source-485079.htm"
-                        target="_blank" rel="noopener noreferrer">
-                        <span class="category-badge">IA & Souveraineté</span>
-                        <img loading="lazy" src="images/ia.jpg" alt="Souveraineté IA">
-                    </a>
-                    <div class="content">
-                        <div class="meta">
-                            <span class="date">📅 28 Sept 2024</span>
-                            <span class="source">Source : ZDNet</span>
-                        </div>
-                        <h3>
-                            Souveraineté Numérique et IA Open Source
-                        </h3>
-                        <p>
-                            La France peut-elle rivaliser avec les géants US ? L'enjeu de l'IA Open Source (Mistral,
-                            Hugging Face)
-                            est crucial pour notre indépendance technologique.
-                        </p>
-                        <a href="https://www.zdnet.fr/actualites/sur-la-souverainete-numerique-macron-appele-a-soutenir-lia-open-source-485079.htm"
-                            target="_blank" rel="noopener noreferrer" class="read-more">Lire l'article →</a>
-                    </div>
-                </article>
-
+            <div class="articles-grid blog-layout" id="rss-feed">
+                <!-- LE CONTENU SERA CHARGÉ PAR JS -->
+                <div class="loader-container" style="grid-column: 1 / -1; text-align:center; padding: 4rem;">
+                    <div class="spinner" style="
+                        border: 4px solid rgba(255,255,255,0.1); 
+                        border-left-color: var(--color-brand); 
+                        border-radius: 50%; 
+                        width: 40px; 
+                        height: 40px; 
+                        animation: spin 1s linear infinite;
+                        margin: 0 auto 1rem;"></div>
+                    <p style="color:var(--text-secondary)">Chargement des actualités...</p>
+                </div>
             </div>
 
             <div class="sources-section">
-                <h3>📚 Ma Stack de Veille</h3>
+                <h3 data-i18n="blog.stack_title">📚 Ma Stack de Veille</h3>
                 <div class="sources-tags">
-                    <a href="https://www.cert.ssi.gouv.fr/" target="_blank" class="source-tag">🛡️ CERT-FR</a>
-                    <a href="https://www.cnil.fr/" target="_blank" class="source-tag">⚖️ CNIL</a>
-                    <a href="https://www.it-connect.fr/" target="_blank" class="source-tag">💻 IT-Connect</a>
-                    <a href="https://www.zdnet.fr/" target="_blank" class="source-tag">📰 ZDNet</a>
-                    <a href="https://www.youtube.com/@Underscore_" target="_blank" class="source-tag">📺 Underscore_</a>
-                    <a href="https://www.youtube.com/@PowerCertAnimatedVideos" target="_blank" class="source-tag">⚡
-                        PowerCert</a>
+                    <a href="https://www.it-connect.fr/" target="_blank" rel="noopener noreferrer" class="source-tag">💻
+                        IT-Connect</a>
+                    <a href="https://www.cert.ssi.gouv.fr/" target="_blank" rel="noopener noreferrer"
+                        class="source-tag">🛡️ ANSSI (CERT-FR)</a>
+                    <a href="https://korben.info/" target="_blank" rel="noopener noreferrer" class="source-tag">🐧
+                        Korben</a>
+                    <a href="https://www.zdnet.fr/" target="_blank" rel="noopener noreferrer" class="source-tag">📰
+                        ZDNet</a>
+                    <a href="https://www.cnil.fr/" target="_blank" rel="noopener noreferrer" class="source-tag">⚖️
+                        CNIL</a>
+                    <a href="https://www.lemagit.fr/" target="_blank" rel="noopener noreferrer" class="source-tag">🏢
+                        LeMagIT</a>
+                    <a href="https://www.journalduhacker.net/" target="_blank" rel="noopener noreferrer"
+                        class="source-tag">🧑‍💻 J. du Hacker</a>
+                    <a href="https://www.clubic.com/" target="_blank" rel="noopener noreferrer" class="source-tag">🗞️
+                        Clubic</a>
                 </div>
             </div>
         </section>
@@ -192,6 +141,7 @@
         </div>
     </dialog>
 
+    <script src="rss_manager.js" defer></script>
     <script src="script.js" defer></script>
 
 </body>

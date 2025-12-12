@@ -8,6 +8,7 @@
     <meta name="description" content="Détail du projet Plex : Serveur Multimédia." />
     <meta name="theme-color" content="#38bdf8" />
     <link rel="icon" href="images/favicon.ico" />
+    <link rel="canonical" href="https://brieuc-metairie.fr/projet-plex.html" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -37,16 +38,22 @@
         <div class="header-inner">
             <div class="name-badge brand-strong">
                 <span class="big-name">Brieuc Métairie</span>
-                <small>Étudiant BTS SIO – option SISR</small>
+                <small class="subtitle typing-cursor" data-i18n="hero.subtitle">Étudiant BTS SIO – option SISR</small>
             </div>
-            <nav role="tablist">
-                <a class="tab-btn" href="index.html">Accueil</a>
-                <a class="tab-btn" href="entreprise.html">Entreprise</a>
-                <a class="tab-btn" href="activites.html">Activités</a>
-                <a class="tab-btn" href="veille.html">Veille</a>
+            <nav class="nav-links">
+                <a class="tab-btn" href="index.html" data-i18n="nav.accueil">Accueil</a>
+                <a class="tab-btn" href="entreprise.html" data-i18n="nav.entreprise">Entreprise</a>
+                <a class="tab-btn" href="activites.html" data-i18n="nav.activites">Activités</a>
+                <a class="tab-btn" href="veille.html" data-i18n="nav.veille">Veille</a>
             </nav>
+
+            <!-- LANG TOGGLE -->
+            <button id="langToggle" class="lang-btn" aria-label="Switch Language">
+                <span class="lang-icon">FR</span>
+            </button>
+
             <div class="header-contact">
-                <a class="btn" href="mailto:metairiebrieuc@gmail.com">✉️ Me contacter</a>
+                <a class="btn" href="mailto:metairiebrieuc@gmail.com" data-i18n="nav.contact">✉️ Me contacter</a>
             </div>
         </div>
     </header>
@@ -104,65 +111,7 @@
     <footer>Â© 2025 Brieuc Métairie – Portfolio</footer>
     <button id="themeToggle" class="theme-btn">🌙</button>
     <script src="script.js"></script>
-    <style>
-        .project-detail-main {
-            padding: 8rem 2rem 2rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .project-hero {
-            margin-bottom: 3rem;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-bottom: 1rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .hero-content h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            color: var(--color-brand);
-        }
-
-        .project-content-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 3rem;
-        }
-
-        @media(max-width: 768px) {
-            .project-content-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .info-card {
-            background: var(--bg-surface);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-highlight);
-        }
-
-        .stack-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .stack-tag {
-            background: var(--bg-card);
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            border: 1px solid var(--border-subtle);
-        }
-    </style>
+    <!-- Styles moved to style.css -->
 </body>
 
 </html>

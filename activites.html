@@ -9,6 +9,7 @@
         content="Projets scolaires et personnels de Brieuc Métairie : Windows, Linux, Virtualisation, Réseau." />
     <meta name="theme-color" content="#38bdf8" />
     <link rel="icon" href="images/favicon.ico" />
+    <link rel="canonical" href="https://brieuc-metairie.fr/activites.html" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Projets & Activités — Portfolio Brieuc Métairie" />
@@ -29,11 +30,6 @@
 
     <header>
         <div class="header-inner">
-            <!-- LANG TOGGLE -->
-            <button id="langToggle" class="lang-btn" aria-label="Switch Language">
-                <span class="lang-icon">🇫🇷</span>
-            </button>
-
             <div class="name-badge brand-strong">
                 <span class="big-name">Brieuc Métairie</span>
                 <small class="subtitle typing-cursor" data-i18n="hero.subtitle">Étudiant BTS SIO – option SISR</small>
@@ -46,6 +42,12 @@
                     data-i18n="nav.activites">Activités</a>
                 <a class="tab-btn" href="veille.html" data-i18n="nav.veille">Veille</a>
             </nav>
+
+            <!-- LANG TOGGLE -->
+            <button id="langToggle" class="lang-btn" aria-label="Switch Language">
+                <span class="lang-icon">FR</span>
+            </button>
+
             <div class="header-contact">
                 <a class="btn" href="mailto:metairiebrieuc@gmail.com" data-i18n="nav.contact">✉️ Me contacter</a>
             </div>
@@ -56,26 +58,29 @@
     <main>
         <!-- ACTIVITÉS -->
         <section id="activites">
-            <h2>Activités</h2>
+            <h2 data-i18n="projects.title">Activités</h2>
 
             <!-- Recherche + filtres tags MULTI -->
             <div style="margin-top:.5rem; display:flex; gap:.75rem; flex-wrap:wrap; align-items:center;">
-                <input id="projectSearch" type="search"
+                <input id="projectSearch" type="search" data-i18n="projects.search_placeholder"
                     placeholder="Rechercher un projet (ex. MediaWiki, GLPI, Plex, Pi-hole)…"
                     aria-label="Rechercher un projet" style="flex:1; min-width:240px; padding:.75rem 1rem; border-radius:12px;
       border:1px solid var(--stroke); background:rgba(255,255,255,.05);
       color:var(--text); font-size:1rem; outline:none;" />
 
                 <div id="tagFilters" style="display:flex; flex-wrap:wrap; gap:.4rem;">
-                    <button class="tag-filter is-on" data-tag="all" type="button">Tous</button>
+                    <button class="tag-filter is-on" data-tag="all" type="button"
+                        data-i18n="projects.filter_all">Tous</button>
                     <button class="tag-filter" data-tag="windows" type="button">Windows</button>
                     <button class="tag-filter" data-tag="docker" type="button">Docker</button>
                     <button class="tag-filter" data-tag="helpdesk" type="button">Helpdesk</button>
                     <button class="tag-filter" data-tag="nas" type="button">NAS</button>
                     <button class="tag-filter" data-tag="wiki" type="button">Wiki</button>
                     <button class="tag-filter" data-tag="raspberry" type="button">Raspberry Pi</button>
-                    <button class="tag-filter" data-tag="reseau" type="button">Réseau</button>
-                    <button class="tag-filter" data-tag="securite" type="button">Sécurité</button>
+                    <button class="tag-filter" data-tag="reseau" type="button"
+                        data-i18n="projects.filter_network">Réseau</button>
+                    <button class="tag-filter" data-tag="securite" type="button"
+                        data-i18n="projects.filter_security">Sécurité</button>
                     <button class="tag-filter" data-tag="web" type="button" title="Web">Web</button>
                 </div>
 
@@ -83,13 +88,13 @@
             </div>
 
 
-            <p style="color:var(--muted); margin-top:.75rem">
+            <p style="color:var(--muted); margin-top:.75rem" data-i18n="projects.intro">
                 Je présente ici deux types de projets : ceux réalisés dans le cadre de ma formation,
                 et ceux montés chez moi en autonomie pour aller plus loin ou répondre à un besoin concret.
             </p>
 
             <!-- ========= PROJETS SCOLAIRES ========= -->
-            <div class="subsection-title">📘 Projets scolaires</div>
+            <div class="subsection-title" data-i18n="projects.school_title">📘 Projets scolaires</div>
             <div class="subsection-meta" id="countSchool"></div>
             <div class="projects-grid" id="projectsSchool">
 
@@ -97,24 +102,25 @@
                 <article class="project-card" data-title="mediawiki windows wiki documentation xampp"
                     data-tags="windows,wiki">
                     <img loading="lazy" src="images/mediawiki.png" alt="MediaWiki" />
-                    <h3>MediaWiki sous Windows</h3>
-                    <p><strong>Objectif :</strong> mettre en place un wiki interne pour centraliser les procédures de
-                        support et
-                        d’exploitation.</p>
-                    <p><strong>Environnement :</strong> Windows + XAMPP.</p>
+                    <h3 data-i18n="projects.mediawiki.title">MediaWiki sous Windows</h3>
+                    <p><strong data-i18n="projects.goal_label">Objectif :</strong> <span
+                            data-i18n="projects.mediawiki.goal">mettre en place un wiki interne pour centraliser les
+                            procédures de support et d’exploitation.</span></p>
+                    <p><strong data-i18n="projects.env_label">Environnement :</strong> Windows + XAMPP.</p>
                     <ul>
-                        <li>Installation / configuration XAMPP</li>
-                        <li>BDD <code>mediawiki</code> via phpMyAdmin</li>
-                        <li>Déploiement dans <code>C:\xampp\htdocs\mediawiki</code></li>
-                        <li>Assistant + extensions (VisualEditor)</li>
-                        <li>Sauvegardes SQL + répertoire images</li>
+                        <li data-i18n="projects.mediawiki.list1">Installation / configuration XAMPP</li>
+                        <li data-i18n="projects.mediawiki.list2">BDD <code>mediawiki</code> via phpMyAdmin</li>
+                        <li data-i18n="projects.mediawiki.list3">Déploiement dans <code>C:\xampp\htdocs\mediawiki</code>
+                        </li>
+                        <li data-i18n="projects.mediawiki.list4">Assistant + extensions (VisualEditor)</li>
+                        <li data-i18n="projects.mediawiki.list5">Sauvegardes SQL + répertoire images</li>
                     </ul>
                     <div class="actions"
                         style="display:flex; flex-direction:column; align-items:stretch; gap:0.5rem; margin: 1rem 1rem 0;">
-                        <a href="projet-mediawiki.html" class="btn"
-                            style="text-decoration:none; text-align:center;">Voir le détail →</a>
+                        <a href="projet-mediawiki.html" class="btn" style="text-decoration:none; text-align:center;"
+                            data-i18n="projects.btn_detail">Voir le détail →</a>
                         <a class="btn" href="docs/Manuel_Installation_Windows.pdf" download
-                            style="text-decoration:none; text-align:center; margin-top:0;">
+                            style="text-decoration:none; text-align:center; margin-top:0;" data-i18n="projects.btn_pdf">
                             📄 Doc PDF
                         </a>
                     </div>
@@ -124,22 +130,25 @@
                 <article class="project-card" data-title="glpi windows helpdesk parc inventaire fusioninventory ocs"
                     data-tags="windows,helpdesk">
                     <img loading="lazy" src="images/glpi.png" alt="GLPI" />
-                    <h3>GLPI sous Windows</h3>
-                    <p><strong>Objectif :</strong> déployer une plateforme helpdesk et gestion de parc.</p>
-                    <p><strong>Environnement :</strong> Windows + WAMP/XAMPP.</p>
+                    <h3 data-i18n="projects.glpi.title">GLPI sous Windows</h3>
+                    <p><strong data-i18n="projects.goal_label">Objectif :</strong> <span
+                            data-i18n="projects.glpi.goal">déployer une plateforme helpdesk et gestion de parc.</span>
+                    </p>
+                    <p><strong data-i18n="projects.env_label">Environnement :</strong> Windows + WAMP/XAMPP.</p>
                     <ul>
-                        <li>Stack Web (Apache / PHP / MariaDB)</li>
-                        <li>BDD <code>glpi</code> via phpMyAdmin</li>
-                        <li>Déploiement dans <code>C:\xampp\htdocs\glpi</code></li>
-                        <li>Configuration profils, entités, SLA</li>
-                        <li>Inventaire auto (FusionInventory)</li>
+                        <li data-i18n="projects.glpi.list1">Stack Web (Apache / PHP / MariaDB)</li>
+                        <li data-i18n="projects.glpi.list2">BDD <code>glpi</code> via phpMyAdmin</li>
+                        <li data-i18n="projects.glpi.list3">Déploiement dans <code>C:\xampp\htdocs\glpi</code></li>
+                        <li data-i18n="projects.glpi.list4">Configuration profils, entités, SLA</li>
+                        <li data-i18n="projects.glpi.list5">Inventaire auto (FusionInventory)</li>
                     </ul>
                     <div class="actions"
                         style="display:flex; flex-direction:column; align-items:stretch; gap:0.5rem; margin: 0 1rem;">
-                        <a href="projet-glpi.html" class="btn" style="text-decoration:none; text-align:center;">Voir le
+                        <a href="projet-glpi.html" class="btn" style="text-decoration:none; text-align:center;"
+                            data-i18n="projects.btn_detail">Voir le
                             détail →</a>
                         <a class="btn" href="docs/GLPI_Cours.pdf" download
-                            style="text-decoration:none; text-align:center; margin-top:0;">
+                            style="text-decoration:none; text-align:center; margin-top:0;" data-i18n="projects.btn_pdf">
                             📄 Doc PDF
                         </a>
                     </div>
@@ -148,7 +157,8 @@
             </div>
 
             <!-- ========= PROJETS PERSONNELS ========= -->
-            <div class="subsection-title">🛠️ Projets personnels</div>
+            <!-- ========= PROJETS PERSONNELS ========= -->
+            <div class="subsection-title" data-i18n="projects.personal_title">🛠️ Projets personnels</div>
             <div class="subsection-meta" id="countPersonal"></div>
             <div class="projects-grid" id="projectsPersonal">
 
@@ -156,18 +166,20 @@
                 <article class="project-card" data-title="plex synology ds920 docker multimedia streaming nas"
                     data-tags="docker,nas">
                     <img loading="lazy" src="images/plex.png" alt="Plex" />
-                    <h3>Serveur Plex sur NAS</h3>
-                    <p><strong>Objectif :</strong> centraliser une médiathèque personnelle et la diffuser à la maison.
-                    </p>
-                    <p><strong>Matériel :</strong> NAS Synology DS920+ + Docker.</p>
+                    <h3 data-i18n="projects.plex.title">Serveur Plex sur NAS</h3>
+                    <p><strong data-i18n="projects.goal_label">Objectif :</strong> <span
+                            data-i18n="projects.plex.goal">centraliser une médiathèque personnelle et la diffuser à la
+                            maison.</span></p>
+                    <p><strong data-i18n="projects.material_label">Matériel :</strong> NAS Synology DS920+ + Docker.</p>
                     <ul>
-                        <li>Plex Media Server via Docker</li>
-                        <li>Volumes persistants config + bibliothèques</li>
-                        <li>Organisation Films / Séries / Musiques</li>
-                        <li>Accès multi-appareils</li>
-                        <li>Transcodage matériel activé</li>
+                        <li data-i18n="projects.plex.list1">Plex Media Server via Docker</li>
+                        <li data-i18n="projects.plex.list2">Volumes persistants config + bibliothèques</li>
+                        <li data-i18n="projects.plex.list3">Organisation Films / Séries / Musiques</li>
+                        <li data-i18n="projects.plex.list4">Accès multi-appareils</li>
+                        <li data-i18n="projects.plex.list5">Transcodage matériel activé</li>
                     </ul>
-                    <p><strong>Résultat :</strong> serveur stable et simple à utiliser.</p>
+                    <p><strong data-i18n="projects.result_label">Résultat :</strong> <span
+                            data-i18n="projects.plex.result">serveur stable et simple à utiliser.</span></p>
                     <div class="actions" style="margin: 1rem 1rem 0;">
                         <a href="projet-plex.html" class="btn"
                             style="text-decoration:none; text-align:center; display:block;">Voir le détail
@@ -179,22 +191,26 @@
                 <article class="project-card" data-title="pihole raspberry pi dns adblock reseau securite"
                     data-tags="raspberry,reseau,securite">
                     <img loading="lazy" src="images/pihole.png" alt="Pi-hole" />
-                    <h3>Pi-hole sur Raspberry Pi</h3>
-                    <p><strong>Objectif :</strong> bloquer publicités/trackers au niveau DNS pour tout le réseau
-                        domestique.</p>
-                    <p><strong>Environnement :</strong> Raspberry Pi + Raspberry Pi OS.</p>
+                    <h3 data-i18n="projects.pihole.title">Pi-hole sur Raspberry Pi</h3>
+                    <p><strong data-i18n="projects.goal_label">Objectif :</strong> <span
+                            data-i18n="projects.pihole.goal">bloquer publicités/trackers au niveau DNS pour tout le
+                            réseau domestique.</span></p>
+                    <p><strong data-i18n="projects.env_label">Environnement :</strong> Raspberry Pi + Raspberry Pi OS.
+                    </p>
                     <ul>
-                        <li>Installation système + mises à jour</li>
-                        <li>Déploiement Pi-hole et DNS local</li>
-                        <li>DNS routeur redirigé vers Pi-hole</li>
-                        <li>Listes de blocage (ads/tracking/malware)</li>
-                        <li>Supervision via interface Web</li>
-                        <li>Sauvegarde configuration + IP fixe</li>
+                        <li data-i18n="projects.pihole.list1">Installation système + mises à jour</li>
+                        <li data-i18n="projects.pihole.list2">Déploiement Pi-hole et DNS local</li>
+                        <li data-i18n="projects.pihole.list3">DNS routeur redirigé vers Pi-hole</li>
+                        <li data-i18n="projects.pihole.list4">Listes de blocage (ads/tracking/malware)</li>
+                        <li data-i18n="projects.pihole.list5">Supervision via interface Web</li>
+                        <li data-i18n="projects.pihole.list6">Sauvegarde configuration + IP fixe</li>
                     </ul>
-                    <p><strong>Résultat :</strong> réseau plus propre et plus sécurisé.</p>
+                    <p><strong data-i18n="projects.result_label">Résultat :</strong> <span
+                            data-i18n="projects.pihole.result">réseau plus propre et plus sécurisé.</span></p>
                     <div class="actions" style="margin: 1rem 1rem 0;">
                         <a href="projet-pihole.html" class="btn"
-                            style="text-decoration:none; text-align:center; display:block;">Voir le détail
+                            style="text-decoration:none; text-align:center; display:block;"
+                            data-i18n="projects.btn_detail">Voir le détail
                             →</a>
                     </div>
                 </article>
@@ -204,21 +220,25 @@
                     data-title="vpn raspberry pi wireguard openvpn acces distant securite reseau"
                     data-tags="raspberry,reseau,securite">
                     <img loading="lazy" src="images/vpn.png" alt="VPN Raspberry Pi" />
-                    <h3>Serveur VPN sur Raspberry Pi</h3>
-                    <p><strong>Objectif :</strong> accéder à mon réseau domestique depuis l’extérieur en sécurité.</p>
-                    <p><strong>Environnement :</strong> Raspberry Pi + OpenVPN.</p>
+                    <h3 data-i18n="projects.vpn.title">Serveur VPN sur Raspberry Pi</h3>
+                    <p><strong data-i18n="projects.goal_label">Objectif :</strong> <span
+                            data-i18n="projects.vpn.goal">accéder à mon réseau domestique depuis l’extérieur en
+                            sécurité.</span></p>
+                    <p><strong data-i18n="projects.env_label">Environnement :</strong> Raspberry Pi + OpenVPN.</p>
                     <ul>
-                        <li>Durcissement du Raspberry Pi</li>
-                        <li>Déploiement serveur VPN</li>
-                        <li>Profils clients (PC/mobile)</li>
-                        <li>Port-forward + DDNS sur la box</li>
-                        <li>Règles firewall pour limiter l’accès interne</li>
-                        <li>Tests externes + documentation utilisateur</li>
+                        <li data-i18n="projects.vpn.list1">Durcissement du Raspberry Pi</li>
+                        <li data-i18n="projects.vpn.list2">Déploiement serveur VPN</li>
+                        <li data-i18n="projects.vpn.list3">Profils clients (PC/mobile)</li>
+                        <li data-i18n="projects.vpn.list4">Port-forward + DDNS sur la box</li>
+                        <li data-i18n="projects.vpn.list5">Règles firewall pour limiter l’accès interne</li>
+                        <li data-i18n="projects.vpn.list6">Tests externes + documentation utilisateur</li>
                     </ul>
-                    <p><strong>Résultat :</strong> accès distant fiable et chiffré.</p>
+                    <p><strong data-i18n="projects.result_label">Résultat :</strong> <span
+                            data-i18n="projects.vpn.result">accès distant fiable et chiffré.</span></p>
                     <div class="actions" style="margin: 1rem 1rem 0;">
                         <a href="projet-vpn.html" class="btn"
-                            style="text-decoration:none; text-align:center; display:block;">Voir le détail
+                            style="text-decoration:none; text-align:center; display:block;"
+                            data-i18n="projects.btn_detail">Voir le détail
                             →</a>
                     </div>
                 </article>
@@ -248,10 +268,11 @@
 
                     <div class="actions"
                         style="display:flex; flex-direction:column; align-items:stretch; gap:0.5rem; margin: 1rem 1rem 0;">
-                        <a href="projet-restaurant.html" class="btn"
-                            style="text-decoration:none; text-align:center;">Voir le détail →</a>
+                        <a href="projet-restaurant.html" class="btn" style="text-decoration:none; text-align:center;"
+                            data-i18n="projects.btn_detail">Voir le détail →</a>
                         <a class="btn" href="https://mom-s-restaurant-1ddpi.kinsta.page/" target="_blank" rel="noopener"
-                            style="text-decoration:none; text-align:center; margin-top:0;">
+                            style="text-decoration:none; text-align:center; margin-top:0;"
+                            data-i18n="projects.restaurant.btn_site">
                             🌐 Accéder au site
                         </a>
                     </div>
