@@ -371,8 +371,9 @@ document.querySelectorAll('.tag-filter').forEach(btn => {
 // =========================================
 // Initialize EmailJS
 (function () {
+  // ⚠️ IMPORTANT: Remplacez ces valeurs par les vôtres depuis https://dashboard.emailjs.com/
   // PUBLIC KEY
-  emailjs.init("5_JtM2w3yC-mK3U_n");
+  emailjs.init("YOUR_PUBLIC_KEY");
 })();
 
 // =========================================
@@ -429,7 +430,8 @@ if (contactForm) {
       message: document.getElementById('message').value
     };
 
-    emailjs.send('service_gmail_brieuc', 'template_portfolio_contact', templateParams)
+    // ⚠️ IMPORTANT: Remplacez 'YOUR_SERVICE_ID' et 'YOUR_TEMPLATE_ID'
+    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
       .then(() => {
         showToast('Message envoyé avec succès !', 'success');
         contactForm.reset();
