@@ -932,6 +932,84 @@ function initConsole() {
     'make': 'Utility to build targets (or sandwiches). Usage: make [target]'
   };
 
+  // --- BIND GLOBAL SOUND EVENTS ---
+  if (input) {
+    input.addEventListener('keydown', () => playSound('key'));
+  }
+  const soundTrigger = document.getElementById('consoleTrigger');
+  if (soundTrigger) {
+    soundTrigger.addEventListener('click', () => playSound('startup'));
+  }
+
+  // --- AUDIO SYSTEM ---
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+  const playSound = (type) => {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    const now = audioCtx.currentTime;
+
+    switch (type) {
+      case 'key': // Mechanical Click
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(200 + Math.random() * 50, now);
+        gainNode.gain.setValueAtTime(0.05, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+        osc.start(now);
+        osc.stop(now + 0.05);
+        break;
+      case 'startup': // Power Up
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(80, now);
+        osc.frequency.exponentialRampToValueAtTime(800, now + 0.3);
+        gainNode.gain.setValueAtTime(0.1, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+        osc.start(now);
+        osc.stop(now + 0.5);
+        break;
+      case 'eat': // Snake Eat (High Blip)
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(400, now);
+        osc.frequency.exponentialRampToValueAtTime(600, now + 0.1);
+        gainNode.gain.setValueAtTime(0.1, now);
+        gainNode.gain.linearRampToValueAtTime(0, now + 0.1);
+        osc.start(now);
+        osc.stop(now + 0.1);
+        break;
+      case 'die': // Crash (Low Noise)
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(100, now);
+        osc.frequency.exponentialRampToValueAtTime(10, now + 0.3);
+        gainNode.gain.setValueAtTime(0.2, now);
+        gainNode.gain.linearRampToValueAtTime(0, now + 0.3);
+        osc.start(now);
+        osc.stop(now + 0.3);
+        break;
+      case 'shoot': // Laser
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(800, now);
+        osc.frequency.exponentialRampToValueAtTime(200, now + 0.15);
+        gainNode.gain.setValueAtTime(0.1, now);
+        gainNode.gain.linearRampToValueAtTime(0, now + 0.15);
+        osc.start(now);
+        osc.stop(now + 0.15);
+        break;
+      case 'hit': // Explosion
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(200, now);
+        osc.frequency.exponentialRampToValueAtTime(50, now + 0.1);
+        gainNode.gain.setValueAtTime(0.1, now);
+        gainNode.gain.linearRampToValueAtTime(0, now + 0.1);
+        osc.start(now);
+        osc.stop(now + 0.1);
+        break;
+    }
+  };
+
   // --- GAMES & HELPERS ---
   const startSnake = () => {
     print('Starting Snake... (Arrow Keys)', 'success');
@@ -956,10 +1034,18 @@ function initConsole() {
       const head = { x: snake[0].x + dx, y: snake[0].y + dy };
       snake.unshift(head);
       if (head.x === food.x && head.y === food.y) {
-        score++; food = { x: Math.floor(Math.random() * tileCount), y: Math.floor(Math.random() * tileCount) };
+        score++;
+        playSound('eat'); // Sound
+        food = { x: Math.floor(Math.random() * tileCount), y: Math.floor(Math.random() * tileCount) };
+        // Speed Up
+        clearInterval(gameInterval);
+        const newSpeed = Math.max(50, 100 - (score * 2));
+        gameInterval = setInterval(drawSnake, newSpeed);
       } else snake.pop();
       if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) {
-        clearInterval(gameInterval); print(`Game Over.Score: ${score} `, 'error'); sCanvas.remove();
+        playSound('die'); // Sound
+        clearInterval(gameInterval); print(`Game Over. Score: ${score} `, 'error'); sCanvas.remove();
+        isGameRunning = false; prompt.style.display = 'flex'; input.focus();
       }
     };
     const keyDownEvent = (e) => {
@@ -1019,6 +1105,9 @@ function initConsole() {
               e.alive = false;
               bullets.splice(bi, 1);
               iScore += 10;
+              playSound('hit'); // Sound
+              // Dynamic Speed Increase
+              if (dx > 0) dx += 0.5; else dx -= 0.5;
             }
           });
           e.x += dx;
@@ -1037,7 +1126,10 @@ function initConsole() {
     const iKeyEvents = (e) => {
       if (e.key === 'ArrowLeft' && player.x > 0) player.x -= 15;
       if (e.key === 'ArrowRight' && player.x < 270) player.x += 15;
-      if (e.key === ' ') bullets.push({ x: player.x + 13, y: player.y - 10 });
+      if (e.key === ' ') {
+        bullets.push({ x: player.x + 13, y: player.y - 10 });
+        playSound('shoot'); // Sound
+      }
     };
     document.addEventListener('keydown', iKeyEvents);
     const invInt = setInterval(drawInvaders, 50);
@@ -1774,61 +1866,13 @@ document.addEventListener('DOMContentLoaded', () => {
   if (consoleWin) makeDraggable(consoleWin);
 
 
-  // --- 7. SOUND EFFECTS (AudioContext) ---
-  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-  const playKeySound = () => {
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    const osc = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain();
-
-    osc.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-
-    // Mechanical click sound
-    osc.type = 'square';
-    // Slight pitch variation for realism
-    osc.frequency.value = 200 + Math.random() * 50;
-
-    // Short envelope
-    gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
-
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.05);
-  };
-
-  const playStartupSound = () => {
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    const osc = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain();
-
-    osc.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-
-    osc.type = 'sine';
-    osc.frequency.value = 80;
-    osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.3);
-
-    gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
-
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.5);
-  };
-
-  // Attach sound listeners
-  const input = document.getElementById('consoleInput');
-  if (input) {
-    input.addEventListener('keydown', playKeySound);
-  }
-
-  // Trigger Hook
-  const trigger = document.getElementById('consoleTrigger');
-  if (trigger) {
-    trigger.addEventListener('click', () => {
-      playStartupSound();
-    });
-  }
+  // --- 7. EXTERNAL SOUND TRIGGERS ---
+  // Use the console's internal playSound if available (exposed via window or event?)
+  // Actually, since initConsole is a closure, we can't easily access playSound from here WITHOUT exposing it.
+  // SOLUTION: We attached playSound to window in the initConsole step? No we didn't.
+  // Let's rely on initConsole to bind these events OR exposure it.
+  // Easier: Just add the event listeners inside `initConsole` itself and remove them from here!
+  // But wait, the previous step added them here.
+  // I will REMOVE them from here and add them to initConsole's global scope area.
 
 });
