@@ -650,8 +650,7 @@ function initConsole() {
                 'secrets': {
                   type: 'dir',
                   children: {
-                    'password.txt': { type: 'file', content: 'admin:admin (Do not share!)' },
-                    'classified.txt': { type: 'file', content: '--- TOP SECRET COMMANDS ---\n\nmake me a sandwich   -> Try with sudo\nmatrix               -> Wake up Neo\nhack                 -> NSA simulation\nmusic                -> Lo-Fi Vibes\ncoffee               -> Caffeine boost\n\n[END OF FILE]' }
+                    'password.txt': { type: 'file', content: 'admin:admin (Do not share!)' }
                   }
                 }
               }
@@ -864,8 +863,7 @@ function initConsole() {
       ['hack', 'Simulate Hack'],
       ['invaders', 'Space Invaders'],
       ['matrix', 'Matrix Rain'],
-      ['snake', 'Snake Game'],
-      ['music', 'Toggle Lo-Fi Radio']
+      ['snake', 'Snake Game']
     ],
     '--- 🎲 RANDOM & TRIVIA ---': [
       ['coffee', 'Brew coffee'],
@@ -909,7 +907,6 @@ function initConsole() {
     'matrix': 'Toggle the Matrix digital rain visual effect.',
     'neofetch': 'Display system information.',
     'password': 'Generate a secure password. Usage: password <len>',
-    'music': 'Toggle background Lo-Fi music (Lofi Girl). Usage: music',
     'ping': 'Send ICMP ECHO_REQUEST to network hosts. Usage: ping <url>',
     'pomodoro': 'Start a 25-minute Pomodoro timer.',
     'projects': 'Navigate to the projects page.',
@@ -926,10 +923,9 @@ function initConsole() {
     'todo': 'Manage tasks. Usage: todo <add|list|del>',
     'top': 'Display processes (mock).',
     'uptime': 'Tell how long the system has been running.',
-    'weather': 'Display current weather conditions. Usage: weather [city]',
+    'weather': 'Display current weather conditions (mock).',
     'whoami': 'Print effective userid.',
-    'whois': 'Query a domain name database.',
-    'make': 'Utility to build targets (or sandwiches). Usage: make [target]'
+    'whois': 'Query a domain name database.'
   };
 
   // --- GAMES & HELPERS ---
@@ -998,13 +994,7 @@ function initConsole() {
         iCtx.fillRect(b.x, b.y, 2, 8);
         if (b.y < 0) bullets.splice(i, 1)
       });
-      // Check for Win
-      if (enemies.filter(e => e.alive).length === 0) {
-        finishGame(true); // true = win
-        return;
-      }
-
-      // Alien Movement
+      // Enemies (Invader Sprite)
       let edge = false;
       iCtx.fillStyle = '#f00';
       enemies.forEach(e => {
@@ -1041,34 +1031,8 @@ function initConsole() {
     };
     document.addEventListener('keydown', iKeyEvents);
     const invInt = setInterval(drawInvaders, 50);
-
-    const finishGame = (win) => {
-      clearInterval(invInt);
-      document.removeEventListener('keydown', iKeyEvents);
-      iCanvas.remove(); // Clean up canvas
-      if (win) {
-        print('VICTORY! Mission Accomplished.', 'success');
-        print('Final Score: ' + iScore, 'info');
-      } else {
-        print('GAME OVER. The aliens have taken over.', 'error');
-        print('Final Score: ' + iScore, 'warn');
-      }
-      isGameRunning = false; // Release lock
-      prompt.style.display = 'flex';
-      input.focus();
-    };
-
-    // Use input listener only to abort
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        clearInterval(invInt);
-        document.removeEventListener('keydown', iKeyEvents);
-        iCanvas.remove();
-        print('Game Aborted.', 'warn');
-        isGameRunning = false;
-        prompt.style.display = 'flex';
-      }
-    }, { once: true });
+    const stopInv = () => { clearInterval(invInt); document.removeEventListener('keydown', iKeyEvents); };
+    input.addEventListener('keydown', (e) => { if (e.key === 'Enter') stopInv(); }, { once: true });
   };
 
   const startHack = () => {
@@ -1193,9 +1157,8 @@ function initConsole() {
         print('Theme set to DRACULA.', 'success');
       } else if (mode === 'matrix' || mode === 'green') {
         consoleWin.classList.remove('theme-retro', 'theme-ocean', 'theme-dracula');
-        consoleWin.classList.add('theme-matrix'); // Add explicit class
         initMatrix();
-        print('Theme set to MATRIX.', 'success');
+        print('Theme set to MATRIX (Visuals ON).', 'success');
       } else {
         print('Usage: theme <retro|ocean|dracula|matrix>', 'warn');
       }
@@ -1311,8 +1274,7 @@ function initConsole() {
     'history': () => print(commandHistory.map((c, i) => `${i + 1}  ${c}`).join('<br>'), 'info'),
     'ping': (args) => {
       const target = args[1] || 'google.com';
-      const fakeIP = Math.floor(Math.random() * 255) + '.' + Math.floor(Math.random() * 255) + '.' + Math.floor(Math.random() * 255) + '.' + Math.floor(Math.random() * 255);
-      print(`Pinging ${target} [${fakeIP}] with 32 bytes of data:`);
+      print(`Pinging ${target} [142.250.178.14] with 32 bytes of data:`);
       let pings = 0;
       const pingInterval = setInterval(() => {
         if (pings >= 4) {
@@ -1321,7 +1283,7 @@ function initConsole() {
           return;
         }
         const time = Math.floor(Math.random() * 20) + 10;
-        print(`Reply from ${fakeIP}: bytes=32 time=${time}ms TTL=115`);
+        print(`Reply from 142.250.178.14: bytes=32 time=${time}ms TTL=115`);
         pings++;
       }, 800);
     },
@@ -1353,16 +1315,13 @@ function initConsole() {
       print(' 42 brieuc    20   0  8.5g 4.2g 1.1g S  12.4 45.1  12:34.56 chrome', 'pre');
     },
     'htop': () => print('CPU[| 23%] MEM[|| 1.2G]'),
-    'weather': (args) => {
-      const city = args.slice(1).join(' ') || 'Server Room';
+    'weather': () => {
       const cities = ['Server Room', 'Paris', 'Tokyo', 'New York', 'Mars Colony'];
+      const temps = ['19°C', '12°C', '28°C', '-5°C', '-60°C'];
       const icons = ['🌡️', '☁️', '☀️', '❄️', '🚀'];
-      // Deterministic pseudo-random based on city string length for consistency
-      const r = city.length % icons.length;
-      const temp = (city === 'Server Room') ? '19°C' : Math.floor(Math.random() * 35 - 5) + '°C';
-
+      const r = Math.floor(Math.random() * cities.length);
       setTimeout(() => {
-        print(`${icons[r]} ${city}: ${temp}`, 'info');
+        print(icons[r] + ' ' + cities[r] + ': ' + temps[r]);
       }, 500);
     },
     'snake': () => { if (typeof startSnake === 'function') startSnake(); },
@@ -1470,6 +1429,12 @@ function initConsole() {
         print('Usage: todo <add|list|del>', 'warn');
       }
     },
+    'uptime': () => {
+      const uptime = Math.floor((Date.now() - startTime) / 1000);
+      const m = Math.floor(uptime / 60);
+      const s = uptime % 60;
+      print(`System up for ${m} minutes and ${s} seconds.`, 'info');
+    },
     'man': (args) => {
       if (!args[1]) {
         print('What manual page do you want? (Usage: man <command>)', 'warn');
@@ -1477,7 +1442,7 @@ function initConsole() {
         const cmdToFind = args[1];
         if (manuals[cmdToFind]) {
           print('NAME', 'pre');
-          print(`    ${cmdToFind} - ${manuals[cmdToFind]} `, 'info');
+          print(`    ${cmdToFind} - ${manuals[cmdToFind]}`, 'info');
         } else {
           print(`No manual entry for ${cmdToFind}`, 'error');
         }
@@ -1491,48 +1456,7 @@ function initConsole() {
     },
     'echo': (args) => print(args.slice(1).join(' '), 'info'),
     'clear': () => output.innerHTML = '',
-    'exit': () => overlay.classList.remove('open'),
-
-    'music': () => {
-      if (!window.lofiAudio) {
-        window.lofiAudio = new Audio('https://stream.zeno.fm/0r0xa792kwzuv');
-        window.lofiAudio.volume = 0.5;
-      }
-      if (window.lofiAudio.paused) {
-        window.lofiAudio.play().then(() => {
-          print('Playing: Lo-Fi Hip Hop Radio 🎵', 'success');
-        }).catch(e => print('Audio blocked. Click document first.', 'error'));
-      } else {
-        window.lofiAudio.pause();
-        print('Music paused. ⏸️', 'warn');
-      }
-    },
-    'make': (args) => {
-      if (args.slice(1).join(' ') === 'me a sandwich') {
-        print('What? Make it yourself.', 'error');
-      } else {
-        print('make: *** No targets specified and no makefile found. Stop.', 'error');
-      }
-    },
-    'sudo': (args) => {
-      if (args[1] === 'rm' && args[2] === '-rf' && args[3] === '/') {
-        triggerBSOD();
-      } else if (args[1] === 'su' || args[1] === '-i') {
-        print('Password for brieuc:', 'warn');
-        setTimeout(() => {
-          print('******', 'info');
-          setTimeout(() => {
-            print('Switched to user root', 'success');
-            currentUser = 'root';
-            document.getElementById('promptPath').innerText = 'root@brieuc:~#';
-          }, 800);
-        }, 1000);
-      } else if (args.slice(1).join(' ') === 'make me a sandwich') {
-        print('Okay. 🥪', 'success');
-      } else {
-        print('Permission denied: You are not root.', 'error');
-      }
-    }
+    'exit': () => overlay.classList.remove('open')
   };
 
   const executeCommand = (command) => {
@@ -1578,65 +1502,840 @@ function initConsole() {
       print(`Command not found: ${command} `, 'error');
     }
   };
-  // 4. Event Listeners
-  trigger.addEventListener('click', () => {
-    overlay.classList.add('open');
-    input.focus();
-  });
+  const args = command.trim().split(' ');
+  let cmd = args[0].toLowerCase();
 
-  closeBtn.addEventListener('click', () => {
-    overlay.classList.remove('open');
-  });
+  // Alias Resolution
+  if (aliases[cmd]) {
+    const expanded = aliases[cmd].split(' ');
+    cmd = expanded[0];
+    args.splice(0, 1, ...expanded);
+  }
 
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) overlay.classList.remove('open');
-  });
-
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      executeCommand(input.value);
-      input.value = '';
-      historyIndex = -1; // Reset navigation
-    } else if (e.key === 'Tab') {
-      e.preventDefault();
-      const current = input.value.trim();
-      if (!current) return;
-
-      const allCmds = [
-        'alias', 'banner', 'calc', 'cat', 'cd', 'clear', 'coffee', 'contact', 'cowsay',
-        'credits', 'currency', 'cv', 'date', 'echo', 'email', 'exit', 'fact', 'flip',
-        'fortune', 'game', 'gui', 'hack', 'help', 'history', 'invaders', 'joke', 'ls', 'man',
-        'matrix', 'neofetch', 'password', 'ping', 'pomodoro', 'projects', 'pwd',
-        'reboot', 'roll', 'shutdown', 'snake', 'social', 'stats', 'sudo', 'sysinfo',
-        'theme', 'todo', 'top', 'uptime', 'weather', 'whoami', 'whois', 'music'
-      ];
-
-      const matches = allCmds.filter(c => c.startsWith(current));
-      if (matches.length === 1) {
-        input.value = matches[0] + ' ';
-      } else if (matches.length > 1) {
-        print(matches.join('   '), 'info');
-      }
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      if (commandHistory.length > 0) {
-        if (historyIndex === -1) historyIndex = commandHistory.length;
-        if (historyIndex > 0) historyIndex--;
-        input.value = commandHistory[historyIndex];
+  // 2. Command Logic
+  if (commandHistory[commandHistory.length - 1] !== command && command.trim() !== '') {
+    commandHistory.push(command);
+  }
+  const safeCmd = cmd.replace(/[<>]/g, '');
+  // Echo command
+  if (safeCmd !== '') {
+    const cmdLine = document.createElement('div');
+    cmdLine.className = 'console-input-line';
+    cmdLine.innerHTML = `<span class="console-prompt">${document.getElementById('promptPath').innerText}</span> <span style="color:#fff">${safeCmd} ${args.slice(1).join(' ')}</span>`;
+    output.appendChild(cmdLine);
+  }
+  switch (cmd) {
+    // --- SHELL COMMANDS ---
+    case 'pwd':
+      print('/home/brieuc', 'info');
+      break;
+    case 'ls':
+      print(Object.keys(virtualFiles).join('   '), 'info');
+      break;
+    case 'cd':
+      print('Directory navigation restricted (demo mode).', 'warn');
+      break;
+    case 'cat':
+      if (!args[1]) {
+        print(' /\\_/\\ ', 'pre');
+        print('( o.o )', 'pre');
+        print(' > ^ < ', 'pre');
       } else {
-        // No history
+        const fileName = args[1];
+        if (virtualFiles[fileName]) {
+          const content = virtualFiles[fileName].replace(/\n/g, '<br>');
+          print(content, 'info');
+        } else {
+          print('cat: ' + fileName + ': No such file or directory', 'error');
+        }
       }
-    } else if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      if (historyIndex !== -1 && historyIndex < commandHistory.length - 1) {
-        historyIndex++;
-        input.value = commandHistory[historyIndex];
+      break;
+    case 'mkdir':
+      print('Permission denied: Read-only file system.', 'error');
+      break;
+
+    // --- GENERAL ---
+    case 'help':
+      print('Available commands:', 'info');
+      print('Type "banner" to see the logo.', 'success');
+
+      const helpMap = {
+        '--- � NAVIGATION & DISCOVERY ---': [
+          ['cd <dir>', 'Change directory'],
+          ['ls', 'List directory'],
+          ['projects', 'View projects'],
+          ['pwd', 'Print working dir'],
+          ['social', 'Social links']
+        ],
+        '--- ℹ️ INFORMATION & IDENTITY ---': [
+          ['credits', 'View credits'],
+          ['cv', 'Download CV'],
+          ['date', 'Show date'],
+          ['email', 'Show email'],
+          ['neofetch', 'System info'],
+          ['stats', 'Session metrics'],
+          ['sysinfo', 'Browser details'],
+          ['uptime', 'Session duration'],
+          ['weather', 'Temperature'],
+          ['whoami', 'User info'],
+          ['whois', 'Domain info']
+        ],
+        '--- 💪 UTILITIES & TOOLS ---': [
+          ['alias <k>=<v>', 'Set alias'],
+          ['calc', 'Calculator'],
+          ['contact', 'Send message'],
+          ['currency', 'Convert money'],
+          ['history', 'Command history'],
+          ['man <cmd>', 'Manual pages'],
+          ['password <len>', 'Gen password'],
+          ['pomodoro', 'Start timer'],
+          ['todo <act>', 'Task manager']
+        ],
+        '--- ⚙️ SYSTEM CONTROL ---': [
+          ['clear', 'Clear screen'],
+          ['echo <txt>', 'Print text'],
+          ['exit', 'Close session'],
+          ['ping', 'Test latency'],
+          ['reboot', 'Reboot system'],
+          ['shutdown', 'Power off'],
+          ['sudo su', 'Root access'],
+          ['theme', 'Color theme'],
+          ['top', 'Process monitor']
+        ],
+        '--- 🎮 ENTERTAINMENT & FUN ---': [
+          ['banner', 'Show logo'],
+          ['game', 'Guess Number'],
+          ['gui', 'Graphical UI'],
+          ['hack', 'Simulate Hack'],
+          ['invaders', 'Space Invaders'],
+          ['matrix', 'Matrix Rain'],
+          ['snake', 'Snake Game']
+        ],
+        '--- 🎲 RANDOM & TRIVIA ---': [
+          ['coffee', 'Brew coffee'],
+          ['cowsay', 'Talking cow'],
+          ['fact', 'Random Fact'],
+          ['flip', 'Flip coin'],
+          ['fortune', 'Quote'],
+          ['joke', 'Random Joke'],
+          ['roll <side>', 'Roll dice']
+        ]
+      };
+
+      // Calculate longest command for perfect padding
+      let maxLen = 0;
+      Object.values(helpMap).forEach(cmds => {
+        cmds.forEach(([c]) => { if (c.length > maxLen) maxLen = c.length; });
+      });
+      // Add a bit of buffer
+      maxLen += 2;
+
+      for (const [section, commands] of Object.entries(helpMap)) {
+        print(section, 'warn');
+        commands.forEach(([cmd, desc]) => {
+          let paddedCmd = cmd.padEnd(maxLen, ' ');
+          paddedCmd = paddedCmd.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          print(`${paddedCmd} : ${desc}`);
+        });
+        print(' '); // spacer
+      }
+      break;
+    case 'whoami':
+      print('User: Brieuc Métairie', 'success');
+      print('Role: Future SysAdmin & Network Expert');
+      print('Location: France');
+      break;
+    case 'social':
+      print('-----------------------------', 'info');
+      print('LinkedIn: <a href="https://linkedin.com/in/brieuc-metairie" target="_blank" style="color:#00f">linkedin.com/in/brieuc-metairie</a>');
+      print('GitHub:   <a href="https://github.com/brieuc-metairie" target="_blank" style="color:#00f">github.com/brieuc-metairie</a>');
+      print('Email:    <a href="mailto:metairiebrieuc@gmail.com" style="color:#00f">metairiebrieuc@gmail.com</a>');
+      print('-----------------------------', 'info');
+      break;
+    case 'projects':
+      print('Redirecting to /activites.html...', 'warn');
+      setTimeout(() => window.location.href = 'activites.html', 800);
+      break;
+    case 'contact':
+      print('Opening secure channel...', 'warn');
+      setTimeout(() => {
+        overlay.classList.remove('open');
+        const modal = document.getElementById('contactModal');
+        if (modal) modal.showModal();
+      }, 500);
+      break;
+    case 'cv':
+      print('Downloading CV...', 'success');
+      const link = document.createElement('a');
+      link.href = 'assets/cv.pdf';
+      link.download = 'CV_Brieuc_Metairie.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      break;
+
+    // --- PHASE 5 FEATURES ---
+    case 'theme':
+      const mode = args[1];
+      const consoleWin = document.querySelector('.console-window');
+      if (mode === 'retro') {
+        consoleWin.classList.add('theme-retro');
+        consoleWin.classList.remove('theme-ocean', 'theme-dracula');
+        if (matrixInterval) { clearInterval(matrixInterval); document.querySelector('.matrix-canvas')?.remove(); }
+        print('Theme set to RETRO.', 'success');
+      } else if (mode === 'ocean') {
+        consoleWin.classList.add('theme-ocean');
+        consoleWin.classList.remove('theme-retro', 'theme-dracula');
+        if (matrixInterval) { clearInterval(matrixInterval); document.querySelector('.matrix-canvas')?.remove(); }
+        print('Theme set to OCEAN.', 'success');
+      } else if (mode === 'dracula') {
+        consoleWin.classList.add('theme-dracula');
+        consoleWin.classList.remove('theme-retro', 'theme-ocean');
+        if (matrixInterval) { clearInterval(matrixInterval); document.querySelector('.matrix-canvas')?.remove(); }
+        print('Theme set to DRACULA.', 'success');
+      } else if (mode === 'matrix' || mode === 'green') {
+        consoleWin.classList.remove('theme-retro', 'theme-ocean', 'theme-dracula');
+        initMatrix();
+        print('Theme set to MATRIX (Visuals ON).', 'success');
       } else {
-        historyIndex = commandHistory.length;
-        input.value = '';
+        print('Usage: theme <retro|ocean|dracula|matrix>', 'warn');
       }
+      break;
+    case 'neofetch':
+      print('            .-/+oossssoo+/-.               brieuc@portfolio', 'pre');
+      print('        `:+ssssssssssssssssss+:`           ----------------', 'pre');
+      print('      -+ssssssssssssssssssyyssss+-         OS: PortfolioOS Web 1.0', 'pre');
+      print('    .ossssssssssssssssssdMMMNysssso.       Host: Browser', 'pre');
+      print('   /ssssssssssshdmmNNmmyNMMMMhssssss/      Uptime: Forever', 'pre');
+      print('  +ssssssssshmydMMMMMMMNddddyssssssss+     Packages: 1 (npm)', 'pre');
+      print(' /sssssssshNMMMyhhyyyyhmNMMMNhssssssss/    Shell: JS-Shell zsh', 'pre');
+      print('.ssssssssdMMMNhsssssssssshNMMMdssssssss.   Resolution: ' + window.innerWidth + 'x' + window.innerHeight, 'pre');
+      print('+sssshhhyNMMNyssssssssssssyNMMMysssssss+   Theme: ' + (args[2] || 'Retro'), 'pre');
+      print('ossyNMMMNyMMhsssssssssssssshmmmhssssssso   CPU: 100% Brain', 'pre');
+      break;
+    case 'cowsay':
+      const txt = args.slice(1).join(' ') || 'Moo!';
+      const len = txt.length;
+      const line = '-'.repeat(len + 2);
+      print(' ' + line, 'pre');
+      print('< ' + txt + ' >', 'pre');
+      print(' ' + line, 'pre');
+      print('        \\   ^__^', 'pre');
+      print('         \\  (oo)\\_______', 'pre');
+      print('            (__)\\       )\\/\\', 'pre');
+      print('                ||----w |', 'pre');
+      print('                ||     ||', 'pre');
+      break;
+    case 'banner':
+      print(' ______       _                   ', 'pre');
+      print('|  _  \\     (_)                  ', 'pre');
+      print('| |_) |_ __  _  ___  _   _  ___  ', 'pre');
+      print('|  _ <| \'__| |/ _ \\| | | |/ __| ', 'pre');
+      print('| |_) | |   | |  __/| |_| | (__  ', 'pre');
+      print('|____/|_|   |_|\\___| \\__,_|\\___| ', 'pre');
+      print('          |__/                 ', 'pre');
+      break;
+    case 'matrix': // Standalone command
+      initMatrix();
+      print('Wake up, Neo...', 'success');
+      break;
+
+    case 'shutdown':
+      print('System halting...', 'error');
+      setTimeout(() => {
+        let overlay = document.querySelector('.shutdown-overlay');
+        if (!overlay) {
+          overlay = document.createElement('div');
+          overlay.className = 'shutdown-overlay';
+          overlay.innerText = "SYSTEM HALTED";
+          document.body.appendChild(overlay);
+        }
+        // Trigger reflow
+        overlay.offsetHeight;
+        overlay.classList.add('active');
+      }, 1000);
+      break;
+
+    case 'reboot':
+      print('Rebooting system...', 'warn');
+      setTimeout(() => location.reload(), 1000);
+      break;
+    case 'calc':
+      const expr = args.slice(1).join('');
+      if (!expr) {
+        print('Usage: calc <expression> (ex: 2+2)', 'warn');
+      } else {
+        try {
+          if (/[^0-9+\-*/().]/.test(expr)) {
+            print('Error: Invalid characters.', 'error');
+          } else {
+            const result = new Function('return ' + expr)();
+            print(`${expr} = ${result}`, 'success');
+          }
+        } catch (e) {
+          print('Error: Invalid expression.', 'error');
+        }
+      }
+      break;
+    case 'vim':
+    case 'vi':
+      print('You are trapped in a text editor.', 'error');
+      print('Press ESC to exit...', 'info');
+      setTimeout(() => print('Just kidding. Type :q! to quit.', 'info'), 1500);
+      break;
+    case ':q!':
+    case ':q':
+      print('Phew! You escaped.', 'success');
+      break;
+    case 'sudo':
+      if (args[1] === 'rm' && args[2] === '-rf' && args[3] === '/') {
+        triggerBSOD();
+      } else if (args[1] === 'su' || args[1] === '-i') {
+        print('Password for brieuc:', 'warn');
+        setTimeout(() => {
+          print('******', 'info');
+          setTimeout(() => {
+            print('Switched to user root', 'success');
+            currentUser = 'root';
+            document.getElementById('promptPath').innerText = 'root@brieuc:~#';
+          }, 800);
+        }, 1000);
+      } else {
+        print('Permission denied: You are not root.', 'error');
+      }
+      break;
+    /* ls handled above */
+    case 'su':
+      executeCommand('sudo su');
+      break;
+    case 'rm':
+      if (currentUser === 'root' && args[1] === '-rf' && args[2] === '/') {
+        triggerBSOD();
+      } else if (currentUser !== 'root') {
+        print('Permission denied: You are not root.', 'error');
+      } else {
+        print('Usage: rm -rf / (Do not try this)', 'warn');
+      }
+      break;
+
+    // --- SYSADMIN ---
+    case 'history':
+      print(commandHistory.map((c, i) => `${i + 1}  ${c}`).join('<br>'), 'info');
+      break;
+    case 'ping': {
+      const target = args[1] || 'google.com';
+      print(`Pinging ${target} [142.250.178.14] with 32 bytes of data:`);
+      let pings = 0;
+      const pingInterval = setInterval(() => {
+        if (pings >= 4) {
+          clearInterval(pingInterval);
+          print(`Ping statistics for ${target}:`, 'info');
+          return;
+        }
+        const time = Math.floor(Math.random() * 20) + 10;
+        print(`Reply from 142.250.178.14: bytes=32 time=${time}ms TTL=115`);
+        pings++;
+      }, 800);
+      break;
     }
-  });
+    case 'ipconfig':
+      print('Windows IP Configuration');
+      print('IPv4 Address. . . . . . . . . . . : 192.168.1.42');
+      break;
+    case 'date':
+      print(new Date().toString());
+      break;
+    case 'curl':
+      if (!args[1]) { print('curl: try \'curl <url>\'', 'warn'); }
+      else {
+        print(`Checking ${args[1]}...`, 'info');
+        setTimeout(() => {
+          print('&lt;html&gt;&lt;head&gt;&lt;title&gt;301 Moved Permanently&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;center&gt;&lt;h1&gt;301 Moved Permanently&lt;/h1&gt;&lt;/center&gt;&lt;/body&gt;&lt;/html&gt;', 'success');
+        }, 400);
+      }
+      break;
+    case 'whois':
+      const domain = args[1] || 'brieuc-metairie.fr';
+      print('Domain Name: ' + domain.toUpperCase());
+      print('Registry Domain ID: 8675309');
+      print('Registrar WHOIS Server: whois.google.com');
+      print('Registrar URL: http://www.google.com');
+      print('Registrar: Google LLC');
+      break;
+    case 'top':
+      print('PID USER      PR  NI  VIRT  RES  SHR S  %CPU %MEM    TIME+ COMMAND', 'pre');
+      print('  1 root      20   0  1.2g 123m  45m S   0.0  1.2   0:01.23 init', 'pre');
+      print(' 42 brieuc    20   0  8.5g 4.2g 1.1g S  12.4 45.1  12:34.56 chrome', 'pre');
+      print(' 55 brieuc    20   0  2.1g 345m  56m S   4.2  3.5   1:05.12 vscode', 'pre');
+      print(' 77 root      20   0  56m   4m   1m S   0.1  0.0   0:00.05 sshd', 'pre');
+      break;
+    case 'htop':
+      print('CPU[| 23%] MEM[|| 1.2G]');
+      break;
+    case 'weather':
+      const cities = ['Server Room', 'Paris', 'Tokyo', 'New York', 'Mars Colony'];
+      const temps = ['19°C', '12°C', '28°C', '-5°C', '-60°C'];
+      const icons = ['🌡️', '☁️', '☀️', '❄️', '🚀'];
+      const r = Math.floor(Math.random() * cities.length);
+      setTimeout(() => {
+        print(icons[r] + ' ' + cities[r] + ': ' + temps[r]);
+      }, 500);
+      break;
+
+    // --- GAMES ---
+    case 'snake': {
+      print('Starting Snake... (Arrow Keys)', 'success');
+      const sCanvas = document.createElement('canvas');
+      sCanvas.width = 300;
+      sCanvas.height = 300;
+      sCanvas.style.border = '2px solid #0f0';
+      sCanvas.style.marginTop = '10px';
+      sCanvas.style.background = '#000';
+      output.appendChild(sCanvas);
+      body.scrollTop = body.scrollHeight;
+      const sCtx = sCanvas.getContext('2d');
+      let snake = [{ x: 10, y: 10 }];
+      let food = { x: 15, y: 15 };
+      let dx = 0; let dy = 0; let score = 0;
+      const tile = 15;
+      const tileCount = sCanvas.width / tile;
+      const drawSnake = () => {
+        sCtx.fillStyle = '#000'; sCtx.fillRect(0, 0, 300, 300);
+        sCtx.fillStyle = '#f00'; sCtx.fillRect(food.x * tile, food.y * tile, tile - 2, tile - 2);
+        sCtx.fillStyle = '#0f0'; snake.forEach(p => sCtx.fillRect(p.x * tile, p.y * tile, tile - 2, tile - 2));
+        const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+        snake.unshift(head);
+        if (head.x === food.x && head.y === food.y) {
+          score++; food = { x: Math.floor(Math.random() * tileCount), y: Math.floor(Math.random() * tileCount) };
+        } else snake.pop();
+        if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) {
+          clearInterval(gameInterval); print(`Game Over.Score: ${score} `, 'error'); sCanvas.remove();
+        }
+      };
+      const keyDownEvent = (e) => {
+        if (e.key === 'ArrowLeft' && dx !== 1) { dx = -1; dy = 0; } if (e.key === 'ArrowUp' && dy !== 1) { dx = 0; dy = -1; }
+        if (e.key === 'ArrowRight' && dx !== -1) { dx = 1; dy = 0; } if (e.key === 'ArrowDown' && dy !== -1) { dx = 0; dy = 1; }
+      };
+      document.addEventListener('keydown', keyDownEvent);
+      const gameInterval = setInterval(drawSnake, 100);
+      const stopGame = () => { clearInterval(gameInterval); document.removeEventListener('keydown', keyDownEvent); };
+      input.addEventListener('keydown', (e) => { if (e.key === 'Enter') stopGame(); }, { once: true });
+      break;
+    }
+
+    case 'invaders': {
+      print('Space Invaders launched.', 'success');
+      const iCanvas = document.createElement('canvas');
+      iCanvas.width = 300; iCanvas.height = 300;
+      iCanvas.style.border = '2px solid #0f0'; iCanvas.style.background = '#000';
+      output.appendChild(iCanvas);
+      const iCtx = iCanvas.getContext('2d');
+      let iScore = 0;
+      let player = { x: 135, y: 270, w: 30, h: 10 };
+      let bullets = [];
+      let enemies = [];
+      for (let r = 0; r < 3; r++) { for (let c = 0; c < 6; c++) enemies.push({ x: 30 + c * 40, y: 30 + r * 30, w: 20, h: 20, alive: true }); }
+      let dx = 2; // Enemy speed
+      const drawInvaders = () => {
+        iCtx.fillStyle = '#000'; iCtx.fillRect(0, 0, 300, 300);
+
+        // Player (Retro Ship)
+        iCtx.fillStyle = '#0f0';
+        iCtx.fillRect(player.x + 10, player.y, 10, 5); // Top
+        iCtx.fillRect(player.x, player.y + 5, 30, 5);  // Bottom
+
+        // Bullets
+        iCtx.fillStyle = '#fff';
+        bullets.forEach((b, i) => {
+          b.y -= 5;
+          iCtx.fillRect(b.x, b.y, 2, 8);
+          if (b.y < 0) bullets.splice(i, 1)
+        });
+
+        // Enemies (Invader Sprite)
+        let edge = false;
+        iCtx.fillStyle = '#f00';
+        enemies.forEach(e => {
+          if (e.alive) {
+            // Draw Alien
+            iCtx.fillRect(e.x + 5, e.y, 10, 5);
+            iCtx.fillRect(e.x, e.y + 5, 20, 10);
+            iCtx.fillRect(e.x, e.y + 15, 5, 5);
+            iCtx.fillRect(e.x + 15, e.y + 15, 5, 5);
+
+            // Collision
+            bullets.forEach((b, bi) => {
+              if (b.x > e.x && b.x < e.x + e.w && b.y > e.y && b.y < e.y + e.h) {
+                e.alive = false;
+                bullets.splice(bi, 1);
+                iScore += 10;
+              }
+            });
+
+            // Movement Logic
+            e.x += dx;
+            if (e.x + e.w > 300 || e.x < 0) edge = true;
+          }
+        });
+
+        if (edge) {
+          dx = -dx;
+          enemies.forEach(e => e.y += 10);
+        }
+
+        // HUD
+        iCtx.fillStyle = '#fff';
+        iCtx.font = '10px monospace';
+        iCtx.fillText('SCORE: ' + iScore, 10, 15);
+      };
+      const iKeyEvents = (e) => {
+        if (e.key === 'ArrowLeft' && player.x > 0) player.x -= 15;
+        if (e.key === 'ArrowRight' && player.x < 270) player.x += 15;
+        if (e.key === ' ') bullets.push({ x: player.x + 13, y: player.y - 10 });
+      };
+      document.addEventListener('keydown', iKeyEvents);
+      const invInt = setInterval(drawInvaders, 50);
+      const stopInv = () => { clearInterval(invInt); document.removeEventListener('keydown', iKeyEvents); };
+      input.addEventListener('keydown', (e) => { if (e.key === 'Enter') stopInv(); }, { once: true });
+      break;
+    }
+
+    case 'game':
+      print('Guess the number (0-100). Type "guess [number]".');
+      window.targetNumber = Math.floor(Math.random() * 101);
+      break;
+    case 'coffee':
+      print('Here is your coffee! ☕', 'success');
+      break;
+    case 'fortune':
+      print('"It works on my machine."', 'success');
+      break;
+    case 'matrix':
+      print('Wake up, Neo...', 'success');
+      initMatrixEffect();
+      break;
+    case 'hack':
+      print('Hacking in progress... [████████] 100%', 'success');
+      break;
+    case 'shutdown':
+      print('Rebooting...', 'warn');
+      setTimeout(() => location.reload(), 2000);
+      break;
+    case 'date':
+      print(new Date().toString());
+      break;
+    case 'clear':
+      output.innerHTML = '';
+      break;
+    case 'exit':
+      overlay.classList.remove('open');
+      break;
+    case '':
+      break;
+    case 'echo':
+      print(args.slice(1).join(' '), 'info');
+      break;
+    case 'credits':
+      print('Portfolio created by Brieuc Métairie.', 'success');
+      print('Built with HTML, CSS (Variables), and Vanilla JS.', 'info');
+      print('Inspired by retro terminals and modern cyber-security UIs.', 'info');
+      break;
+    case 'email':
+      print('metairiebrieuc@gmail.com', 'info');
+      break;
+    case 'man':
+      if (!args[1]) {
+        print('What manual page do you want? (Usage: man <command>)', 'warn');
+      } else {
+        const cmdToFind = args[1];
+        const manuals = {
+          'alias': 'Define or display aliases. Usage: alias <name>=<cmd>',
+          'banner': 'Display the system logo.',
+          'calc': 'Evaluate mathematical expressions. Usage: calc <expr>',
+          'cat': 'Concatenate and display file content. Usage: cat <file>',
+          'cd': 'Change the current directory. Usage: cd <dir>',
+          'clear': 'Clear the terminal screen.',
+          'coffee': 'Brew a fresh cup of coffee. Usage: coffee',
+          'contact': 'Display contact information form.',
+          'cowsay': 'Display a message spoken by a cow. Usage: cowsay <text>',
+          'credits': 'Show project credits and author info.',
+          'currency': 'Convert currency. Usage: currency <amt> <from> <to>',
+          'cv': 'Download the curriculum vitae (PDF).',
+          'date': 'Display the current system date and time.',
+          'echo': 'Display a line of text. Usage: echo <text>',
+          'email': 'Display the author\'s email address.',
+          'exit': 'Close the terminal session.',
+          'fact': 'Display a random interesting fact.',
+          'flip': 'Flip a coin (Heads/Tails).',
+          'fortune': 'Display a random quote or fortune.',
+          'game': 'Play a number guessing game.',
+          'gui': 'Attempt to launch the Graphical User Interface.',
+          'help': 'Display information about builtin commands.',
+          'history': 'Display the command history list.',
+          'invaders': 'Play the Space Invaders game.',
+          'joke': 'Tell a programming joke.',
+          'ls': 'List directory contents.',
+          'man': 'Format and display the on-line manual pages.',
+          'matrix': 'Toggle the Matrix digital rain visual effect.',
+          'neofetch': 'Display system information.',
+          'password': 'Generate a secure password. Usage: password <len>',
+          'ping': 'Send ICMP ECHO_REQUEST to network hosts. Usage: ping <url>',
+          'pomodoro': 'Start a 25-minute Pomodoro timer.',
+          'projects': 'Navigate to the projects page.',
+          'pwd': 'Print name of current/working directory.',
+          'reboot': 'Restart the system.',
+          'roll': 'Roll a die. Usage: roll <sides>',
+          'shutdown': 'Bring the system down.',
+          'snake': 'Play the Snake game.',
+          'social': 'Display social media links.',
+          'stats': 'Display session statistics.',
+          'sudo': 'Execute a command as another user.',
+          'sysinfo': 'Display detailed browser and system info.',
+          'theme': 'Set the color theme. Usage: theme <name>',
+          'todo': 'Manage tasks. Usage: todo <add|list|del>',
+          'top': 'Display processes (mock).',
+          'uptime': 'Tell how long the system has been running.',
+          'weather': 'Display current weather conditions (mock).',
+          'whoami': 'Print effective userid.',
+          'whois': 'Query a domain name database.'
+        };
+        if (manuals[cmdToFind]) {
+          print('NAME', 'pre');
+          print(`    ${cmdToFind} - ${manuals[cmdToFind]}`, 'info');
+        } else {
+          print(`No manual entry for ${cmdToFind}`, 'error');
+        }
+      }
+      break;
+    case 'uptime':
+      const uptime = Math.floor((Date.now() - startTime) / 1000);
+      const m = Math.floor(uptime / 60);
+      const s = uptime % 60;
+      print(`System up for ${m} minutes and ${s} seconds.`, 'info');
+      break;
+    case 'todo':
+      const action = args[1];
+      if (action === 'add') {
+        const task = args.slice(2).join(' ');
+        if (task) {
+          todoList.push(task);
+          print(`Task added: "${task}"`, 'success');
+        } else print('Usage: todo add <task>', 'warn');
+      } else if (action === 'list') {
+        if (todoList.length === 0) print('No tasks yet.', 'info');
+        else {
+          print('TODO LIST:', 'warn');
+          todoList.forEach((t, i) => print(`${i + 1}. ${t}`, 'info'));
+        }
+      } else if (action === 'del') {
+        const idx = parseInt(args[2]) - 1;
+        if (!isNaN(idx) && todoList[idx]) {
+          print(`Deleted: "${todoList[idx]}"`, 'error');
+          todoList.splice(idx, 1);
+        } else print('Usage: todo del <number>', 'warn');
+      } else {
+        print('Usage: todo <add|list|del>', 'warn');
+      }
+      break;
+    case 'alias':
+      if (!args[1]) {
+        print('Current Aliases:', 'warn');
+        Object.keys(aliases).forEach(k => print(`${k}=${aliases[k]}`, 'info'));
+      } else {
+        const pair = args.slice(1).join(' ').split('=');
+        if (pair.length === 2) {
+          aliases[pair[0].trim()] = pair[1].trim();
+          print(`Alias set: ${pair[0]} -> ${pair[1]}`, 'success');
+        } else print('Usage: alias <name>=<command>', 'warn');
+      }
+      break;
+    case 'joke':
+      const jokes = [
+        'Why do programmers prefer dark mode? Because light attracts bugs.',
+        'How many programmers does it take to change a light bulb? None, that\'s a hardware problem.',
+        'I told my wife she was drawing her eyebrows too high. She looked surprised.',
+        'There are 10 types of people in the world: those who understand binary, and those who don\'t.',
+        'A SQL query walks into a bar, walks up to two tables and asks, "Can I join you?"'
+      ];
+      print(jokes[Math.floor(Math.random() * jokes.length)], 'success');
+      break;
+    case 'hack':
+      print('Initiating brute-force attack on NSA servers...', 'warn');
+      let hCount = 0;
+      const hInt = setInterval(() => {
+        if (hCount > 20) {
+          clearInterval(hInt);
+          print('ACCESS DENIED. Connection terminated by host.', 'error');
+        } else {
+          print(`[${Math.random().toString(16).substr(2, 8)}] Uploading payload... ${hCount * 5}%`, 'info');
+          const output = document.querySelector('.console-output');
+          output.scrollTop = output.scrollHeight;
+          hCount++;
+        }
+      }, 150);
+      break;
+    case 'roll':
+      const sides = parseInt(args[1]) || 6;
+      print(`You rolled a ${Math.floor(Math.random() * sides) + 1} (d${sides})`, 'success');
+      break;
+    case 'flip':
+      print(Math.random() > 0.5 ? 'Heads' : 'Tails', 'success');
+      break;
+    case 'fact':
+      const facts = [
+        'The first computer bug was an actual moth.',
+        'JavaScript was created in 10 days.',
+        'The QWERTY layout was designed to slow you down.',
+        '90% of the world\'s currency is digital.',
+        'The first domain name ever registered was Symbolics.com.'
+      ];
+      print(facts[Math.floor(Math.random() * facts.length)], 'info');
+      break;
+    case 'currency':
+      if (args.length < 4) {
+        print('Usage: currency <amount> <from> <to> (e.g., 100 USD EUR)', 'warn');
+      } else {
+        const amt = parseFloat(args[1]);
+        const from = args[2].toUpperCase();
+        const to = args[3].toUpperCase();
+        const rates = { 'USD': 1, 'EUR': 0.92, 'GBP': 0.79, 'JPY': 150 };
+        if (rates[from] && rates[to]) {
+          const res = (amt / rates[from]) * rates[to];
+          print(`${amt} ${from} = ${res.toFixed(2)} ${to}`, 'success');
+        } else print('Unsupported currency. (Try USD, EUR, GBP, JPY)', 'error');
+      }
+      break;
+    case 'pomodoro':
+      print('Starting 25-minute timer...', 'info');
+      let pTime = 25 * 60;
+      const pInt = setInterval(() => {
+        pTime--;
+        if (pTime <= 0) {
+          clearInterval(pInt);
+          print('Pomodoro complete! Take a break.', 'success');
+          new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg').play().catch(() => { });
+        } else if (pTime % 300 === 0) {
+          print(`${pTime / 60} minutes remaining...`, 'info');
+        }
+      }, 1000);
+      break;
+    case 'password': {
+      const len = parseInt(args[1]) || 12;
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+      let pwd = '';
+      for (let i = 0; i < len; i++) pwd += chars.charAt(Math.floor(Math.random() * chars.length));
+      print(`Generated Password: ${pwd}`, 'success');
+      break;
+    }
+    case 'sysinfo':
+      print('Browser: ' + navigator.userAgent, 'info');
+      print('Language: ' + navigator.language, 'info');
+      print('Platform: ' + navigator.platform, 'info');
+      print('Cores: ' + (navigator.hardwareConcurrency || 'Unknown'), 'info');
+      break;
+    case 'gui':
+      print('GUI? We don\'t do that here. CLI is life. 🐧', 'success');
+      break;
+    case 'stats':
+      print('--- SESSION STATS ---', 'warn');
+      print(`Commands Run: ${commandHistory.length}`, 'info');
+      const uptimeS = Math.floor((Date.now() - startTime) / 1000);
+      print(`Uptime: ${Math.floor(uptimeS / 60)}m ${uptimeS % 60}s`, 'info');
+      break;
+    default:
+      if (cmd.startsWith('guess ')) {
+        const guess = parseInt(cmd.split(' ')[1]);
+        if (isNaN(guess)) { print('Invalid number.', 'error'); return; }
+        if (!window.targetNumber && window.targetNumber !== 0) { print('Start game first with "game".', 'error'); return; }
+        if (guess === window.targetNumber) {
+          print(`🎉 WIN! The number was ${window.targetNumber}.`, 'success'); window.targetNumber = null;
+        } else if (guess < window.targetNumber) {
+          print('Higher ↑', 'warn');
+        } else {
+          print('Lower ↓', 'warn');
+        }
+        return;
+      }
+      print(`Command not found: ${command} `, 'error');
+  }
+};
+
+// 4. Event Listeners
+trigger.addEventListener('click', () => {
+  overlay.classList.add('open');
+  input.focus();
+});
+
+closeBtn.addEventListener('click', () => {
+  overlay.classList.remove('open');
+});
+
+overlay.addEventListener('click', (e) => {
+  if (e.target === overlay) overlay.classList.remove('open');
+});
+
+input.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    executeCommand(input.value);
+    input.value = '';
+    historyIndex = -1; // Reset navigation
+  } else if (e.key === 'Tab') {
+    e.preventDefault();
+    const val = input.value; // Don't trim to allow typing arguments, but for command completion we care about start
+    const args = val.split(' ');
+    const prefix = args[args.length - 1]; // Autocomplete last word? Or just command?
+    // Let's just autocomplete the COMMAND for now (first word)
+    if (args.length > 1) return; // Only autocomplete command
+
+    const potentialCommands = ['ls', 'cd', 'cat', 'pwd', 'clear', 'whoami', 'social', 'cv', 'projects', 'contact', 'ping', 'ipconfig', 'htop', 'weather', 'date', 'invaders', 'snake', 'game', 'theme', 'calc', 'coffee', 'fortune', 'sudo', 'exit', 'shutdown', 'matrix', 'hack', 'vim', 'help'];
+
+    const matches = potentialCommands.filter(c => c.startsWith(val));
+
+    if (matches.length === 1) {
+      input.value = matches[0] + ' ';
+    } else if (matches.length > 1) {
+      print(matches.join('  '), 'info');
+    }
+  } else if (e.key === 'Tab') {
+    e.preventDefault();
+    const current = input.value.trim();
+    if (!current) return;
+
+    const allCmds = [
+      'alias', 'banner', 'calc', 'cat', 'cd', 'clear', 'coffee', 'contact', 'cowsay',
+      'credits', 'currency', 'cv', 'date', 'echo', 'email', 'exit', 'fact', 'flip',
+      'fortune', 'game', 'gui', 'hack', 'help', 'history', 'invaders', 'joke', 'ls', 'man',
+      'matrix', 'neofetch', 'password', 'ping', 'pomodoro', 'projects', 'pwd',
+      'reboot', 'roll', 'shutdown', 'snake', 'social', 'stats', 'sudo', 'sysinfo',
+      'theme', 'todo', 'top', 'uptime', 'weather', 'whoami', 'whois'
+    ];
+
+    const matches = allCmds.filter(c => c.startsWith(current));
+    if (matches.length === 1) {
+      input.value = matches[0] + ' ';
+    } else if (matches.length > 1) {
+      print(matches.join('   '), 'info');
+    }
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (commandHistory.length > 0) {
+      if (historyIndex === -1) historyIndex = commandHistory.length;
+      if (historyIndex > 0) historyIndex--;
+      input.value = commandHistory[historyIndex];
+    } else {
+      // No history
+    }
+  } else if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    if (historyIndex !== -1 && historyIndex < commandHistory.length - 1) {
+      historyIndex++;
+      input.value = commandHistory[historyIndex];
+    } else {
+      historyIndex = commandHistory.length;
+      input.value = '';
+    }
+  }
+});
 }
 
 // Matrix Effect Implementation
@@ -1718,117 +2417,4 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-});
-
-// =========================================
-//  INTERACTIVE FEATURES (Drag & Sound)
-// =========================================
-document.addEventListener('DOMContentLoaded', () => {
-
-  // --- 6. DRAGGABLE CONSOLE ---
-  const makeDraggable = (elmnt) => {
-    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-    const header = elmnt.querySelector('.console-header');
-    if (header) {
-      header.onmousedown = dragMouseDown;
-      header.style.cursor = 'grab';
-    } else {
-      elmnt.onmousedown = dragMouseDown;
-    }
-
-    function dragMouseDown(e) {
-      e = e || window.event;
-      e.preventDefault();
-      // Get the mouse cursor position at startup:
-      pos3 = e.clientX;
-      pos4 = e.clientY;
-      document.onmouseup = closeDragElement;
-      // Call a function whenever the cursor moves:
-      document.onmousemove = elementDrag;
-      header.style.cursor = 'grabbing';
-    }
-
-    function elementDrag(e) {
-      e = e || window.event;
-      e.preventDefault();
-      // Calculate the new cursor position:
-      pos1 = pos3 - e.clientX;
-      pos2 = pos4 - e.clientY;
-      pos3 = e.clientX;
-      pos4 = e.clientY;
-      // Set the element's new position:
-      elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-      elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-      elmnt.style.transform = 'none'; // Disable center transform once moved
-    }
-
-    function closeDragElement() {
-      // Stop moving when mouse button is released:
-      document.onmouseup = null;
-      document.onmousemove = null;
-      header.style.cursor = 'grab';
-    }
-  };
-
-  const consoleWin = document.querySelector('.console-window');
-  if (consoleWin) makeDraggable(consoleWin);
-
-
-  // --- 7. SOUND EFFECTS (AudioContext) ---
-  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-  const playKeySound = () => {
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    const osc = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain();
-
-    osc.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-
-    // Mechanical click sound
-    osc.type = 'square';
-    // Slight pitch variation for realism
-    osc.frequency.value = 200 + Math.random() * 50;
-
-    // Short envelope
-    gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
-
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.05);
-  };
-
-  const playStartupSound = () => {
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    const osc = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain();
-
-    osc.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-
-    osc.type = 'sine';
-    osc.frequency.value = 80;
-    osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.3);
-
-    gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
-
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.5);
-  };
-
-  // Attach sound listeners
-  const input = document.getElementById('consoleInput');
-  if (input) {
-    input.addEventListener('keydown', playKeySound);
-  }
-
-  // Trigger Hook
-  const trigger = document.getElementById('consoleTrigger');
-  if (trigger) {
-    trigger.addEventListener('click', () => {
-      playStartupSound();
-    });
-  }
-
 });
