@@ -493,7 +493,10 @@ if (contactForm) {
     btn.disabled = true;
 
     // Use sendForm to automatically capture all fields and avoid manual mapping issues
-    emailjs.sendForm('service_ai6odsp', 'template_f5ktfaz', this, 'B33KUw_SRxXz54Mng')
+    emailjs.sendForm('service_ai6odsp', 'template_f5ktfaz', this, {
+      publicKey: 'B33KUw_SRxXz54Mng',
+      privateKey: 'IqtOBnr9hq3AO3vs67k3v'
+    })
       .then(() => {
         showToast('Message envoyé avec succès !', 'success');
         contactForm.reset();
