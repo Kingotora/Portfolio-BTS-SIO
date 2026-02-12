@@ -442,7 +442,12 @@ document.querySelectorAll('.tag-filter').forEach(btn => {
 // =========================================
 // Initialize EmailJS
 (function () {
-  // PUBLIC KEY (Passed explicitly in sendForm)
+  if (typeof emailjs !== 'undefined') {
+    emailjs.init({
+      publicKey: 'AMbZG589fBcjogWQ8',
+      privateKey: 'hfN57mZelNaU6g2bqQ46k'
+    });
+  }
 })();
 
 // =========================================
@@ -492,11 +497,8 @@ if (contactForm) {
     btn.textContent = 'Envoi...';
     btn.disabled = true;
 
-    // Use sendForm to automatically capture all fields and avoid manual mapping issues
-    emailjs.sendForm('service_ai6odsp', 'template_h2a018w', this, {
-      publicKey: 'AMbZG589fBcjogWQ8',
-      privateKey: 'hfN57mZelNaU6g2bqQ46k'
-    })
+    // Keys are provided via emailjs.init()
+    emailjs.sendForm('service_ai6odsp', 'template_h2a018w', this)
       .then(() => {
         showToast('Message envoyé avec succès !', 'success');
         contactForm.reset();
