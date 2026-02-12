@@ -96,15 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // =========================================
 //  SCROLL INDICATOR
-// =========================================
-window.addEventListener('scroll', () => {
-  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  const scrolled = (winScroll / height) * 100;
-
-  const bar = document.getElementById("scrollProgress");
-  if (bar) bar.style.width = scrolled + "%";
-});
+// Scroll progress is handled inside the unified updateScrollUI function below
 
 
 // =========================================
@@ -621,11 +613,18 @@ window.addEventListener('scroll', () => {
 });
 
 function updateScrollUI() {
-  // 1. Scroll Button Visibility
+  // 1. Scroll Progress Bar
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+  const bar = document.getElementById('scrollProgress');
+  if (bar) bar.style.width = scrolled + '%';
+
+  // 2. Scroll Button Visibility
   if (window.scrollY > 300) {
     scrollTopBtn?.classList.add('show');
 
-    // 2. Move Theme Button to Header Inner (Right of Contact)
+    // 3. Move Theme Button to Header Inner (Right of Contact)
     if (themeBtn && headerInner && !headerInner.contains(themeBtn)) {
       headerInner.appendChild(themeBtn);
       themeBtn.classList.add('in-menu');
@@ -633,7 +632,7 @@ function updateScrollUI() {
   } else {
     scrollTopBtn?.classList.remove('show');
 
-    // 3. Move Theme Button back to Body (or original spot)
+    // 4. Move Theme Button back to Body (or original spot)
     if (themeBtn && headerInner && headerInner.contains(themeBtn)) {
       document.body.appendChild(themeBtn);
       themeBtn.classList.remove('in-menu');
@@ -641,8 +640,10 @@ function updateScrollUI() {
   }
 }
 
-// 3D TILT LOGIC (Performance Optimized)
+// 3D TILT LOGIC (Performance Optimized — Desktop Only)
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 function initTiltEffect() {
+  if (isTouchDevice) return; // Skip on touch devices
   const cards = document.querySelectorAll('.project-card');
 
   cards.forEach(card => {
@@ -688,10 +689,8 @@ function initTiltEffect() {
 
 if (scrollTopBtn) {
   scrollTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0 });
+    // scroll-behavior: smooth is handled by CSS
   });
 }
 

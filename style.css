@@ -78,6 +78,10 @@ body.light-mode {
 /* =========================================
    RESET & BASE STYLE
    ========================================= */
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   box-sizing: border-box;
   /* Firefox Scrollbar */
@@ -167,6 +171,8 @@ body::before {
     radial-gradient(circle at 50% 80%, rgba(56, 189, 248, 0.05), transparent 60%);
   filter: blur(60px);
   pointer-events: none;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Optional patterned overlay for texture */
@@ -178,6 +184,8 @@ body::after {
   opacity: 0.25;
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   pointer-events: none;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 
@@ -838,7 +846,7 @@ section {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .skill-card:hover {
@@ -878,8 +886,8 @@ section {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
-  /* Removed transform to fix lag */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  will-change: transform;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -1104,7 +1112,7 @@ body.light-mode #projectSearch {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
   margin-right: 0.5rem;
   letter-spacing: 0.05em;
   width: auto;
@@ -1136,7 +1144,7 @@ body.light-mode #projectSearch {
   font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 500;
-  transition: all 0.2s;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
 }
 
 .tag-filter:hover {
@@ -1174,7 +1182,7 @@ body.light-mode #projectSearch {
   justify-content: center;
   box-shadow: var(--shadow-lg);
   backdrop-filter: blur(10px);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s, color 0.3s;
 }
 
 .theme-btn:hover {
@@ -1302,8 +1310,8 @@ body.light-mode #projectSearch {
     height: auto;
     background: rgba(15, 23, 42, 0.95);
     /* Deep dark */
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-top: 1px solid var(--border-subtle);
     display: flex;
     flex-direction: row;
@@ -1430,6 +1438,26 @@ body.light-mode #projectSearch {
     bottom: 10rem;
   }
 
+  /* Disable 3D tilt and spotlight on touch devices */
+  .project-card::before,
+  .skill-card::before,
+  .article-card::before {
+    display: none !important;
+  }
+
+  .project-card:hover {
+    transform: translateY(-4px) !important;
+  }
+
+  /* Reduce body blur overlay on mobile for performance */
+  body::before {
+    filter: blur(40px);
+  }
+
+  body::after {
+    display: none;
+  }
+
   /* Timeline adjustment */
   .timeline {
     padding-left: 1.5rem;
@@ -1534,7 +1562,7 @@ dialog#contactModal h3 {
   background: var(--bg-surface);
   color: var(--text-primary);
   font-family: var(--font-body);
-  transition: all 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .form-group input:focus,
@@ -1844,7 +1872,7 @@ dialog#contactModal h3 {
   border-radius: var(--radius-lg);
   padding: 2rem;
   text-align: center;
-  transition: transform 0.3s ease, border-color 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   position: relative;
   overflow: hidden;
 }
@@ -1888,7 +1916,7 @@ dialog#contactModal h3 {
   border-radius: 99px;
   font-size: 0.85rem;
   color: var(--text-secondary);
-  transition: all 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
 }
 
 .tech-badge:hover {
@@ -2757,8 +2785,7 @@ body.page-404 {
 
   /* LAYOUT ADJUSTMENTS */
   main {
-    padding: 10rem 1rem 2rem;
-    /* Increased padding again */
+    padding: 6rem 1rem 2rem;
   }
 
   h1 {
@@ -2829,8 +2856,8 @@ body.page-404 {
     width: 75%;
     max-width: 300px;
     background: var(--bg-surface);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     flex-direction: column;
     align-items: center;
     justify-content: center;
