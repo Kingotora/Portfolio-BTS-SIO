@@ -493,23 +493,8 @@ if (contactForm) {
     btn.textContent = 'Envoi...';
     btn.disabled = true;
 
-    // Send params (Standard EmailJS names)
-    // Send params (Exact match with EmailJS Template)
-    const templateParams = {
-      user_name: contactForm.querySelector('[name="user_name"]').value,
-      user_email: contactForm.querySelector('[name="user_email"]').value,
-      message: contactForm.querySelector('[name="message"]').value
-    };
-
-    console.log('Sending EmailJS with:', {
-      service: 'service_ai6odsp',
-      template: 'template_f5ktfaz',
-      params: templateParams,
-      key: 'B33KUw_SRxXz54Mng'
-    });
-
-    // Pass Public Key explicitly as the 4th argument
-    emailjs.send('service_ai6odsp', 'template_f5ktfaz', templateParams, 'B33KUw_SRxXz54Mng')
+    // Use sendForm to automatically capture all fields and avoid manual mapping issues
+    emailjs.sendForm('service_ai6odsp', 'template_f5ktfaz', this, 'B33KUw_SRxXz54Mng')
       .then(() => {
         showToast('Message envoyé avec succès !', 'success');
         contactForm.reset();
