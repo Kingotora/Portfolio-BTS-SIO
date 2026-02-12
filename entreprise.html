@@ -68,7 +68,7 @@
     <main>
         <!-- ENTREPRISE -->
         <section id="entreprise">
-            <h2 data-i18n="company.title">Mon Stage chez Althec</h2>
+            <h2 data-i18n="company.title">Mon alternance chez Althec</h2>
             <p data-i18n="company.intro_title">Présentation de l’entreprise</p>
             <img loading="lazy" class="logo" src="images/logoalthec.webp" alt="Logo Althec Sécurité Systèmes" />
 
@@ -120,13 +120,114 @@
             <img loading="lazy" class="orgchart" src="images/Organigramme.webp"
                 alt="Organigramme de l'entreprise Althec Sécurité Systèmes" />
         </section>
+
+        <!-- MES MISSIONS -->
+        <section id="missions">
+            <h2 data-i18n="missions.title">🎯 Mes Missions</h2>
+            <p data-i18n="missions.intro">Durant mon stage chez Althec, j'ai été impliqué dans deux domaines
+                principaux qui m'ont permis de développer mes compétences techniques et relationnelles.</p>
+
+            <div class="missions-grid">
+                <div class="mission-card">
+                    <div class="mission-icon">🌐</div>
+                    <h3 data-i18n="missions.network.title">Configuration Réseau</h3>
+                    <p data-i18n="missions.network.desc">Paramétrage et déploiement des équipements réseau sur site
+                        client : switches, routeurs, NVR (enregistreurs vidéo réseau), caméras IP. Configuration des
+                        VLAN, adressage IP, règles de pare-feu et accès distants sécurisés (VPN).</p>
+                    <ul>
+                        <li data-i18n="missions.network.list1">Configuration IP caméras et NVR sur le réseau client
+                        </li>
+                        <li data-i18n="missions.network.list2">Paramétrage switch (VLAN, trunk, PoE)</li>
+                        <li data-i18n="missions.network.list3">Mise en place d'accès distant sécurisé</li>
+                        <li data-i18n="missions.network.list4">Tests de connectivité et dépannage terrain</li>
+                    </ul>
+                </div>
+
+                <div class="mission-card">
+                    <div class="mission-icon">🛟</div>
+                    <h3 data-i18n="missions.support.title">Support Client</h3>
+                    <p data-i18n="missions.support.desc">Assistance téléphonique et sur site auprès des clients pour
+                        résoudre les incidents liés aux systèmes de sûreté. Diagnostic des pannes, interventions
+                        correctives et rédaction de comptes-rendus d'intervention.</p>
+                    <ul>
+                        <li data-i18n="missions.support.list1">Diagnostic et résolution d'incidents à distance</li>
+                        <li data-i18n="missions.support.list2">Interventions correctives sur site</li>
+                        <li data-i18n="missions.support.list3">Rédaction de rapports d'intervention</li>
+                        <li data-i18n="missions.support.list4">Formation utilisateur aux outils déployés</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJET MENÉ -->
+        <section id="projet">
+            <h2 data-i18n="project.title">🚀 Projet Mené — Cluster Proxmox & Ceph</h2>
+            <p data-i18n="project.intro">J'ai conçu et déployé une infrastructure de virtualisation haute
+                disponibilité basée sur Proxmox VE avec un stockage distribué Ceph, composée de trois nœuds physiques.
+            </p>
+
+            <div class="project-highlight">
+                <div class="project-header">
+                    <span class="project-badge" data-i18n="project.badge">🏗️ Infrastructure</span>
+                    <span class="project-tech">Proxmox VE · Ceph · cephadm · Linux</span>
+                </div>
+
+                <div class="project-details">
+                    <div class="project-step">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <h4 data-i18n="project.step1.title">Préparation des nœuds</h4>
+                            <p data-i18n="project.step1.desc">Installation de Proxmox VE sur trois serveurs physiques,
+                                configuration réseau (bridge, VLAN management, Ceph network dédié), hardening système.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="project-step">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <h4 data-i18n="project.step2.title">Création du cluster Proxmox</h4>
+                            <p data-i18n="project.step2.desc">Initialisation du cluster sur le nœud principal, jonction
+                                des deux autres nœuds, vérification du quorum et de la synchronisation des
+                                configurations.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-step">
+                        <div class="step-number">03</div>
+                        <div class="step-content">
+                            <h4 data-i18n="project.step3.title">Déploiement Ceph via cephadm</h4>
+                            <p data-i18n="project.step3.desc">Bootstrap du cluster Ceph avec cephadm, ajout des OSD
+                                (disques), configuration des monitors et managers sur chaque nœud, création des pools de
+                                stockage.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-step">
+                        <div class="step-number">04</div>
+                        <div class="step-content">
+                            <h4 data-i18n="project.step4.title">Tests & Validation</h4>
+                            <p data-i18n="project.step4.desc">Migration à chaud de VMs entre nœuds, tests de résilience
+                                (arrêt d'un nœud), mesure des performances I/O, documentation complète de
+                                l'architecture.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-result">
+                    <strong data-i18n="project.result.label">Résultat :</strong>
+                    <span data-i18n="project.result.text">Infrastructure opérationnelle en haute disponibilité avec
+                        stockage redondant, capable de supporter la perte d'un nœud sans interruption de service.</span>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
         <div class="footer-content">
             <div class="footer-col">
                 <h4>Brieuc Métairie</h4>
-                <p>
+                <p data-i18n="footer.desc">
                     Administrateur Système & Réseau en devenir.
                     Passionné par la cybersécurité, l'automatisation et les infrastructures robustes.
                 </p>
@@ -170,7 +271,12 @@
             </div>
         </div>
         <div class="footer-bottom">
-            © 2025 Brieuc Métairie – Tous droits réservés.
+            <span data-i18n="footer.rights">© 2026 Brieuc Métairie – Portfolio</span>
+            <div class="footer-legal">
+                <a href="mentions-legales.html" data-i18n="nav.mentions">Mentions Légales</a>
+                <span class="separator">·</span>
+                <a href="politique-confidentialite.html" data-i18n="nav.confidentialite">Confidentialité</a>
+            </div>
         </div>
     </footer>
 
@@ -208,6 +314,7 @@
 
     <script src="js/lang.js"></script>
     <script src="script.js" defer></script>
+    <script src="js/console.js?v=FIXED3" defer></script>
 
 </body>
 

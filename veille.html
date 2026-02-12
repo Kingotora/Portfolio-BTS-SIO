@@ -83,6 +83,92 @@
                     Je décrypte l'essentiel pour rester à jour.
                 </p>
             </div>
+            <!-- ANALYSIS SECTION -->
+            <div class="analysis-section">
+                <h3 data-i18n="blog.analysis.title">📝 Mes Analyses d'Articles</h3>
+                <p class="analysis-intro" data-i18n="blog.analysis.intro">
+                    Dans le cadre de mon BTS SIO, je sélectionne des articles pertinents et j'en rédige une analyse
+                    personnelle pour montrer ma compréhension des enjeux technologiques actuels.
+                </p>
+
+                <div class="analysis-grid">
+                    <!-- Analysis Card 1 -->
+                    <article class="analysis-card">
+                        <div class="analysis-header">
+                            <span class="analysis-badge" data-i18n="blog.analysis.badge">📖 Analyse</span>
+                            <span class="analysis-date" data-i18n="blog.analysis1.date">📅 10 Fév 2026</span>
+                        </div>
+                        <h4 data-i18n="blog.analysis1.title">L'essor des passkeys : vers la fin des mots de passe ?</h4>
+                        <div class="analysis-meta">
+                            <span data-i18n="blog.analysis1.source">Source : IT-Connect</span>
+                        </div>
+                        <div class="analysis-body">
+                            <p class="analysis-summary-label" data-i18n="blog.analysis.summary_label"><strong>Résumé de
+                                    l'article :</strong></p>
+                            <p data-i18n="blog.analysis1.summary">
+                                Les passkeys (clés d'accès) remplacent progressivement les mots de passe traditionnels.
+                                Basées sur la norme FIDO2/WebAuthn, elles utilisent la biométrie ou un PIN local pour
+                                authentifier l'utilisateur sans jamais transmettre de secret au serveur.
+                                Google, Apple et Microsoft les intègrent désormais nativement.
+                            </p>
+                            <p class="analysis-label" data-i18n="blog.analysis.my_analysis"><strong>Mon analyse
+                                    :</strong></p>
+                            <p data-i18n="blog.analysis1.analysis">
+                                En tant que futur administrateur système, cette évolution m'intéresse particulièrement.
+                                Les mots de passe restent le maillon faible de la sécurité : phishing, réutilisation,
+                                complexité insuffisante. Les passkeys résolvent ces problèmes en supprimant le secret
+                                partagé.
+                                Cependant, le déploiement en entreprise pose des questions : compatibilité avec les
+                                anciens
+                                systèmes, gestion centralisée via Active Directory, et formation des utilisateurs.
+                                C'est une technologie à suivre de près pour les DSI.
+                            </p>
+                        </div>
+                        <a href="https://www.it-connect.fr/" target="_blank" rel="noopener noreferrer" class="read-more"
+                            data-i18n="blog.read_more">Lire l'article complet →</a>
+                    </article>
+
+                    <!-- Analysis Card 2 -->
+                    <article class="analysis-card">
+                        <div class="analysis-header">
+                            <span class="analysis-badge" data-i18n="blog.analysis.badge">📖 Analyse</span>
+                            <span class="analysis-date" data-i18n="blog.analysis2.date">📅 28 Jan 2026</span>
+                        </div>
+                        <h4 data-i18n="blog.analysis2.title">NIS 2 : la nouvelle directive européenne de cybersécurité
+                        </h4>
+                        <div class="analysis-meta">
+                            <span data-i18n="blog.analysis2.source">Source : ANSSI</span>
+                        </div>
+                        <div class="analysis-body">
+                            <p class="analysis-summary-label" data-i18n="blog.analysis.summary_label"><strong>Résumé de
+                                    l'article :</strong></p>
+                            <p data-i18n="blog.analysis2.summary">
+                                La directive NIS 2, entrée en vigueur en octobre 2024, élargit considérablement le
+                                périmètre
+                                des organisations soumises à des obligations de cybersécurité en Europe.
+                                Elle impose des mesures de gestion des risques, de signalement d'incidents et de
+                                gouvernance
+                                à des milliers d'entités supplémentaires, y compris des PME et collectivités.
+                            </p>
+                            <p class="analysis-label" data-i18n="blog.analysis.my_analysis"><strong>Mon analyse
+                                    :</strong></p>
+                            <p data-i18n="blog.analysis2.analysis">
+                                NIS 2 va transformer le quotidien des administrateurs système et réseau. Les entreprises
+                                devront renforcer leurs politiques de sauvegarde, de supervision et de réponse aux
+                                incidents.
+                                Pour un technicien SISR, cela signifie maîtriser les outils de détection (SIEM, IDS),
+                                documenter rigoureusement les procédures et participer à des exercices de crise.
+                                C'est un cadre réglementaire qui valorise notre métier et rend nos compétences
+                                indispensables.
+                            </p>
+                        </div>
+                        <a href="https://www.cert.ssi.gouv.fr/" target="_blank" rel="noopener noreferrer"
+                            class="read-more" data-i18n="blog.read_more">Lire l'article complet →</a>
+                    </article>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem;" data-i18n="blog.rss_title">📡 Flux RSS — Actualités en temps réel</h3>
 
             <div class="articles-grid blog-layout" id="rss-feed">
                 <!-- LE CONTENU SERA CHARGÉ PAR JS -->
@@ -118,11 +204,9 @@
                         Numerama</a>
                     <a href="https://www.developpez.com/" target="_blank" rel="noopener noreferrer" class="source-tag">☕
                         Developpez</a>
+                    <a href="https://www.clubic.com/" target="_blank" rel="noopener noreferrer" class="source-tag">🗞️
+                        Clubic</a>
                 </div>
-            </div>
-            <a href="https://www.clubic.com/" target="_blank" rel="noopener noreferrer" class="source-tag">🗞️
-                Clubic</a>
-            </div>
             </div>
         </section>
     </main>
@@ -131,7 +215,7 @@
         <div class="footer-content">
             <div class="footer-col">
                 <h4>Brieuc Métairie</h4>
-                <p>
+                <p data-i18n="footer.desc">
                     Administrateur Système & Réseau en devenir.
                     Passionné par la cybersécurité, l'automatisation et les infrastructures robustes.
                 </p>
@@ -175,7 +259,12 @@
             </div>
         </div>
         <div class="footer-bottom">
-            © 2025 Brieuc Métairie – Tous droits réservés.
+            <span data-i18n="footer.rights">© 2026 Brieuc Métairie – Portfolio</span>
+            <div class="footer-legal">
+                <a href="mentions-legales.html" data-i18n="nav.mentions">Mentions Légales</a>
+                <span class="separator">·</span>
+                <a href="politique-confidentialite.html" data-i18n="nav.confidentialite">Confidentialité</a>
+            </div>
         </div>
     </footer>
 
@@ -220,6 +309,7 @@
     <script src="rss_manager.js" defer></script>
     <script src="js/lang.js"></script>
     <script src="script.js" defer></script>
+    <script src="js/console.js?v=FIXED3" defer></script>
 
 </body>
 
