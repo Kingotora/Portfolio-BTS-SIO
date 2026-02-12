@@ -494,13 +494,14 @@ if (contactForm) {
     btn.disabled = true;
 
     // Send params (Standard EmailJS names)
+    // Send params (Exact match with EmailJS Template)
     const templateParams = {
-      from_name: contactForm.querySelector('[name="user_name"]').value,
-      reply_to: contactForm.querySelector('[name="user_email"]').value,
+      user_name: contactForm.querySelector('[name="user_name"]').value,
+      user_email: contactForm.querySelector('[name="user_email"]').value,
       message: contactForm.querySelector('[name="message"]').value
     };
 
-    emailjs.send('service_ai6odsp', 'template_h2a018w', templateParams)
+    emailjs.send('service_ai6odsp', 'template_f5ktfaz', templateParams)
       .then(() => {
         showToast('Message envoyé avec succès !', 'success');
         contactForm.reset();

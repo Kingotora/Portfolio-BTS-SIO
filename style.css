@@ -1961,10 +1961,12 @@ footer {
   border-top: 1px solid var(--border-subtle);
   font-size: 0.85rem;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  /* Stack vertically */
+  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 1rem;
+  text-align: center;
 }
 
 .footer-bottom .footer-legal {
@@ -1974,7 +1976,8 @@ footer {
 }
 
 .footer-bottom .footer-legal a {
-  color: var(--text-secondary);
+  color: var(--color-brand);
+  /* Blue */
   text-decoration: none;
   transition: color 0.3s ease;
 }
