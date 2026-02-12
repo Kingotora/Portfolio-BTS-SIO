@@ -494,7 +494,8 @@ if (contactForm) {
     btn.disabled = true;
 
     // Use sendForm to automatically capture all fields and avoid manual mapping issues
-    emailjs.sendForm('service_ai6odsp', 'template_f5ktfaz', this, 'B33KUw_SRxXz54Mng')
+    // TESTING: Using Auto-Reply template to debug ID issue
+    emailjs.sendForm('service_ai6odsp', 'template_s78ot6c', this, 'B33KUw_SRxXz54Mng')
       .then(() => {
         showToast('Message envoyé avec succès !', 'success');
         contactForm.reset();
