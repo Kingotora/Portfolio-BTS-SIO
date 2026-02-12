@@ -442,8 +442,8 @@ document.querySelectorAll('.tag-filter').forEach(btn => {
 // =========================================
 // Initialize EmailJS
 (function () {
-  // PUBLIC KEY
-  if (typeof emailjs !== 'undefined') emailjs.init("B33KUw_SRxXz54Mng");
+  // PUBLIC KEY (Commented out - passed explicitly in send() to avoid init issues)
+  // if (typeof emailjs !== 'undefined') emailjs.init("B33KUw_SRxXz54Mng");
 })();
 
 // =========================================
@@ -501,7 +501,15 @@ if (contactForm) {
       message: contactForm.querySelector('[name="message"]').value
     };
 
-    emailjs.send('service_ai6odsp', 'template_f5ktfaz', templateParams)
+    console.log('Sending EmailJS with:', {
+      service: 'service_ai6odsp',
+      template: 'template_f5ktfaz',
+      params: templateParams,
+      key: 'B33KUw_SRxXz54Mng'
+    });
+
+    // Pass Public Key explicitly as the 4th argument
+    emailjs.send('service_ai6odsp', 'template_f5ktfaz', templateParams, 'B33KUw_SRxXz54Mng')
       .then(() => {
         showToast('Message envoyé avec succès !', 'success');
         contactForm.reset();
