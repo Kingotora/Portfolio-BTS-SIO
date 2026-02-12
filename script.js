@@ -442,8 +442,7 @@ document.querySelectorAll('.tag-filter').forEach(btn => {
 // =========================================
 // Initialize EmailJS
 (function () {
-  // PUBLIC KEY (Commented out - passed explicitly in send() to avoid init issues)
-  // if (typeof emailjs !== 'undefined') emailjs.init("B33KUw_SRxXz54Mng");
+  // PUBLIC KEY (Passed explicitly in sendForm)
 })();
 
 // =========================================
@@ -494,8 +493,7 @@ if (contactForm) {
     btn.disabled = true;
 
     // Use sendForm to automatically capture all fields and avoid manual mapping issues
-    // TESTING: Using Auto-Reply template to debug ID issue
-    emailjs.sendForm('service_ai6odsp', 'template_s78ot6c', this, 'B33KUw_SRxXz54Mng')
+    emailjs.sendForm('service_ai6odsp', 'template_f5ktfaz', this, 'B33KUw_SRxXz54Mng')
       .then(() => {
         showToast('Message envoyé avec succès !', 'success');
         contactForm.reset();
