@@ -494,8 +494,8 @@ if (contactForm) {
 
     // Use sendForm to automatically capture all fields and avoid manual mapping issues
     emailjs.sendForm('service_ai6odsp', 'template_h2a018w', this, {
-      publicKey: 'B33KUw_SRxXz54Mng',
-      privateKey: 'lqtOBnr9hq3AO3vs67k3v'
+      publicKey: 'AMbZG589fBcjogWQ8',
+      privateKey: 'hfN57mZelNaU6g2bqQ46k'
     })
       .then(() => {
         showToast('Message envoyé avec succès !', 'success');
