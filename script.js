@@ -497,17 +497,31 @@ if (contactForm) {
     btn.textContent = 'Envoi...';
     btn.disabled = true;
 
-    // Keys are provided via emailjs.init()
-    emailjs.sendForm('service_ai6odsp', 'template_h2a018w', this)
-      .then(() => {
-        showToast('Message envoyé avec succès !', 'success');
-        contactForm.reset();
-        setTimeout(() => {
-          const modal = document.getElementById('contactModal');
-          if (modal) modal.close();
-          if (status) status.textContent = "";
-        }, 1000);
-      }, (error) => {
+    // Build FormData manually to include accessToken (private key)
+    const formData = new FormData(this);
+    formData.append('service_id', 'service_ai6odsp');
+    formData.append('template_id', 'template_h2a018w');
+    formData.append('user_id', 'AMbZG589fBcjogWQ8');
+    formData.append('accessToken', 'hfN57mZelNaU6g2bqQ46k');
+
+    fetch('https://api.emailjs.com/api/v1.0/email/send-form', {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => {
+        if (response.ok) {
+          showToast('Message envoyé avec succès !', 'success');
+          contactForm.reset();
+          setTimeout(() => {
+            const modal = document.getElementById('contactModal');
+            if (modal) modal.close();
+            if (status) status.textContent = "";
+          }, 1000);
+        } else {
+          return response.text().then(text => { throw { status: response.status, text }; });
+        }
+      })
+      .catch((error) => {
         console.error('FAILED...', error);
         showToast("Erreur lors de l'envoi du message.", 'error');
         if (status) {
