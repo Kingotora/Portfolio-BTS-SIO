@@ -38,6 +38,64 @@ const PROJECTS = [
         detailLink: "projet-glpi.html",
         pdfLink: "docs/GLPI_Cours.pdf"
     },
+    // PROFESSIONAL ACTIVITIES (Althec)
+    {
+        id: "support-glpi",
+        type: "professional",
+        titleKey: "projects.support_glpi.title",
+        goalKey: "projects.support_glpi.goal",
+        envKey: "projects.env_label",
+        envText: "GLPI + FusionInventory",
+        img: "images/support-glpi.png",
+        tags: ["helpdesk", "windows"],
+        listKeys: [
+            "projects.support_glpi.list1",
+            "projects.support_glpi.list2",
+            "projects.support_glpi.list3",
+            "projects.support_glpi.list4"
+        ],
+        resultKey: "projects.result_label",
+        resultTextKey: "projects.support_glpi.result",
+        detailLink: "projet-support-glpi.html"
+    },
+    {
+        id: "m365-ad",
+        type: "professional",
+        titleKey: "projects.m365_ad.title",
+        goalKey: "projects.m365_ad.goal",
+        envKey: "projects.env_label",
+        envText: "Windows Server + Microsoft 365",
+        img: "images/m365-admin.png",
+        tags: ["windows", "reseau"],
+        listKeys: [
+            "projects.m365_ad.list1",
+            "projects.m365_ad.list2",
+            "projects.m365_ad.list3",
+            "projects.m365_ad.list4"
+        ],
+        resultKey: "projects.result_label",
+        resultTextKey: "projects.m365_ad.result",
+        detailLink: "projet-m365-ad.html"
+    },
+    {
+        id: "omada",
+        type: "professional",
+        titleKey: "projects.omada.title",
+        goalKey: "projects.omada.goal",
+        envKey: "projects.env_label",
+        envText: "TP-Link Omada SDN",
+        img: "images/omada-dashboard.png",
+        tags: ["reseau"],
+        listKeys: [
+            "projects.omada.list1",
+            "projects.omada.list2",
+            "projects.omada.list3",
+            "projects.omada.list4"
+        ],
+        resultKey: "projects.result_label",
+        resultTextKey: "projects.omada.result",
+        detailLink: "projet-omada.html"
+    },
     // PERSONAL PROJECTS
     {
         id: "plex",
@@ -104,18 +162,38 @@ const PROJECTS = [
     {
         id: "restaurant",
         type: "personal",
-        title: "Site vitrine pour un restaurant",
-        goal: "réaliser un site vitrine simple et élégant pour présenter le restaurant, l’ambiance, les menus et les informations pratiques.",
-        content: "pages essentielles (Accueil, Carte/Menu, Infos pratiques, Contact) avec un design cohérent et une navigation fluide.",
+        titleKey: "projects.restaurant.title",
+        goalKey: "projects.restaurant.goal",
+        contentKey: "projects.restaurant.content",
         img: "images/restaurant.webp",
         tags: ["web", "personnel"],
-        listRaw: [
-            "Maquettage puis intégration HTML/CSS/JS",
-            "Responsive complet (mobile → desktop)",
-            "Optimisation des images et du chargement",
-            "Formulaire de contact et liens réseaux sociaux"
+        listKeys: [
+            "projects.restaurant.list1",
+            "projects.restaurant.list2",
+            "projects.restaurant.list3",
+            "projects.restaurant.list4"
         ],
         detailLink: "projet-restaurant.html",
         siteLink: "https://mom-s-restaurant-1ddpi.kinsta.page/"
+    },
+    {
+        id: "newsletter",
+        type: "personal",
+        titleKey: "projects.newsletter.title",
+        goalKey: "projects.newsletter.goal",
+        envKey: "projects.env_label",
+        envText: "Node.js + SQLite + Brevo API",
+        img: "images/newsletter.webp",
+        tags: ["web"],
+        listKeys: [
+            "projects.newsletter.list1",
+            "projects.newsletter.list2",
+            "projects.newsletter.list3",
+            "projects.newsletter.list4",
+            "projects.newsletter.list5"
+        ],
+        resultKey: "projects.result_label",
+        resultTextKey: "projects.newsletter.result",
+        detailLink: "projet-newsletter.html"
     }
 ];
