@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Déploiement M365 & Active Directory — Brieuc Métairie</title>
+    <meta name="description"
+        content="Activité professionnelle : déploiement de Microsoft 365 et Active Directory pour l'ensemble de l'entreprise Althec." />
+    <meta name="theme-color" content="#0f172a" />
+    <link rel="icon" href="images/favicon.ico" />
+    <link rel="canonical" href="https://brieuc-metairie.fr/projet-m365-ad.html" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css?v=3">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      "name": "Déploiement M365 & Active Directory",
+      "description": "Mise en place de l'environnement informatique complet de l'entreprise : Active Directory, Microsoft 365, postes de travail.",
+      "author": {
+          "@type": "Person",
+          "name": "Brieuc Métairie"
+      },
+      "url": "https://brieuc-metairie.fr/projet-m365-ad.html",
+      "keywords": "Active Directory, Microsoft 365, Windows Server, GPO, Exchange Online, Teams"
+    }
+    </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Aller au contenu</a>
+    <div id="scrollProgress"></div>
+
+    <header>
+        <div class="header-inner">
+            <div class="name-badge brand-strong">
+                <span class="big-name">Brieuc Métairie</span>
+                <small class="subtitle typing-cursor" data-i18n="hero.subtitle">Étudiant BTS SIO – option SISR</small>
+            </div>
+            <nav class="nav-links" aria-label="Navigation principale">
+                <a class="tab-btn" href="index.html" data-i18n="nav.accueil">Accueil</a>
+                <a class="tab-btn" href="entreprise.html" data-i18n="nav.entreprise">Entreprise</a>
+                <a class="tab-btn" href="activites.html" data-i18n="nav.activites">Activités</a>
+                <a class="tab-btn" href="veille.html" data-i18n="nav.veille">Veille</a>
+            </nav>
+
+            <!-- LANG TOGGLE -->
+            <button id="langToggle" class="lang-btn" aria-label="Switch Language">
+                <span class="lang-icon">FR</span>
+            </button>
+
+            <div class="header-contact">
+                <a class="btn" href="mailto:metairiebrieuc@gmail.com" data-i18n="nav.contact">✉️ Me contacter</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="project-detail-main">
+        <section class="project-hero">
+            <div class="hero-content">
+                <a href="activites.html" class="back-link">← Retour aux activités</a>
+                <h1>Déploiement M365 & Active Directory</h1>
+                <p class="subtitle">Mise en place de l'environnement informatique de l'entreprise</p>
+                <div class="tags">
+                    <span class="tag">Alternance</span>
+                    <span class="tag">Windows Server</span>
+                    <span class="tag">Microsoft 365</span>
+                    <span class="tag">Active Directory</span>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/m365-admin.png" alt="Infrastructure M365" width="474" height="251"
+                    class="img-cover-300 rounded-md">
+            </div>
+        </section>
+
+        <section class="project-content-grid">
+            <div class="content-left">
+                <!-- STORYTELLING INTRO -->
+                <div class="story-block">
+                    <h2>🎯 <span class="highlight">Le Besoin</span></h2>
+                    <p>
+                        Althec n'avait pas d'environnement informatique centralisé.
+                        Chaque poste était configuré <strong>individuellement</strong>,
+                        les comptes étaient gérés localement, et il n'y avait
+                        <strong>pas de messagerie professionnelle unifiée</strong>.
+                        Il fallait tout reprendre de zéro.
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <h2>💡 <span class="highlight">Active Directory : la base</span></h2>
+                    <p>
+                        J'ai installé et configuré un <strong>Windows Server</strong> avec les rôles
+                        <strong>AD DS, DNS et DHCP</strong>. Ça permet de centraliser tous les comptes
+                        utilisateurs, de gérer les droits d'accès, et d'appliquer des politiques de sécurité
+                        (GPO) sur tous les postes automatiquement.
+                    </p>
+                    <p>
+                        Concrètement : un collaborateur se connecte avec son compte, et il retrouve son bureau,
+                        ses dossiers et ses droits, peu importe le poste.
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <h2>☁️ <span class="highlight">Microsoft 365 : la messagerie et les outils</span></h2>
+                    <p>
+                        En parallèle, j'ai déployé <strong>Microsoft 365</strong> pour toute l'entreprise :
+                        <strong>Exchange Online</strong> pour la messagerie professionnelle,
+                        <strong>Teams</strong> pour la communication interne,
+                        et <strong>OneDrive</strong> pour le stockage cloud de chaque utilisateur.
+                    </p>
+                    <p>
+                        J'ai aussi configuré les postes de travail pour qu'ils soient
+                        <strong>intégrés au domaine</strong> : installation de Windows, jonction AD,
+                        déploiement des applications Office, et personnalisation via GPO.
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <h2>🚀 <span class="highlight">Le Résultat</span></h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-num">100%</span>
+                            <span class="stat-desc">des collaborateurs équipés</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-num">1</span>
+                            <span class="stat-desc">domaine centralisé</span>
+                        </div>
+                    </div>
+                    <p class="summary-text">
+                        L'entreprise dispose maintenant d'un environnement informatique complet et professionnel.
+                        Les comptes sont centralisés, la messagerie est unifiée, et les postes sont gérés de manière
+                        homogène.
+                    </p>
+                </div>
+            </div>
+
+            <aside class="content-right">
+                <div class="info-card">
+                    <h3>Infos Techniques</h3>
+                    <ul>
+                        <li><strong>Entreprise :</strong> Althec Sécurité</li>
+                        <li><strong>Rôle :</strong> Admin Système (Alternance)</li>
+                        <li><strong>Périmètre :</strong> Toute l'entreprise</li>
+                    </ul>
+                    <hr>
+                    <h3>Stack Technique</h3>
+                    <div class="stack-list">
+                        <span class="stack-tag">Windows Server 2022</span>
+                        <span class="stack-tag">Active Directory</span>
+                        <span class="stack-tag">DNS / DHCP</span>
+                        <span class="stack-tag">GPO</span>
+                        <span class="stack-tag">Microsoft 365</span>
+                        <span class="stack-tag">Exchange Online</span>
+                        <span class="stack-tag">Teams</span>
+                        <span class="stack-tag">OneDrive</span>
+                    </div>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <footer>
+        © 2026 Brieuc Métairie – Portfolio
+    </footer>
+
+    <button id="themeToggle" class="theme-btn">🌙</button>
+
+    <script src="js/lang.js?v=3"></script>
+    <script src="script.js?v=3" defer></script>
+    <script src="js/console.js?v=3" defer></script>
+</body>
+
+</html>

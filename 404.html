@@ -14,10 +14,11 @@
     <meta property="og:description" content="Oups ! Vous êtes perdu ?" />
     <meta property="og:image" content="https://brieuc-metairie.fr/images/banner.webp" />
 
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 
 <body class="page-404">
+    <a href="#main-content" class="skip-link">Aller au contenu</a>
     <div id="scrollProgress"></div>
 
     <header>
@@ -27,7 +28,7 @@
                 <small class="subtitle typing-cursor">404 Error Detected</small>
             </div>
 
-            <nav class="nav-links">
+            <nav class="nav-links" aria-label="Navigation principale">
                 <a href="index.html" class="tab-btn">Accueil</a>
                 <a href="entreprise.html" class="tab-btn">Entreprise</a>
                 <a href="activites.html" class="tab-btn">Activités</a>
@@ -45,7 +46,7 @@
         </div>
     </header>
 
-    <main class="page-404-content">
+    <main id="main-content" class="page-404-content">
         <div class="container">
             <h1>40<span class="glitch">4</span></h1>
 
@@ -113,14 +114,15 @@
             </div>
         </div>
         <div class="footer-bottom">
-            © 2025 Brieuc Métairie – Tous droits réservés.
+            © 2026 Brieuc Métairie – Portfolio
         </div>
     </footer>
 
     <button id="themeToggle" class="theme-btn" aria-label="Changer de thème">🌙</button>
 
-    <script src="js/lang.js"></script>
-    <script src="script.js" defer></script>
+    <script src="js/lang.js?v=3"></script>
+    <script src="script.js?v=3" defer></script>
+    <script src="js/console.js?v=3" defer></script>
 </body>
 
 </html>

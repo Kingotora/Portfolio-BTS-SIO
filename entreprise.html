@@ -26,10 +26,11 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;900&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 
 <body>
+    <a href="#main-content" class="skip-link">Aller au contenu</a>
     <div id="scrollProgress"></div>
 
     <header>
@@ -39,7 +40,7 @@
                 <small class="subtitle typing-cursor" data-i18n="hero.subtitle">Étudiant BTS SIO – option SISR</small>
             </div>
 
-            <nav class="nav-links">
+            <nav class="nav-links" aria-label="Navigation principale">
                 <a href="index.html" class="tab-btn" data-i18n="nav.accueil">Accueil</a>
                 <a href="entreprise.html" class="tab-btn active" aria-selected="true" style="text-decoration:none"
                     data-i18n="nav.entreprise">Entreprise</a>
@@ -65,33 +66,55 @@
         </div>
     </header>
 
-    <main>
+    <main id="main-content">
         <!-- ENTREPRISE -->
-        <section id="entreprise">
+        <section id="entreprise" class="fade-in-up">
             <h2 data-i18n="company.title">Mon alternance chez Althec</h2>
             <p data-i18n="company.intro_title">Présentation de l’entreprise</p>
-            <img loading="lazy" class="logo" src="images/logoalthec.webp" alt="Logo Althec Sécurité Systèmes" />
+            <div class="company-intro">
+                <img loading="lazy" class="logo" src="images/logoalthec.webp" alt="Logo Althec Sécurité Systèmes" />
+                <p data-i18n="company.desc">
+                    <strong>ALTHEC Sécurité Systèmes</strong> est une PME spécialisée dans la sûreté électronique.
+                    Elle accompagne ses clients de manière complète : analyse du besoin, choix de la solution,
+                    installation sur site, puis maintenance dans la durée.
+                    La relation client est directe, ce qui permet d’adapter rapidement les solutions.
+                </p>
+            </div>
 
-            <p data-i18n="company.desc">
-                <strong>ALTHEC Sécurité Systèmes</strong> est une PME spécialisée dans la sûreté électronique.
-                Elle accompagne ses clients de manière complète : analyse du besoin, choix de la solution,
-                installation sur site, puis maintenance dans la durée.
-                La relation client est directe, ce qui permet d’adapter rapidement les solutions.
-            </p>
-
-            <p><strong data-i18n="company.details.social">Raison sociale :</strong> ALTHEC SECURITE SYSTEMES</p>
-            <p><strong data-i18n="company.details.legal">Forme juridique :</strong> SARL à associé unique (capital
-                social 80&nbsp;000&nbsp;€)</p>
-            <p><strong data-i18n="company.details.creation">Date de création :</strong> 4 janvier 2006</p>
-            <p><strong data-i18n="company.details.hq">Siège social :</strong> 4 rue Voltaire, 94290 Villeneuve-le-Roi
-            </p>
-            <p><strong data-i18n="company.details.sector">Secteur :</strong> alarmes intrusion, vidéosurveillance IP,
-                contrôle d’accès, interphonie.</p>
-            <p><strong data-i18n="company.details.zone">Zone :</strong> principalement Île-de-France.</p>
-            <p><strong data-i18n="company.details.clients">Clientèle :</strong> commerces, PME, collectivités,
-                copropriétés.</p>
-            <p><strong data-i18n="company.details.turnover">Chiffre d’affaires :</strong> diffusions restreintes ;
-                activité stable depuis 2006.</p>
+            <div class="company-details-grid">
+                <div class="detail-item">
+                    <strong data-i18n="company.details.social">Raison sociale :</strong>
+                    <span>ALTHEC SECURITE SYSTEMES</span>
+                </div>
+                <div class="detail-item">
+                    <strong data-i18n="company.details.legal">Forme juridique :</strong>
+                    <span>SARL à associé unique (capital 80&nbsp;000&nbsp;€)</span>
+                </div>
+                <div class="detail-item">
+                    <strong data-i18n="company.details.creation">Date de création :</strong>
+                    <span>4 janvier 2006</span>
+                </div>
+                <div class="detail-item">
+                    <strong data-i18n="company.details.hq">Siège social :</strong>
+                    <span>4 rue Voltaire, 94290 Villeneuve-le-Roi</span>
+                </div>
+                <div class="detail-item">
+                    <strong data-i18n="company.details.sector">Secteur :</strong>
+                    <span>alarmes intrusion, vidéosurveillance IP, contrôle d’accès, interphonie.</span>
+                </div>
+                <div class="detail-item">
+                    <strong data-i18n="company.details.zone">Zone :</strong>
+                    <span>principalement Île-de-France.</span>
+                </div>
+                <div class="detail-item">
+                    <strong data-i18n="company.details.clients">Clientèle :</strong>
+                    <span>commerces, PME, collectivités, copropriétés.</span>
+                </div>
+                <div class="detail-item">
+                    <strong data-i18n="company.details.turnover">Chiffre d’affaires :</strong>
+                    <span>diffusions restreintes ; activité stable depuis 2006.</span>
+                </div>
+            </div>
 
             <h3 data-i18n="company.activity.title">Activité principale</h3>
             <p data-i18n="company.activity.text">
@@ -122,14 +145,14 @@
         </section>
 
         <!-- MES MISSIONS -->
-        <section id="missions">
+        <section id="missions" class="fade-in-up">
             <h2 data-i18n="missions.title">🎯 Mes Missions</h2>
             <p data-i18n="missions.intro">Durant mon stage chez Althec, j'ai été impliqué dans deux domaines
                 principaux qui m'ont permis de développer mes compétences techniques et relationnelles.</p>
 
             <div class="missions-grid">
                 <div class="mission-card">
-                    <div class="mission-icon">🌐</div>
+
                     <h3 data-i18n="missions.network.title">Configuration Réseau</h3>
                     <p data-i18n="missions.network.desc">Paramétrage et déploiement des équipements réseau sur site
                         client : switches, routeurs, NVR (enregistreurs vidéo réseau), caméras IP. Configuration des
@@ -144,7 +167,7 @@
                 </div>
 
                 <div class="mission-card">
-                    <div class="mission-icon">🛟</div>
+
                     <h3 data-i18n="missions.support.title">Support Client</h3>
                     <p data-i18n="missions.support.desc">Assistance téléphonique et sur site auprès des clients pour
                         résoudre les incidents liés aux systèmes de sûreté. Diagnostic des pannes, interventions
@@ -160,7 +183,7 @@
         </section>
 
         <!-- PROJET MENÉ -->
-        <section id="projet">
+        <section id="projet" class="fade-in-up">
             <h2 data-i18n="project.title">🚀 Projet Mené — Cluster Proxmox & Ceph</h2>
             <p data-i18n="project.intro">J'ai conçu et déployé une infrastructure de virtualisation haute
                 disponibilité basée sur Proxmox VE avec un stockage distribué Ceph, composée de trois nœuds physiques.
@@ -283,7 +306,6 @@
     <button id="themeToggle" class="theme-btn" aria-label="Changer de thème">🌙</button>
 
     <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
     <!-- CONTACT MODAL -->
     <dialog id="contactModal">
@@ -307,15 +329,20 @@
                         placeholder="Bonjour, je vous contacte pour..."></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary" id="sendBtn">Envoyer</button>
+                <!-- Honeypot anti-spam (hidden from users) -->
+                <div class="honeypot" aria-hidden="true">
+                    <label for="website_url">Ne pas remplir</label>
+                    <input type="text" id="website_url" name="website_url" tabindex="-1" autocomplete="off" />
+                </div>
                 <p id="formStatus" style="margin-top:1rem; font-size:0.9rem;"></p>
             </form>
         </div>
     </dialog>
 
-    <script src="js/lang.js"></script>
-    <script src="script.js" defer></script>
-    <script src="js/console.js?v=FIXED3" defer></script>
 
+    <script src="js/lang.js?v=3"></script>
+    <script src="script.js?v=3" defer></script>
+    <script src="js/console.js?v=3" defer></script>
 </body>
 
 </html>

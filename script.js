@@ -138,6 +138,10 @@ if (navToggle && navLinks) {
     navToggle.classList.toggle('open');
     navLinks.classList.toggle('active');
 
+    // Accessibility: aria-expanded
+    const isExpanded = navToggle.classList.contains('open');
+    navToggle.setAttribute('aria-expanded', isExpanded);
+
     // Prevent body scroll when menu is open
     if (navLinks.classList.contains('active')) {
       document.body.style.overflow = 'hidden';
@@ -199,15 +203,17 @@ function renderProjects() {
 
   // 1. Render School Projects (activites.html)
   const schoolContainer = document.getElementById('projectsSchool');
+  const proContainer = document.getElementById('projectsPro');
   const personalContainer = document.getElementById('projectsPersonal');
 
   // 2. Render Latest Projects (index.html)
   const latestContainer = document.getElementById('projectsLatest');
 
-  if (!schoolContainer && !personalContainer && !latestContainer) return;
+  if (!schoolContainer && !proContainer && !personalContainer && !latestContainer) return;
 
   // Clear content before re-rendering
   if (schoolContainer) schoolContainer.innerHTML = '';
+  if (proContainer) proContainer.innerHTML = '';
   if (personalContainer) personalContainer.innerHTML = '';
   if (latestContainer) latestContainer.innerHTML = '';
 
@@ -222,6 +228,7 @@ function renderProjects() {
 
   let visibleCount = 0;
   let schoolCount = 0;
+  let proCount = 0;
   let personalCount = 0;
 
   // Helper to create card
@@ -254,6 +261,8 @@ function renderProjects() {
       detailsHTML += `<p><strong data-i18n="${project.envKey}">${translations[currentLang][project.envKey]}</strong> ${project.envText}</p>`;
     } else if (project.matKey && project.matText) {
       detailsHTML += `<p><strong data-i18n="${project.matKey}">${translations[currentLang][project.matKey]}</strong> ${project.matText}</p>`;
+    } else if (project.contentKey) {
+      detailsHTML += `<p><strong data-i18n="projects.content_label">${translations[currentLang]['projects.content_label']}</strong> <span data-i18n="${project.contentKey}">${translations[currentLang][project.contentKey]}</span></p>`;
     } else if (project.content) {
       detailsHTML += `<p><strong>Contenu :</strong> ${project.content}</p>`;
     }
@@ -317,7 +326,7 @@ function renderProjects() {
 
     // Logic for Activites page
     PROJECTS.forEach(project => {
-      if (schoolContainer || personalContainer) {
+      if (schoolContainer || proContainer || personalContainer) {
         const tags = project.tags || [];
         // Multi-tag Logic: OR logic (inclusive)
         const matchesTag = isAll || activeTags.some(t => tags.includes(t));
@@ -334,6 +343,9 @@ function renderProjects() {
           if (project.type === 'school' && schoolContainer) {
             schoolContainer.appendChild(card);
             schoolCount++;
+          } else if (project.type === 'professional' && proContainer) {
+            proContainer.appendChild(card);
+            proCount++;
           } else if (project.type === 'personal' && personalContainer) {
             personalContainer.appendChild(card);
             personalCount++;
@@ -345,8 +357,10 @@ function renderProjects() {
 
   // Update Titles Visibility on Activites Page
   const tSchool = document.querySelector('[data-i18n="projects.school_title"]');
+  const tPro = document.querySelector('[data-i18n="projects.pro_title"]');
   const tPerso = document.querySelector('[data-i18n="projects.personal_title"]');
   if (tSchool) tSchool.style.display = schoolCount > 0 ? 'block' : 'none';
+  if (tPro) tPro.style.display = proCount > 0 ? 'block' : 'none';
   if (tPerso) tPerso.style.display = personalCount > 0 ? 'block' : 'none';
 
   // No Results
@@ -429,18 +443,24 @@ document.querySelectorAll('.tag-filter').forEach(btn => {
 });
 
 
-// =========================================
-//  CONTACT FORM (EMAILJS)
-// =========================================
-// Initialize EmailJS
-(function () {
-  if (typeof emailjs !== 'undefined') {
-    emailjs.init({
-      publicKey: 'AMbZG589fBcjogWQ8',
-      privateKey: 'hfN57mZelNaU6g2bqQ46k'
-    });
-  }
-})();
+// Lazy-load EmailJS SDK only when contact modal opens
+let emailjsLoaded = false;
+function loadEmailJS() {
+  return new Promise((resolve, reject) => {
+    if (emailjsLoaded) { resolve(); return; }
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+    script.onload = () => {
+      emailjsLoaded = true;
+      if (typeof emailjs !== 'undefined') {
+        emailjs.init({ publicKey: 'AMbZG589fBcjogWQ8' });
+      }
+      resolve();
+    };
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+}
 
 // =========================================
 //  TOAST NOTIFICATIONS (Global)
@@ -479,9 +499,27 @@ function showToast(message, type = 'info') {
 //  EMAILJS INTEGRATION
 // =========================================
 const contactForm = document.getElementById('contactForm');
+// Anti-spam: rate limiting
+let lastSubmitTime = 0;
+
 if (contactForm) {
   contactForm.addEventListener('submit', function (event) {
     event.preventDefault();
+
+    // Honeypot check: if the hidden field is filled, it's a bot
+    const honeypot = document.getElementById('website_url');
+    if (honeypot && honeypot.value) {
+      console.warn('Spam detected');
+      return;
+    }
+
+    // Rate limiting: prevent submissions within 10 seconds
+    const now = Date.now();
+    if (now - lastSubmitTime < 10000) {
+      showToast('Veuillez patienter avant de renvoyer un message.', 'info');
+      return;
+    }
+    lastSubmitTime = now;
 
     const btn = document.getElementById('sendBtn');
     const status = document.getElementById('formStatus');
@@ -489,12 +527,13 @@ if (contactForm) {
     btn.textContent = 'Envoi...';
     btn.disabled = true;
 
-    // Build FormData manually to include accessToken (private key)
+    // Build FormData (public key only, no private key)
     const formData = new FormData(this);
+    // Remove honeypot field from submission
+    formData.delete('website_url');
     formData.append('service_id', 'service_ai6odsp');
     formData.append('template_id', 'template_h2a018w');
     formData.append('user_id', 'AMbZG589fBcjogWQ8');
-    formData.append('accessToken', 'hfN57mZelNaU6g2bqQ46k');
 
     fetch('https://api.emailjs.com/api/v1.0/email/send-form', {
       method: 'POST',
@@ -541,7 +580,7 @@ const headerContactBtn = document.querySelector('.header-contact .btn');
 if (contactModal && headerContactBtn) {
   headerContactBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    contactModal.showModal();
+    loadEmailJS().then(() => contactModal.showModal());
   });
 }
 
@@ -550,7 +589,7 @@ const mobileContactBtn = document.getElementById('mobileContactBtn');
 if (contactModal && mobileContactBtn) {
   mobileContactBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    contactModal.showModal();
+    loadEmailJS().then(() => contactModal.showModal());
   });
 }
 const closeContactBtn = document.getElementById('closeContact');

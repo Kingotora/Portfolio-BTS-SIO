@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Veille Technologique & Blog — Brieuc Métairie</title>
+    <title>Veille & Analyses Tech — Brieuc Métairie</title>
     <meta name="description"
-        content="Suivez ma veille technologique et mes actualités sur la Cybersécurité, Windows Server, Linux et l'administration système." />
+        content="Ma veille sur la cybersécurité et le sysadmin. J'analyse ce qui bouge dans la tech pour rester à jour et comprendre les enjeux." />
     <meta name="theme-color" content="#0f172a" />
     <link rel="icon" href="images/favicon.ico" />
     <link rel="canonical" href="https://brieuc-metairie.fr/veille.html" />
@@ -34,10 +34,11 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;900&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 
 <body>
+    <a href="#main-content" class="skip-link">Aller au contenu</a>
     <div id="scrollProgress"></div>
 
     <header>
@@ -47,7 +48,7 @@
                 <small class="subtitle typing-cursor" data-i18n="hero.subtitle">Étudiant BTS SIO – option SISR</small>
             </div>
 
-            <nav class="nav-links">
+            <nav class="nav-links" aria-label="Navigation principale">
                 <a href="index.html" class="tab-btn" data-i18n="nav.accueil">Accueil</a>
                 <a href="entreprise.html" class="tab-btn" data-i18n="nav.entreprise">Entreprise</a>
                 <a href="activites.html" class="tab-btn" data-i18n="nav.activites">Activités</a>
@@ -73,9 +74,9 @@
         </div>
     </header>
 
-    <main>
+    <main id="main-content">
         <!-- VEILLE -->
-        <section id="veille">
+        <section id="veille" class="fade-in-up">
             <div class="blog-header">
                 <h2 data-i18n="blog.title">Blog & Veille Tech</h2>
                 <p class="intro" data-i18n="blog.intro">
@@ -84,7 +85,7 @@
                 </p>
             </div>
             <!-- ANALYSIS SECTION -->
-            <div class="analysis-section">
+            <div class="analysis-section fade-in-up">
                 <h3 data-i18n="blog.analysis.title">📝 Mes Analyses d'Articles</h3>
                 <p class="analysis-intro" data-i18n="blog.analysis.intro">
                     Dans le cadre de mon BTS SIO, je sélectionne des articles pertinents et j'en rédige une analyse
@@ -92,121 +93,200 @@
                 </p>
 
                 <div class="analysis-grid">
-                    <!-- Analysis Card 1 -->
+                    <!-- Analysis Card 3 -->
                     <article class="analysis-card">
                         <div class="analysis-header">
                             <span class="analysis-badge" data-i18n="blog.analysis.badge">📖 Analyse</span>
-                            <span class="analysis-date" data-i18n="blog.analysis1.date">📅 10 Fév 2026</span>
+                            <span class="analysis-date" data-i18n="blog.analysis3.date">📅 15 Fév 2026</span>
                         </div>
-                        <h4 data-i18n="blog.analysis1.title">L'essor des passkeys : vers la fin des mots de passe ?</h4>
+                        <h4 data-i18n="blog.analysis3.title">L'IA au service de la détection des cybermenaces</h4>
                         <div class="analysis-meta">
-                            <span data-i18n="blog.analysis1.source">Source : IT-Connect</span>
+                            <span data-i18n="blog.analysis3.source">Source : IT-Connect</span>
                         </div>
                         <div class="analysis-body">
                             <p class="analysis-summary-label" data-i18n="blog.analysis.summary_label"><strong>Résumé de
                                     l'article :</strong></p>
-                            <p data-i18n="blog.analysis1.summary">
-                                Les passkeys (clés d'accès) remplacent progressivement les mots de passe traditionnels.
-                                Basées sur la norme FIDO2/WebAuthn, elles utilisent la biométrie ou un PIN local pour
-                                authentifier l'utilisateur sans jamais transmettre de secret au serveur.
-                                Google, Apple et Microsoft les intègrent désormais nativement.
+                            <p data-i18n="blog.analysis3.summary">
+                                L'intelligence artificielle s'impose comme un outil incontournable dans les SOC
+                                (Security Operations Centers). Les solutions basées sur le machine learning analysent
+                                des millions d'événements en temps réel pour détecter des comportements anormaux,
+                                réduisant le temps de détection des intrusions de plusieurs jours à quelques minutes.
+                                Des éditeurs comme CrowdStrike, Darktrace ou Microsoft Sentinel intègrent ces
+                                capacités nativement.
                             </p>
                             <p class="analysis-label" data-i18n="blog.analysis.my_analysis"><strong>Mon analyse
                                     :</strong></p>
-                            <p data-i18n="blog.analysis1.analysis">
-                                En tant que futur administrateur système, cette évolution m'intéresse particulièrement.
-                                Les mots de passe restent le maillon faible de la sécurité : phishing, réutilisation,
-                                complexité insuffisante. Les passkeys résolvent ces problèmes en supprimant le secret
-                                partagé.
-                                Cependant, le déploiement en entreprise pose des questions : compatibilité avec les
-                                anciens
-                                systèmes, gestion centralisée via Active Directory, et formation des utilisateurs.
-                                C'est une technologie à suivre de près pour les DSI.
+                            <p data-i18n="blog.analysis3.analysis">
+                                Pour un futur administrateur système, l'IA dans la cybersécurité change la donne.
+                                Les outils de supervision classiques (Nagios, Zabbix) ne suffisent plus face au volume
+                                d'alertes. L'IA permet de trier le bruit et de remonter uniquement les vrais incidents.
+                                Mais il faut rester vigilant : ces outils ne remplacent pas l'expertise humaine, ils
+                                l'augmentent. Un faux positif mal géré peut être aussi problématique qu'une vraie
+                                attaque ignorée. C'est un domaine que je veux approfondir, notamment via des labos
+                                avec Wazuh ou ELK Stack.
                             </p>
                         </div>
-                        <a href="https://www.it-connect.fr/" target="_blank" rel="noopener noreferrer" class="read-more"
-                            data-i18n="blog.read_more">Lire l'article complet →</a>
+                        <a href="https://www.it-connect.fr/microsoft-copilot-for-security-disponible-le-1er-avril-2024-ce-quil-faut-savoir/"
+                            target="_blank" rel="noopener noreferrer" class="read-more" data-i18n="blog.read_more">Lire
+                            l'article complet →</a>
                     </article>
 
-                    <!-- Analysis Card 2 -->
+                    <!-- Analysis Card 4 -->
                     <article class="analysis-card">
                         <div class="analysis-header">
                             <span class="analysis-badge" data-i18n="blog.analysis.badge">📖 Analyse</span>
-                            <span class="analysis-date" data-i18n="blog.analysis2.date">📅 28 Jan 2026</span>
+                            <span class="analysis-date" data-i18n="blog.analysis4.date">📅 12 Fév 2026</span>
                         </div>
-                        <h4 data-i18n="blog.analysis2.title">NIS 2 : la nouvelle directive européenne de cybersécurité
+                        <h4 data-i18n="blog.analysis4.title">Les limites de l'IA face aux cyberattaques sophistiquées
                         </h4>
                         <div class="analysis-meta">
-                            <span data-i18n="blog.analysis2.source">Source : ANSSI</span>
+                            <span data-i18n="blog.analysis4.source">Source : ZDNet</span>
                         </div>
                         <div class="analysis-body">
                             <p class="analysis-summary-label" data-i18n="blog.analysis.summary_label"><strong>Résumé de
                                     l'article :</strong></p>
-                            <p data-i18n="blog.analysis2.summary">
-                                La directive NIS 2, entrée en vigueur en octobre 2024, élargit considérablement le
-                                périmètre
-                                des organisations soumises à des obligations de cybersécurité en Europe.
-                                Elle impose des mesures de gestion des risques, de signalement d'incidents et de
-                                gouvernance
-                                à des milliers d'entités supplémentaires, y compris des PME et collectivités.
+                            <p data-i18n="blog.analysis4.summary">
+                                Si l'IA améliore la détection, les attaquants l'utilisent aussi à leur avantage.
+                                Des campagnes de phishing générées par des LLM (Large Language Models) produisent
+                                des emails quasi parfaits, sans fautes ni incohérences. Les deepfakes audio permettent
+                                de contourner l'authentification vocale. L'article souligne que la course entre
+                                attaquants et défenseurs entre dans une nouvelle ère.
                             </p>
                             <p class="analysis-label" data-i18n="blog.analysis.my_analysis"><strong>Mon analyse
                                     :</strong></p>
-                            <p data-i18n="blog.analysis2.analysis">
-                                NIS 2 va transformer le quotidien des administrateurs système et réseau. Les entreprises
-                                devront renforcer leurs politiques de sauvegarde, de supervision et de réponse aux
-                                incidents.
-                                Pour un technicien SISR, cela signifie maîtriser les outils de détection (SIEM, IDS),
-                                documenter rigoureusement les procédures et participer à des exercices de crise.
-                                C'est un cadre réglementaire qui valorise notre métier et rend nos compétences
-                                indispensables.
+                            <p data-i18n="blog.analysis4.analysis">
+                                Cet article complète bien le précédent : l'IA n'est pas qu'un bouclier, c'est aussi
+                                une arme. En tant que technicien réseau, ça m'oblige à repenser la sensibilisation
+                                des utilisateurs. Un mail de phishing généré par IA sera beaucoup plus difficile à
+                                repérer qu'avant. La solution passe par des couches de protection multiples : filtrage
+                                email avancé, MFA obligatoire, formation continue des utilisateurs et segmentation
+                                réseau stricte. L'humain reste le dernier maillon de la chaîne de défense.
                             </p>
                         </div>
-                        <a href="https://www.cert.ssi.gouv.fr/" target="_blank" rel="noopener noreferrer"
-                            class="read-more" data-i18n="blog.read_more">Lire l'article complet →</a>
+                        <a href="https://www.zdnet.fr/actualites/l-ia-rend-le-phishing-plus-redoutable-que-jamais-une-nouvelle-menace-pour-les-entreprises-39965254.htm"
+                            target="_blank" rel="noopener noreferrer" class="read-more" data-i18n="blog.read_more">Lire
+                            l'article complet →</a>
+                    </article>
+
+                    <!-- Analysis Card 5 -->
+                    <article class="analysis-card">
+                        <div class="analysis-header">
+                            <span class="analysis-badge" data-i18n="blog.analysis.badge">📖 Analyse</span>
+                            <span class="analysis-date" data-i18n="blog.analysis5.date">📅 08 Fév 2026</span>
+                        </div>
+                        <h4 data-i18n="blog.analysis5.title">Zero Trust : pourquoi ce modèle s'impose en 2026</h4>
+                        <div class="analysis-meta">
+                            <span data-i18n="blog.analysis5.source">Source : Numerama</span>
+                        </div>
+                        <div class="analysis-body">
+                            <p class="analysis-summary-label" data-i18n="blog.analysis.summary_label"><strong>Résumé de
+                                    l'article :</strong></p>
+                            <p data-i18n="blog.analysis5.summary">
+                                Le modèle Zero Trust ("ne jamais faire confiance, toujours vérifier") devient la norme
+                                en cybersécurité d'entreprise. Plutôt que de considérer le réseau interne comme sûr,
+                                chaque accès est vérifié individuellement : identité de l'utilisateur, état du poste,
+                                localisation, comportement. Microsoft, Google et Cloudflare proposent des solutions
+                                clés en main pour adopter cette approche.
+                            </p>
+                            <p class="analysis-label" data-i18n="blog.analysis.my_analysis"><strong>Mon analyse
+                                    :</strong></p>
+                            <p data-i18n="blog.analysis5.analysis">
+                                Le Zero Trust remet en question tout ce qu'on apprend sur la sécurité périmétrique
+                                traditionnelle (pare-feu = mur de protection). Dans la réalité, les attaques viennent
+                                souvent de l'intérieur (compte compromis, clé USB infectée). Avec le travail hybride
+                                et le cloud, la notion de "réseau interne sûr" n'a plus de sens. Pour un admin SISR,
+                                ça veut dire repenser l'architecture : micro-segmentation, authentification forte à
+                                chaque accès, et logs centralisés pour pouvoir auditer chaque connexion.
+                            </p>
+                        </div>
+                        <a href="https://www.cloudflare.com/fr-fr/learning/security/glossary/what-is-zero-trust/"
+                            target="_blank" rel="noopener noreferrer" class="read-more" data-i18n="blog.read_more">Lire
+                            l'article complet →</a>
+                    </article>
+
+                    <!-- Analysis Card 6 -->
+                    <article class="analysis-card">
+                        <div class="analysis-header">
+                            <span class="analysis-badge" data-i18n="blog.analysis.badge">📖 Analyse</span>
+                            <span class="analysis-date" data-i18n="blog.analysis6.date">📅 03 Fév 2026</span>
+                        </div>
+                        <h4 data-i18n="blog.analysis6.title">Retour d'expérience : déployer le Zero Trust dans une PME
+                        </h4>
+                        <div class="analysis-meta">
+                            <span data-i18n="blog.analysis6.source">Source : Korben</span>
+                        </div>
+                        <div class="analysis-body">
+                            <p class="analysis-summary-label" data-i18n="blog.analysis.summary_label"><strong>Résumé de
+                                    l'article :</strong></p>
+                            <p data-i18n="blog.analysis6.summary">
+                                Un retour d'expérience détaille le déploiement progressif du Zero Trust dans une PME
+                                de 80 salariés. L'entreprise a commencé par imposer le MFA sur tous les accès, puis
+                                a mis en place un proxy d'accès conditionnel (Cloudflare Access), avant de segmenter
+                                son réseau en micro-zones. Le projet a pris 6 mois et a réduit les incidents de
+                                sécurité de 70 %.
+                            </p>
+                            <p class="analysis-label" data-i18n="blog.analysis.my_analysis"><strong>Mon analyse
+                                    :</strong></p>
+                            <p data-i18n="blog.analysis6.analysis">
+                                Ce retour terrain est très instructif. Il montre que le Zero Trust n'est pas réservé
+                                aux grands groupes : une PME peut l'adopter progressivement, en commençant par le MFA
+                                (le plus simple et le plus efficace). Ce qui m'intéresse, c'est la démarche par
+                                étapes : on ne casse pas tout pour reconstruire, on améliore couche par couche.
+                                C'est exactement l'approche que je voudrais appliquer en entreprise. La réduction
+                                de 70 % des incidents prouve que l'effort en vaut la peine.
+                            </p>
+                        </div>
+                        <a href="https://www.lemagit.fr/conseil/Zero-Trust-comment-demarrer" target="_blank"
+                            rel="noopener noreferrer" class="read-more" data-i18n="blog.read_more">Lire l'article
+                            complet →</a>
                     </article>
                 </div>
-            </div>
 
-            <h3 style="margin-top: 2rem;" data-i18n="blog.rss_title">📡 Flux RSS — Actualités en temps réel</h3>
+                <section id="rss-feed-section" class="fade-in-up">
+                    <h3 style="margin-top: 2rem;" data-i18n="blog.rss_title">📡 Flux RSS — Actualités en temps réel</h3>
 
-            <div class="articles-grid blog-layout" id="rss-feed">
-                <!-- LE CONTENU SERA CHARGÉ PAR JS -->
-                <div class="loader-container" style="grid-column: 1 / -1; text-align:center; padding: 4rem;">
-                    <div class="spinner" style="
-                        border: 4px solid rgba(255,255,255,0.1); 
-                        border-left-color: var(--color-brand); 
-                        border-radius: 50%; 
-                        width: 40px; 
-                        height: 40px; 
-                        animation: spin 1s linear infinite;
-                        margin: 0 auto 1rem;"></div>
-                    <p style="color:var(--text-secondary)">Chargement des actualités...</p>
-                </div>
-            </div>
+                    <div class="articles-grid blog-layout" id="rss-feed">
+                        <!-- LE CONTENU SERA CHARGÉ PAR JS -->
+                        <div class="loader-container" style="grid-column: 1 / -1; text-align:center; padding: 4rem;">
+                            <div class="spinner" style="
+                            border: 4px solid rgba(255,255,255,0.1); 
+                            border-left-color: var(--color-brand); 
+                            border-radius: 50%; 
+                            width: 40px; 
+                            height: 40px; 
+                            animation: spin 1s linear infinite;
+                            margin: 0 auto 1rem;"></div>
+                            <p style="color:var(--text-secondary)">Chargement des actualités...</p>
+                        </div>
+                    </div>
+                </section>
 
-            <div class="sources-section">
-                <h3 data-i18n="blog.stack_title">📚 Ma Stack de Veille</h3>
-                <div class="sources-tags">
-                    <a href="https://www.it-connect.fr/" target="_blank" rel="noopener noreferrer" class="source-tag">💻
-                        IT-Connect</a>
-                    <a href="https://www.cert.ssi.gouv.fr/" target="_blank" rel="noopener noreferrer"
-                        class="source-tag">🛡️ ANSSI</a>
-                    <a href="https://korben.info/" target="_blank" rel="noopener noreferrer" class="source-tag">🐧
-                        Korben</a>
-                    <a href="https://www.zdnet.fr/" target="_blank" rel="noopener noreferrer" class="source-tag">📰
-                        ZDNet</a>
-                    <a href="https://www.cnil.fr/" target="_blank" rel="noopener noreferrer" class="source-tag">⚖️
-                        CNIL</a>
-                    <a href="https://www.journalduhacker.net/" target="_blank" rel="noopener noreferrer"
-                        class="source-tag">🧑‍💻 J. du Hacker</a>
-                    <a href="https://www.numerama.com/" target="_blank" rel="noopener noreferrer" class="source-tag">🟣
-                        Numerama</a>
-                    <a href="https://www.developpez.com/" target="_blank" rel="noopener noreferrer" class="source-tag">☕
-                        Developpez</a>
-                    <a href="https://www.clubic.com/" target="_blank" rel="noopener noreferrer" class="source-tag">🗞️
-                        Clubic</a>
-                </div>
+                <section class="sources-section fade-in-up">
+                    <h3 data-i18n="blog.stack_title">📚 Ma Stack de Veille</h3>
+                    <div class="sources-tags">
+                        <a href="https://www.it-connect.fr/" target="_blank" rel="noopener noreferrer"
+                            class="source-tag">💻
+                            IT-Connect</a>
+                        <a href="https://www.cert.ssi.gouv.fr/" target="_blank" rel="noopener noreferrer"
+                            class="source-tag">🛡️ ANSSI</a>
+                        <a href="https://korben.info/" target="_blank" rel="noopener noreferrer" class="source-tag">🐧
+                            Korben</a>
+                        <a href="https://www.zdnet.fr/" target="_blank" rel="noopener noreferrer" class="source-tag">📰
+                            ZDNet</a>
+                        <a href="https://www.cnil.fr/" target="_blank" rel="noopener noreferrer" class="source-tag">⚖️
+                            CNIL</a>
+                        <a href="https://www.journalduhacker.net/" target="_blank" rel="noopener noreferrer"
+                            class="source-tag">🧑‍💻 J. du Hacker</a>
+                        <a href="https://www.numerama.com/" target="_blank" rel="noopener noreferrer"
+                            class="source-tag">🟣
+                            Numerama</a>
+                        <a href="https://www.developpez.com/" target="_blank" rel="noopener noreferrer"
+                            class="source-tag">☕
+                            Developpez</a>
+                        <a href="https://www.clubic.com/" target="_blank" rel="noopener noreferrer"
+                            class="source-tag">🗞️
+                            Clubic</a>
+                    </div>
             </div>
         </section>
     </main>
@@ -271,7 +351,6 @@
     <button id="themeToggle" class="theme-btn" aria-label="Changer de thème">🌙</button>
 
     <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
     <!-- CONTACT MODAL -->
     <dialog id="contactModal">
@@ -295,6 +374,11 @@
                         placeholder="Bonjour, je vous contacte pour..."></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary" id="sendBtn">Envoyer</button>
+                <!-- Honeypot anti-spam (hidden from users) -->
+                <div class="honeypot" aria-hidden="true">
+                    <label for="website_url">Ne pas remplir</label>
+                    <input type="text" id="website_url" name="website_url" tabindex="-1" autocomplete="off" />
+                </div>
                 <p id="formStatus" style="margin-top:1rem; font-size:0.9rem;"></p>
             </form>
         </div>
@@ -306,11 +390,11 @@
     <!-- MOBILE CONTACT FAB -->
     <button id="mobileContactBtn" class="mobile-fab" aria-label="Me contacter">✉️</button>
 
-    <script src="rss_manager.js" defer></script>
-    <script src="js/lang.js"></script>
-    <script src="script.js" defer></script>
-    <script src="js/console.js?v=FIXED3" defer></script>
 
+    <script src="rss_manager.js?v=3" defer></script>
+    <script src="js/lang.js?v=3"></script>
+    <script src="script.js?v=3" defer></script>
+    <script src="js/console.js?v=3" defer></script>
 </body>
 
 </html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Newsletter — Brieuc Métairie</title>
+    <meta name="description"
+        content="Détail du projet Newsletter : système complet de newsletter pour une association, déployé avec Node.js, SQLite et Brevo." />
+    <meta name="theme-color" content="#38bdf8" />
+    <link rel="icon" href="images/favicon.ico" />
+    <link rel="canonical" href="https://brieuc-metairie.fr/projet-newsletter.html" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=3">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      "name": "Système de Newsletter pour une association",
+      "description": "Conception et déploiement d'un système complet de newsletter clé-en-main pour une association.",
+      "author": {
+          "@type": "Person",
+          "name": "Brieuc Métairie"
+      },
+      "url": "https://brieuc-metairie.fr/projet-newsletter.html",
+      "keywords": "Node.js, SQLite, Brevo, Newsletter, Email, API, Backend"
+    }
+  </script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Aller au contenu</a>
+    <div id="scrollProgress"></div>
+    <header>
+        <div class="header-inner">
+            <div class="name-badge brand-strong">
+                <span class="big-name">Brieuc Métairie</span>
+                <small class="subtitle typing-cursor" data-i18n="hero.subtitle">Étudiant BTS SIO – option SISR</small>
+            </div>
+            <nav class="nav-links" aria-label="Navigation principale">
+                <a class="tab-btn" href="index.html" data-i18n="nav.accueil">Accueil</a>
+                <a class="tab-btn" href="entreprise.html" data-i18n="nav.entreprise">Entreprise</a>
+                <a class="tab-btn" href="activites.html" data-i18n="nav.activites">Activités</a>
+                <a class="tab-btn" href="veille.html" data-i18n="nav.veille">Veille</a>
+            </nav>
+
+            <!-- LANG TOGGLE -->
+            <button id="langToggle" class="lang-btn" aria-label="Switch Language">
+                <span class="lang-icon">FR</span>
+            </button>
+
+            <div class="header-contact">
+                <a class="btn" href="mailto:metairiebrieuc@gmail.com" data-i18n="nav.contact">✉️ Me contacter</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="project-detail-main">
+        <section class="project-hero">
+            <div class="hero-content">
+                <a href="activites.html" class="back-link">← Retour aux projets</a>
+                <h1>Système de Newsletter pour une association</h1>
+                <p class="subtitle">Backend & Déploiement Cloud</p>
+                <div class="tags">
+                    <span class="tag">Node.js</span>
+                    <span class="tag">SQLite</span>
+                    <span class="tag">Brevo API</span>
+                    <span class="tag">Render</span>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/newsletter.webp" alt="Newsletter System" class="img-contain-300 rounded-md">
+            </div>
+        </section>
+
+        <section class="project-content-grid">
+            <div class="content-left">
+                <h2>Contexte</h2>
+                <p>Une association avait besoin d'un outil simple et autonome pour communiquer avec ses membres
+                    par email. Les solutions du marché (Mailchimp, Sendinblue Pro) étaient soit trop coûteuses,
+                    soit trop complexes pour des bénévoles non-techniques. J'ai donc conçu un système
+                    clé-en-main, gratuit et documenté.</p>
+
+                <h2>Réalisations</h2>
+                <ul>
+                    <li>Développement d'un backend complet en <strong>Node.js</strong> avec Express.</li>
+                    <li>Base de données <strong>SQLite</strong> pour la gestion des abonnés (inscription,
+                        désinscription, historique).</li>
+                    <li>Intégration de l'API <strong>Brevo</strong> (ex-Sendinblue) pour l'envoi d'emails
+                        transactionnels.</li>
+                    <li>Tableau de bord administrateur avec authentification, gestion des abonnés, envoi de newsletters
+                        et consultation de l'historique.</li>
+                    <li>Déploiement sur <strong>Render.com</strong> (gratuit) avec monitoring
+                        <strong>UptimeRobot</strong> pour éviter la mise en veille du serveur.</li>
+                    <li>Rédaction d'une documentation exhaustive : guide de déploiement, guide utilisateur, backup,
+                        maintenance.</li>
+                </ul>
+
+                <h2>Documentation livrée</h2>
+                <ul>
+                    <li><strong>README.md</strong> — Vue d'ensemble du système</li>
+                    <li><strong>DEPLOIEMENT.md</strong> — Guide pas à pas pour mettre en ligne (15 min)</li>
+                    <li><strong>GUIDE_UTILISATEUR.md</strong> — Utilisation quotidienne du tableau de bord</li>
+                    <li><strong>PING_UPTIME.md</strong> — Configuration UptimeRobot pour garder le serveur actif</li>
+                    <li><strong>BACKUP.md</strong> — Stratégie de sauvegarde (CSV, GitHub Actions, Google Drive)</li>
+                </ul>
+            </div>
+            <aside class="content-right">
+                <div class="info-card">
+                    <h3>Infos Techniques</h3>
+                    <ul>
+                        <li><strong>Type :</strong> Projet Personnel</li>
+                        <li><strong>Destinataire :</strong> Association</li>
+                        <li><strong>Coût :</strong> 0 €/mois</li>
+                    </ul>
+                    <hr>
+                    <h3>Stack</h3>
+                    <div class="stack-list">
+                        <span class="stack-tag">Node.js</span>
+                        <span class="stack-tag">Express</span>
+                        <span class="stack-tag">SQLite</span>
+                        <span class="stack-tag">Brevo API</span>
+                        <span class="stack-tag">Render</span>
+                        <span class="stack-tag">UptimeRobot</span>
+                        <span class="stack-tag">HTML/CSS</span>
+                        <span class="stack-tag">Git</span>
+                    </div>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <footer>© 2026 Brieuc Métairie – Portfolio</footer>
+    <button id="themeToggle" class="theme-btn">🌙</button>
+    <script src="js/lang.js?v=3"></script>
+    <script src="script.js?v=3" defer></script>
+    <script src="js/console.js?v=3" defer></script>
+</body>
+
+</html>
