@@ -9,6 +9,7 @@ const PROJECTS = [
         envText: "Windows + XAMPP",
         img: "images/mediawiki.webp",
         tags: ["windows", "wiki"],
+        skillsKeys: ["skill.windows", "skill.web", "skill.doc"],
         listKeys: [
             "projects.mediawiki.list1",
             "projects.mediawiki.list2",
@@ -28,6 +29,7 @@ const PROJECTS = [
         envText: "Windows + WAMP/XAMPP",
         img: "images/glpi.webp",
         tags: ["windows", "helpdesk"],
+        skillsKeys: ["skill.windows", "skill.helpdesk", "skill.web"],
         listKeys: [
             "projects.glpi.list1",
             "projects.glpi.list2",
@@ -48,6 +50,7 @@ const PROJECTS = [
         envText: "GLPI + FusionInventory",
         img: "images/support-glpi.png",
         tags: ["helpdesk", "windows"],
+        skillsKeys: ["skill.helpdesk", "skill.windows", "skill.doc"],
         listKeys: [
             "projects.support_glpi.list1",
             "projects.support_glpi.list2",
@@ -67,6 +70,7 @@ const PROJECTS = [
         envText: "Windows Server + Microsoft 365",
         img: "images/m365-admin.png",
         tags: ["windows", "reseau"],
+        skillsKeys: ["skill.ad", "skill.m365", "skill.windows", "skill.helpdesk"],
         listKeys: [
             "projects.m365_ad.list1",
             "projects.m365_ad.list2",
@@ -86,6 +90,7 @@ const PROJECTS = [
         envText: "TP-Link Omada SDN",
         img: "images/omada-dashboard.png",
         tags: ["reseau"],
+        skillsKeys: ["skill.network", "skill.security", "skill.hardware"],
         listKeys: [
             "projects.omada.list1",
             "projects.omada.list2",
@@ -106,6 +111,7 @@ const PROJECTS = [
         matText: "NAS Synology DS920+ + Docker",
         img: "images/plex.webp",
         tags: ["docker", "nas"],
+        skillsKeys: ["skill.docker", "skill.network", "skill.hardware"],
         listKeys: [
             "projects.plex.list1",
             "projects.plex.list2",
@@ -126,6 +132,7 @@ const PROJECTS = [
         envText: "Raspberry Pi + Raspberry Pi OS",
         img: "images/pihole.webp",
         tags: ["raspberry", "reseau", "securite"],
+        skillsKeys: ["skill.dns", "skill.network", "skill.linux"],
         listKeys: [
             "projects.pihole.list1",
             "projects.pihole.list2",
@@ -147,6 +154,7 @@ const PROJECTS = [
         envText: "Raspberry Pi + OpenVPN",
         img: "images/vpn.webp",
         tags: ["raspberry", "reseau", "securite"],
+        skillsKeys: ["skill.vpn", "skill.network", "skill.security", "skill.linux"],
         listKeys: [
             "projects.vpn.list1",
             "projects.vpn.list2",
@@ -167,6 +175,7 @@ const PROJECTS = [
         contentKey: "projects.restaurant.content",
         img: "images/restaurant.webp",
         tags: ["web", "personnel"],
+        skillsKeys: ["skill.web"],
         listKeys: [
             "projects.restaurant.list1",
             "projects.restaurant.list2",
@@ -185,6 +194,7 @@ const PROJECTS = [
         envText: "Node.js + SQLite + Brevo API",
         img: "images/newsletter.webp",
         tags: ["web"],
+        skillsKeys: ["skill.web", "skill.db", "skill.doc"],
         listKeys: [
             "projects.newsletter.list1",
             "projects.newsletter.list2",
