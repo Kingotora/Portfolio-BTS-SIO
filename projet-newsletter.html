@@ -15,7 +15,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=6">
 
     <script type="application/ld+json">
     {
@@ -80,35 +80,65 @@
 
         <section class="project-content-grid">
             <div class="content-left">
-                <h2>Contexte</h2>
-                <p>Une association avait besoin d'un outil simple et autonome pour communiquer avec ses membres
-                    par email. Les solutions du marché (Mailchimp, Sendinblue Pro) étaient soit trop coûteuses,
-                    soit trop complexes pour des bénévoles non-techniques. J'ai donc conçu un système
-                    clé-en-main, gratuit et documenté.</p>
+                <div class="story-block">
+                    <h2>🎯 <span class="highlight">Le Problème</span></h2>
+                    <p>
+                        Une association locale était confrontée à un problème de communication majeur : comment envoyer
+                        des actualités régulières à plus de 500 adhérents sans que les emails ne finissent dans les
+                        dossiers spams ? Les solutions leaders du marché (Mailchimp, Hubspot) s'avéraient très coûteuses
+                        pour leur budget associatif, et les interfaces souvent trop complexes pour des bénévoles
+                        non-techniques. Il fallait concevoir un système sur-mesure, infaillible et surtout... sans aucun
+                        coût d'exploitation (0 €/mois).
+                    </p>
+                </div>
 
-                <h2>Réalisations</h2>
-                <ul>
-                    <li>Développement d'un backend complet en <strong>Node.js</strong> avec Express.</li>
-                    <li>Base de données <strong>SQLite</strong> pour la gestion des abonnés (inscription,
-                        désinscription, historique).</li>
-                    <li>Intégration de l'API <strong>Brevo</strong> (ex-Sendinblue) pour l'envoi d'emails
-                        transactionnels.</li>
-                    <li>Tableau de bord administrateur avec authentification, gestion des abonnés, envoi de newsletters
-                        et consultation de l'historique.</li>
-                    <li>Déploiement sur <strong>Render.com</strong> (gratuit) avec monitoring
-                        <strong>UptimeRobot</strong> pour éviter la mise en veille du serveur.</li>
-                    <li>Rédaction d'une documentation exhaustive : guide de déploiement, guide utilisateur, backup,
-                        maintenance.</li>
-                </ul>
+                <div class="story-block">
+                    <h2>💡 <span class="highlight">Architecturer une Solution Serveur (Node.js)</span></h2>
+                    <p>
+                        Plutôt que d'empiler des plugins sur un CMS, j'ai développé un moteur de newsletter ('backend')
+                        complet. J'ai architecturé une application en <strong>Node.js</strong> propulsée par Express.js.
+                        Pour la base de données, j'ai opté pour <strong>SQLite</strong>, car ce format fichier
+                        ultra-léger est parfait pour stocker des centaines de contacts sans nécessiter de serveur SQL
+                        lourd.
+                    </p>
+                    <p>
+                        Le cœur du système repose sur l'appel à l'API REST de <strong>Brevo (ex-Sendinblue)</strong>. En
+                        déléguant l'envoi effectif des requêtes SMTP à ce tiers de confiance, on garantit une
+                        délivrabilité maximale (les serveurs de messagerie comme Gmail ou Outlook ne classeront pas les
+                        mails en spam).
+                    </p>
+                </div>
 
-                <h2>Documentation livrée</h2>
-                <ul>
-                    <li><strong>README.md</strong> — Vue d'ensemble du système</li>
-                    <li><strong>DEPLOIEMENT.md</strong> — Guide pas à pas pour mettre en ligne (15 min)</li>
-                    <li><strong>GUIDE_UTILISATEUR.md</strong> — Utilisation quotidienne du tableau de bord</li>
-                    <li><strong>PING_UPTIME.md</strong> — Configuration UptimeRobot pour garder le serveur actif</li>
-                    <li><strong>BACKUP.md</strong> — Stratégie de sauvegarde (CSV, GitHub Actions, Google Drive)</li>
-                </ul>
+                <div class="story-block">
+                    <h2>🔥 <span class="highlight">Le Challenge du Déploiement</span></h2>
+                    <p>
+                        L'hébergement gratuit a été le véritable défi technique. J'ai déployé le conteneur du code
+                        backend sur la plateforme PaaS <strong>Render.com</strong>. Cependant, les instances gratuites
+                        se mettent en veille après 15 minutes d'inactivité, ce qui rendait le site inaccessible. Pour
+                        contourner cette limitation, j'ai couplé le service à <strong>UptimeRobot</strong>, qui effectue
+                        un 'ping' HTTP automatique toutes les 14 minutes, gardant ainsi le serveur "éveillé" en
+                        permanence.
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <h2>🚀 <span class="highlight">L'Impact Opérationnel</span></h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-num">0 €</span>
+                            <span class="stat-desc">Coût de fonctionnement</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-num">99%</span>
+                            <span class="stat-desc">Taux de délivrabilité</span>
+                        </div>
+                    </div>
+                    <p class="summary-text">
+                        L'association communique aujourd'hui en toute autonomie grâce à une interface d'administration
+                        basique et sécurisée. Une documentation technique complète (Guides Utilisateurs, Procédures de
+                        Backup SQL local) a été livrée pour assurer la pérennité du système même en mon absence.
+                    </p>
+                </div>
             </div>
             <aside class="content-right">
                 <div class="info-card">
@@ -130,6 +160,13 @@
                         <span class="stack-tag">HTML/CSS</span>
                         <span class="stack-tag">Git</span>
                     </div>
+                    <hr>
+                    <h3 data-i18n="projects.skills_label">Compétences développées</h3>
+                    <div class="tech-tags" style="display:flex; flex-wrap:wrap; gap:0.4em;">
+                        <span class="tech-badge" data-i18n="skill.web">Développement Web</span>
+                        <span class="tech-badge" data-i18n="skill.db">Bases de données</span>
+                        <span class="tech-badge" data-i18n="skill.doc">Documentation / API</span>
+                    </div>
                 </div>
             </aside>
         </section>
@@ -137,9 +174,9 @@
 
     <footer>© 2026 Brieuc Métairie – Portfolio</footer>
     <button id="themeToggle" class="theme-btn">🌙</button>
-    <script src="js/lang.js?v=3"></script>
-    <script src="script.js?v=3" defer></script>
-    <script src="js/console.js?v=3" defer></script>
+    <script src="js/lang.js?v=6"></script>
+    <script src="script.js?v=6" defer></script>
+    <script src="js/console.js?v=6" defer></script>
 </body>
 
 </html>

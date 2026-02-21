@@ -14,7 +14,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=6">
 
     <script type="application/ld+json">
     {
@@ -79,16 +79,65 @@
 
         <section class="project-content-grid">
             <div class="content-left">
-                <h2>Contexte</h2>
-                <p>Protéger l'ensemble des appareils du réseau local contre les publicités intrusives et les traqueurs,
-                    sans rien installer sur chaque machine.</p>
-                <h2>Réalisations</h2>
-                <ul>
-                    <li>Installation de Pi-hole sur un Raspberry Pi.</li>
-                    <li>Configuration du DHCP de la box pour utiliser le DNS Pi-hole.</li>
-                    <li>Ajout de blocklists personnalisées.</li>
-                    <li>Monitoring du trafic DNS via le tableau de bord web.</li>
-                </ul>
+                <div class="story-block">
+                    <h2>🎯 <span class="highlight">La Problématique du Trafic Parasite</span></h2>
+                    <p>
+                        La navigation web moderne est lourdement encombrée par des requêtes invisibles : bannières
+                        publicitaires, traçage comportemental, télémétrie cachée des objets connectés (IoT), voire
+                        maliciels polymorphes. Ces requêtes consomment la bande passante, augmentent le temps de
+                        chargement des pages et constituent une violation silencieuse de la confidentialité des données
+                        sur un réseau local. Installer une extension de navigateur (type uBlock) poste par poste est
+                        insuffisant et ne protège pas les tablettes, téléphones ou téléviseurs connectés.
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <h2>💡 <span class="highlight">La Solution : DNS Sinkholing</span></h2>
+                    <p>
+                        Pour éradiquer le problème à sa racine architecturale, j'ai conceptualisé le déploiement d'un
+                        "Sinkhole DNS" matériel. J'ai provisionné et durci un nano-ordinateur <strong>Raspberry
+                            Pi</strong> sous environnement GNU/Linux (Raspberry Pi OS Lite) afin d'y installer
+                        nativement le service <strong>Pi-hole</strong>.
+                    </p>
+                    <p>
+                        Techniquement, j'ai reconfiguré le serveur DHCP de la passerelle internet (le routeur) pour
+                        forcer tous les clients du réseau local à interroger l'adresse IP statique du Raspberry Pi
+                        lorsqu'ils cherchent à résoudre un nom de domaine. Si le domaine est sur une "liste noire", le
+                        Pi-hole renvoie une réponse nulle (trou noir), empêchant la publicité ou le traqueur de se
+                        charger en amont.
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <h2>🔥 <span class="highlight">Le Challenge de la Faux Positive</span></h2>
+                    <p>
+                        L'importation de listes de blocage agressives (regroupant des millions de domaines maintenus par
+                        la communauté open-source) engendre inévitablement des "faux positifs" (un service légitime qui
+                        se retrouve bloqué). Le véritable travail d'administration a consisté à analyser les journaux de
+                        requêtes en direct (Live Logs) afin d'établir un 'Whitelisting' chirurgical pour maintenir le
+                        parfait fonctionnement de certains services cloud stricts, tout en bloquant la télémétrie
+                        abusive.
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <h2>🚀 <span class="highlight">L'Impact Immédiat</span></h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-num">> 30%</span>
+                            <span class="stat-desc">Requêtes bloquées</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-num">Global</span>
+                            <span class="stat-desc">Protection unifiée</span>
+                        </div>
+                    </div>
+                    <p class="summary-text">
+                        En déplaçant le filtrage anti-pubs et anti-malwares au niveau de l'infrastructure
+                        d'entreprise/domestique plutôt qu'au niveau logiciel terminal, la navigation est devenue
+                        radicalement plus fluide. De plus, la surface d'attaque du pare-feu a été drastiquement réduite.
+                    </p>
+                </div>
             </div>
             <aside class="content-right">
                 <div class="info-card">
@@ -104,6 +153,13 @@
                         <span class="stack-tag">Linux</span>
                         <span class="stack-tag">Networking</span>
                     </div>
+                    <hr>
+                    <h3 data-i18n="projects.skills_label">Compétences développées</h3>
+                    <div class="tech-tags" style="display:flex; flex-wrap:wrap; gap:0.4em;">
+                        <span class="tech-badge" data-i18n="skill.dns">Services Réseau (DNS)</span>
+                        <span class="tech-badge" data-i18n="skill.network">Réseau & Routage</span>
+                        <span class="tech-badge" data-i18n="skill.linux">Système GNU/Linux</span>
+                    </div>
                 </div>
             </aside>
         </section>
@@ -112,9 +168,9 @@
     <footer>Â© 2026 Brieuc Métairie – Portfolio</footer>
     <button id="themeToggle" class="theme-btn">🌙</button>
     <!-- Styles moved to style.css -->
-    <script src="js/lang.js?v=3"></script>
-    <script src="script.js?v=3" defer></script>
-    <script src="js/console.js?v=3" defer></script>
+    <script src="js/lang.js?v=6"></script>
+    <script src="script.js?v=6" defer></script>
+    <script src="js/console.js?v=6" defer></script>
 </body>
 
 </html>

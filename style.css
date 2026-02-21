@@ -2014,20 +2014,23 @@ dialog#contactModal h3 {
 }
 
 .tech-badge {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.3);
   padding: 0.4rem 0.8rem;
   border-radius: 99px;
   font-size: 0.85rem;
-  color: var(--text-secondary);
-  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+  font-weight: 600;
+  color: var(--color-brand);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(56, 189, 248, 0.05);
 }
 
 .tech-badge:hover {
   background: var(--color-brand);
   color: #fff;
   border-color: var(--color-brand);
-  transform: scale(1.05);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
 }
 
 /* Intro Text Grid */

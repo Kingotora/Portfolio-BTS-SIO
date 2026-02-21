@@ -14,7 +14,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=6">
 
     <script type="application/ld+json">
     {
@@ -79,16 +79,61 @@
 
         <section class="project-content-grid">
             <div class="content-left">
-                <h2>Contexte</h2>
-                <p>Création d'un serveur personnel pour centraliser et diffuser du contenu multimédia (vidéos, musique,
-                    photos) sur différents appareils (TV, Smartphone, Web).</p>
-                <h2>Réalisations</h2>
-                <ul>
-                    <li>Déploiement de Plex via Docker (Container).</li>
-                    <li>Montage des volumes et gestion des permissions Linux.</li>
-                    <li>Configuration de l'accès distant sécurisé.</li>
-                    <li>Transcodage matériel (Hardware Transcoding) configuré.</li>
-                </ul>
+                <div class="story-block">
+                    <h2>🎯 <span class="highlight">Le Constat : Fragmentation des Médias</span></h2>
+                    <p>
+                        Avant ce projet, ma bibliothèque multimédia (films, séries, documentaires) était fragmentée sur
+                        divers disques durs externes et ordinateurs. Il n'existait aucune solution centralisée pour
+                        visionner un film sur la télévision du salon, le reprendre sur un smartphone dans les
+                        transports, ou partager l'accès de manière sécurisée avec des amis distants.
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <h2>💡 <span class="highlight">La Solution : Architecture Serveur NAS</span></h2>
+                    <p>
+                        J'ai opté pour la mise en place d'un serveur <strong>Plex Media Server</strong>. Plutôt que
+                        d'installer l'application directement sur l'OS, j'ai choisi de conteneuriser le service via
+                        <strong>Docker</strong> sur un NAS Synology DS920+. Cette approche garantit une parfaite
+                        isolation du processus serveur et facilite les futures migrations ou sauvegardes.
+                    </p>
+                    <p>
+                        Pour assurer une lecture fluide quel que soit le format du fichier original et l'appareil de
+                        destination, j'ai dû mapper la puce graphique Intel (iGPU) directement dans le conteneur Docker.
+                        Cela permet le <strong>transcodage matériel (Hardware Transcoding)</strong>, évitant ainsi la
+                        saturation du processeur central lors de la conversion vidéo à la volée.
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <h2>🔥 <span class="highlight">Sécurité & Exposition Web</span></h2>
+                    <p>
+                        Exposer un service multimédia sur Internet nécessite une configuration réseau rigoureuse. J'ai
+                        dû paramétrer des règles spécifiques de <strong>Port Forwarding</strong> (NAT) sur le routeur de
+                        bordure, configurer un DNS dynamique (DDNS) pour lier mon adresse IP publique fluctuante à un
+                        nom de domaine, et forcer l'établissement de connexions cryptées TLS pour toutes les requêtes
+                        externes entrantes.
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <h2>🚀 <span class="highlight">L'Expérience Utilisateur</span></h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-num">1</span>
+                            <span class="stat-desc">Bibliothèque unifiée</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-num">Flux</span>
+                            <span class="stat-desc">Transcodage HW actif</span>
+                        </div>
+                    </div>
+                    <p class="summary-text">
+                        La solution finale rivalise avec les plateformes de streaming professionnelles. Les métadonnées
+                        (affiches, synopsis) sont récupérées automatiquement, et la gestion granulaire des comptes
+                        utilisateurs permet de restreindre l'accès au contenu selon des profils de sécurité définis.
+                    </p>
+                </div>
             </div>
             <aside class="content-right">
                 <div class="info-card">
@@ -104,6 +149,13 @@
                         <span class="stack-tag">Plex</span>
                         <span class="stack-tag">Linux</span>
                     </div>
+                    <hr>
+                    <h3 data-i18n="projects.skills_label">Compétences développées</h3>
+                    <div class="tech-tags" style="display:flex; flex-wrap:wrap; gap:0.4em;">
+                        <span class="tech-badge" data-i18n="skill.docker">Docker & Services</span>
+                        <span class="tech-badge" data-i18n="skill.network">Réseau & Routage</span>
+                        <span class="tech-badge" data-i18n="skill.hardware">Matériel Cisco/Omada (NAS)</span>
+                    </div>
                 </div>
             </aside>
         </section>
@@ -112,9 +164,9 @@
     <footer>Â© 2026 Brieuc Métairie – Portfolio</footer>
     <button id="themeToggle" class="theme-btn">🌙</button>
     <!-- Styles moved to style.css -->
-    <script src="js/lang.js?v=3"></script>
-    <script src="script.js?v=3" defer></script>
-    <script src="js/console.js?v=3" defer></script>
+    <script src="js/lang.js?v=6"></script>
+    <script src="script.js?v=6" defer></script>
+    <script src="js/console.js?v=6" defer></script>
 </body>
 
 </html>

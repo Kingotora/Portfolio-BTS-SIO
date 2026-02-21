@@ -18,7 +18,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;900&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=6">
 
     <script type="application/ld+json">
     {
@@ -87,61 +87,68 @@
             <div class="content-left">
                 <!-- STORYTELLING INTRO -->
                 <div class="story-block">
-                    <h2>🎯 <span class="highlight">Le Besoin</span></h2>
+                    <h2>🎯 <span class="highlight">Le Constat & Le Besoin Initial</span></h2>
                     <p>
-                        Althec n'avait pas d'environnement informatique centralisé.
-                        Chaque poste était configuré <strong>individuellement</strong>,
-                        les comptes étaient gérés localement, et il n'y avait
-                        <strong>pas de messagerie professionnelle unifiée</strong>.
-                        Il fallait tout reprendre de zéro.
+                        Lors de mon audit initial de l'infrastructure d'Althec, j'ai constaté l'absence critique d'un
+                        annuaire d'entreprise.
+                        Chaque station de travail opérait en « Workgroup » autonome. Conséquence : les configurations de
+                        sécurité et les partages réseaux devaient être déployés <strong>poste par poste
+                            manuellement</strong>, les mots de passe étaient stockés localement, et l'entreprise
+                        souffrait d'un déficit d'identité numérique unifiée (<strong>pas de messagerie professionnelle
+                            standardisée</strong>). Il fallait rationnaliser l'architecture I&O (Infrastructure et
+                        Opérations) depuis ses fondations.
                     </p>
                 </div>
 
                 <div class="story-block">
-                    <h2>💡 <span class="highlight">Active Directory : la base</span></h2>
+                    <h2>💡 <span class="highlight">L'Ossature : Infrastructure Active Directory</span></h2>
                     <p>
-                        J'ai installé et configuré un <strong>Windows Server</strong> avec les rôles
-                        <strong>AD DS, DNS et DHCP</strong>. Ça permet de centraliser tous les comptes
-                        utilisateurs, de gérer les droits d'accès, et d'appliquer des politiques de sécurité
-                        (GPO) sur tous les postes automatiquement.
+                        La première étape pivot fut la promotion d'un <strong>Windows Server 2022</strong> au rôle de
+                        Contrôleur de Domaine (AD DS). Ce serveur est devenu le pilier de l'autorité réseau, couplé aux
+                        services indissociables de résolution de noms (DNS) et d'attribution dynamique de baux (DHCP).
                     </p>
                     <p>
-                        Concrètement : un collaborateur se connecte avec son compte, et il retrouve son bureau,
-                        ses dossiers et ses droits, peu importe le poste.
-                    </p>
-                </div>
-
-                <div class="story-block">
-                    <h2>☁️ <span class="highlight">Microsoft 365 : la messagerie et les outils</span></h2>
-                    <p>
-                        En parallèle, j'ai déployé <strong>Microsoft 365</strong> pour toute l'entreprise :
-                        <strong>Exchange Online</strong> pour la messagerie professionnelle,
-                        <strong>Teams</strong> pour la communication interne,
-                        et <strong>OneDrive</strong> pour le stockage cloud de chaque utilisateur.
-                    </p>
-                    <p>
-                        J'ai aussi configuré les postes de travail pour qu'ils soient
-                        <strong>intégrés au domaine</strong> : installation de Windows, jonction AD,
-                        déploiement des applications Office, et personnalisation via GPO.
+                        Grâce à ce socle d'identité, j'ai hiérarchisé l'entreprise via des Unités Organisationnelles
+                        (OU), centralisé les comptes de connexion, et libéré la puissance de déploiement des
+                        <strong>Stratégies de Groupe (GPO)</strong>. Aujourd'hui, cibler une map réseau, bloquer l'usage
+                        des ports USB par mesure DLP, ou pousser un script d'ouverture de session s'opère en quelques
+                        clics pour tous les clients du WAN.
                     </p>
                 </div>
 
                 <div class="story-block">
-                    <h2>🚀 <span class="highlight">Le Résultat</span></h2>
+                    <h2>☁️ <span class="highlight">La Transition Cloud : Microsoft 365</span></h2>
+                    <p>
+                        Dans une optique de mobilité et de sécurité des flux de données, j'ai simultanément orchestré
+                        une migration vers le cloud avec <strong>Microsoft 365</strong>.
+                        J'ai configuré les enregistrements DNS publics (MX, SPF, DKIM) pour déployer <strong>Exchange
+                            Online</strong> avec une totale légitimité, instancié <strong>Teams</strong> pour la VoIP et
+                        les outils de collaboration, et sécurisé la gestion granulaire des documents via
+                        <strong>SharePoint</strong>.
+                    </p>
+                    <p>
+                        Le défi final consistait à préparer les postes physiques : mastering du parc, jonction au
+                        domaine Active Directory avec sécurisation locale (LAPS), et déploiement applicatif distant de
+                        la suite Office.
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <h2>🚀 <span class="highlight">Le Résultat Final</span></h2>
                     <div class="stats-grid">
                         <div class="stat-item">
-                            <span class="stat-num">100%</span>
-                            <span class="stat-desc">des collaborateurs équipés</span>
+                            <span class="stat-num">SSO</span>
+                            <span class="stat-desc">Authentification unique</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-num">1</span>
-                            <span class="stat-desc">domaine centralisé</span>
+                            <span class="stat-num">Niv. 2</span>
+                            <span class="stat-desc">Standard Sécurité franchi</span>
                         </div>
                     </div>
                     <p class="summary-text">
-                        L'entreprise dispose maintenant d'un environnement informatique complet et professionnel.
-                        Les comptes sont centralisés, la messagerie est unifiée, et les postes sont gérés de manière
-                        homogène.
+                        L'entreprise dispose d'un modèle hybride souverain. L'authentification unifiée fluidifie
+                        massivement l'onboarding RH des nouveaux salariés, tandis que l'administration réseau gagne une
+                        visibilité exhaustive, garantissant une meilleure résilience de l'exploitation.
                     </p>
                 </div>
             </div>
@@ -166,6 +173,14 @@
                         <span class="stack-tag">Teams</span>
                         <span class="stack-tag">OneDrive</span>
                     </div>
+                    <hr>
+                    <h3 data-i18n="projects.skills_label">Compétences développées</h3>
+                    <div class="tech-tags" style="display:flex; flex-wrap:wrap; gap:0.4em;">
+                        <span class="tech-badge" data-i18n="skill.ad">Gérer un AD</span>
+                        <span class="tech-badge" data-i18n="skill.m365">Microsoft 365</span>
+                        <span class="tech-badge" data-i18n="skill.windows">Windows Server</span>
+                        <span class="tech-badge" data-i18n="skill.helpdesk">Support N1/N2</span>
+                    </div>
                 </div>
             </aside>
         </section>
@@ -177,9 +192,9 @@
 
     <button id="themeToggle" class="theme-btn">🌙</button>
 
-    <script src="js/lang.js?v=3"></script>
-    <script src="script.js?v=3" defer></script>
-    <script src="js/console.js?v=3" defer></script>
+    <script src="js/lang.js?v=6"></script>
+    <script src="script.js?v=6" defer></script>
+    <script src="js/console.js?v=6" defer></script>
 </body>
 
 </html>

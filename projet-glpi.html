@@ -17,7 +17,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;900&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=6">
 
     <script type="application/ld+json">
     {
@@ -86,52 +86,64 @@
             <div class="content-left">
                 <!-- STORYTELLING INTRO -->
                 <div class="story-block">
-                    <h2>🎯 <span class="highlight">Le Problème</span></h2>
+                    <h2>🎯 <span class="highlight">Le Diagnostic Initial</span></h2>
                     <p>
-                        L'entreprise gérait encore ses incidents par <strong>téléphone et post-it</strong>. Résultat ?
-                        Des demandes perdues, aucun suivi de l'historique, et un service informatique débordé incapable
-                        de prioriser les urgences.
-                        Il fallait centraliser tout ça.
+                        Avant mon intervention, la gestion des incidents informatiques au sein d'Althec reposait sur des
+                        processus informels : <strong>appels téléphoniques directs, emails dispersés et
+                            post-it</strong>. Cette absence de centralisation engendrait une déperdition d'informations
+                        critiques. Les requêtes se perdaient, l'historique des pannes sur un équipement spécifique était
+                        inexistant, et la Direction des Systèmes d'Information (DSI) subissait les urgences au lieu de
+                        les prioriser rationnellement par niveau de criticité.
                     </p>
                 </div>
 
                 <div class="story-block">
-                    <h2>💡 <span class="highlight">La Solution : GLPI</span></h2>
+                    <h2>💡 <span class="highlight">La Solution : Déploiement GLPI</span></h2>
                     <p>
-                        J'ai choisi de déployer <strong>GLPI</strong> (Gestionnaire Libre de Parc Informatique), la
-                        référence open-source.
-                        Pourquoi ? Gratuit, flexible, et une communauté énorme.
+                        Pour structurer le support, j'ai pris l'initiative d'architecturer et de déployer
+                        <strong>GLPI</strong> (Gestionnaire Libre de Parc Informatique). Le choix de cette plateforme
+                        ITSM open-source s'est imposé par sa robustesse, sa flexibilité interopérable, et son alignement
+                        natif avec les bonnes pratiques <strong>ITIL</strong> (Information Technology Infrastructure
+                        Library).
                     </p>
                     <p>
-                        Mon rôle a été d'installer le serveur complète (Stack LAMP), de sécuriser l'accès, et surtout
-                        de configurer l'outil pour qu'il soit <em>simple</em> à utiliser pour les secrétaires.
-                    </p>
-                </div>
-
-                <div class="story-block">
-                    <h2>🔥 <span class="highlight">Le Challenge</span></h2>
-                    <p>
-                        Le plus dur n'était pas la technique, mais l'humain.
-                        Il a fallu <strong>former les utilisateurs</strong> à abandonner leurs vieilles habitudes
-                        (mails/téléphone)
-                        pour passer par le portail web. J'ai donc créé des guides PDF ultra-simplifiés.
+                        J'ai orchestré l'installation complète du socle serveur (Stack LAMP sous Debian), sécurisé les
+                        flux d'administration, et personnalisé l'interface métier. J'ai également couplé GLPI avec
+                        l'agent <strong>FusionInventory</strong> pour automatiser la remontée matérielle des postes
+                        clients, éliminant ainsi les saisies d'inventaire manuelles fastidieuses.
                     </p>
                 </div>
 
                 <div class="story-block">
-                    <h2>🚀 <span class="highlight">L'Impact</span></h2>
+                    <h2>🔥 <span class="highlight">Le Double Challenge</span></h2>
+                    <p>
+                        Si le volet technique (déploiement de la base MariaDB, configuration des agents de remontée,
+                        paramétrage des SLA) a soulevé des défis réseau intéressants, la véritable épreuve fut la
+                        <strong>conduite du changement</strong>. Techniciens et collaborateurs devaient abandonner la
+                        facilité du téléphone direct pour formaliser leurs demandes via un portail web structuré.
+                        <br><br>
+                        Pour surmonter cette friction d'adoption, j'ai épuré l'interface utilisateur à l'extrême
+                        (profils Self-Service verrouillés) et rédigé des manuels de prise en main ultra-visuels sous
+                        forme de fiches réflexes, accompagnés de démonstrations physiques.
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <h2>🚀 <span class="highlight">L'Impact Opérationnel</span></h2>
                     <div class="stats-grid">
                         <div class="stat-item">
                             <span class="stat-num">-30%</span>
-                            <span class="stat-desc">de temps de résolution</span>
+                            <span class="stat-desc">Temps de résolution (MTTR)</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-num">100%</span>
-                            <span class="stat-desc">de tickets tracés</span>
+                            <span class="stat-desc">Traçabilité des actifs & incidents</span>
                         </div>
                     </div>
                     <p class="summary-text">
-                        Aujourd'hui, l'équipe DSI a une vue en temps réel sur l'état du parc et les demandes en cours.
+                        Aujourd'hui, l'équipe DSI dispose d'un véritable tableau de bord décisionnel en temps réel. La
+                        cartographie du parc est exhaustive et dynamique, permettant de rationnaliser le renouvellement
+                        matériel et de justifier le temps passé sur l'exploitation au quotidien.
                     </p>
                 </div>
             </div>
@@ -153,6 +165,13 @@
                         <span class="stack-tag">GLPI 10</span>
                         <span class="stack-tag">FusionInventory</span>
                     </div>
+                    <hr>
+                    <h3 data-i18n="projects.skills_label">Compétences développées</h3>
+                    <div class="tech-tags" style="display:flex; flex-wrap:wrap; gap:0.4em;">
+                        <span class="tech-badge" data-i18n="skill.windows">Windows Server</span>
+                        <span class="tech-badge" data-i18n="skill.helpdesk">Support IT</span>
+                        <span class="tech-badge" data-i18n="skill.web">Serveurs Web</span>
+                    </div>
                 </div>
             </aside>
         </section>
@@ -160,10 +179,8 @@
         <section class="project-gallery">
             <h2>Galerie</h2>
             <div class="gallery-grid">
-                <img src="https://via.placeholder.com/600x400" alt="Capture GLPI 1"
-                    class="w-full rounded-sm">
-                <img src="https://via.placeholder.com/600x400" alt="Capture GLPI 2"
-                    class="w-full rounded-sm">
+                <img src="https://via.placeholder.com/600x400" alt="Capture GLPI 1" class="w-full rounded-sm">
+                <img src="https://via.placeholder.com/600x400" alt="Capture GLPI 2" class="w-full rounded-sm">
             </div>
         </section>
     </main>
@@ -175,9 +192,9 @@
     <button id="themeToggle" class="theme-btn">🌙</button>
 
     <!-- Styles moved to style.css -->
-    <script src="js/lang.js?v=3"></script>
-    <script src="script.js?v=3" defer></script>
-    <script src="js/console.js?v=3" defer></script>
+    <script src="js/lang.js?v=6"></script>
+    <script src="script.js?v=6" defer></script>
+    <script src="js/console.js?v=6" defer></script>
 </body>
 
 </html>

@@ -249,6 +249,27 @@ function renderProjects() {
       titleHTML = `<h3>${project.title}</h3>`;
     }
 
+    let tagsHTML = '';
+    if (project.tags && project.tags.length > 0) {
+      tagsHTML = '<div class="card-tags" style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1rem;">';
+      project.tags.forEach(t => {
+        let displayName = t;
+        if (t === 'windows') displayName = 'Windows';
+        else if (t === 'docker') displayName = 'Docker';
+        else if (t === 'helpdesk') displayName = 'Helpdesk';
+        else if (t === 'nas') displayName = 'NAS';
+        else if (t === 'wiki') displayName = 'Wiki';
+        else if (t === 'raspberry') displayName = 'Raspberry Pi';
+        else if (t === 'reseau') displayName = (translations[currentLang] && translations[currentLang]['projects.filter_network']) || 'Réseau';
+        else if (t === 'securite') displayName = (translations[currentLang] && translations[currentLang]['projects.filter_security']) || 'Sécurité';
+        else if (t === 'web') displayName = 'Web';
+        else if (t === 'personnel') displayName = 'Personnel';
+
+        tagsHTML += `<span class="tag-filter" style="font-size:0.75rem; padding:0.2rem 0.6rem; cursor:default;">${displayName}</span>`;
+      });
+      tagsHTML += '</div>';
+    }
+
     let detailsHTML = '';
     if (project.goalKey) {
       detailsHTML += `<p><strong data-i18n="projects.goal_label">${translations[currentLang]['projects.goal_label']}</strong> <span data-i18n="${project.goalKey}">${translations[currentLang][project.goalKey]}</span></p>`;
@@ -287,6 +308,16 @@ function renderProjects() {
       resultHTML += `<p><strong data-i18n="${project.resultKey}">${translations[currentLang][project.resultKey]}</strong> <span data-i18n="${project.resultTextKey}">${translations[currentLang][project.resultTextKey]}</span></p>`;
     }
 
+    // Skills
+    let skillsHTML = '';
+    if (project.skillsKeys && project.skillsKeys.length > 0) {
+      skillsHTML += `<div style="margin-top:0.75rem;"><strong style="display:block; margin-bottom:0.5rem;" data-i18n="projects.skills_label">${translations[currentLang]['projects.skills_label']}</strong><div class="tech-tags" style="display:flex; flex-wrap:wrap; gap:0.4em;">`;
+      project.skillsKeys.forEach(sk => {
+        skillsHTML += `<span class="tech-badge" data-i18n="${sk}">${translations[currentLang][sk]}</span>`;
+      });
+      skillsHTML += `</div></div>`;
+    }
+
     // Actions
     let actionsHTML = '';
     if (project.detailLink) {
@@ -302,8 +333,10 @@ function renderProjects() {
     card.innerHTML = `
             ${imgHTML}
             ${titleHTML}
+            ${tagsHTML}
             ${detailsHTML}
             ${listHTML}
+            ${skillsHTML}
             ${resultHTML}
             <div class="actions" style="display:flex; flex-direction:column; align-items:stretch; gap:0.5rem; margin: 1rem 1rem 0;">
                 ${actionsHTML}

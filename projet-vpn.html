@@ -14,7 +14,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=6">
 
     <script type="application/ld+json">
     {
@@ -72,26 +72,71 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="images/vpn.webp" alt="VPN Architecture"
-                    class="img-contain-300 rounded-md">
+                <img src="images/vpn.webp" alt="VPN Architecture" class="img-contain-300 rounded-md">
             </div>
         </section>
 
         <section class="project-content-grid">
             <div class="content-left">
-                <h2>Contexte</h2>
-                <p>Nécessité d'accéder aux ressources du réseau local (NAS, Imprimante, Serveurs) depuis l'extérieur de
-                    manière sécurisée, sans exposer directement les services sur Internet.</p>
-                <h2>Réalisations</h2>
-                <ul>
-                    <li>Installation d'un serveur VPN sur Raspberry Pi.</li>
-                    <li>Configuration du port forwarding et du DDNS (Dynamic DNS).</li>
-                    <li>Génération des certificats et clés clients.</li>
-                    <li>Mise en place de règles de pare-feu (Firewall) strictes.</li>
-                </ul>
-                <h2>Bilan</h2>
-                <p>Un tunnel chiffré permettant de travailler à distance comme si j'étais à la maison, en toute
-                    sécurité.</p>
+                <div class="story-block">
+                    <h2>🎯 <span class="highlight">Le Problème de l'Exposition Publique</span></h2>
+                    <p>
+                        Dans le cadre du pilotage à distance de mon infrastructure "Lab" (NAS, interfaces de domotique,
+                        hyperviseur, gestionnaire de mots de passe), il était impensable d'ouvrir grossièrement tous ces
+                        ports Web de gestion directement sur l'Internet public. Une telle pratique offre une surface
+                        d'attaque beaucoup trop large pour les scans de vulnérabilités (Shodan, masscan) et les attaques
+                        par force brute opportunistes.
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <h2>💡 <span class="highlight">La Solution : Tunnel Cryptographique</span></h2>
+                    <p>
+                        Pour résoudre ce paradoxe (avoir accès de n'importe où tout en restant invisible), j'ai
+                        entrepris le déploiement d'une passerelle <strong>Virtual Private Network (VPN)</strong> privée,
+                        basée sur les protocoles <strong>OpenVPN / WireGuard</strong>.
+                    </p>
+                    <p>
+                        La mécanique est la suivante : un nano-ordinateur (Raspberry Pi durci sous GNU/Linux) sert de
+                        point d'entrée unique. Seul le port UDP chiffré du VPN est exposé à Internet via une
+                        configuration de NAT (Port Forwarding) stricte au niveau du routeur. Une fois le "tunnel" établi
+                        via un échange de certificats SSL/TLS asymétriques depuis l'extérieur (mon smartphone ou mon PC
+                        portable 4G), l'appareil distant intègre virtuellement le réseau LAN comme s'il était
+                        physiquement branché dessus.
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <h2>🔥 <span class="highlight">Les Défis de Routage et DNS Dynamique</span></h2>
+                    <p>
+                        Les adresses IP publiques des FAI (Fournisseurs d'Accès Internet) grand public sont généralement
+                        dynamiques. J'ai donc dû intégrer un client <strong>DDNS (Dynamic DNS)</strong> pour garantir
+                        qu'un nom de domaine fixe pointe perpétuellement vers la bonne passerelle, même en cas de
+                        changement d'IP. Par ailleurs, la gestion des tables de routage (IPTables / UFW) sur Linux a été
+                        un excellent cas pratique pour comprendre en profondeur comment les paquets transitent entre les
+                        interfaces réseau.
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <h2>🚀 <span class="highlight">L'Impact sur la Sécurité</span></h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-num">1</span>
+                            <span class="stat-desc">Point d'entrée durci</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-num">AES</span>
+                            <span class="stat-desc">Chiffrement fort de l'encapsulation</span>
+                        </div>
+                    </div>
+                    <p class="summary-text">
+                        L'ensemble des services vitaux du réseau restent dorénavant isolés du world-wide-web. L'accès
+                        distant est fluide, confidentiel et intégralement chiffré de bout-en-bout, ce qui empêche toute
+                        interception de type attaque de l'homme du milieu (Man-In-The-Middle), même depuis un réseau
+                        Wi-Fi public d'aéroport ou d'hôtel non sécurisé.
+                    </p>
+                </div>
             </div>
             <aside class="content-right">
                 <div class="info-card">
@@ -108,6 +153,13 @@
                         <span class="stack-tag">Networking</span>
                         <span class="stack-tag">Security</span>
                     </div>
+                    <hr>
+                    <h3 data-i18n="projects.skills_label">Compétences développées</h3>
+                    <div class="tech-tags" style="display:flex; flex-wrap:wrap; gap:0.4em;">
+                        <span class="tech-badge" data-i18n="skill.network">Réseau & Routage</span>
+                        <span class="tech-badge" data-i18n="skill.security">Sécurité / VLANs</span>
+                        <span class="tech-badge" data-i18n="skill.linux">Système GNU/Linux</span>
+                    </div>
                 </div>
             </aside>
         </section>
@@ -116,9 +168,9 @@
     <footer>© 2026 Brieuc Métairie – Portfolio</footer>
     <button id="themeToggle" class="theme-btn">🌙</button>
     <!-- Styles moved to style.css -->
-    <script src="js/lang.js?v=3"></script>
-    <script src="script.js?v=3" defer></script>
-    <script src="js/console.js?v=3" defer></script>
+    <script src="js/lang.js?v=6"></script>
+    <script src="script.js?v=6" defer></script>
+    <script src="js/console.js?v=6" defer></script>
 </body>
 
 </html>

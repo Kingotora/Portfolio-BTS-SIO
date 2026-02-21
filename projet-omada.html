@@ -18,7 +18,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;900&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=6">
 
     <script type="application/ld+json">
     {
@@ -87,57 +87,61 @@
             <div class="content-left">
                 <!-- STORYTELLING INTRO -->
                 <div class="story-block">
-                    <h2>🎯 <span class="highlight">Le Contexte</span></h2>
+                    <h2>🎯 <span class="highlight">Le Contexte & Le Besoin</span></h2>
                     <p>
-                        Chez Althec, le réseau est géré via la solution
-                        <strong>TP-Link Omada SDN</strong>.
-                        Switchs, bornes Wi-Fi et routeur sont tous pilotés depuis
-                        une seule interface centralisée.
-                        C'est avec cet outil que j'administre et supervise le réseau au quotidien.
+                        Historiquement, la gestion du réseau physique chez Althec (switchs de cœur, switchs de
+                        distribution, routeurs d'accès et bornes Wi-Fi) se faisait en "stand-alone". Chaque équipement
+                        devait être configuré individuellement via son adresse IP locale. Cette méthode posait des
+                        problèmes critiques de visibilité : en cas de boucle réseau, de congestion, ou de borne Wi-Fi
+                        défaillante, identifier l'origine du problème prenait un temps considérable. L'infrastructure
+                        manquait fondamentalement de supervision holistique.
                     </p>
                 </div>
 
                 <div class="story-block">
-                    <h2>💡 <span class="highlight">Ce que je fais avec Omada</span></h2>
+                    <h2>💡 <span class="highlight">L'Approche SDN (Software-Defined Networking)</span></h2>
                     <p>
-                        Depuis le <strong>contrôleur Omada</strong>, j'ai une vue en temps réel
-                        sur tout le réseau : qui est connecté, le trafic sur chaque port,
-                        l'état des bornes Wi-Fi, et les alertes en cas de problème.
+                        Pour unifier l'administration réseau, j'ai pris en charge l'exploitation de la stack matérielle
+                        via la solution <strong>TP-Link Omada SDN</strong>. Le contrôleur hybride Omada ingère (adopte)
+                        tous les équipements compatibles du parc pour les manager depuis une console centralisée.
                     </p>
                     <p>
-                        Je gère la <strong>configuration réseau</strong> :
-                        VLANs, règles de sécurité, SSID Wi-Fi par usage
-                        (collaborateurs, invités). Tout est centralisé, pas besoin
-                        de se connecter à chaque équipement un par un.
-                    </p>
-                </div>
-
-                <div class="story-block">
-                    <h2>🔧 <span class="highlight">Maintenance et supervision</span></h2>
-                    <p>
-                        Je m'occupe aussi des <strong>mises à jour firmware</strong>
-                        des équipements réseau et des <strong>sauvegardes de configuration</strong>,
-                        le tout depuis l'interface Omada.
-                        En cas de panne ou de lenteur, je peux diagnostiquer rapidement
-                        grâce aux stats en temps réel.
+                        Mon rôle consiste à modéliser la topologie réseau directe : configuration des <strong>VLANs
+                            802.1Q</strong> pour isoler hermétiquement les flux très spécifiques (VLAN
+                        Vidéosurveillance, VLAN Voix IP, VLAN Data, VLAN Invité), la création des réseaux sans-fils
+                        cryptés WPA3, et l'application stricte des Access Control Lists (ACL) au niveau du switch de
+                        cœur pour empêcher le routage inter-VLAN non autorisé.
                     </p>
                 </div>
 
                 <div class="story-block">
-                    <h2>🚀 <span class="highlight">Le Résultat</span></h2>
+                    <h2>🔧 <span class="highlight">MCO et Télémétrie</span></h2>
+                    <p>
+                        Au-delà de la configuration initiale, la véritable puissance de l'outil réside dans son volet
+                        analytique. En exploitant la télémétrie SNMP remontée par les équipements, je maintiens la
+                        surveillance de l'état de santé du réseau.
+                        Je programme également les mises à jour de firmware en grappes (batch) durant les fenêtres de
+                        maintenance nocturnes, et configure les sauvegardes automatiques de la topologie logique.
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <h2>🚀 <span class="highlight">L'Impact sur la Production</span></h2>
                     <div class="stats-grid">
                         <div class="stat-item">
-                            <span class="stat-num">1</span>
-                            <span class="stat-desc">interface pour tout gérer</span>
+                            <span class="stat-num">100%</span>
+                            <span class="stat-desc">Visibilité des flux</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-num">24/7</span>
-                            <span class="stat-desc">supervision en temps réel</span>
+                            <span class="stat-num">Proactif</span>
+                            <span class="stat-desc">Alerting temps réel</span>
                         </div>
                     </div>
                     <p class="summary-text">
-                        Le réseau est maintenant stable, segmenté et supervisé de manière centralisée.
-                        N'importe quel problème réseau est détecté et résolu bien plus rapidement qu'avant.
+                        En passant d'une gestion fracturée à un modèle centralisé défini par logiciel, le réseau de
+                        l'entreprise est devenu profondément résilient et prévisible. Toute défaillance d'un câble,
+                        anomalie de consommation portuaire (PoE) ou tentative de connexion illégitime lève immédiatement
+                        une alerte qualifiée.
                     </p>
                 </div>
             </div>
@@ -160,6 +164,13 @@
                         <span class="stack-tag">WPA3</span>
                         <span class="stack-tag">Portail captif</span>
                     </div>
+                    <hr>
+                    <h3 data-i18n="projects.skills_label">Compétences développées</h3>
+                    <div class="tech-tags" style="display:flex; flex-wrap:wrap; gap:0.4em;">
+                        <span class="tech-badge" data-i18n="skill.network">Réseau & Routage</span>
+                        <span class="tech-badge" data-i18n="skill.security">Sécurité / VLANs</span>
+                        <span class="tech-badge" data-i18n="skill.hardware">Matériel Cisco/Omada</span>
+                    </div>
                 </div>
             </aside>
         </section>
@@ -171,9 +182,9 @@
 
     <button id="themeToggle" class="theme-btn">🌙</button>
 
-    <script src="js/lang.js?v=3"></script>
-    <script src="script.js?v=3" defer></script>
-    <script src="js/console.js?v=3" defer></script>
+    <script src="js/lang.js?v=6"></script>
+    <script src="script.js?v=6" defer></script>
+    <script src="js/console.js?v=6" defer></script>
 </body>
 
 </html>

@@ -15,7 +15,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=6">
 
     <script type="application/ld+json">
     {
@@ -73,25 +73,69 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="images/mediawiki.webp" alt="MediaWiki Interface"
-                    class="img-contain-300 rounded-md">
+                <img src="images/mediawiki.webp" alt="MediaWiki Interface" class="img-contain-300 rounded-md">
             </div>
         </section>
 
         <section class="project-content-grid">
             <div class="content-left">
-                <h2>Contexte</h2>
-                <p>Nécessité de centraliser les procédures techniques et la documentation utilisateur dans un format
-                    accessible, modifiable et versionné.</p>
-                <h2>Réalisations</h2>
-                <ul>
-                    <li>Installation de XAMPP sur Windows Server.</li>
-                    <li>Configuration de la base de données MariaDB.</li>
-                    <li>Déploiement de MediaWiki et personnalisation du skin Vector.</li>
-                    <li>Mise en place des droits utilisateurs (Lecture/Écriture/Admin).</li>
-                </ul>
-                <h2>Bilan</h2>
-                <p>Une documentation centralisée qui réduit le temps de résolution des incidents récurrents.</p>
+                <div class="story-block">
+                    <h2>🎯 <span class="highlight">Le Diagnostic Initial</span></h2>
+                    <p>
+                        Au sein de nombre de structures, la connaissance technique est volatile. J'ai constaté que les
+                        procédures d'installation, les résolutions d'incidents complexes et les configurations
+                        spécifiques étaient souvent documentées sur des fichiers Word dispersés ou, pire, conservées
+                        uniquement dans la tête des techniciens. Cette situation allongeait considérablement le temps de
+                        formation des nouveaux arrivants et créait une dépendance risquée envers certains collaborateurs
+                        clés (SPOF humain).
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <h2>💡 <span class="highlight">La Solution : Déploiement MediaWiki</span></h2>
+                    <p>
+                        Pour endiguer cette perte d'information, j'ai conceptualisé le déploiement d'une base de
+                        connaissances robuste basée sur <strong>MediaWiki</strong>, le moteur qui propulse Wikipédia. Ce
+                        choix s'est imposé pour sa gestion native de l'historique (versioning), sa capacité de recherche
+                        puissante et son aspect collaboratif inné.
+                    </p>
+                    <p>
+                        Techniquement, j'ai provisionné la pile serveur sous environnement Windows Server (Stack XAMPP /
+                        MariaDB), configuré les droits d'écriture par RBAC (Role-Based Access Control) pour sécuriser le
+                        contenu, et intégré l'éditeur visuel (VisualEditor) afin d'abaisser la barrière à l'entrée pour
+                        les contributeurs moins techniques.
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <h2>🔥 <span class="highlight">Le Challenge Technique</span></h2>
+                    <p>
+                        L'intégration d'extensions complexes (comme VisualEditor sous Windows nécessitant Parsoid) fut
+                        un défi d'administration backend instructif. De plus, il a fallu formaliser une
+                        <strong>politique de sauvegarde automatisée</strong> (dumps SQL réguliers et backup du
+                        répertoire des médias) pour garantir l'intégrité de ce nouveau "cerveau" de l'équipe
+                        informatique face aux pannes ou erreurs humaines.
+                    </p>
+                </div>
+
+                <div class="story-block">
+                    <h2>🚀 <span class="highlight">L'Impact Opérationnel</span></h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-num">Zéro</span>
+                            <span class="stat-desc">Perte de connaissance</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-num">Standard</span>
+                            <span class="stat-desc">Centralisé & Pérenne</span>
+                        </div>
+                    </div>
+                    <p class="summary-text">
+                        La plateforme agit désormais comme la seule source de vérité ("Single Source of Truth"). Les
+                        incidents récurrents sont résolus plus rapidement en consultant la base, et l'intégration de
+                        toute nouvelle ressource technique est drastiquement accélérée.
+                    </p>
+                </div>
             </div>
             <aside class="content-right">
                 <div class="info-card">
@@ -108,6 +152,13 @@
                         <span class="stack-tag">PHP</span>
                         <span class="stack-tag">MediaWiki</span>
                     </div>
+                    <hr>
+                    <h3 data-i18n="projects.skills_label">Compétences développées</h3>
+                    <div class="tech-tags" style="display:flex; flex-wrap:wrap; gap:0.4em;">
+                        <span class="tech-badge" data-i18n="skill.windows">Windows Server</span>
+                        <span class="tech-badge" data-i18n="skill.web">Serveurs Web</span>
+                        <span class="tech-badge" data-i18n="skill.doc">Documentation</span>
+                    </div>
                 </div>
             </aside>
         </section>
@@ -116,9 +167,9 @@
     <footer>Â© 2026 Brieuc Métairie – Portfolio</footer>
     <button id="themeToggle" class="theme-btn">🌙</button>
     <!-- Styles moved to style.css -->
-    <script src="js/lang.js?v=3"></script>
-    <script src="script.js?v=3" defer></script>
-    <script src="js/console.js?v=3" defer></script>
+    <script src="js/lang.js?v=6"></script>
+    <script src="script.js?v=6" defer></script>
+    <script src="js/console.js?v=6" defer></script>
 </body>
 
 </html>
